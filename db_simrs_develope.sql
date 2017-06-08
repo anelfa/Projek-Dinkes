@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2017 at 04:16 AM
+-- Generation Time: Jun 08, 2017 at 08:08 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.34
 
@@ -129,6 +129,17 @@ CREATE TABLE `asuransi` (
   `biaya` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `asuransi`
+--
+
+INSERT INTO `asuransi` (`stts`, `biaya`) VALUES
+('df', 0),
+('T', 0),
+('TY', 16160),
+('Y+', 20000),
+('Y++', 30000);
+
 -- --------------------------------------------------------
 
 --
@@ -154,6 +165,24 @@ CREATE TABLE `bangsal` (
   `nm_bangsal` varchar(30) DEFAULT NULL,
   `status` enum('0','1') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bangsal`
+--
+
+INSERT INTO `bangsal` (`kd_bangsal`, `nm_bangsal`, `status`) VALUES
+('-', '-', '1'),
+('AP', 'APOTEK', '1'),
+('APL', 'APEL', '1'),
+('CDW', 'CENDRAWASIH', '1'),
+('GD', 'GUDANG', '1'),
+('KMB', 'KAMAR BAYI', '1'),
+('LL', 'LILY', '1'),
+('MLT', 'MELATI', '1'),
+('MWR', 'MAWAR', '1'),
+('PPY', 'PEPAYA', '1'),
+('PRN', 'PERINATOLOGI', '1'),
+('STW', 'STRAWBERY', '1');
 
 -- --------------------------------------------------------
 
@@ -732,6 +761,34 @@ CREATE TABLE `dokter` (
   `no_ijn_praktek` varchar(40) DEFAULT NULL,
   `status` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dokter`
+--
+
+INSERT INTO `dokter` (`kd_dokter`, `nm_dokter`, `jk`, `tmp_lahir`, `tgl_lahir`, `gol_drh`, `agama`, `almt_tgl`, `no_telp`, `stts_nikah`, `kd_sps`, `alumni`, `no_ijn_praktek`, `status`) VALUES
+('D0000001', 'drg. Helma Murad', 'P', '', '0000-00-00', 'A', 'ISLAM', '', '', 'MENIKAH', '-', '', '', '1'),
+('D0000002', 'drg. Darvini Rachmida', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000003', 'drg. Sumiani', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000004', 'dr. Nurul Fadli', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000005', 'dr. Murthy Mutmainah, Sp.OG', 'P', '', '0000-00-00', '', '', '', '', '', 'S0012', '', '', '1'),
+('D0000006', 'dr. Wulan Tristianti, Sp.A ', 'P', '', '0000-00-00', '', '', '', '', '', 'S0011', '', '', '1'),
+('D0000007', 'dr. Christine Handayani T, Sp.A', 'P', '', '0000-00-00', '', '', '', '', '', 'S0011', '', '', '1'),
+('D0000008', 'dr. Siusan', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000009', 'dr. Zulfi Hidayat', 'L', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000010', 'dr. Ipung Ferdian Prasetyo', 'L', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000011', 'dr. Resi Nurseptiani', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000012', 'dr. Chandra', 'L', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000013', 'dr. Fitria Soraya', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000014', 'dr. Devi Caroline', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000015', 'dr. Herawaty', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000016', 'dr. Merdina Manik, M.Gizi ', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000017', 'dr. Nanda Wulandari, Sp.A', 'P', '', '0000-00-00', '', '', '', '', '', 'S0011', '', '', '1'),
+('D0000018', 'dr. Dwi Miranti Anggraini,Sp.A', 'P', '', '0000-00-00', '', '', '', '', '', 'S0011', '', '', '1'),
+('D0000019', 'dr. Sylvia Jiero, Sp.A', 'P', '', '0000-00-00', '', '', '', '', '', 'S0011', '', '', '1'),
+('D0000020', 'dr. Pradana Akmaja Chaetawarsa, Sp.OG', 'L', '', '0000-00-00', '', '', '', '', '', 'S0012', '', '', '1'),
+('D0000021', 'dr. Laily Rachmawati', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1'),
+('D0000022', 'dr. Asrina Veranita', 'P', '', '0000-00-00', '', '', '', '', '', '-', '', '', '1');
 
 -- --------------------------------------------------------
 
@@ -5377,6 +5434,13 @@ CREATE TABLE `kabupaten` (
   `nm_kab` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `kabupaten`
+--
+
+INSERT INTO `kabupaten` (`kd_kab`, `nm_kab`) VALUES
+(1, '-');
+
 -- --------------------------------------------------------
 
 --
@@ -5498,6 +5562,13 @@ CREATE TABLE `kecamatan` (
   `nm_kec` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `kecamatan`
+--
+
+INSERT INTO `kecamatan` (`kd_kec`, `nm_kec`) VALUES
+(1, '-');
+
 -- --------------------------------------------------------
 
 --
@@ -5508,6 +5579,13 @@ CREATE TABLE `kelurahan` (
   `kd_kel` int(11) NOT NULL,
   `nm_kel` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kelurahan`
+--
+
+INSERT INTO `kelurahan` (`kd_kel`, `nm_kel`) VALUES
+(1, '-');
 
 -- --------------------------------------------------------
 
@@ -5894,6 +5972,13 @@ CREATE TABLE `pasien` (
   `kabupatenpj` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pasien`
+--
+
+INSERT INTO `pasien` (`no_rkm_medis`, `nm_pasien`, `no_ktp`, `jk`, `tmp_lahir`, `tgl_lahir`, `nm_ibu`, `alamat`, `gol_darah`, `pekerjaan`, `stts_nikah`, `agama`, `tgl_daftar`, `no_tlp`, `umur`, `pnd`, `keluarga`, `namakeluarga`, `kd_pj`, `no_peserta`, `kd_kel`, `kd_kec`, `kd_kab`, `pekerjaanpj`, `alamatpj`, `kelurahanpj`, `kecamatanpj`, `kabupatenpj`) VALUES
+('000001', 'Fanji', '1', 'L', 'Jakarta', '1990-11-16', 'Saanih', 'ALAMAT', 'AB', '1', 'MENIKAH', 'ISLAM', '2017-06-08', '1', '26 Th', '-', 'SAUDARA', 'Saanih', 'C01', '1', 1, 1, 1, 'IRT', 'ALAMAT', 'KELURAHAN', 'KECAMATAN', 'KABUPATEN');
+
 -- --------------------------------------------------------
 
 --
@@ -5964,6 +6049,36 @@ CREATE TABLE `pegawai` (
   `cuti_diambil` int(11) NOT NULL,
   `dankes` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pegawai`
+--
+
+INSERT INTO `pegawai` (`id`, `nik`, `nama`, `jk`, `jbtn`, `jnj_jabatan`, `departemen`, `bidang`, `stts_wp`, `stts_kerja`, `npwp`, `pendidikan`, `gapok`, `tmp_lahir`, `tgl_lahir`, `alamat`, `kota`, `mulai_kerja`, `ms_kerja`, `indexins`, `bpd`, `rekening`, `stts_aktif`, `wajibmasuk`, `pengurang`, `indek`, `mulai_kontrak`, `cuti_diambil`, `dankes`) VALUES
+(1, 'D0000001', 'drg. Helma Murad', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(2, 'D0000002', 'drg. Darvini Rachmida', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(3, 'D0000003', 'drg. Sumiani', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(4, 'D0000004', 'dr. Nurul Fadli', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(5, 'D0000005', 'dr. Murthy Mutmainah, Sp.OG', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(6, 'D0000006', 'dr. Wulan Tristianti, Sp.A ', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(7, 'D0000007', 'dr. Christine Handayani T, Sp.A', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(8, 'D0000008', 'dr. Siusan', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(9, 'D0000009', 'dr. Zulfi Hidayat', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(10, 'D0000010', 'dr. Ipung Ferdian Prasetyo', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(11, 'D0000011', 'dr. Resi Nurseptiani', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(12, 'D0000012', 'dr. Chandra', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(13, 'D0000013', 'dr. Fitria Soraya', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(14, 'D0000014', 'dr. Devi Caroline', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(15, 'D0000015', 'dr. Herawaty', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(16, 'D0000016', 'dr. Merdina Manik, M.Gizi ', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(17, 'D0000017', 'dr. Nanda Wulandari, Sp.A', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(18, 'D0000018', 'dr. Dwi Miranti Anggraini,Sp.A', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(19, 'D0000019', 'dr. Sylvia Jiero, Sp.A', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(20, 'D0000020', 'dr. Pradana Akmaja Chaetawarsa, Sp.OG', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(21, 'D0000021', 'dr. Laily Rachmawati', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(22, 'D0000022', 'dr. Asrina Veranita', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(23, '123456', 'Zaki', 'Pria', '-', '-', '-', '-', '-', '-', '-', '-', 0, 'Jakarta', '1987-05-10', 'Jl Saminten 1 no 176', '-', '0000-00-00', '<1', '-', 'T', '-', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(24, '2345', 'Hafiz', 'Pria', '-', '-', '-', '-', '-', '-', '-', '-', 0, 'df', '1981-06-09', 't', '-', '0000-00-00', '<1', '-', 'T', '-', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -6221,6 +6336,14 @@ CREATE TABLE `penjab` (
   `png_jawab` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `penjab`
+--
+
+INSERT INTO `penjab` (`kd_pj`, `png_jawab`) VALUES
+('C01', 'UMUM'),
+('C02', 'BPJS');
+
 -- --------------------------------------------------------
 
 --
@@ -6427,6 +6550,21 @@ CREATE TABLE `poliklinik` (
   `registrasi` double NOT NULL,
   `registrasilama` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `poliklinik`
+--
+
+INSERT INTO `poliklinik` (`kd_poli`, `nm_poli`, `registrasi`, `registrasilama`) VALUES
+('GZ', 'Poli Gizi', 0, 0),
+('IGD', 'IGD', 0, 0),
+('IGDK', 'Unit IGD', 0, 0),
+('OBG', 'Poli Poli Obstetri/Gyn', 100000, 100000),
+('PA', 'Poli Anak', 0, 0),
+('PD', 'Poli Penyakit Dalam', 0, 0),
+('PG', 'Poli Gigi', 0, 0),
+('PU', 'Poli Umum', 0, 0),
+('VK', 'VK', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -6645,9 +6783,25 @@ CREATE TABLE `reg_periksa` (
   `stts_daftar` enum('-','Lama','Baru') NOT NULL,
   `status_lanjut` enum('Ralan','Ranap') NOT NULL,
   `kd_pj` char(3) NOT NULL,
-  `umurdaftar` int(11) DEFAULT NULL,
-  `sttsumur` enum('Th','Bl','Hr') DEFAULT NULL
+  `hr_umur` int(11) DEFAULT NULL,
+  `bln_umur` int(5) DEFAULT NULL,
+  `thn_umur` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reg_periksa`
+--
+
+INSERT INTO `reg_periksa` (`no_reg`, `no_rawat`, `tgl_registrasi`, `jam_reg`, `kd_dokter`, `no_rkm_medis`, `kd_poli`, `p_jawab`, `almt_pj`, `hubunganpj`, `biaya_reg`, `stts`, `stts_daftar`, `status_lanjut`, `kd_pj`, `hr_umur`, `bln_umur`, `thn_umur`) VALUES
+('001', '2017/06/08/000001', '2017-06-08', '10:49:53', 'D0000017', '000001', 'GZ', 'Saanih', ', -, -, -', 'SAUDARA', 0, 'Belum', 'Baru', 'Ralan', 'C01', 0, NULL, NULL),
+('001', '2017/06/08/000002', '2017-06-08', '12:22:49', 'D0000013', '000001', 'PD', 'Saanih', ', -, -, -', 'SAUDARA', 0, 'Belum', 'Baru', 'Ralan', 'C01', 0, 0, 0),
+('002', '2017/06/08/000003', '2017-06-08', '12:25:42', 'D0000013', '000001', 'PD', 'Saanih', 'ALAMAT, -, -, -', 'SAUDARA', 0, 'Belum', 'Baru', 'Ralan', 'C01', 0, 0, 0),
+('003', '2017/06/08/000004', '2017-06-08', '12:27:49', 'D0000013', '000001', 'OBG', 'Saanih', 'ALAMAT, -, -, -', 'SAUDARA', 100000, 'Belum', 'Baru', 'Ralan', 'C01', 0, 0, 0),
+('001', '2017/06/08/000005', '2017-06-08', '12:28:32', 'D0000018', '000001', 'GZ', 'Saanih', 'ALAMAT, -, -, -', 'SAUDARA', 0, 'Belum', 'Baru', 'Ralan', 'C01', 0, 0, 0),
+('004', '2017/06/08/000006', '2017-06-08', '12:31:59', 'D0000013', '000001', 'PD', 'Saanih', 'ALAMAT, -, -, -', 'SAUDARA', 0, 'Belum', 'Baru', 'Ralan', 'C01', 0, 0, 0),
+('002', '2017/06/08/000007', '2017-06-08', '12:33:51', 'D0000018', '000001', 'OBG', 'Saanih', 'ALAMAT, -, -, -', 'SAUDARA', 100000, 'Belum', 'Baru', 'Ralan', 'C01', 12, 0, 0),
+('003', '2017/06/08/000008', '2017-06-08', '12:41:37', 'D0000018', '000001', 'PD', 'Saanih', 'ALAMAT, -, -, -', 'SAUDARA', 0, 'Belum', 'Baru', 'Ralan', 'C01', 0, 0, 0),
+('005', '2017/06/08/000009', '2017-06-08', '12:53:15', 'D0000013', '000001', 'PD', 'Saanih', 'ALAMAT, -, -, -', 'SAUDARA', 0, 'Belum', 'Baru', 'Ralan', 'C01', 23, 6, 26);
 
 -- --------------------------------------------------------
 
@@ -7153,6 +7307,13 @@ CREATE TABLE `set_alamat_pasien` (
   `kabupaten` enum('true','false') DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `set_alamat_pasien`
+--
+
+INSERT INTO `set_alamat_pasien` (`kelurahan`, `kecamatan`, `kabupaten`) VALUES
+('true', 'true', 'true');
+
 -- --------------------------------------------------------
 
 --
@@ -7311,6 +7472,13 @@ CREATE TABLE `set_kelengkapan_data_pasien` (
   `p_kabupatenpj` tinyint(4) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `set_kelengkapan_data_pasien`
+--
+
+INSERT INTO `set_kelengkapan_data_pasien` (`no_ktp`, `p_no_ktp`, `tmp_lahir`, `p_tmp_lahir`, `nm_ibu`, `p_nm_ibu`, `alamat`, `p_alamat`, `pekerjaan`, `p_pekerjaan`, `no_tlp`, `p_no_tlp`, `umur`, `p_umur`, `namakeluarga`, `p_namakeluarga`, `no_peserta`, `p_no_peserta`, `kelurahan`, `p_kelurahan`, `kecamatan`, `p_kecamatan`, `kabupaten`, `p_kabupaten`, `pekerjaanpj`, `p_pekerjaanpj`, `alamatpj`, `p_alamatpj`, `kelurahanpj`, `p_kelurahanpj`, `kecamatanpj`, `p_kecamatanpj`, `kabupatenpj`, `p_kabupatenpj`) VALUES
+('Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1, 'Yes', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -7410,6 +7578,13 @@ CREATE TABLE `set_nota` (
 CREATE TABLE `set_no_rkm_medis` (
   `no_rkm_medis` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `set_no_rkm_medis`
+--
+
+INSERT INTO `set_no_rkm_medis` (`no_rkm_medis`) VALUES
+('000001');
 
 -- --------------------------------------------------------
 
@@ -7583,6 +7758,13 @@ CREATE TABLE `set_urut_no_rkm_medis` (
   `posisi_tahun_bulan` enum('Depan','Belakang') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `set_urut_no_rkm_medis`
+--
+
+INSERT INTO `set_urut_no_rkm_medis` (`urutan`, `tahun`, `bulan`, `posisi_tahun_bulan`) VALUES
+('Straight', 'No', 'No', 'Depan');
+
 -- --------------------------------------------------------
 
 --
@@ -7592,6 +7774,13 @@ CREATE TABLE `set_urut_no_rkm_medis` (
 CREATE TABLE `set_validasi_registrasi` (
   `wajib_closing_kasir` enum('Yes','No') DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `set_validasi_registrasi`
+--
+
+INSERT INTO `set_validasi_registrasi` (`wajib_closing_kasir`) VALUES
+('No');
 
 -- --------------------------------------------------------
 
@@ -7657,6 +7846,27 @@ CREATE TABLE `spesialis` (
   `kd_sps` char(5) NOT NULL DEFAULT '',
   `nm_sps` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `spesialis`
+--
+
+INSERT INTO `spesialis` (`kd_sps`, `nm_sps`) VALUES
+('-', '-'),
+('S0001', 'Fisioterapi'),
+('S0003', 'urologi'),
+('S0004', 'Radiologi'),
+('S0005', 'orthopedhi'),
+('S0006', 'Bedah'),
+('S0007', 'Syaraf'),
+('S0008', 'Anastesi'),
+('S0009', 'THT'),
+('S0010', 'Mata'),
+('S0011', 'Anak'),
+('S0012', 'Obsgyn'),
+('S0013', 'Dalam'),
+('S0015', 'Gigi dan Mulut'),
+('s002', 'tes');
 
 -- --------------------------------------------------------
 
@@ -8860,7 +9070,7 @@ ALTER TABLE `aplicare_ketersediaan_kamar`
 --
 ALTER TABLE `asuransi`
   ADD PRIMARY KEY (`stts`),
-  ADD KEY `biaya` (`biaya`);
+  ADD KEY `biaya` (`biaya`) USING BTREE;
 
 --
 -- Indexes for table `aturan_pakai`
@@ -8875,7 +9085,7 @@ ALTER TABLE `aturan_pakai`
 --
 ALTER TABLE `bangsal`
   ADD PRIMARY KEY (`kd_bangsal`),
-  ADD KEY `nm_bangsal` (`nm_bangsal`);
+  ADD KEY `nm_bangsal` (`nm_bangsal`) USING BTREE;
 
 --
 -- Indexes for table `bank`
@@ -9237,18 +9447,18 @@ ALTER TABLE `diet`
 --
 ALTER TABLE `dokter`
   ADD PRIMARY KEY (`kd_dokter`),
-  ADD KEY `kd_sps` (`kd_sps`),
-  ADD KEY `nm_dokter` (`nm_dokter`),
-  ADD KEY `jk` (`jk`),
-  ADD KEY `tmp_lahir` (`tmp_lahir`),
-  ADD KEY `tgl_lahir` (`tgl_lahir`),
-  ADD KEY `gol_drh` (`gol_drh`),
-  ADD KEY `agama` (`agama`),
-  ADD KEY `almt_tgl` (`almt_tgl`),
-  ADD KEY `no_telp` (`no_telp`),
-  ADD KEY `stts_nikah` (`stts_nikah`),
-  ADD KEY `alumni` (`alumni`),
-  ADD KEY `no_ijn_praktek` (`no_ijn_praktek`);
+  ADD KEY `kd_sps` (`kd_sps`) USING BTREE,
+  ADD KEY `nm_dokter` (`nm_dokter`) USING BTREE,
+  ADD KEY `jk` (`jk`) USING BTREE,
+  ADD KEY `tmp_lahir` (`tmp_lahir`) USING BTREE,
+  ADD KEY `tgl_lahir` (`tgl_lahir`) USING BTREE,
+  ADD KEY `gol_drh` (`gol_drh`) USING BTREE,
+  ADD KEY `agama` (`agama`) USING BTREE,
+  ADD KEY `almt_tgl` (`almt_tgl`) USING BTREE,
+  ADD KEY `no_telp` (`no_telp`) USING BTREE,
+  ADD KEY `stts_nikah` (`stts_nikah`) USING BTREE,
+  ADD KEY `alumni` (`alumni`) USING BTREE,
+  ADD KEY `no_ijn_praktek` (`no_ijn_praktek`) USING BTREE;
 
 --
 -- Indexes for table `dpjp_ranap`
@@ -10005,15 +10215,15 @@ ALTER TABLE `pasien_mati`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nik_2` (`nik`),
-  ADD KEY `departemen` (`departemen`),
-  ADD KEY `bidang` (`bidang`),
-  ADD KEY `stts_wp` (`stts_wp`),
-  ADD KEY `stts_kerja` (`stts_kerja`),
-  ADD KEY `pendidikan` (`pendidikan`),
-  ADD KEY `indexins` (`indexins`),
-  ADD KEY `jnj_jabatan` (`jnj_jabatan`),
-  ADD KEY `bpd` (`bpd`);
+  ADD UNIQUE KEY `nik_2` (`nik`) USING BTREE,
+  ADD KEY `departemen` (`departemen`) USING BTREE,
+  ADD KEY `bidang` (`bidang`) USING BTREE,
+  ADD KEY `stts_wp` (`stts_wp`) USING BTREE,
+  ADD KEY `stts_kerja` (`stts_kerja`) USING BTREE,
+  ADD KEY `pendidikan` (`pendidikan`) USING BTREE,
+  ADD KEY `indexins` (`indexins`) USING BTREE,
+  ADD KEY `jnj_jabatan` (`jnj_jabatan`) USING BTREE,
+  ADD KEY `bpd` (`bpd`) USING BTREE;
 
 --
 -- Indexes for table `pemasukan_lain`
@@ -10225,9 +10435,9 @@ ALTER TABLE `pnm_tnj_harian`
 --
 ALTER TABLE `poliklinik`
   ADD PRIMARY KEY (`kd_poli`),
-  ADD KEY `nm_poli` (`nm_poli`),
-  ADD KEY `registrasi` (`registrasi`),
-  ADD KEY `registrasilama` (`registrasilama`);
+  ADD KEY `nm_poli` (`nm_poli`) USING BTREE,
+  ADD KEY `registrasi` (`registrasi`) USING BTREE,
+  ADD KEY `registrasilama` (`registrasilama`) USING BTREE;
 
 --
 -- Indexes for table `potongan`
@@ -11153,17 +11363,17 @@ ALTER TABLE `jam_jaga`
 -- AUTO_INCREMENT for table `kabupaten`
 --
 ALTER TABLE `kabupaten`
-  MODIFY `kd_kab` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kd_kab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `kecamatan`
 --
 ALTER TABLE `kecamatan`
-  MODIFY `kd_kec` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kd_kec` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `kelurahan`
 --
 ALTER TABLE `kelurahan`
-  MODIFY `kd_kel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kd_kel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `master_tindakan`
 --
@@ -11183,7 +11393,7 @@ ALTER TABLE `master_tunjangan_harian`
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `sms`
 --
@@ -11446,8 +11656,8 @@ ALTER TABLE `diagnosa_pasien`
 -- Constraints for table `dokter`
 --
 ALTER TABLE `dokter`
-  ADD CONSTRAINT `dokter_ibfk_2` FOREIGN KEY (`kd_sps`) REFERENCES `spesialis` (`kd_sps`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `dokter_ibfk_3` FOREIGN KEY (`kd_dokter`) REFERENCES `pegawai` (`nik`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `dokter_ibfk_1` FOREIGN KEY (`kd_sps`) REFERENCES `spesialis` (`kd_sps`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `dokter_ibfk_2` FOREIGN KEY (`kd_dokter`) REFERENCES `pegawai` (`nik`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `dpjp_ranap`
