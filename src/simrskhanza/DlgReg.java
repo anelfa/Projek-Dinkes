@@ -2613,7 +2613,7 @@ public final class DlgReg extends javax.swing.JDialog {
         TDokter.setEditable(false);
         TDokter.setName("TDokter"); // NOI18N
         FormInput.add(TDokter);
-        TDokter.setBounds(183, 102, 181, 23);
+        TDokter.setBounds(183, 132, 181, 23);
 
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
@@ -2633,7 +2633,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel13.setText("Dr Dituju :");
         jLabel13.setName("jLabel13"); // NOI18N
         FormInput.add(jLabel13);
-        jLabel13.setBounds(0, 102, 77, 23);
+        jLabel13.setBounds(0, 132, 77, 23);
 
         jLabel9.setText("Jam :");
         jLabel9.setName("jLabel9"); // NOI18N
@@ -2796,12 +2796,12 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel19.setText("Unit :");
         jLabel19.setName("jLabel19"); // NOI18N
         FormInput.add(jLabel19);
-        jLabel19.setBounds(0, 132, 77, 23);
+        jLabel19.setBounds(0, 102, 77, 23);
 
         TPoli.setEditable(false);
         TPoli.setName("TPoli"); // NOI18N
         FormInput.add(TPoli);
-        TPoli.setBounds(148, 132, 120, 23);
+        TPoli.setBounds(148, 102, 120, 23);
 
         TBiaya.setName("TBiaya"); // NOI18N
         TBiaya.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2810,7 +2810,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(TBiaya);
-        TBiaya.setBounds(270, 132, 94, 23);
+        TBiaya.setBounds(270, 102, 94, 23);
 
         kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
@@ -2820,7 +2820,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(kddokter);
-        kddokter.setBounds(81, 102, 100, 23);
+        kddokter.setBounds(81, 132, 100, 23);
 
         BtnDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter.setMnemonic('3');
@@ -2832,7 +2832,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnDokter);
-        BtnDokter.setBounds(366, 102, 28, 23);
+        BtnDokter.setBounds(366, 132, 28, 23);
 
         kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
@@ -2842,7 +2842,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(kdpoli);
-        kdpoli.setBounds(80, 132, 66, 23);
+        kdpoli.setBounds(80, 102, 66, 23);
 
         BtnUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnUnit.setMnemonic('4');
@@ -2854,7 +2854,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnUnit);
-        BtnUnit.setBounds(366, 132, 28, 23);
+        BtnUnit.setBounds(366, 102, 28, 23);
 
         jLabel30.setText("Status :");
         jLabel30.setName("jLabel30"); // NOI18N
