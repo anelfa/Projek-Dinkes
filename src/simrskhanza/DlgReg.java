@@ -3087,6 +3087,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 if(ChkTracer.isSelected()==true){
                     ctk();
                 }
+                cetakregister(); 
                 tampil();
                 emptTeks();                
             }else{
@@ -3101,6 +3102,7 @@ public final class DlgReg extends javax.swing.JDialog {
                     if(ChkTracer.isSelected()==true){
                         ctk();
                     }
+                    cetakregister(); 
                     tampil();
                     emptTeks();                
                 }else{
@@ -3115,6 +3117,7 @@ public final class DlgReg extends javax.swing.JDialog {
                         if(ChkTracer.isSelected()==true){
                             ctk();
                         }
+                        cetakregister(); 
                         tampil();
                         emptTeks();                
                     }else{
@@ -3129,6 +3132,7 @@ public final class DlgReg extends javax.swing.JDialog {
                             if(ChkTracer.isSelected()==true){
                                 ctk();
                             }
+                            cetakregister(); 
                             tampil();
                             emptTeks();                
                         }else{
@@ -3143,6 +3147,7 @@ public final class DlgReg extends javax.swing.JDialog {
                                 if(ChkTracer.isSelected()==true){
                                     ctk();
                                 }
+                                 cetakregister(); 
                                 tampil();
                                 emptTeks();                
                             }else{
@@ -4645,7 +4650,29 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_MnCetakRegisterActionPerformed
-
+public void cetakregister() {                                                
+        if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",var.getnamars());
+            param.put("alamatrs",var.getalamatrs());
+            param.put("kotars",var.getkabupatenrs());
+            param.put("propinsirs",var.getpropinsirs());
+            param.put("kontakrs",var.getkontakrs());
+            param.put("emailrs",var.getemailrs());
+            param.put("logo",Sequel.cariGambar("select logo from setting"));
+            Valid.MyReport("rptBuktiRegister.jrxml","report","::[ Bukti Register ]::",
+                   "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+                   "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.umur,poliklinik.nm_poli,"+
+                   "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab "+
+                   "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
+                   "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                   "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }      
     private void DTPRegItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPRegItemStateChanged
         isNumber();
     }//GEN-LAST:event_DTPRegItemStateChanged
@@ -5674,11 +5701,8 @@ Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
         writer.write(command);
     }
     
-    private void cetakStruk2(  String title, FileWriter writer){
-        String strukFile = "tracerRm.txt";
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(strukFile));        
+    private void cetakStruk2(  String title, FileWriter writer) throws  IOException{
+           
             String tgll= Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+TNoRw.getText()+"'");
             String[] tglref= tgll.split("-");
             boltText(writer);
@@ -5708,10 +5732,7 @@ Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
             gantiBaris(writer);
             gantiBaris(writer);
             gantiBaris(writer);
-            reader.close();
-        } catch (Exception ex) {
-            System.out.println("Notif : "+ex);
-        }
+          
     }
     
     private void boltText(Writer writer){
