@@ -461,12 +461,12 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="136"
-						y="293"
+						y="281"
 						width="97"
-						height="16"
+						height="26"
 						key="textField-3"/>
 					<box></box>
-					<textElement textAlignment="Center" lineSpacing="Single">
+					<textElement lineSpacing="Single">
 						<font fontName="Tahoma" size="11"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{no_reg}]]></textFieldExpression>
