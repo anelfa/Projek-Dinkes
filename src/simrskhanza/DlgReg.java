@@ -800,7 +800,6 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel23 = new widget.Label();
         AsalRujukan = new widget.TextBox();
         btnPenjab1 = new widget.Button();
-        ChkTracker = new widget.CekBox();
         ChkTracer = new widget.CekBox();
         jLabel1 = new javax.swing.JLabel();
         ChkInput = new widget.CekBox();
@@ -2930,19 +2929,6 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(btnPenjab1);
         btnPenjab1.setBounds(852, 132, 28, 23);
 
-        ChkTracker.setBackground(new java.awt.Color(235, 255, 235));
-        ChkTracker.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
-        ChkTracker.setForeground(new java.awt.Color(153, 0, 51));
-        ChkTracker.setSelected(true);
-        ChkTracker.setBorderPainted(true);
-        ChkTracker.setBorderPaintedFlat(true);
-        ChkTracker.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ChkTracker.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ChkTracker.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ChkTracker.setName("ChkTracker"); // NOI18N
-        FormInput.add(ChkTracker);
-        ChkTracker.setBounds(203, 12, 23, 23);
-
         ChkTracer.setBackground(new java.awt.Color(235, 255, 235));
         ChkTracer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
         ChkTracer.setForeground(new java.awt.Color(153, 0, 51));
@@ -3154,7 +3140,7 @@ public final class DlgReg extends javax.swing.JDialog {
                                 if(!AsalRujukan.getText().equals("")){
                                     Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
                                 }
-                                if(ChkTracker.isSelected()==true){
+                                if(ChkTracer.isSelected()==true){
                                     ctk();
                                 }
                                 tampil();
@@ -5131,7 +5117,6 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.CekBox ChkInput;
     private widget.CekBox ChkJln;
     private widget.CekBox ChkTracer;
-    private widget.CekBox ChkTracker;
     private widget.ComboBox CmbDetik;
     private widget.ComboBox CmbJam;
     private widget.ComboBox CmbMenit;
