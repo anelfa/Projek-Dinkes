@@ -802,7 +802,6 @@ public final class DlgReg extends javax.swing.JDialog {
         btnPenjab1 = new widget.Button();
         ChkTracer = new widget.CekBox();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -2948,11 +2947,6 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel1.setName("jLabel1"); // NOI18N
         FormInput.add(jLabel1);
         jLabel1.setBounds(930, 14, 90, 14);
-
-        jLabel2.setText(getString(var.getkode()));
-        jLabel2.setName("jLabel2"); // NOI18N
-        FormInput.add(jLabel2);
-        jLabel2.setBounds(330, 20, 66, 14);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -5254,7 +5248,6 @@ public void cetakregister() {
     private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
-    private javax.swing.JLabel jLabel2;
     private widget.Label jLabel20;
     private widget.Label jLabel21;
     private widget.Label jLabel22;
