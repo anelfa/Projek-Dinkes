@@ -19,7 +19,7 @@ public final class var {
     private static PreparedStatement ps,ps2;
     private static ResultSet rs,rs2;
     
-    private static String kode="",kdbangsal="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser=""; 
+    private static String userea="",kode="",kdbangsal="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
     private static boolean admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
             tindakan_ralan=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
@@ -329,6 +329,7 @@ public final class var {
                         var.presensi_bulanan=true;
                         var.pegawai_admin=true;
                         var.pegawai_user=true;
+                        var.userea="Fanji";
                         var.suplier=true;
                         var.satuan_barang=true;
                         var.konversi_satuan=true;
@@ -1030,6 +1031,7 @@ public final class var {
     public static boolean getpresensi_bulanan(){return var.presensi_bulanan;} 
     public static boolean getpegawai_admin(){return var.pegawai_admin;} 
     public static boolean getpegawai_user(){return var.pegawai_user;} 
+    public static String getuserea(){return var.userea;} 
     public static boolean getsuplier(){return var.suplier;} 
     public static boolean getsatuan_barang(){return var.satuan_barang;} 
     public static boolean getkonversi_satuan(){return var.konversi_satuan;} 

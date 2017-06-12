@@ -38,10 +38,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -62,6 +59,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -82,6 +80,7 @@ import org.jfree.data.general.DefaultPieDataset;
  */
 public final class DlgReg extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
+   
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
@@ -151,6 +150,7 @@ public final class DlgReg extends javax.swing.JDialog {
      * @param parent
      * @param modal */
     public DlgReg(java.awt.Frame parent, boolean modal) {
+        
         super(parent, modal);
         initComponents();
 
@@ -802,6 +802,7 @@ public final class DlgReg extends javax.swing.JDialog {
         btnPenjab1 = new widget.Button();
         ChkTracer = new widget.CekBox();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -1988,7 +1989,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit1.setEditable(false);
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2017" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2017" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -2036,7 +2037,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit2.setEditable(false);
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2017" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2017" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -2489,7 +2490,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2017" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2017" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2504,7 +2505,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2017" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2017" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2646,7 +2647,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPReg.setEditable(false);
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-06-2017" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2017" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -2947,6 +2948,11 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel1.setName("jLabel1"); // NOI18N
         FormInput.add(jLabel1);
         jLabel1.setBounds(930, 14, 90, 14);
+
+        jLabel2.setText(getString(var.getkode()));
+        jLabel2.setName("jLabel2"); // NOI18N
+        FormInput.add(jLabel2);
+        jLabel2.setBounds(330, 20, 66, 14);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -5248,6 +5254,7 @@ public void cetakregister() {
     private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
+    private javax.swing.JLabel jLabel2;
     private widget.Label jLabel20;
     private widget.Label jLabel21;
     private widget.Label jLabel22;
@@ -5618,6 +5625,7 @@ Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,188));
+            
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           

@@ -228,6 +228,8 @@ import tranfusidarah.UTDStokDarah;
 import viabarcode.DlgBarcodeRalan;
 import viabarcode.DlgBarcodeRanap;
 public class frmUtama extends javax.swing.JFrame {
+
+    private static String cobaa;
     private final Connection koneksi=koneksiDB.condb();
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
@@ -575,6 +577,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnDataPenjualan = new widget.ButtonBig();
         btnInputPenjualan = new widget.ButtonBig();
         btnDataPenyerahanDarah = new widget.ButtonBig();
+        jLabel1 = new javax.swing.JLabel();
         internalFrame1 = new widget.InternalFrame();
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
@@ -689,7 +692,6 @@ public class frmUtama extends javax.swing.JFrame {
         });
         panelGlass1.add(edAdmin);
         edAdmin.setBounds(85, 12, 220, 23);
-        edAdmin.getAccessibleContext().setAccessibleDescription("Silahkan masukkan ID Admin");
         edAdmin.getAccessibleContext().setAccessibleParent(panelGlass1);
 
         edPwd.setForeground(new java.awt.Color(125, 81, 81));
@@ -3662,7 +3664,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27/05/2017" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10/06/2017" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -3702,6 +3704,9 @@ public class frmUtama extends javax.swing.JFrame {
                 btnDataPenyerahanDarahActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("jLabel1");
+        jLabel1.setName("jLabel1"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("::[ Khanza Hospital Management System 2017 ]::");
@@ -4650,7 +4655,8 @@ public class frmUtama extends javax.swing.JFrame {
                     lblStts.setText("Admin : ");
                     lblUser.setText("Admin Utama");
                 }else*/
-				if(var.getjml1()>=1){    
+				if(var.getjml1()>=1){
+                                 
                     BtnMenu.setEnabled(true);
                     BtnToolReg.setEnabled(true);
                     BtnToolKamnap.setEnabled(true);
@@ -4663,17 +4669,19 @@ public class frmUtama extends javax.swing.JFrame {
                     MnGantiPassword.setEnabled(false);
                     BtnToolJualObat.setEnabled(true);
                     DlgLogin.dispose();
+                    String coba="Fanji";
                     BtnLog.setText("Log Out");
                     MnLogin.setText("Log Out");
                     lblStts.setText("Admin : ");
                     lblUser.setText("Admin Utama");
                 }else if(var.getjml2()>=1){  
                     BtnMenu.setEnabled(true);
+                    frmUtama.cobaa=Sequel.cariIsi("select nama from pegawai where nik="+var.getkode()+"");
                     DlgLogin.dispose();
                     BtnLog.setText("Log Out");
                     MnLogin.setText("Log Out");
                     lblStts.setText("Admin : ");
-                    lblUser.setText(var.getkode());
+                    lblUser.setText(cobaa);
                     MnGantiPassword.setEnabled(true);
                     BtnToolReg.setEnabled(var.getregistrasi());
                     BtnToolKamnap.setEnabled(var.getkamar_inap());
@@ -4683,8 +4691,10 @@ public class frmUtama extends javax.swing.JFrame {
                     btnToolIGD.setEnabled(var.getigd());      
                     BtnToolJualObat.setEnabled(var.getigd());
                     btnToolBcdRalan.setEnabled(var.getbarcoderalan());
-                    btnToolBcdRanap.setEnabled(var.getbarcoderanap());   
+                    btnToolBcdRanap.setEnabled(var.getbarcoderanap()); 
+                     
                     Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");
+                    
                 }else if((var.getjml1()==0)&&(var.getjml2()==0)){
                     JOptionPane.showMessageDialog(null,"Maaf, Gagal login. ID User atau password ada yang salah ...!");
                     BtnToolReg.setEnabled(false);
@@ -8204,6 +8214,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private widget.InternalFrame internalFrame3;
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame6;
+    private javax.swing.JLabel jLabel1;
     private widget.Label jLabel10;
     private javax.swing.JLabel jLabel11;
     private widget.Label jLabel12;
@@ -9434,5 +9445,5 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         }
     }
     
-
+ 
 }
