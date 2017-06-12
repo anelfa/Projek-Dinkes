@@ -399,24 +399,24 @@ public final class DlgIGD extends javax.swing.JDialog {
         
         try{
            ps=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                   "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,"+
+                   "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,poliklinik.nm_poli,"+
                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab "+
                    "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
                    "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                    "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli  where  "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  reg_periksa.no_reg like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  reg_periksa.no_rawat like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  reg_periksa.tgl_registrasi like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  reg_periksa.kd_dokter like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  dokter.nm_dokter like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  reg_periksa.no_rkm_medis like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  reg_periksa.stts_daftar like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  pasien.nm_pasien like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  poliklinik.nm_poli like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  reg_periksa.p_jawab like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  reg_periksa.almt_pj like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  reg_periksa.hubunganpj like ? or "+
-                "  poliklinik.kd_poli='IGDK' and tgl_registrasi between ? and ? and  penjab.png_jawab like ? order by reg_periksa.no_rawat "); 
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  reg_periksa.no_reg like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  reg_periksa.no_rawat like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  reg_periksa.tgl_registrasi like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  reg_periksa.kd_dokter like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  dokter.nm_dokter like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  reg_periksa.no_rkm_medis like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  reg_periksa.stts_daftar like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  pasien.nm_pasien like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  poliklinik.nm_poli like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  reg_periksa.p_jawab like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  reg_periksa.almt_pj like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  reg_periksa.hubunganpj like ? or "+
+                "  poliklinik.kd_poli='IGD' and tgl_registrasi between ? and ? and  penjab.png_jawab like ? order by reg_periksa.no_rawat "); 
            ps3=koneksi.prepareStatement("select nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) asal,"+
                         "namakeluarga,keluarga,pasien.kd_pj,penjab.png_jawab,if(tgl_daftar=?,'Baru','Lama') as daftar, "+
                         "year(from_days(datediff(now(), pasien.tgl_lahir))) as tahun, "+
@@ -2487,19 +2487,19 @@ public final class DlgIGD extends javax.swing.JDialog {
         }else{
             switch (TStatus.getText()) {
                 case "Baru":
-                        biaya=Sequel.cariIsiAngka("select registrasi from poliklinik where kd_poli='IGDK'");
+                        biaya=Sequel.cariIsiAngka("select registrasi from poliklinik where kd_poli='IGD'");
                         break;
                 case "Lama":
-                        biaya=Sequel.cariIsiAngka("select registrasilama from poliklinik where kd_poli='IGDK'");
+                        biaya=Sequel.cariIsiAngka("select registrasilama from poliklinik where kd_poli='IGD'");
                         break;
                 default:
-                        biaya=Sequel.cariIsiAngka("select registrasi from poliklinik where kd_poli='IGDK'");
+                        biaya=Sequel.cariIsiAngka("select registrasi from poliklinik where kd_poli='IGD'");
                         break;
             }
-            Sequel.menyimpan("poliklinik","?,?,?,?",4,new String[]{"IGDK","Unit IGD","0","0"});
+            Sequel.menyimpan("poliklinik","?,?,?,?",4,new String[]{"IGD","Unit IGD","0","0"});
             if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
                     new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                    kddokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
+                    kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
                     TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
                 if(!AsalRujukan.getText().equals("")){
                     Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
@@ -2511,7 +2511,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 isNumber();
                 if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
                         new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                        kddokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
+                        kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
                         TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
                     if(!AsalRujukan.getText().equals("")){
                         Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
@@ -2523,7 +2523,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                     isNumber();
                     if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
                             new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                            kddokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
+                            kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
                             TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
                         if(!AsalRujukan.getText().equals("")){
                             Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
@@ -2535,7 +2535,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                         isNumber();
                         if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
                                 new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                                kddokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
+                                kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
                                 TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
                             if(!AsalRujukan.getText().equals("")){
                                 Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
@@ -2547,7 +2547,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                             isNumber();
                             if(Sequel.menyimpantf("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
                                     new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                                    kddokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
+                                    kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
                                     TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
                                 if(!AsalRujukan.getText().equals("")){
                                     Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
@@ -2619,24 +2619,24 @@ public final class DlgIGD extends javax.swing.JDialog {
             param.put("emailrs",var.getemailrs());   
             param.put("logo",Sequel.cariGambar("select logo from setting")); 
                Valid.MyReport("rptReg.jrxml","report","::[ Data Registrasi Periksa ]::","select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                   "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,ifnull((select perujuk from rujuk_masuk where rujuk_masuk.no_rawat=reg_periksa.no_rawat),'') as perujuk,"+
+                   "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,poliklinik.nm_poli,ifnull((select perujuk from rujuk_masuk where rujuk_masuk.no_rawat=reg_periksa.no_rawat),'') as perujuk,"+
                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab "+
                    "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab  "+
                    "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.kd_pj=penjab.kd_pj "+
                    "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_poli=poliklinik.kd_poli "+
-                   "where poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.no_reg like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.tgl_registrasi like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.kd_dokter like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and dokter.nm_dokter like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.stts_daftar like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and poliklinik.nm_poli like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.p_jawab like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.almt_pj like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and penjab.png_jawab like '%"+TCari.getText().trim()+"%' or "+
-                   " poliklinik.kd_poli='IGDK' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.hubunganpj like '%"+TCari.getText().trim()+"%' order by reg_periksa.no_rawat desc",param);   
+                   "where poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.no_reg like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.tgl_registrasi like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.kd_dokter like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and dokter.nm_dokter like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.stts_daftar like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and poliklinik.nm_poli like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.p_jawab like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.almt_pj like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and penjab.png_jawab like '%"+TCari.getText().trim()+"%' or "+
+                   " poliklinik.kd_poli='IGD' and tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.hubunganpj like '%"+TCari.getText().trim()+"%' order by reg_periksa.no_rawat desc",param);   
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
@@ -2685,20 +2685,20 @@ public final class DlgIGD extends javax.swing.JDialog {
         }else{
             switch (TStatus.getText()) {
                 case "Baru":
-                        biaya=Sequel.cariIsiAngka("select registrasi from poliklinik where kd_poli='IGDK'");
+                        biaya=Sequel.cariIsiAngka("select registrasi from poliklinik where kd_poli='IGD'");
                         break;
                 case "Lama":
-                        biaya=Sequel.cariIsiAngka("select registrasilama from poliklinik where kd_poli='IGDK'");
+                        biaya=Sequel.cariIsiAngka("select registrasilama from poliklinik where kd_poli='IGD'");
                         break;
                 default:
-                        biaya=Sequel.cariIsiAngka("select registrasi from poliklinik where kd_poli='IGDK'");
+                        biaya=Sequel.cariIsiAngka("select registrasi from poliklinik where kd_poli='IGD'");
                         break;
             }
             if(var.getedit_registrasi()==true){
                 Sequel.queryu2("update reg_periksa set no_rawat=?,no_reg=?,tgl_registrasi=?,jam_reg=?,kd_dokter=?,no_rkm_medis=?,kd_poli=?,"+
                         "p_jawab=?,almt_pj=?,biaya_reg=?,hubunganpj=?,stts_daftar=?,kd_pj=? where no_rawat=?",14,
                         new String[]{TNoRw.getText(),TNoReg.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                            kddokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),""+biaya,THbngn.getText(),
+                            kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),""+biaya,THbngn.getText(),
                             TStatus.getText(),kdpnj.getText(),tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString()
                     });
             }else{
@@ -2713,7 +2713,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                     Sequel.queryu2("update reg_periksa set no_rawat=?,no_reg=?,tgl_registrasi=?,jam_reg=?,kd_dokter=?,no_rkm_medis=?,kd_poli=?,"+
                         "p_jawab=?,almt_pj=?,biaya_reg=?,hubunganpj=?,stts_daftar=?,kd_pj=? where no_rawat=?",14,
                         new String[]{TNoRw.getText(),TNoReg.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
-                            kddokter.getText(),TNoRM.getText(),"IGDK",TPngJwb.getText(),TAlmt.getText(),""+biaya,THbngn.getText(),
+                            kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),""+biaya,THbngn.getText(),
                             TStatus.getText(),kdpnj.getText(),tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString()
                     });
                 }
@@ -3101,7 +3101,7 @@ private void BtnPrint2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 param.put("logo",Sequel.cariGambar("select logo from setting")); 
           Valid.MyReport("rptSuratSakit.jrxml","report","::[ Surat Sakit ]::",
                         "select reg_periksa.no_rawat,dokter.nm_dokter,pasien.keluarga,pasien.namakeluarga,pasien.tgl_lahir,pasien.jk," +
-                        " pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.pekerjaan,pasien.alamat" +
+                        " pasien.nm_pasien,pasien.jk,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,pasien.pekerjaan,pasien.alamat" +
                         " from reg_periksa inner join pasien inner join dokter" +
                         " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter "+
                         "where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
@@ -3588,7 +3588,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             param.put("logo",Sequel.cariGambar("select logo from setting"));
             Valid.MyReport("rptSuratSakit2.jrxml","report","::[ Surat Sakit ]::",
                 "select reg_periksa.no_rkm_medis,dokter.nm_dokter,pasien.keluarga,pasien.namakeluarga,pasien.tgl_lahir,pasien.jk," +
-                " pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.pekerjaan,pasien.alamat" +
+                " pasien.nm_pasien,pasien.jk,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,pasien.pekerjaan,pasien.alamat" +
                 " from reg_periksa inner join pasien inner join dokter" +
                 " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter  "+
                 "where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
@@ -3940,7 +3940,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             dlgki.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             dlgki.setLocationRelativeTo(internalFrame1);
             dlgki.isCek();
-            dlgki.setNoRm(TNoRw.getText(),DTPReg.getDate(),"2. Rawat Jalan","IGDK","Unit IGD/UGD");
+            dlgki.setNoRm(TNoRw.getText(),DTPReg.getDate(),"2. Rawat Jalan","IGD","Unit IGD/UGD");
             dlgki.tampil();
             dlgki.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
