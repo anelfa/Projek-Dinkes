@@ -3664,7 +3664,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10/06/2017" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13/06/2017" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -4227,7 +4227,6 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu5.setMnemonic('P');
         jMenu5.setText("Presensi Pegawai");
         jMenu5.setToolTipText("Alt+P");
-        jMenu5.setEnabled(false);
         jMenu5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jMenu5.setHideActionText(true);
         jMenu5.setName("jMenu5"); // NOI18N
@@ -4311,7 +4310,6 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu6.setMnemonic('I');
         jMenu6.setText("Informasi");
         jMenu6.setToolTipText("Alt+I");
-        jMenu6.setEnabled(false);
         jMenu6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jMenu6.setName("jMenu6"); // NOI18N
         jMenu6.setPreferredSize(new java.awt.Dimension(89, 30));
@@ -4492,7 +4490,6 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu7.setMnemonic('N');
         jMenu7.setText("Anjungan & Antrian");
         jMenu7.setToolTipText("Alt+N");
-        jMenu7.setEnabled(false);
         jMenu7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jMenu7.setName("jMenu7"); // NOI18N
         jMenu7.setPreferredSize(new java.awt.Dimension(138, 30));
