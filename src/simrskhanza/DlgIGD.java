@@ -41,6 +41,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -74,7 +78,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     private Date cal=new Date();
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     private double biaya=0;
-    private String alamatperujuk="-",umur="0",sttsumur="Th",
+    private String alamatperujuk="-",th_umur="0",bl_umur="0",hr_umur="0",umur="0",sttsumur="Th",
             validasiregistrasi=Sequel.cariIsi("select wajib_closing_kasir from set_validasi_registrasi");
 
     /** Creates new form DlgReg
@@ -1507,7 +1511,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         TglSakit1.setEditable(false);
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2017" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-06-2017" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -1555,7 +1559,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         TglSakit2.setEditable(false);
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2017" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-06-2017" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -2008,7 +2012,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2017" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-06-2017" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2023,7 +2027,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2017" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-06-2017" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2116,7 +2120,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         DTPReg.setEditable(false);
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2017" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-06-2017" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -2496,11 +2500,11 @@ public final class DlgIGD extends javax.swing.JDialog {
                         biaya=Sequel.cariIsiAngka("select registrasi from poliklinik where kd_poli='IGD'");
                         break;
             }
-            Sequel.menyimpan("poliklinik","?,?,?,?",4,new String[]{"IGD","Unit IGD","0","0"});
-            if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
+           // Sequel.menyimpan("poliklinik","?,?,?,?",4,new String[]{"IGD","Unit IGD","0","0"});
+            if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",18,
                     new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                     kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                    TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
+                    TStatus.getText(),"Ralan",kdpnj.getText(),hr_umur, bl_umur, th_umur})==true){
                 if(!AsalRujukan.getText().equals("")){
                     Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
                 }
@@ -2509,10 +2513,10 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else{
                 Kd2.setText("");
                 isNumber();
-                if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
+                if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",18,
                         new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                         kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                        TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
+                        TStatus.getText(),"Ralan",kdpnj.getText(),hr_umur, bl_umur, th_umur})==true){
                     if(!AsalRujukan.getText().equals("")){
                         Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
                     }
@@ -2521,10 +2525,10 @@ public final class DlgIGD extends javax.swing.JDialog {
                 }else{
                     Kd2.setText("");
                     isNumber();
-                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
+                    if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",18,
                             new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                             kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                            TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
+                            TStatus.getText(),"Ralan",kdpnj.getText(),hr_umur, bl_umur, th_umur})==true){
                         if(!AsalRujukan.getText().equals("")){
                             Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
                         }
@@ -2533,10 +2537,10 @@ public final class DlgIGD extends javax.swing.JDialog {
                     }else{
                         Kd2.setText("");
                         isNumber();
-                        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
+                        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",18,
                                 new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                                 kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                                TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
+                                TStatus.getText(),"Ralan",kdpnj.getText(),hr_umur, bl_umur, th_umur})==true){
                             if(!AsalRujukan.getText().equals("")){
                                 Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
                             }
@@ -2545,10 +2549,10 @@ public final class DlgIGD extends javax.swing.JDialog {
                         }else{
                             Kd2.setText("");
                             isNumber();
-                            if(Sequel.menyimpantf("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",17,
+                            if(Sequel.menyimpantf("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",18,
                                     new String[]{TNoReg.getText(),TNoRw.getText(),Valid.SetTgl(DTPReg.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                                     kddokter.getText(),TNoRM.getText(),"IGD",TPngJwb.getText(),TAlmt.getText(),THbngn.getText(),biaya+"","Belum",
-                                    TStatus.getText(),"Ralan",kdpnj.getText(),umur,sttsumur})==true){
+                                    TStatus.getText(),"Ralan",kdpnj.getText(),hr_umur, bl_umur, th_umur})==true){
                                 if(!AsalRujukan.getText().equals("")){
                                     Sequel.menyimpan("rujuk_masuk","'"+TNoRw.getText()+"','"+AsalRujukan.getText()+"','"+alamatperujuk+"','-','0'","No.Rujuk");
                                 }
@@ -4281,6 +4285,16 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }
 
     private void isPas(){
+         try {
+            ps3=koneksi.prepareStatement("select nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) asal,"+
+                        "namakeluarga,keluarga,pasien.kd_pj,penjab.png_jawab,if(tgl_daftar=?,'Baru','Lama') as daftar, "+
+                        "year(from_days(datediff(now(), pasien.tgl_lahir))) as tahun, "+
+                        "month(from_days(datediff(now(),pasien.tgl_lahir))) as bulan, "+
+                        "day(from_days(datediff(now(),pasien.tgl_lahir))) as hari , pasien.tgl_lahir from pasien "+
+                        "inner join kelurahan inner join kecamatan inner join kabupaten inner join penjab "+
+                        "on pasien.kd_kel=kelurahan.kd_kel and pasien.kd_pj=penjab.kd_pj "+
+                        "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "+
+                        "where pasien.no_rkm_medis=?");
         try {            
             ps3.setString(1,Valid.SetTgl(DTPReg.getSelectedItem()+""));
             ps3.setString(2,TNoRM.getText());
@@ -4293,25 +4307,24 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 kdpnj.setText(rs.getString("kd_pj"));
                 nmpnj.setText(rs.getString("png_jawab"));
                 TStatus.setText(rs.getString("daftar"));
-                umur="0";
-                sttsumur="Th";
-                if(rs.getInt("tahun")>0){
-                    umur=rs.getString("tahun");
-                    sttsumur="Th";
-                }else if(rs.getInt("tahun")==0){
-                    if(rs.getInt("bulan")>0){
-                        umur=rs.getString("bulan");
-                        sttsumur="Bl";
-                    }else if(rs.getInt("bulan")==0){
-                        umur=rs.getString("hari");
-                        sttsumur="Hr";
-                    }
-                }
+               String tanggal = rs.getString("tgl_lahir");
+Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
+                    
+            Date kini = new Date();
+            LocalDate today =LocalDate.now();
+            LocalDate birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Period p = Period.between(birthday,today);
+            long p2 =ChronoUnit.DAYS.between(birthday,today);
+              th_umur=String.valueOf(p.getYears());
+            bl_umur=String.valueOf(p.getMonths());
+            hr_umur=String.valueOf(p.getDays());
             }
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 
