@@ -4666,7 +4666,9 @@ public class frmUtama extends javax.swing.JFrame {
                     MnGantiPassword.setEnabled(false);
                     BtnToolJualObat.setEnabled(true);
                     DlgLogin.dispose();
+                    
                     String coba="Fanji";
+                    var.setU_username("coba");
                     BtnLog.setText("Log Out");
                     MnLogin.setText("Log Out");
                     lblStts.setText("Admin : ");

@@ -54,6 +54,8 @@ public final class var {
             reklasifikasi_ranap=false,utd_penyerahan_darah=false,hutang_obat=false,riwayat_obat_alkes_bhp=false,sensus_harian_poli=false,rl4a=false,
             aplicare_referensi_kamar=false,aplicare_ketersediaan_kamar=false,inacbg_klaim_baru_otomatis=false,inacbg_klaim_baru_manual=false,inacbg_coder_nik=false,
             mutasi_berkas=false,akun_piutang=false,harian_kso=false,bulanan_kso=false,harian_menejemen=false,bulanan_menejemen=false;
+     private static String u_username;
+   
     
     public static void setData(String user, String pass) {
        try {                
@@ -995,7 +997,13 @@ public final class var {
             }
 
     }
-    
+     public static String getU_username() {
+        return u_username;
+    }
+
+    public static void setU_username(String u_username) {
+        var.u_username = u_username;
+    }
     public static int getjml1() {return var.jml1;}    
     public static int getjml2() {return var.jml2;}    
     public static boolean getadmin(){return var.admin;}        
