@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2017 at 03:05 AM
+-- Generation Time: Jun 15, 2017 at 04:08 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.34
 
@@ -194,6 +194,13 @@ CREATE TABLE `bank` (
   `namabank` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `bank`
+--
+
+INSERT INTO `bank` (`namabank`) VALUES
+('T');
+
 -- --------------------------------------------------------
 
 --
@@ -301,6 +308,13 @@ CREATE TABLE `biaya_sekali` (
 CREATE TABLE `bidang` (
   `nama` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bidang`
+--
+
+INSERT INTO `bidang` (`nama`) VALUES
+('-');
 
 -- --------------------------------------------------------
 
@@ -5125,6 +5139,27 @@ CREATE TABLE `jabatan` (
   `nm_jbtn` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `jabatan`
+--
+
+INSERT INTO `jabatan` (`kd_jbtn`, `nm_jbtn`) VALUES
+('J001', '-'),
+('J015', 'Administrasi'),
+('J006', 'Akuntan'),
+('J010', 'Analis'),
+('J004', 'Apoteker'),
+('J003', 'Asisten Apoteker'),
+('J014', 'Bendahara'),
+('J008', 'Driver'),
+('J002', 'IT'),
+('J013', 'Kepegawaian'),
+('J005', 'Keuangan'),
+('J009', 'Perawat'),
+('J007', 'Rekam Medis'),
+('J012', 'Sekertaris'),
+('J011', 'Umum');
+
 -- --------------------------------------------------------
 
 --
@@ -5400,6 +5435,13 @@ CREATE TABLE `jnj_jabatan` (
   `nama` varchar(50) NOT NULL,
   `tnj` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jnj_jabatan`
+--
+
+INSERT INTO `jnj_jabatan` (`kode`, `nama`, `tnj`) VALUES
+('-', '-', 0);
 
 -- --------------------------------------------------------
 
@@ -74094,6 +74136,8 @@ CREATE TABLE `pasien` (
 
 INSERT INTO `pasien` (`no_rkm_medis`, `nm_pasien`, `no_ktp`, `jk`, `tmp_lahir`, `tgl_lahir`, `nm_ibu`, `alamat`, `gol_darah`, `pekerjaan`, `stts_nikah`, `agama`, `tgl_daftar`, `no_tlp`, `umur`, `pnd`, `keluarga`, `namakeluarga`, `kd_pj`, `no_peserta`, `kd_kel`, `kd_kec`, `kd_kab`, `pekerjaanpj`, `alamatpj`, `kelurahanpj`, `kecamatanpj`, `kabupatenpj`) VALUES
 ('000002', 'SITI CHAPSAH', '3329094609590002', 'P', 'Jakarta', '1959-09-06', 'a', 'A', '-', 'PNS DAERAH', 'MENIKAH', 'ISLAM', '2017-06-12', '1', '57 Th 9 Bl 6 Hr', '-', 'IBU', 'a', 'C02', '0000079979951', 1101012005, 110101, 1101, 'a', 'A', 'UJONG PULO RAYEUK', 'BAKONGAN', 'KABUPATEN ACEH SELATAN'),
+('000003', 'aa', '1', 'L', 'aa', '2017-06-12', 'a', 'A', '-', 'a', 'MENIKAH', 'ISLAM', '2017-06-13', '1', '0 Th 0 Bl 1 Hr', '-', 'SAUDARA', 'a', 'C01', 'a', 1101012001, 110101, 1101, 'a', 'ALAMAT', 'KEDAI BAKONGAN', 'BAKONGAN', 'KABUPATEN ACEH SELATAN'),
+('000004', '1', '1', 'L', '1', '2017-06-13', '1', '', '-', '1', 'MENIKAH', 'ISLAM', '2017-06-13', '1', '0 Th 0 Bl 0 Hr', '-', 'SAUDARA', '1', 'C01', '1', 1101012002, 110101, 1101, '1', 'ALAMAT', 'UJUNG MANGKI', 'BAKONGAN1', 'KABUPATEN ACEH SELATAN'),
 ('012553', 'FANJI AHMAD PRATAMA', '3175101611900006', 'L', 'Jakarta', '1990-11-16', 'Saanih', 'JLN. BAMBU HITAM RT 004 RW 01 NO. 36', '-', 'PEGAWAI PEMERIN', 'MENIKAH', 'ISLAM', '2017-06-12', '085691673338', '26 Th 6 Bl 27 Hr', '-', 'IBU', 'Saanih', 'C02', '0000037012498', 3175101006, 317510, 3175, 'IRT', 'JLN. BAMBU HITAM RT 004 RW 01 NO. 36', 'BAMBU APUS', 'CIPAYUNG', 'KOTA JAKARTA TIMUR');
 
 -- --------------------------------------------------------
@@ -74194,8 +74238,10 @@ INSERT INTO `pegawai` (`id`, `nik`, `nama`, `jk`, `jbtn`, `jnj_jabatan`, `depart
 (20, 'D0000020', 'dr. Pradana Akmaja Chaetawarsa, Sp.OG', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
 (21, 'D0000021', 'dr. Laily Rachmawati', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
 (22, 'D0000022', 'dr. Asrina Veranita', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '0000-00-00', '', '', 'T', '', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
-(23, '123456', 'Zaki', 'Pria', '-', '-', '-', '-', '-', '-', '-', '-', 0, 'Jakarta', '1987-05-10', 'Jl Saminten 1 no 176', '-', '0000-00-00', '<1', '-', 'T', '-', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
-(24, '2345', 'Hafiz', 'Pria', '-', '-', '-', '-', '-', '-', '-', '-', 0, 'df', '1981-06-09', 't', '-', '0000-00-00', '<1', '-', 'T', '-', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0);
+(27, 'l001', 'Loket', 'Pria', '-', '-', '-', '-', '-', '-', '-', '-', 0, 'Jakarta', '2017-06-13', '', '-', '0000-00-00', '<1', '-', 'T', '-', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(28, 'k001', 'Kasir', 'Pria', '-', '-', '-', '-', '-', '-', '-', '-', 0, 'jakarta', '2017-06-13', '', '-', '0000-00-00', '<1', '-', 'T', '-', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(29, 'p001', 'fanji', 'Pria', '-', '-', '-', '-', '-', '-', '-', '-', 0, 'j', '2017-06-15', '', '-', '0000-00-00', '<1', '-', 'T', '-', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0),
+(30, '2222', 'coba', 'Pria', '-', '-', '-', '-', '-', '-', '-', '-', 0, 's', '2017-06-15', '', '-', '0000-00-00', '<1', '-', 'T', '-', 'AKTIF', 0, 0, 0, '0000-00-00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -74416,6 +74462,13 @@ CREATE TABLE `pendidikan` (
   `maksimal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pendidikan`
+--
+
+INSERT INTO `pendidikan` (`tingkat`, `indek`, `gapok1`, `kenaikan`, `maksimal`) VALUES
+('-', 0, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -74593,6 +74646,16 @@ CREATE TABLE `petugas` (
   `no_telp` varchar(13) DEFAULT NULL,
   `status` enum('0','1') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `petugas`
+--
+
+INSERT INTO `petugas` (`nip`, `nama`, `jk`, `tmp_lahir`, `tgl_lahir`, `gol_darah`, `agama`, `stts_nikah`, `alamat`, `kd_jbtn`, `no_telp`, `status`) VALUES
+('2222', 'coba', 'L', 's', '2017-06-15', 'A', 'ISLAM', 'MENIKAH', '', 'J002', '', '1'),
+('k001', 'Kasir', 'L', 'jakarta', '2017-06-13', 'A', 'ISLAM', 'MENIKAH', '', 'J015', '', '1'),
+('l001', 'Loket', 'L', 'Jakarta', '2017-06-13', 'A', 'ISLAM', 'MENIKAH', '', 'J015', '', '1'),
+('p001', 'fanji', 'L', 'j', '2017-06-15', 'A', 'ISLAM', 'MENIKAH', '', 'J002', '', '1');
 
 -- --------------------------------------------------------
 
@@ -74950,17 +75013,27 @@ CREATE TABLE `reg_periksa` (
   `kd_pj` char(3) NOT NULL,
   `hr_umur` int(11) DEFAULT NULL,
   `bln_umur` int(5) DEFAULT NULL,
-  `thn_umur` int(8) DEFAULT NULL
+  `thn_umur` int(8) DEFAULT NULL,
+  `nm_user` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `reg_periksa`
 --
 
-INSERT INTO `reg_periksa` (`no_reg`, `no_rawat`, `tgl_registrasi`, `jam_reg`, `kd_dokter`, `no_rkm_medis`, `kd_poli`, `p_jawab`, `almt_pj`, `hubunganpj`, `biaya_reg`, `stts`, `stts_daftar`, `status_lanjut`, `kd_pj`, `hr_umur`, `bln_umur`, `thn_umur`) VALUES
-('001', '2017/06/12/000001', '2017-06-12', '10:17:15', 'D0000011', '012553', 'IGD', 'Saanih', 'JLN. BAMBU HITAM RT 004 RW 01 NO. 36, BAMBU APUS, CIPAYUNG, KOTA JAKARTA TIMUR', 'IBU', 0, 'Belum', 'Baru', 'Ralan', 'C02', 27, 6, 26),
-('001', '2017/06/12/000002', '2017-06-12', '10:34:52', 'D0000010', '000002', 'IGD', 'a', 'A, KEDAI BAKONGAN, BAKONGAN, KABUPATEN ACEH SELATAN', 'IBU', 0, 'Belum', 'Baru', 'Ralan', 'C02', 4, 11, 2),
-('002', '2017/06/12/000003', '2017-06-12', '11:04:11', 'D0000015', '012553', 'ANA', 'Saanih', 'JLN. BAMBU HITAM RT 004 RW 01 NO. 36, BAMBU APUS, CIPAYUNG, KOTA JAKARTA TIMUR', 'IBU', 0, 'Belum', 'Baru', 'Ralan', 'C02', 27, 6, 26);
+INSERT INTO `reg_periksa` (`no_reg`, `no_rawat`, `tgl_registrasi`, `jam_reg`, `kd_dokter`, `no_rkm_medis`, `kd_poli`, `p_jawab`, `almt_pj`, `hubunganpj`, `biaya_reg`, `stts`, `stts_daftar`, `status_lanjut`, `kd_pj`, `hr_umur`, `bln_umur`, `thn_umur`, `nm_user`) VALUES
+('001', '2017/06/12/000001', '2017-06-12', '10:17:15', 'D0000011', '012553', 'IGD', 'Saanih', 'JLN. BAMBU HITAM RT 004 RW 01 NO. 36, BAMBU APUS, CIPAYUNG, KOTA JAKARTA TIMUR', 'IBU', 0, 'Belum', 'Baru', 'Ralan', 'C02', 27, 6, 26, ''),
+('001', '2017/06/15/000001', '2017-06-15', '08:16:19', 'D0000020', '000002', 'OBG', 'a', 'A, UJONG PULO RAYEUK, BAKONGAN, KABUPATEN ACEH SELATAN', 'IBU', 100000, 'Belum', 'Lama', 'Ralan', 'C02', 9, 9, 57, 'Coba Test Printe'),
+('001', '2017/06/15/000002', '2017-06-15', '08:20:10', 'D0000018', '012553', 'INT', 'Saanih', 'JLN. BAMBU HITAM RT 004 RW 01 NO. 36, BAMBU APUS, CIPAYUNG, KOTA JAKARTA TIMUR', 'IBU', 0, 'Belum', 'Lama', 'Ralan', 'C02', 30, 6, 26, ''),
+('002', '2017/06/15/000003', '2017-06-15', '08:22:06', 'D0000018', '000002', 'INT', 'a', 'A, UJONG PULO RAYEUK, BAKONGAN, KABUPATEN ACEH SELATAN', 'IBU', 0, 'Belum', 'Lama', 'Ralan', 'C02', 9, 9, 57, 'Coba Test Printe'),
+('003', '2017/06/15/000004', '2017-06-15', '08:23:57', 'D0000018', '012553', 'INT', 'Saanih', 'JLN. BAMBU HITAM RT 004 RW 01 NO. 36, BAMBU APUS, CIPAYUNG, KOTA JAKARTA TIMUR', 'IBU', 0, 'Belum', 'Lama', 'Ralan', 'C02', 30, 6, 26, ''),
+('001', '2017/06/15/000005', '2017-06-15', '08:26:01', 'D0000013', '000002', 'OBG', 'a', 'A, UJONG PULO RAYEUK, BAKONGAN, KABUPATEN ACEH SELATAN', 'IBU', 100000, 'Belum', 'Lama', 'Ralan', 'C02', 9, 9, 57, 'Admin Utama'),
+('002', '2017/06/15/000006', '2017-06-15', '08:26:21', 'D0000013', '000004', 'OBG', '1', ', UJUNG MANGKI, BAKONGAN, KABUPATEN ACEH SELATAN', 'SAUDARA', 100000, 'Belum', 'Lama', 'Ralan', 'C01', 2, 0, 0, 'Coba Test Printe'),
+('003', '2017/06/15/000007', '2017-06-15', '08:39:21', 'D0000013', '000002', 'IGD', 'a', 'A, UJONG PULO RAYEUK, BAKONGAN, KABUPATEN ACEH SELATAN', 'IBU', 0, 'Belum', 'Lama', 'Ralan', 'C02', 9, 9, 57, 'Admin Utama'),
+('001', '2017/06/15/000008', '2017-06-15', '08:41:02', 'D0000014', '012553', 'IGD', 'Saanih', 'JLN. BAMBU HITAM RT 004 RW 01 NO. 36, BAMBU APUS, CIPAYUNG, KOTA JAKARTA TIMUR', 'IBU', 0, 'Belum', 'Lama', 'Ralan', 'C02', 30, 6, 26, 'Admin Utama'),
+('004', '2017/06/15/000009', '2017-06-15', '08:44:06', 'D0000013', '000002', 'IGD', 'a', 'A, UJONG PULO RAYEUK, BAKONGAN, KABUPATEN ACEH SELATAN', 'IBU', 0, 'Belum', 'Lama', 'Ralan', 'C02', 9, 9, 57, ''),
+('005', '2017/06/15/000010', '2017-06-15', '08:46:43', 'D0000013', '000002', 'IGD', 'a', 'A, UJONG PULO RAYEUK, BAKONGAN, KABUPATEN ACEH SELATAN', 'IBU', 0, 'Belum', 'Lama', 'Ralan', 'C02', 9, 9, 57, ''),
+('001', '2017/06/15/000011', '2017-06-15', '09:07:19', 'D0000015', '000002', 'IGD', 'a', 'A, UJONG PULO RAYEUK, BAKONGAN, KABUPATEN ACEH SELATAN', 'IBU', 0, 'Belum', 'Lama', 'Ralan', 'C02', 9, 9, 57, 'Kasir');
 
 -- --------------------------------------------------------
 
@@ -75758,7 +75831,7 @@ CREATE TABLE `set_no_rkm_medis` (
 --
 
 INSERT INTO `set_no_rkm_medis` (`no_rkm_medis`) VALUES
-('000002');
+('000004');
 
 -- --------------------------------------------------------
 
@@ -76068,6 +76141,13 @@ CREATE TABLE `stts_kerja` (
   `indek` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `stts_kerja`
+--
+
+INSERT INTO `stts_kerja` (`stts`, `ktg`, `indek`) VALUES
+('-', '-', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -76078,6 +76158,13 @@ CREATE TABLE `stts_wp` (
   `stts` char(5) NOT NULL,
   `ktg` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stts_wp`
+--
+
+INSERT INTO `stts_wp` (`stts`, `ktg`) VALUES
+('-', '-');
 
 -- --------------------------------------------------------
 
@@ -76627,6 +76714,29 @@ CREATE TABLE `tracker` (
   `jam_login` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tracker`
+--
+
+INSERT INTO `tracker` (`nip`, `tgl_login`, `jam_login`) VALUES
+('2', '2017-06-15', '07:48:31'),
+('2', '2017-06-15', '07:54:28'),
+('2', '2017-06-15', '08:16:06'),
+('2', '2017-06-15', '08:22:01'),
+('2', '2017-06-15', '08:26:15'),
+('2222', '2017-06-15', '09:00:28'),
+('k001', '2017-06-15', '08:47:41'),
+('k001', '2017-06-15', '08:54:18'),
+('k001', '2017-06-15', '09:07:10'),
+('l001', '2017-06-15', '08:43:46'),
+('l001', '2017-06-15', '08:46:36'),
+('l001', '2017-06-15', '08:53:23'),
+('l001', '2017-06-15', '08:55:26'),
+('l001', '2017-06-15', '08:56:39'),
+('l001', '2017-06-15', '09:02:44'),
+('l001', '2017-06-15', '09:05:49'),
+('p001', '2017-06-15', '08:58:10');
+
 -- --------------------------------------------------------
 
 --
@@ -76882,6 +76992,16 @@ CREATE TABLE `user` (
   `harian_menejemen` enum('true','false') DEFAULT NULL,
   `bulanan_menejemen` enum('true','false') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_user`, `password`, `penyakit`, `obat_penyakit`, `dokter`, `jadwal_praktek`, `petugas`, `pasien`, `registrasi`, `tindakan_ralan`, `kamar_inap`, `tindakan_ranap`, `operasi`, `rujukan_keluar`, `rujukan_masuk`, `beri_obat`, `resep_pulang`, `pasien_meninggal`, `diet_pasien`, `kelahiran_bayi`, `periksa_lab`, `periksa_radiologi`, `kasir_ralan`, `deposit_pasien`, `piutang_pasien`, `peminjaman_berkas`, `barcode`, `presensi_harian`, `presensi_bulanan`, `pegawai_admin`, `pegawai_user`, `suplier`, `satuan_barang`, `konversi_satuan`, `jenis_barang`, `obat`, `stok_opname_obat`, `stok_obat_pasien`, `pengadaan_obat`, `pemesanan_obat`, `penjualan_obat`, `piutang_obat`, `retur_ke_suplier`, `retur_dari_pembeli`, `retur_obat_ranap`, `retur_piutang_pasien`, `keuntungan_penjualan`, `keuntungan_beri_obat`, `sirkulasi_obat`, `ipsrs_barang`, `ipsrs_pengadaan_barang`, `ipsrs_stok_keluar`, `ipsrs_rekap_pengadaan`, `ipsrs_rekap_stok_keluar`, `ipsrs_pengeluaran_harian`, `inventaris_jenis`, `inventaris_kategori`, `inventaris_merk`, `inventaris_ruang`, `inventaris_produsen`, `inventaris_koleksi`, `inventaris_inventaris`, `inventaris_sirkulasi`, `parkir_jenis`, `parkir_in`, `parkir_out`, `parkir_rekap_harian`, `parkir_rekap_bulanan`, `informasi_kamar`, `harian_tindakan_poli`, `obat_per_poli`, `obat_per_kamar`, `obat_per_dokter_ralan`, `obat_per_dokter_ranap`, `harian_dokter`, `bulanan_dokter`, `harian_paramedis`, `bulanan_paramedis`, `pembayaran_ralan`, `pembayaran_ranap`, `rekap_pembayaran_ralan`, `rekap_pembayaran_ranap`, `tagihan_masuk`, `tambahan_biaya`, `potongan_biaya`, `resep_obat`, `resume_pasien`, `penyakit_ralan`, `penyakit_ranap`, `kamar`, `tarif_ralan`, `tarif_ranap`, `tarif_lab`, `tarif_radiologi`, `tarif_operasi`, `akun_rekening`, `rekening_tahun`, `posting_jurnal`, `buku_besar`, `cashflow`, `keuangan`, `pengeluaran`, `setup_pjlab`, `setup_otolokasi`, `setup_jam_kamin`, `setup_embalase`, `tracer_login`, `display`, `set_harga_obat`, `set_penggunaan_tarif`, `set_oto_ralan`, `biaya_harian`, `biaya_masuk_sekali`, `set_no_rm`, `billing_ralan`, `billing_ranap`, `jm_ranap_dokter`, `igd`, `barcoderalan`, `barcoderanap`, `set_harga_obat_ralan`, `set_harga_obat_ranap`, `penyakit_pd3i`, `surveilans_pd3i`, `surveilans_ralan`, `diagnosa_pasien`, `surveilans_ranap`, `pny_takmenular_ranap`, `pny_takmenular_ralan`, `kunjungan_ralan`, `rl32`, `rl33`, `rl37`, `rl38`, `harian_tindakan_dokter`, `sms`, `sidikjari`, `jam_masuk`, `jadwal_pegawai`, `parkir_barcode`, `set_nota`, `dpjp_ranap`, `mutasi_barang`, `rl34`, `rl36`, `fee_visit_dokter`, `fee_bacaan_ekg`, `fee_rujukan_rontgen`, `fee_rujukan_ranap`, `fee_ralan`, `akun_bayar`, `bayar_pemesanan_obat`, `obat_per_dokter_peresep`, `ipsrs_jenis_barang`, `pemasukan_lain`, `pengaturan_rekening`, `closing_kasir`, `keterlambatan_presensi`, `set_harga_kamar`, `rekap_per_shift`, `bpjs_cek_nik`, `bpjs_cek_kartu`, `bpjs_cek_riwayat`, `obat_per_cara_bayar`, `kunjungan_ranap`, `bayar_piutang`, `payment_point`, `bpjs_cek_nomor_rujukan`, `icd9`, `darurat_stok`, `retensi_rm`, `temporary_presensi`, `jurnal_harian`, `sirkulasi_obat2`, `edit_registrasi`, `bpjs_referensi_diagnosa`, `bpjs_referensi_poli`, `industrifarmasi`, `harian_js`, `bulanan_js`, `harian_paket_bhp`, `bulanan_paket_bhp`, `piutang_pasien2`, `bpjs_referensi_faskes`, `bpjs_sep`, `pengambilan_utd`, `tarif_utd`, `pengambilan_utd2`, `utd_medis_rusak`, `pengambilan_penunjang_utd`, `pengambilan_penunjang_utd2`, `utd_penunjang_rusak`, `suplier_penunjang`, `utd_donor`, `bpjs_monitoring_klaim`, `utd_cekal_darah`, `utd_komponen_darah`, `utd_stok_darah`, `utd_pemisahan_darah`, `harian_kamar`, `rincian_piutang_pasien`, `keuntungan_beri_obat_nonpiutang`, `reklasifikasi_ralan`, `reklasifikasi_ranap`, `utd_penyerahan_darah`, `hutang_obat`, `riwayat_obat_alkes_bhp`, `sensus_harian_poli`, `rl4a`, `aplicare_referensi_kamar`, `aplicare_ketersediaan_kamar`, `inacbg_klaim_baru_otomatis`, `inacbg_klaim_baru_manual`, `inacbg_coder_nik`, `mutasi_berkas`, `akun_piutang`, `harian_kso`, `bulanan_kso`, `harian_menejemen`, `bulanan_menejemen`) VALUES
+('Éb\r0¡PÖ“­MûÍ„öß', 'j §iL*]dæÑÉ+åä$û', 'false', 'false', 'false', 'false', 'false', 'false', 'true', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false'),
+('LxÒLç“Tp\0Ášï’', 'a±V¶cø&ÛþÆ¾\rƒ5', 'false', 'false', 'false', 'false', 'false', 'false', 'true', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false', 'false'),
+('nEËTªù!OX\\', 'VÑJ¦ôG+faWÏ:pŸ', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true'),
+('T„7 ­y˜	Ô5¤ÜøNå', 'VÑJ¦ôG+faWÏ:pŸ', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', '', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true', 'true');
 
 -- --------------------------------------------------------
 
@@ -77904,7 +78024,7 @@ ALTER TABLE `ipsrssuplier`
 --
 ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`kd_jbtn`),
-  ADD KEY `nm_jbtn` (`nm_jbtn`);
+  ADD KEY `nm_jbtn` (`nm_jbtn`) USING BTREE;
 
 --
 -- Indexes for table `jadwal`
@@ -78587,8 +78707,8 @@ ALTER TABLE `periksa_radiologi`
 --
 ALTER TABLE `petugas`
   ADD PRIMARY KEY (`nip`),
-  ADD KEY `kd_jbtn` (`kd_jbtn`),
-  ADD KEY `nama` (`nama`);
+  ADD KEY `kd_jbtn` (`kd_jbtn`) USING BTREE,
+  ADD KEY `nama` (`nama`) USING BTREE;
 
 --
 -- Indexes for table `piutang`
@@ -79596,7 +79716,7 @@ ALTER TABLE `master_tunjangan_harian`
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `provinsi`
 --
@@ -80394,8 +80514,8 @@ ALTER TABLE `periksa_radiologi`
 -- Constraints for table `petugas`
 --
 ALTER TABLE `petugas`
-  ADD CONSTRAINT `petugas_ibfk_4` FOREIGN KEY (`nip`) REFERENCES `pegawai` (`nik`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `petugas_ibfk_5` FOREIGN KEY (`kd_jbtn`) REFERENCES `jabatan` (`kd_jbtn`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `petugas_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `pegawai` (`nik`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `petugas_ibfk_2` FOREIGN KEY (`kd_jbtn`) REFERENCES `jabatan` (`kd_jbtn`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `piutang`

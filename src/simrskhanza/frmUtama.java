@@ -245,6 +245,8 @@ public class frmUtama extends javax.swing.JFrame {
     private static frmUtama myInstance;
     private PreparedStatement ps;
     private ResultSet rs;
+    private PreparedStatement ps2;
+    private ResultSet rs2;
     private final Properties prop = new Properties();     
     private int jmlmenu=0;
     private String coder_nik="",pilihpage="",judulform="";
@@ -4675,7 +4677,7 @@ public class frmUtama extends javax.swing.JFrame {
                     lblUser.setText("Admin Utama");
                 }else if(var.getjml2()>=1){  
                     BtnMenu.setEnabled(true);
-                    frmUtama.cobaa=Sequel.cariIsi("select nama from pegawai where nik="+var.getkode()+"");
+                    frmUtama.cobaa=Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode());
                     DlgLogin.dispose();
                     BtnLog.setText("Log Out");
                     MnLogin.setText("Log Out");
@@ -9390,6 +9392,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
             ps=koneksi.prepareStatement("select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo from setting");
             try {
                 rs=ps.executeQuery();
+            
                 while(rs.next()){
                     jLabel8.setText(rs.getString(1));
                     this.setTitle("SIM "+rs.getString("nama_instansi"));
@@ -9400,7 +9403,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
                     var.setpropinsirs(rs.getString("propinsi"));
                     var.setkontakrs(rs.getString("kontak"));
                     var.setemailrs(rs.getString("email"));
-
+                    
                     if(rs.getString(5).equals("Yes")){
                         Blob blob = rs.getBlob(6);
                         PanelWall.setBackgroundImage(new javax.swing.ImageIcon(blob.getBytes(1, (int) (blob.length()))));
