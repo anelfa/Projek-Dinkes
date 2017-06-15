@@ -3,7 +3,7 @@
     $db_hostname    ="localhost";
     $db_username    ="root";
     $db_password    ="";
-    $db_name        ="sik";
+    $db_name        ="db_simrs_develope";
 
     function host(){
         global $db_hostname;
