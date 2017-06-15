@@ -4592,7 +4592,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private void BtnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogActionPerformed
         try{
-            com.sun.awt.AWTUtilities.setWindowOpacity(DlgLogin,0.7f);
+         //   com.sun.awt.AWTUtilities.setWindowOpacity(DlgLogin,0.7f);
         }catch(Exception e){            
         }
         FlayMenu.setVisible(false);
@@ -4783,7 +4783,7 @@ private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         isTutup();
         try{            
             if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
-                com.sun.awt.AWTUtilities.setWindowOpacity(DlgHome,0.6f);
+               // com.sun.awt.AWTUtilities.setWindowOpacity(DlgHome,0.6f);
             }                
         }catch(Exception e){
             
