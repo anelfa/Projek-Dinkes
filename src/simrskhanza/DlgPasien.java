@@ -586,7 +586,6 @@ public class DlgPasien extends javax.swing.JDialog {
         BtnKelurahan = new widget.Button();
         BtnKecamatan = new widget.Button();
         BtnKabupaten = new widget.Button();
-        ChkDaftar = new widget.CekBox();
         jLabel14 = new widget.Label();
         NmIbu = new widget.TextBox();
         jLabel16 = new widget.Label();
@@ -614,6 +613,7 @@ public class DlgPasien extends javax.swing.JDialog {
         jLabel30 = new widget.Label();
         ChkAlamatSama = new widget.CekBox();
         jLabel1 = new javax.swing.JLabel();
+        ChkDaftar = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -1789,7 +1789,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
         DTPLahir.setEditable(false);
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2017" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2017" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -1927,7 +1927,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
         DTPDaftar.setEditable(false);
         DTPDaftar.setForeground(new java.awt.Color(50, 70, 50));
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-06-2017" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2017" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -2148,22 +2148,6 @@ public class DlgPasien extends javax.swing.JDialog {
         });
         FormInput.add(BtnKabupaten);
         BtnKabupaten.setBounds(796, 192, 28, 23);
-
-        ChkDaftar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(175, 180, 170)));
-        ChkDaftar.setForeground(new java.awt.Color(153, 0, 51));
-        ChkDaftar.setBorderPainted(true);
-        ChkDaftar.setBorderPaintedFlat(true);
-        ChkDaftar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ChkDaftar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ChkDaftar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ChkDaftar.setName("ChkDaftar"); // NOI18N
-        ChkDaftar.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                ChkDaftarItemStateChanged(evt);
-            }
-        });
-        FormInput.add(ChkDaftar);
-        ChkDaftar.setBounds(850, 102, 23, 23);
 
         jLabel14.setText("Nama Ibu :");
         jLabel14.setName("jLabel14"); // NOI18N
@@ -2444,6 +2428,23 @@ public class DlgPasien extends javax.swing.JDialog {
         jLabel1.setName("jLabel1"); // NOI18N
         FormInput.add(jLabel1);
         jLabel1.setBounds(860, 195, 90, 14);
+
+        ChkDaftar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(175, 180, 170)));
+        ChkDaftar.setForeground(new java.awt.Color(153, 0, 51));
+        ChkDaftar.setSelected(false);
+        ChkDaftar.setBorderPainted(true);
+        ChkDaftar.setBorderPaintedFlat(true);
+        ChkDaftar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkDaftar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkDaftar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkDaftar.setName("ChkDaftar"); // NOI18N
+        ChkDaftar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkDaftarItemStateChanged(evt);
+            }
+        });
+        FormInput.add(ChkDaftar);
+        ChkDaftar.setBounds(400, 100, 23, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -3670,11 +3671,11 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
 
     private void ChkDaftarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkDaftarItemStateChanged
         if(ChkDaftar.isSelected()==true){
-            DTPDaftar.setEditable(true);
+            DTPLahir.setEditable(true);
         }else if(ChkDaftar.isSelected()==false){
-            DTPDaftar.setEditable(false);            
+            DTPLahir.setEditable(false);            
         }
-        DTPDaftar.requestFocus();
+        DTPLahir.requestFocus();
     }//GEN-LAST:event_ChkDaftarItemStateChanged
 
     private void MnIdentitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnIdentitasActionPerformed
@@ -4545,9 +4546,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         }
     }//GEN-LAST:event_ChkAlamatSamaItemStateChanged
 
-    /**
-     * @data args the command line arguments
-     */
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
