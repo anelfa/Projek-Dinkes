@@ -11,12 +11,12 @@
     <entry key="HYBRIDWEB">webapps</entry>
     <entry key="ANTRIAN">sender</entry>
     <entry key="MENUTRANSPARAN">no</entry>
-    <entry key="URLAPIBPJS">http://dvlp.bpjs-kesehatan.go.id:8081/devWsLokalRest</entry>
-    <entry key="SECRETKEYAPIBPJS">1fY0CBCA72</entry>
-    <entry key="CONSIDAPIBPJS">1163</entry>
+    <entry key="URLAPIBPJS">http://dvlp.bpjs-kesehatan.go.id:8081/devwslokalrest</entry>
+    <entry key="SECRETKEYAPIBPJS">7lH3C91B3A</entry>
+    <entry key="CONSIDAPIBPJS">17643</entry>
     <entry key="URLAPIAPLICARE">http://dvlp.bpjs-kesehatan.go.id:9080/aplicaresws</entry>
-    <entry key="SECRETKEYAPIAPLICARE">1112</entry>
-    <entry key="CONSIDAPIAPLICARE">1000</entry>
+    <entry key="SECRETKEYAPIAPLICARE">8cG0606137</entry>
+    <entry key="CONSIDAPIAPLICARE">12151</entry>
     <entry key="KAMARAKTIFRANAP"></entry>
     <entry key="DOKTERAKTIFKASIRRALAN"></entry>
     <entry key="POLIAKTIFKASIRRALAN"></entry>
