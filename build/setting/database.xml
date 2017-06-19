@@ -22,4 +22,6 @@
     <entry key="POLIAKTIFKASIRRALAN"></entry>
     <entry key="JADWALDOKTERDIREGISTRASI">aktif</entry>
     <entry key="IPPRINTERTRACER">10.50.150.57/label2</entry>
+    <entry key="TOKENINHEALTH">inh_aba40329b828c943e91f2e5c7f9f1f1b</entry>
+    <entry key="KODEPROVIDERINHEALTH">0902R010</entry>
 </properties>
