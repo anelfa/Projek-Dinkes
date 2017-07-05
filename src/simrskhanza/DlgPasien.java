@@ -2063,6 +2063,11 @@ public class DlgPasien extends javax.swing.JDialog {
                 KelurahanMouseExited(evt);
             }
         });
+        Kelurahan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KelurahanActionPerformed(evt);
+            }
+        });
         Kelurahan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 KelurahanKeyPressed(evt);
@@ -2431,7 +2436,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
         ChkDaftar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(175, 180, 170)));
         ChkDaftar.setForeground(new java.awt.Color(153, 0, 51));
-        ChkDaftar.setSelected(false);
+        ChkDaftar.setSelected(true);
         ChkDaftar.setBorderPainted(true);
         ChkDaftar.setBorderPaintedFlat(true);
         ChkDaftar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -4545,6 +4550,10 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             AlamatPj.requestFocus();
         }
     }//GEN-LAST:event_ChkAlamatSamaItemStateChanged
+
+    private void KelurahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KelurahanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KelurahanActionPerformed
 
    
     public static void main(String args[]) {

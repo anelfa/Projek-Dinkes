@@ -79,7 +79,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             p_kelurahan=0,p_kecamatan=0,p_kabupaten=0,p_pekerjaanpj=0,
             p_alamatpj=0,p_kelurahanpj=0,p_kecamatanpj=0,p_kabupatenpj=0,jmlhari=0;
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
-    private String klg="SAUDARA",statuspasien="",pengurutan="",tahun="",bulan="",posisitahun="",awalantahun="",awalanbulan="",
+    private String id_kel,id_kec,nm_kec,id_kab,nm_kab,id_kelPj,id_kecPj,nm_kecPj,id_kabPj,nm_kabPj,klg="SAUDARA",statuspasien="",pengurutan="",tahun="",bulan="",posisitahun="",awalantahun="",awalanbulan="",
             no_ktp="",tmp_lahir="",nm_ibu="",alamat="",pekerjaan="",no_tlp="",
             umur="",namakeluarga="",no_peserta="",kelurahan="",kecamatan="",sttsumur="",
             kabupaten="",pekerjaanpj="",alamatpj="",kelurahanpj="",kecamatanpj="",
@@ -372,11 +372,25 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(kel.getTable().getSelectedRow()!= -1){
                     if(pilih==1){                    
-                        Kelurahan.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
-                        Kelurahan.requestFocus();
+                        Kelurahan.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),1).toString());
+                            id_kel=kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString();
+                            id_kec=Sequel.cariIsi("select kelurahan.kd_kec from kelurahan where kelurahan.kd_kel=?",id_kel);
+                            nm_kec=Sequel.cariIsi("select kecamatan.nm_kec from kecamatan where kecamatan.kd_kec=?",id_kec);
+                            Kecamatan.setText(nm_kec);
+                            id_kab=Sequel.cariIsi("select kecamatan.kd_kab from kecamatan where kecamatan.kd_kec=?",id_kec);
+                            nm_kab=(Sequel.cariIsi("select kabupaten.nm_kab from kabupaten where kabupaten.kd_kab=?",id_kab));
+                            Kabupaten.setText(nm_kab);   
+                            Kelurahan.requestFocus();
                     }else if(pilih==2){                    
-                        KelurahanPj.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
-                        KelurahanPj.requestFocus();
+                       KelurahanPj.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),1).toString());
+                            id_kelPj=kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString();
+                            id_kecPj=Sequel.cariIsi("select kelurahan.kd_kec from kelurahan where kelurahan.kd_kel=?",id_kelPj);
+                            nm_kecPj=Sequel.cariIsi("select kecamatan.nm_kec from kecamatan where kecamatan.kd_kec=?",id_kecPj);
+                            KecamatanPj.setText(nm_kecPj);
+                            id_kabPj=Sequel.cariIsi("select kecamatan.kd_kab from kecamatan where kecamatan.kd_kec=?",id_kecPj);
+                            nm_kabPj=(Sequel.cariIsi("select kabupaten.nm_kab from kabupaten where kabupaten.kd_kab=?",id_kabPj));
+                            KabupatenPj.setText(nm_kabPj); 
+                            KelurahanPj.requestFocus();
                     }
                 }   
             }
@@ -3439,10 +3453,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                     Valid.SetTgl(DTPLahir.getSelectedItem()+""),NmIbu.getText(),
                     Alamat.getText().replaceAll("ALAMAT",""),CMbGd.getSelectedItem().toString(),Pekerjaan.getText(),CmbStts.getSelectedItem().toString(),cmbAgama.getSelectedItem().toString(),
                     DTPDaftar.getSelectedItem().toString().substring(6,10)+"-"+DTPDaftar.getSelectedItem().toString().substring(3,5)+"-"+DTPDaftar.getSelectedItem().toString().substring(0,2),
-                    TTlp.getText(),TUmur.getText()+" Th",CMbPnd.getSelectedItem().toString(),klg,Saudara.getText(),Kdpnj.getText(),TNoPeserta.getText(),
-                    Sequel.cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?",Kelurahan.getText().replaceAll("KELURAHAN","-")),
-                    Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?",Kecamatan.getText().replaceAll("KECAMATAN","-")),
-                    Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?",Kabupaten.getText().replaceAll("KABUPATEN","-")),
+                    TTlp.getText(),TUmur.getText()+" Th",CMbPnd.getSelectedItem().toString(),klg,Saudara.getText(),Kdpnj.getText(),TNoPeserta.getText(),id_kel,id_kec,id_kab,
                     PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),KabupatenPj.getText()
                 })==true){
                     if(ChkRM.isSelected()==true){
