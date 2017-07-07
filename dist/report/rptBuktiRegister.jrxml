@@ -54,7 +54,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 	<field name="biaya_reg" class="java.lang.Double"/>
 	<field name="stts_daftar" class="java.lang.String"/>
 	<field name="png_jawab" class="java.lang.String"/>
-        <field name="nm_user" class="java.lang.String"/>
+	<field name="nm_user" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
