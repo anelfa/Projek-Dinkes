@@ -293,7 +293,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 					<textElement lineSpacing="Single">
 						<font fontName="Tahoma" size="11"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{tgl_registrasi}+" "+$F{jam_reg}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{tgl_registrasi}.split("-")[2]+"-"+$F{tgl_registrasi}.split("-")[1]+"-"+$F{tgl_registrasi}.split("-")[0]+" "+$F{jam_reg}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -497,7 +497,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 					<textElement lineSpacing="Single">
 						<font fontName="Tahoma" size="11"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{tgl_lahir}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{tgl_lahir}.split("-")[2]+"-"+$F{tgl_lahir}.split("-")[1]+"-"+$F{tgl_lahir}.split("-")[0]]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -523,7 +523,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 					<textElement lineSpacing="Single">
 						<font fontName="Tahoma" size="11"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{jb}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{png_jawab}]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>
