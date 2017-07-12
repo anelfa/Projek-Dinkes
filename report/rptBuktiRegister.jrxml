@@ -200,7 +200,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 						key="textField"/>
 					<box></box>
 					<textElement lineSpacing="Single">
-						<font fontName="Tahoma" size="11"/>
+						<font fontName="Tahoma" size="9"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{almt_pj}]]></textFieldExpression>
 				</textField>
