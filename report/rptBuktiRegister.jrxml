@@ -350,7 +350,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<line direction="TopDown">
 					<reportElement
 						x="1"
-						y="262"
+						y="280"
 						width="232"
 						height="1"
 						forecolor="#006666"
@@ -362,7 +362,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<staticText>
 					<reportElement
 						x="1"
-						y="307"
+						y="324"
 						width="232"
 						height="18"
 						key="staticText"/>
@@ -375,7 +375,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<staticText>
 					<reportElement
 						x="1"
-						y="323"
+						y="339"
 						width="232"
 						height="18"
 						key="staticText"/>
@@ -388,20 +388,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<staticText>
 					<reportElement
 						x="1"
-						y="337"
-						width="232"
-						height="18"
-						key="staticText"/>
-					<box></box>
-					<textElement textAlignment="Center" lineSpacing="Single">
-						<font fontName="Tahoma" size="11"/>
-					</textElement>
-				<text><![CDATA[Ke Rumah Sakit]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="1"
-						y="248"
+						y="247"
 						width="70"
 						height="18"
 						key="staticText-1"/>
@@ -427,7 +414,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<staticText>
 					<reportElement
 						x="1"
-						y="265"
+						y="280"
 						width="70"
 						height="18"
 						key="staticText-2"/>
@@ -440,9 +427,9 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="0"
-						y="283"
-						width="97"
-						height="68"
+						y="295"
+						width="171"
+						height="42"
 						key="textField-2"/>
 					<box></box>
 					<textElement lineSpacing="Single">
@@ -453,7 +440,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<line direction="TopDown">
 					<reportElement
 						x="1"
-						y="307"
+						y="323"
 						width="232"
 						height="1"
 						forecolor="#006666"
@@ -463,7 +450,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="136"
-						y="295"
+						y="307"
 						width="97"
 						height="16"
 						key="textField-3"/>
@@ -476,7 +463,7 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<staticText>
 					<reportElement
 						x="155"
-						y="265"
+						y="280"
 						width="70"
 						height="18"
 						key="staticText-3"/>
@@ -511,6 +498,32 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 						<font fontName="Tahoma" size="11"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{tgl_lahir}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="1"
+						y="264"
+						width="70"
+						height="18"
+						key="staticText-5"/>
+					<box></box>
+					<textElement textAlignment="Left" lineSpacing="Single">
+						<font fontName="Tahoma" size="11"/>
+					</textElement>
+				<text><![CDATA[Jenis Bayar]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="73"
+						y="265"
+						width="160"
+						height="18"
+						key="textField-5"/>
+					<box></box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="11"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{png_jawab}]]></textFieldExpression>
 				</textField>
 			</band>
 		</detail>
