@@ -248,7 +248,8 @@ public class frmUtama extends javax.swing.JFrame {
     private static frmUtama myInstance;
     private PreparedStatement ps;
     private ResultSet rs;
-    private final Properties prop = new Properties();     
+    private final Properties prop = new Properties();  
+    private final Properties propVer = new Properties();  
     private int jmlmenu=0;
     private String coder_nik="",pilihpage="",judulform="";
     /** Creates new form frmUtama */
@@ -306,10 +307,12 @@ public class frmUtama extends javax.swing.JFrame {
         lblTgl.setText(tanggal.getSelectedItem().toString());
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
+             propVer.loadFromXML(new FileInputStream("setting/version.xml"));
+            
         } catch (Exception e) {
             System.out.println("Notif Setting : "+e);
         }
-        
+        lblVersion.setText("VERSI "+propVer.getProperty("VERSION"));
         FlayMenu.setVisible(false);
             
     }
@@ -604,6 +607,9 @@ public class frmUtama extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         BtnLog = new widget.ButtonBig();
         BtnClose = new widget.ButtonBig();
+        String verr;
+        verr = propVer.getProperty("VERSION");
+        lblVersion = new javax.swing.JLabel();
         internalFrame4 = new widget.InternalFrame();
         lblStts = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -3769,7 +3775,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19/06/2017" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13/07/2017" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -3814,11 +3820,11 @@ public class frmUtama extends javax.swing.JFrame {
         setTitle("::[ Khanza Hospital Management System 2017 ]::");
         setIconImages(null);
         addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                formComponentResized(evt);
-            }
             public void componentMoved(java.awt.event.ComponentEvent evt) {
                 formComponentMoved(evt);
+            }
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
             }
         });
         addWindowStateListener(new java.awt.event.WindowStateListener() {
@@ -3827,11 +3833,11 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -4124,6 +4130,10 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         internalFrame1.add(BtnClose);
+
+        lblVersion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblVersion.setName("lblVersion"); // NOI18N
+        internalFrame1.add(lblVersion);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.PAGE_START);
 
@@ -8396,6 +8406,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private javax.swing.JLabel lblStts;
     private javax.swing.JLabel lblTgl;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JLabel lblVersion;
     private usu.widget.glass.PanelGlass panelGlass1;
     private usu.widget.glass.PanelGlass panelJudul;
     private widget.InternalFrame panelMenu;

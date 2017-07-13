@@ -5,6 +5,8 @@
  */
 package simrskhanza;
 
+import java.io.FileInputStream;
+import java.util.Properties;
 import usu.widget.util.WidgetUtilities;
 
 /**
@@ -12,17 +14,56 @@ import usu.widget.util.WidgetUtilities;
  * @author khanzasoft
  */
 public class SIMRSKhanza {
+    
+private static final Properties propVer = new Properties();  
+private static final Properties propDatabase = new Properties();  
+public static String version;
 
+ 
+        
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        WidgetUtilities.invokeLater(() -> {
+         try {
+            propVer.loadFromXML(new FileInputStream("setting/version.xml"));
+            propDatabase.loadFromXML(new FileInputStream("setting/database.xml"));
+        } catch (Exception e) {
+            System.out.println("Notif Setting : "+e);
+        }
+         version = propVer.getProperty("VERSION");
+        
+         if(propDatabase.getProperty("AUTOUPDATESISTEM").equals("aktif"))
+         {
+             
+         
+         try {
+            if (!Updater.getLatestVersion().equals(version) ) {
+                new UpdateInfo(Updater.getWhatsNew());
+            }
+            else
+            {
+                WidgetUtilities.invokeLater(() -> {
            frmUtama utama=frmUtama.getInstance();
            utama.isWall();
            //utama.setIconImage(new javax.swing.ImageIcon( getClass(). getResource("/picture/home.PNG")).getImage());
            utama.setVisible(true);
        });
+            }
+        } catch (Exception ex) {
+         ex.printStackTrace();
+    }
+         }
+         else
+             {
+                WidgetUtilities.invokeLater(() -> {
+           frmUtama utama=frmUtama.getInstance();
+           utama.isWall();
+           //utama.setIconImage(new javax.swing.ImageIcon( getClass(). getResource("/picture/home.PNG")).getImage());
+           utama.setVisible(true);
+       });
+            }
+             
     }
     
 }
