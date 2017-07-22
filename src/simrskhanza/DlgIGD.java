@@ -145,7 +145,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         setSize(885,674);
 
         Object[] row={"P","No.Reg","No.Rawat","Tanggal","Jam","Kd.Dokter","Dokter Dituju","Nomer RM",
-            "Pasien","J.K.","Umur","Poliklinik","Penanggung Jawab","Alamat P.J.","Hubungan dg P.J.",
+            "Pasien","J.K.","Tgl.Lahir","Umur","Poliklinik","Penanggung Jawab","Alamat P.J.","Hubungan dg P.J.",
             "Biaya Regristrasi","Status","Jenis Bayar"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -172,7 +172,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         tbPetugas.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbPetugas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 18; i++) {
+        for (i = 0; i < 19; i++) {
             TableColumn column = tbPetugas.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -195,20 +195,22 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else if(i==9){
                 column.setPreferredWidth(30);
             }else if(i==10){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(80);
             }else if(i==11){
-                column.setPreferredWidth(140);
+                column.setPreferredWidth(80);
             }else if(i==12){
                 column.setPreferredWidth(140);
             }else if(i==13){
-                column.setPreferredWidth(200);
+                column.setPreferredWidth(140);
             }else if(i==14){
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(200);
             }else if(i==15){
                 column.setPreferredWidth(90);
             }else if(i==16){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(90);
             }else if(i==17){
+                column.setPreferredWidth(100);
+            }else if(i==18){
                 column.setPreferredWidth(80);
             }
         }
@@ -463,7 +465,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         
         try{
            ps=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                   "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,poliklinik.nm_poli,"+
+                   "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,poliklinik.nm_poli,"+
                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab "+
                    "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
                    "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -4296,9 +4298,15 @@ public void cetakregister() {
             ps.setString(37,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
             ps.setString(38,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
             ps.setString(39,"%"+TCari.getText().trim()+"%");
+            
+            
             rs=ps.executeQuery();
             while(rs.next()){
-                tabMode.addRow(new Object[] {false,rs.getString(1),
+                String[] tgllahir= rs.getString(10).split("-");
+                
+                tabMode.addRow(new Object[] {false,
+                   
+                    rs.getString(1),
                                rs.getString(2),
                                rs.getString(3),
                                rs.getString(4),
@@ -4307,14 +4315,17 @@ public void cetakregister() {
                                rs.getString(7),
                                rs.getString(8),
                                rs.getString(9),
-                               rs.getString(10),
+                               tgllahir[2]+"-"+tgllahir[1]+"-"+tgllahir[0],
+                               
                                rs.getString(11),
                                rs.getString(12),
                                rs.getString(13),
                                rs.getString(14),
-                               Valid.SetAngka(rs.getDouble(15)),
-                               rs.getString(16),
-                               rs.getString(17)});
+                               
+                               rs.getString(15),
+                               Valid.SetAngka(rs.getDouble(16)),
+                               rs.getString(17),
+                                rs.getString(18)});
             }                    
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
@@ -4334,6 +4345,11 @@ public void cetakregister() {
         THbngn.setText("");
         TAlmt.setText("");
         TStatus.setText("");
+        
+        kddokter.setText("");
+       
+        TDokter.setText("");
+        
         isNumber();       
         TNoRM.requestFocus();
         kdpnj.setText("");

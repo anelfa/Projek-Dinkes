@@ -1789,7 +1789,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
         DTPLahir.setEditable(false);
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2017" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-07-2017" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -1927,7 +1927,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
         DTPDaftar.setEditable(false);
         DTPDaftar.setForeground(new java.awt.Color(50, 70, 50));
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2017" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-07-2017" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -2050,6 +2050,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnPenjab);
         BtnPenjab.setBounds(845, 42, 28, 23);
 
+        Kelurahan.setEditable(false);
         Kelurahan.setText("KELURAHAN");
         Kelurahan.setHighlighter(null);
         Kelurahan.setName("Kelurahan"); // NOI18N
@@ -2076,6 +2077,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(Kelurahan);
         Kelurahan.setBounds(712, 162, 130, 23);
 
+        Kecamatan.setEditable(false);
         Kecamatan.setText("KECAMATAN");
         Kecamatan.setHighlighter(null);
         Kecamatan.setName("Kecamatan"); // NOI18N
