@@ -12,4 +12,4 @@ Ini adalah simrs projek dinas kesehatan Prov. DKI Jakarta menggunakan SIMRS Khan
   Ya Alloh maafkan kami karena telah berdoa buruk, semua ini kami lakukan
   karena kami tidak pernah rela karya kami dibajak tanpa ijin.
 
-  Informasi dan panduan bisa dicek di halaman https://github.com/anelfa/Projek-Dinkes/wiki
+  Informasi dan panduan bisa dicek di halaman >> https://github.com/anelfa/Projek-Dinkes/wiki
