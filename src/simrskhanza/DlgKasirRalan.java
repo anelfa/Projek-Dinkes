@@ -861,7 +861,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnHapusData.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnHapusData.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnHapusData.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnHapusData.setIconTextGap(5);
         MnHapusData.setName("MnHapusData"); // NOI18N
         MnHapusData.setPreferredSize(new java.awt.Dimension(250, 28));
 
@@ -1962,7 +1961,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass8.add(jLabel15);
 
         DTPCari1.setEditable(false);
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2017" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2017" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1981,7 +1980,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass8.add(jLabel17);
 
         DTPCari2.setEditable(false);
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2017" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-07-2017" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2347,8 +2346,8 @@ private void MnBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
 
                                 billing.TNoRw.setText(TNoRw.getText());  
-                                billing.isRawat(); 
                                 billing.isCek();
+                                billing.isRawat(); 
                                 if(sudah>0){
                                     billing.setPiutang();
                                 }
@@ -2435,8 +2434,8 @@ private void MnBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }                        
 
                             billing.TNoRw.setText(TNoRw.getText());  
-                            billing.isRawat(); 
                             billing.isCek();
+                            billing.isRawat(); 
                             billing.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
                             billing.setLocationRelativeTo(internalFrame1);
                             tampilkasir();
@@ -2667,7 +2666,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 kamarinap.billing.periksalab.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
                 kamarinap.billing.periksalab.setLocationRelativeTo(internalFrame1);
                 kamarinap.billing.periksalab.emptTeks();
-                kamarinap.billing.periksalab.setNoRm(TNoRw.getText()); 
+                kamarinap.billing.periksalab.setNoRm(TNoRw.getText(),"Ralan"); 
                 kamarinap.billing.periksalab.tampiltarif();
                 kamarinap.billing.periksalab.tampil(); 
                 kamarinap.billing.periksalab.isCek();
@@ -2829,7 +2828,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 kamarinap.billing.periksarad.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
                 kamarinap.billing.periksarad.setLocationRelativeTo(internalFrame1);
                 kamarinap.billing.periksarad.emptTeks();
-                kamarinap.billing.periksarad.setNoRm(TNoRw.getText()); 
+                kamarinap.billing.periksarad.setNoRm(TNoRw.getText(),"Ralan"); 
                 kamarinap.billing.periksarad.tampil(); 
                 kamarinap.billing.periksarad.isCek();
                 kamarinap.billing.periksarad.setVisible(true);
@@ -2920,7 +2919,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             DlgTagihanOperasi dlgro=new DlgTagihanOperasi(null,false);
             dlgro.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
             dlgro.setLocationRelativeTo(internalFrame1);
-            dlgro.setNoRm(TNoRw.getText(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString()+", "+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString());
+            dlgro.setNoRm(TNoRw.getText(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString()+", "+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString(),"Ralan");
             dlgro.setVisible(true);
         }
     }//GEN-LAST:event_MnOperasiActionPerformed

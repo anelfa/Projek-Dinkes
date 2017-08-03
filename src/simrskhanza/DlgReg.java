@@ -3749,7 +3749,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 dlgro.setLocationRelativeTo(internalFrame1);
                 dlgro.emptTeks();
                 dlgro.isCek();
-                dlgro.setNoRm(TNoRw.getText());  
+                dlgro.setNoRm(TNoRw.getText(),"Ralan");  
                 dlgro.tampiltarif();
                 dlgro.tampil();
                 dlgro.setVisible(true);
@@ -4175,7 +4175,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 dlgro.setLocationRelativeTo(internalFrame1);
                 dlgro.emptTeks();
                 dlgro.isCek();
-                dlgro.setNoRm(TNoRw.getText());  
+                dlgro.setNoRm(TNoRw.getText(),"Ralan");   
                 dlgro.tampil();
                 dlgro.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
@@ -4678,7 +4678,7 @@ public void cetakregister() {
             DlgTagihanOperasi dlgro=new DlgTagihanOperasi(null,false);
             dlgro.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             dlgro.setLocationRelativeTo(internalFrame1);
-            dlgro.setNoRm(TNoRw.getText(),TNoRM.getText()+", "+TPasien.getText());
+            dlgro.setNoRm(TNoRw.getText(),TNoRM.getText()+", "+TPasien.getText(),"Ralan");
             dlgro.setVisible(true);
         }
     }//GEN-LAST:event_MnOperasiActionPerformed

@@ -422,7 +422,28 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+    public boolean mengedittf(String table,String acuan_field,String update){
+        bool=true;
+        try {
+            ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+            try{                        
+                ps.executeUpdate();  
+                bool=true;
+             }catch(Exception e){
+                bool=false;
+                System.out.println("Notifikasi : "+e);
+                JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Mungkin kode sudah digunakan sebelumnya...!!!!");
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            bool=false;
+            System.out.println("Notifikasi : "+e);
+        }
+        return bool;
+    }
     public void mengedit(String table,String acuan_field,String update,int i,String[] a){
         try {
             ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
@@ -601,7 +622,29 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+    public boolean queryu2tf(String qry,int i,String[] a){
+        bool=false;
+        try {
+            try{            
+                ps=connect.prepareStatement(qry);
+                for(angka=1;angka<=i;angka++){
+                    ps.setString(angka,a[angka-1]);
+                } 
+                ps.executeUpdate(); 
+                bool=true;
+             }catch(Exception e){
+                bool=false;
+                System.out.println("Notifikasi : "+e);
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+        return bool;
+    }
     public void queryu3(String qry,int i,String[] a){
         try {
             try{            

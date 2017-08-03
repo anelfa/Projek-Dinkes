@@ -26,13 +26,13 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import keuangan.Jurnal;
 
 /**
  *
@@ -44,17 +44,25 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement psinputrawatdr,psinputrawatpr,psinputrawatdrpr,pstarif,pscari,pscari2,pscari3,pscari4,
-                              pstindakan,pstindakan2,pstindakan3,pshapustindakan,pshapustindakan2,pshapustindakan3;
-    private ResultSet rs,rstindakan,rstarif;
+                              pstindakan,pstindakan2,pstindakan3,pshapustindakan,pshapustindakan2,pshapustindakan3,psrekening;
+    private ResultSet rs,rstindakan,rstarif,rsrekening;
     private String pilihtable="",kd_pj="",kd_bangsal="",ruang_ranap="Yes", cara_bayar_ranap="Yes";
     private boolean[] pagi,siang,sore,malam; 
     private boolean pg=false,sg=false,sr=false,mlm=false;
+    private boolean sukses=false;
     private String[] kode,nama,kategori;
     private double[] totaltnd,bagianrs,bhp,jmdokter,jmperawat,kso,menejemen;
     private int jml=0,i=0,index=0;
     public  DlgCariDokter dokter=new DlgCariDokter(null,false);
     public  DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     public  DlgJnsPerawatanRanap perawatan=new DlgJnsPerawatanRanap(null,false);
+    private double ttljmdokter=0,ttljmperawat=0,ttlkso=0,ttlpendapatan=0,
+            hapusttljmdokter=0,hapusttljmperawat=0,hapusttlkso=0,hapusttlpendapatan=0;
+    private Jurnal jur=new Jurnal();
+    private String Suspen_Piutang_Tindakan_Ranap="",Tindakan_Ranap="",Beban_Jasa_Medik_Dokter_Tindakan_Ranap="",
+            Utang_Jasa_Medik_Dokter_Tindakan_Ranap="",Beban_Jasa_Medik_Paramedis_Tindakan_Ranap="",
+            Utang_Jasa_Medik_Paramedis_Tindakan_Ranap="",Beban_KSO_Tindakan_Ranap="",
+            Utang_KSO_Tindakan_Ranap="";
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -95,13 +103,13 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         for (i = 0; i < 14; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(40);
+                column.setPreferredWidth(35);
             }else if(i==1){
-                column.setPreferredWidth(40);
+                column.setPreferredWidth(35);
             }else if(i==2){
-                column.setPreferredWidth(40);
+                column.setPreferredWidth(35);
             }else if(i==3){
-                column.setPreferredWidth(40);
+                column.setPreferredWidth(35);
             }else if(i==4){
                 column.setPreferredWidth(90);
             }else if(i==5){
@@ -188,6 +196,33 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         });
         
         TCari.requestFocus();
+        try {
+            psrekening=koneksi.prepareStatement("select * from set_akun_ranap");
+            try {
+                rsrekening=psrekening.executeQuery();
+                while(rsrekening.next()){
+                    Suspen_Piutang_Tindakan_Ranap=rsrekening.getString("Suspen_Piutang_Tindakan_Ranap");
+                    Tindakan_Ranap=rsrekening.getString("Tindakan_Ranap");
+                    Beban_Jasa_Medik_Dokter_Tindakan_Ranap=rsrekening.getString("Beban_Jasa_Medik_Dokter_Tindakan_Ranap");
+                    Utang_Jasa_Medik_Dokter_Tindakan_Ranap=rsrekening.getString("Utang_Jasa_Medik_Dokter_Tindakan_Ranap");
+                    Beban_Jasa_Medik_Paramedis_Tindakan_Ranap=rsrekening.getString("Beban_Jasa_Medik_Paramedis_Tindakan_Ranap");
+                    Utang_Jasa_Medik_Paramedis_Tindakan_Ranap=rsrekening.getString("Utang_Jasa_Medik_Paramedis_Tindakan_Ranap");
+                    Beban_KSO_Tindakan_Ranap=rsrekening.getString("Beban_KSO_Tindakan_Ranap");
+                    Utang_KSO_Tindakan_Ranap=rsrekening.getString("Utang_KSO_Tindakan_Ranap");
+                }
+            } catch (Exception e) {
+                System.out.println("Notif Rekening : "+e);
+            } finally{
+                if(rsrekening!=null){
+                    rsrekening.close();
+                }
+                if(psrekening!=null){
+                    psrekening.close();
+                }
+            }            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
     
 
@@ -216,6 +251,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         TNadi = new widget.TextBox();
         TGCS = new widget.TextBox();
         TAlergi = new widget.TextBox();
+        TPasien = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -379,6 +415,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             }
         });
 
+        TPasien.setFocusTraversalPolicyProvider(true);
+        TPasien.setName("TPasien"); // NOI18N
+        TPasien.setSelectionColor(new java.awt.Color(255, 255, 255));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -522,7 +562,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-11-2016" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-07-2017" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -720,8 +760,10 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             try {          
                 if(pilihtable.equals("rawat_inap_dr")||pilihtable.equals("rawat_inap_pr")||pilihtable.equals("rawat_inap_drpr")){
                     koneksi.setAutoCommit(false);   
+                    ttljmdokter=0;ttljmperawat=0;ttlkso=0;ttlpendapatan=0;
+                    hapusttljmdokter=0;hapusttljmperawat=0;hapusttlkso=0;hapusttlpendapatan=0;
                     for(i=0;i<tbKamar.getRowCount();i++){                                                              
-                        if(tbKamar.getValueAt(i,0).toString().equals("true")||tbKamar.getValueAt(i,1).toString().equals("true")||tbKamar.getValueAt(i,2).toString().equals("true")||tbKamar.getValueAt(i,3).toString().equals("true")){
+                       // if(tbKamar.getValueAt(i,0).toString().equals("true")||tbKamar.getValueAt(i,1).toString().equals("true")||tbKamar.getValueAt(i,2).toString().equals("true")||tbKamar.getValueAt(i,3).toString().equals("true")){
                                 pg=false;
                                 sg=false;
                                 sr=false;
@@ -741,6 +783,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 pg=true;
                                             }
                                             if(tbKamar.getValueAt(i,0).toString().equals("true")&&(pg==false)){
+                                                sukses=false;
                                                 psinputrawatdr=koneksi.prepareStatement("insert into rawat_inap_dr values(?,?,?,?,?,?,?,?,?,?,?)");
                                                 try {                                                
                                                     psinputrawatdr.setString(1,TNoRw.getText());
@@ -755,14 +798,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatdr.setString(10,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatdr.setString(11,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatdr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( psinputrawatdr != null){
                                                         psinputrawatdr.close();
                                                    }
                                                 }
+                                                if(sukses==true){
+                                                    ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,0).toString().equals("false")&&(pg==true)){
+                                                sukses=false;
                                                 pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
                                                     "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat=?");
                                                 try {
@@ -771,13 +822,20 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan.setString(4,"07:00:00");
                                                     pshapustindakan.executeUpdate(); 
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( pshapustindakan != null){
                                                         pshapustindakan.close();
                                                    }
-                                                }                    
+                                                }   
+                                                if(sukses==true){
+                                                    hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
 
                                             pstindakan.setString(1,TNoRw.getText());
@@ -790,6 +848,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 sg=true;
                                             }
                                             if(tbKamar.getValueAt(i,1).toString().equals("true")&&(sg==false)){
+                                                sukses=false;
                                                 psinputrawatdr=koneksi.prepareStatement("insert into rawat_inap_dr values(?,?,?,?,?,?,?,?,?,?,?)");
                                                 try {
                                                     psinputrawatdr.setString(1,TNoRw.getText());
@@ -804,14 +863,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatdr.setString(10,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatdr.setString(11,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatdr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                     if(psinputrawatdr != null){
                                                         psinputrawatdr.close();
                                                     }
-                                                }                                           
+                                                }            
+                                                if(sukses==true){
+                                                    ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,1).toString().equals("false")&&(sg==true)){
+                                                sukses=false;
                                                 pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
                                                         "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat=?");
                                                 try {
@@ -819,14 +886,21 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
                                                     pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan.setString(4,"12:00:00");
-                                                    pshapustindakan.executeUpdate();                                            
+                                                    pshapustindakan.executeUpdate(); 
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( pshapustindakan != null){
                                                         pshapustindakan.close();
                                                    }
                                                 } 
+                                                if(sukses==true){
+                                                    hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
 
                                             pstindakan.setString(1,TNoRw.getText());
@@ -839,6 +913,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 sr=true;
                                             }
                                             if(tbKamar.getValueAt(i,2).toString().equals("true")&&(sr==false)){
+                                                sukses=false;
                                                 psinputrawatdr=koneksi.prepareStatement("insert into rawat_inap_dr values(?,?,?,?,?,?,?,?,?,?,?)");
                                                 try {
                                                     psinputrawatdr.setString(1,TNoRw.getText());
@@ -853,14 +928,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatdr.setString(10,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatdr.setString(11,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatdr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                     if(psinputrawatdr != null){
                                                         psinputrawatdr.close();
                                                     }
                                                 }
+                                                if(sukses==true){
+                                                    ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,2).toString().equals("false")&&(sr==true)){
+                                                sukses=false;
                                                 pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
                                                         "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat=?");
                                                 try {
@@ -868,8 +951,10 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
                                                     pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan.setString(4,"16:00:00");
-                                                    pshapustindakan.executeUpdate();                                            
+                                                    pshapustindakan.executeUpdate();  
+                                                    sukses=true;
                                                 }  catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( pshapustindakan != null){
@@ -888,6 +973,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 mlm=true;
                                             }
                                             if(tbKamar.getValueAt(i,3).toString().equals("true")&&(mlm==false)){
+                                                sukses=false;
                                                 psinputrawatdr=koneksi.prepareStatement("insert into rawat_inap_dr values(?,?,?,?,?,?,?,?,?,?,?)");
                                                 try {
                                                     psinputrawatdr.setString(1,TNoRw.getText());
@@ -902,14 +988,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatdr.setString(10,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatdr.setString(11,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatdr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notfikasi : "+e);
                                                 } finally{
                                                     if(psinputrawatdr != null){
                                                         psinputrawatdr.close();
                                                     }
                                                 }
-                                            }else if(tbKamar.getValueAt(i,4).toString().equals("false")&&(mlm==true)){
+                                                if(sukses==true){
+                                                    ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
+                                            }else if(tbKamar.getValueAt(i,3).toString().equals("false")&&(mlm==true)){
+                                                sukses=false;
                                                 pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
                                                         "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat=?");
                                                 try {
@@ -918,13 +1012,20 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan.setString(4,"20:00:00");
                                                     pshapustindakan.executeUpdate(); 
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( pshapustindakan != null){
                                                         pshapustindakan.close();
                                                    }
-                                                }                                            
+                                                }   
+                                                if(sukses==true){
+                                                    hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
                                         } catch (Exception e) {
                                             System.out.println("Notifikasi : "+e);
@@ -951,6 +1052,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 pg=true;
                                             }
                                             if(tbKamar.getValueAt(i,0).toString().equals("true")&&(pg==false)){
+                                                sukses=false;
                                                 psinputrawatpr=koneksi.prepareStatement("insert into rawat_inap_pr values(?,?,?,?,?,?,?,?,?,?,?)");
                                                 try {
                                                     psinputrawatpr.setString(1,TNoRw.getText());
@@ -965,14 +1067,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatpr.setString(10,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatpr.setString(11,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatpr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                    if(psinputrawatpr != null){
                                                        psinputrawatpr.close();
                                                    } 
-                                                }                                           
+                                                }       
+                                                if(sukses==true){
+                                                    ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,0).toString().equals("false")&&(pg==true)){
+                                                sukses=false;
                                                 pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
                                                         "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat=?");
                                                 try {
@@ -980,14 +1090,21 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
                                                     pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan2.setString(4,"07:00:00");
-                                                    pshapustindakan2.executeUpdate();                                            
+                                                    pshapustindakan2.executeUpdate();  
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( pshapustindakan2 != null){
                                                         pshapustindakan2.close();
                                                    }
                                                 } 
+                                                if(sukses==true){
+                                                    hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
 
                                             pstindakan2.setString(1,TNoRw.getText());
@@ -1000,6 +1117,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 sg=true;
                                             }
                                             if(tbKamar.getValueAt(i,1).toString().equals("true")&&(sg==false)){
+                                                sukses=false;
                                                 psinputrawatpr=koneksi.prepareStatement("insert into rawat_inap_pr values(?,?,?,?,?,?,?,?,?,?,?)");
                                                 try {
                                                     psinputrawatpr.setString(1,TNoRw.getText());
@@ -1014,14 +1132,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatpr.setString(10,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatpr.setString(11,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatpr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                    if(psinputrawatpr != null){
                                                        psinputrawatpr.close();
                                                    } 
                                                 }
+                                                if(sukses==true){
+                                                    ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,1).toString().equals("false")&&(sg==true)){
+                                                sukses=false;
                                                 pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
                                                         "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat=?");
                                                 try {
@@ -1029,14 +1155,21 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
                                                     pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan2.setString(4,"12:00:00");
-                                                    pshapustindakan2.executeUpdate();                                            
+                                                    pshapustindakan2.executeUpdate();   
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                     if( pshapustindakan2 != null){
                                                         pshapustindakan2.close();
                                                     }
                                                 } 
+                                                if(sukses==true){
+                                                    hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
 
                                             pstindakan2.setString(1,TNoRw.getText());
@@ -1049,6 +1182,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 sr=true;
                                             }
                                             if(tbKamar.getValueAt(i,2).toString().equals("true")&&(sr==false)){
+                                                sukses=false;
                                                 psinputrawatpr=koneksi.prepareStatement("insert into rawat_inap_pr values(?,?,?,?,?,?,?,?,?,?,?)");
                                                 try {
                                                     psinputrawatpr.setString(1,TNoRw.getText());
@@ -1063,14 +1197,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatpr.setString(10,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatpr.setString(11,tbKamar.getValueAt(i,7).toString()); 
                                                     psinputrawatpr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                    if(psinputrawatpr != null){
                                                        psinputrawatpr.close();
                                                    } 
-                                                }  
+                                                }
+                                                if(sukses==true){
+                                                    ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,2).toString().equals("false")&&(sr==true)){
+                                                sukses=false;
                                                 pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
                                                         "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat=?");
                                                 try {
@@ -1078,14 +1220,21 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
                                                     pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan2.setString(4,"16:00:00");
-                                                    pshapustindakan2.executeUpdate();                                            
+                                                    pshapustindakan2.executeUpdate();   
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                     if( pshapustindakan2 != null){
                                                         pshapustindakan2.close();
                                                     }
-                                                } 
+                                                }
+                                                if(sukses==true){
+                                                    hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }       
 
                                             pstindakan2.setString(1,TNoRw.getText());
@@ -1098,6 +1247,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 mlm=true;
                                             }
                                             if(tbKamar.getValueAt(i,3).toString().equals("true")&&(mlm==false)){
+                                                sukses=false;
                                                 psinputrawatpr=koneksi.prepareStatement("insert into rawat_inap_pr values(?,?,?,?,?,?,?,?,?,?,?)");
                                                 try {
                                                     psinputrawatpr.setString(1,TNoRw.getText());
@@ -1112,14 +1262,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatpr.setString(10,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatpr.setString(11,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatpr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                    if(psinputrawatpr != null){
                                                        psinputrawatpr.close();
                                                    } 
-                                                }  
+                                                }
+                                                if(sukses==true){
+                                                    ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,3).toString().equals("false")&&(mlm==true)){
+                                                sukses=false;
                                                 pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
                                                         "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat=?");
                                                 try {
@@ -1128,13 +1286,20 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan2.setString(4,"20:00:00");
                                                     pshapustindakan2.executeUpdate();  
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                     if( pshapustindakan2 != null){
                                                         pshapustindakan2.close();
                                                     }
-                                                }                                           
+                                                }  
+                                                if(sukses==true){
+                                                    hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
                                         } catch (Exception e) {
                                             System.out.println("Notifikasi : "+e);
@@ -1162,6 +1327,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 pg=true;
                                             }
                                             if(tbKamar.getValueAt(i,0).toString().equals("true")&&(pg==false)){
+                                                sukses=false;
                                                 psinputrawatdrpr=koneksi.prepareStatement("insert into rawat_inap_drpr values(?,?,?,?,?,?,?,?,?,?,?,?,?)");             
                                                 try {                                                
                                                     psinputrawatdrpr.setString(1,TNoRw.getText());
@@ -1178,14 +1344,23 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatdrpr.setString(12,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatdrpr.setString(13,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatdrpr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                    if(psinputrawatdrpr != null){
                                                        psinputrawatdrpr.close();
                                                    } 
                                                 }  
+                                                if(sukses==true){
+                                                    ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,0).toString().equals("false")&&(pg==true)){
+                                                sukses=false;
                                                 pshapustindakan3=koneksi.prepareStatement("delete from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
                                                         "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat=?");
                                                 try {
@@ -1194,13 +1369,21 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan3.setString(4,"07:00:00");
                                                     pshapustindakan3.executeUpdate();  
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( pshapustindakan3 != null){
                                                         pshapustindakan3.close();
                                                    }
-                                                }                                           
+                                                }  
+                                                if(sukses==true){
+                                                    hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
 
                                             pstindakan3.setString(1,TNoRw.getText());
@@ -1213,6 +1396,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 sg=true;
                                             }
                                             if(tbKamar.getValueAt(i,1).toString().equals("true")&&(sg==false)){
+                                                sukses=false;
                                                 psinputrawatdrpr=koneksi.prepareStatement("insert into rawat_inap_drpr values(?,?,?,?,?,?,?,?,?,?,?,?,?)");         
                                                 try {
                                                     psinputrawatdrpr.setString(1,TNoRw.getText());
@@ -1229,14 +1413,23 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatdrpr.setString(12,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatdrpr.setString(13,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatdrpr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                    if(psinputrawatdrpr != null){
                                                        psinputrawatdrpr.close();
                                                    } 
-                                                }                                           
+                                                }                    
+                                                if(sukses==true){
+                                                    ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,1).toString().equals("false")&&(sg==true)){
+                                                sukses=false;
                                                 pshapustindakan3=koneksi.prepareStatement("delete from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
                                                         "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat=?");
                                                 try {
@@ -1245,13 +1438,21 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan3.setString(4,"12:00:00");
                                                     pshapustindakan3.executeUpdate(); 
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( pshapustindakan3 != null){
                                                         pshapustindakan3.close();
                                                    }
-                                                }                                            
+                                                } 
+                                                if(sukses==true){
+                                                    hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
 
                                             pstindakan3.setString(1,TNoRw.getText());
@@ -1264,6 +1465,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 sr=true;
                                             }
                                             if(tbKamar.getValueAt(i,2).toString().equals("true")&&(sr==false)){
+                                                sukses=false;
                                                 psinputrawatdrpr=koneksi.prepareStatement("insert into rawat_inap_drpr values(?,?,?,?,?,?,?,?,?,?,?,?,?)");             
                                                 try {
                                                     psinputrawatdrpr.setString(1,TNoRw.getText());
@@ -1280,14 +1482,23 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatdrpr.setString(12,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatdrpr.setString(13,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatdrpr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                    if(psinputrawatdrpr != null){
                                                        psinputrawatdrpr.close();
                                                    } 
                                                 }
+                                                if(sukses==true){
+                                                    ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }else if(tbKamar.getValueAt(i,2).toString().equals("false")&&(sr==true)){
+                                                sukses=false;
                                                 pshapustindakan3=koneksi.prepareStatement("delete from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
                                                         "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat=?");
                                                 try {
@@ -1295,14 +1506,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
                                                     pshapustindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan3.setString(4,"16:00:00");
-                                                    pshapustindakan3.executeUpdate();                                            
+                                                    pshapustindakan3.executeUpdate();      
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( pshapustindakan3 != null){
                                                         pshapustindakan3.close();
                                                    }
                                                 } 
+                                                if(sukses==true){
+                                                    hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
 
                                             pstindakan3.setString(1,TNoRw.getText());
@@ -1315,6 +1534,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 mlm=true;
                                             }
                                             if(tbKamar.getValueAt(i,3).toString().equals("true")&&(mlm==false)){
+                                                sukses=false;
                                                 psinputrawatdrpr=koneksi.prepareStatement("insert into rawat_inap_drpr values(?,?,?,?,?,?,?,?,?,?,?,?,?)");             
                                                 try {
                                                     psinputrawatdrpr.setString(1,TNoRw.getText());
@@ -1331,14 +1551,23 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     psinputrawatdrpr.setString(12,tbKamar.getValueAt(i,13).toString());
                                                     psinputrawatdrpr.setString(13,tbKamar.getValueAt(i,7).toString());
                                                     psinputrawatdrpr.executeUpdate();
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 } finally{
                                                    if(psinputrawatdrpr != null){
                                                        psinputrawatdrpr.close();
                                                    } 
                                                 }
-                                            }else if(tbKamar.getValueAt(i,4).toString().equals("false")&&(mlm==true)){
+                                                if(sukses==true){
+                                                    ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
+                                            }else if(tbKamar.getValueAt(i,3).toString().equals("false")&&(mlm==true)){
+                                                sukses=false;
                                                 pshapustindakan3=koneksi.prepareStatement("delete from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
                                                         "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat=?");
                                                 try {
@@ -1346,14 +1575,22 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                     pshapustindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
                                                     pshapustindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
                                                     pshapustindakan3.setString(4,"20:00:00");
-                                                    pshapustindakan3.executeUpdate();                                            
+                                                    pshapustindakan3.executeUpdate();   
+                                                    sukses=true;
                                                 } catch (Exception e) {
+                                                    sukses=false;
                                                     System.out.println("Notifikasi : "+e);
                                                 }finally{
                                                    if( pshapustindakan3 != null){
                                                         pshapustindakan3.close();
                                                    }
                                                 } 
+                                                if(sukses==true){
+                                                    hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
+                                                    hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
+                                                    hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
+                                                    hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
+                                                }
                                             }
                                         } catch (Exception e) {
                                             System.out.println("Notifikasi : "+e);
@@ -1368,9 +1605,47 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                         
                                         break;
                                 }                           
-                        }                           
+                        //}                           
                     } 
                      
+                    Sequel.queryu("delete from tampjurnal");    
+                    if(hapusttlpendapatan>0){
+                        Sequel.menyimpan("tampjurnal","'"+Suspen_Piutang_Tindakan_Ranap+"','Suspen Piutang Tindakan Ranap','0','"+hapusttlpendapatan+"'","Rekening");    
+                        Sequel.menyimpan("tampjurnal","'"+Tindakan_Ranap+"','Pendapatan Tindakan Rawat Inap','"+hapusttlpendapatan+"','0'","Rekening");                              
+                    }
+                    if(hapusttljmdokter>0){
+                        Sequel.menyimpan("tampjurnal","'"+Beban_Jasa_Medik_Dokter_Tindakan_Ranap+"','Beban Jasa Medik Dokter Tindakan Ranap','0','"+hapusttljmdokter+"'","Rekening");    
+                        Sequel.menyimpan("tampjurnal","'"+Utang_Jasa_Medik_Dokter_Tindakan_Ranap+"','Utang Jasa Medik Dokter Tindakan Ranap','"+hapusttljmdokter+"','0'","Rekening");                              
+                    }
+                    if(hapusttljmperawat>0){
+                        Sequel.menyimpan("tampjurnal","'"+Beban_Jasa_Medik_Paramedis_Tindakan_Ranap+"','Beban Jasa Medik Paramedis Tindakan Ranap','0','"+hapusttljmperawat+"'","Rekening");    
+                        Sequel.menyimpan("tampjurnal","'"+Utang_Jasa_Medik_Paramedis_Tindakan_Ranap+"','Utang Jasa Medik Paramedis Tindakan Ranap','"+hapusttljmperawat+"','0'","Rekening");                              
+                    }
+                    if(hapusttlkso>0){
+                        Sequel.menyimpan("tampjurnal","'"+Beban_KSO_Tindakan_Ranap+"','Beban KSO Tindakan Ranap','0','"+hapusttlkso+"'","Rekening");    
+                        Sequel.menyimpan("tampjurnal","'"+Utang_KSO_Tindakan_Ranap+"','Utang KSO Tindakan Ranap','"+hapusttlkso+"','0'","Rekening");                              
+                    }
+                    jur.simpanJurnal(TNoRw.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN OLEH "+var.getkode());                                                
+
+                    Sequel.queryu("delete from tampjurnal");    
+                    if(ttlpendapatan>0){
+                        Sequel.menyimpan("tampjurnal","'"+Suspen_Piutang_Tindakan_Ranap+"','Suspen Piutang Tindakan Ranap','"+ttlpendapatan+"','0'","Rekening");    
+                        Sequel.menyimpan("tampjurnal","'"+Tindakan_Ranap+"','Pendapatan Tindakan Rawat Inap','0','"+ttlpendapatan+"'","Rekening");                              
+                    }
+                    if(ttljmdokter>0){
+                        Sequel.menyimpan("tampjurnal","'"+Beban_Jasa_Medik_Dokter_Tindakan_Ranap+"','Beban Jasa Medik Dokter Tindakan Ranap','"+ttljmdokter+"','0'","Rekening");    
+                        Sequel.menyimpan("tampjurnal","'"+Utang_Jasa_Medik_Dokter_Tindakan_Ranap+"','Utang Jasa Medik Dokter Tindakan Ranap','0','"+ttljmdokter+"'","Rekening");                              
+                    }
+                    if(ttljmperawat>0){
+                        Sequel.menyimpan("tampjurnal","'"+Beban_Jasa_Medik_Paramedis_Tindakan_Ranap+"','Beban Jasa Medik Paramedis Tindakan Ranap','"+ttljmperawat+"','0'","Rekening");    
+                        Sequel.menyimpan("tampjurnal","'"+Utang_Jasa_Medik_Paramedis_Tindakan_Ranap+"','Utang Jasa Medik Paramedis Tindakan Ranap','0','"+ttljmperawat+"'","Rekening");                              
+                    }
+                    if(ttlkso>0){
+                        Sequel.menyimpan("tampjurnal","'"+Beban_KSO_Tindakan_Ranap+"','Beban KSO Tindakan Ranap','"+ttlkso+"','0'","Rekening");    
+                        Sequel.menyimpan("tampjurnal","'"+Utang_KSO_Tindakan_Ranap+"','Utang KSO Tindakan Ranap','0','"+ttlkso+"'","Rekening");                              
+                    }
+                    jur.simpanJurnal(TNoRw.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+var.getkode());                                                
+
                     if((!TKeluhan.getText().trim().equals(""))||(!TPemeriksaan.getText().trim().equals(""))||
                         (!TSuhu.getText().trim().equals(""))||(!TTensi.getText().trim().equals(""))||
                         (!TAlergi.getText().trim().equals(""))||(!TTinggi.getText().trim().equals(""))||
@@ -1576,6 +1851,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.TextBox TKeluhan;
     private widget.TextBox TNadi;
     private widget.TextBox TNoRw;
+    private widget.TextBox TPasien;
     private widget.TextBox TPemeriksaan;
     private widget.TextBox TRespirasi;
     private widget.TextBox TSuhu;
@@ -2301,9 +2577,10 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         TCari.requestFocus();
     }
     
-    public void setNoRm(String norwt,String pilihtable,Date tanggal,String jam,String menit,String detik,boolean status) {
+    public void setNoRm(String norwt,String pilihtable,Date tanggal,String jam,String menit,String detik,boolean status,String pasien) {
         TNoRw.setText(norwt);
         kddokter.setText("");
+        TPasien.setText(pasien);
         this.kd_pj=Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat=?",TNoRw.getText());
         this.kd_bangsal=Sequel.cariIsi(
                 "select bangsal.kd_bangsal from bangsal inner join kamar inner join kamar_inap "+

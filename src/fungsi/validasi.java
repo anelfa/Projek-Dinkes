@@ -979,7 +979,23 @@ public final class validasi {
     public String SetAngka2(double nilai){        
        return df3.format(nilai);
     }
-    
+     public double roundUp(double number, int multiple) {
+        int result = multiple;
+
+        if (number % multiple == 0) {
+            return (int) number;
+        }
+
+        if (number % multiple != 0) {
+
+            int division = (int) ((number / multiple) + 1);
+
+            result = division * multiple;
+
+        }
+        return result;
+
+    }
     public double SetAngka(String txt){
         double x;         
             if(txt.equals("")){

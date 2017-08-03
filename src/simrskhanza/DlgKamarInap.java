@@ -3578,12 +3578,9 @@ private void MnBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     var.setkdbangsal(Sequel.cariIsi("select kd_bangsal from set_lokasi"));
                                 }
 
-                                billing.TNoRw.setText(norawat.getText());  
-                                billing.isRawat();                             
-                                billing.isCek();
-                                if(sudah>0){                             
-                                    billing.setPiutang();
-                                }
+                                billing.TNoRw.setText(norawat.getText());                   
+                                billing.isCek();  
+                                billing.isRawat();          
                                 billing.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                                 billing.setLocationRelativeTo(internalFrame1);
                                 billing.setVisible(true);
@@ -3702,7 +3699,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         billing.periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                         billing.periksalab.setLocationRelativeTo(internalFrame1);
                         billing.periksalab.emptTeks();
-                        billing.periksalab.setNoRm(rs2.getString("no_rawat2"));  
+                        billing.periksalab.setNoRm(rs2.getString("no_rawat2"),"Ranap");   
                         billing.periksalab.tampiltarif();
                         billing.periksalab.tampil();
                         billing.periksalab.isCek();
@@ -3729,7 +3726,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             billing.periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             billing.periksalab.setLocationRelativeTo(internalFrame1);
             billing.periksalab.emptTeks();
-            billing.periksalab.setNoRm(norawat.getText());  
+            billing.periksalab.setNoRm(norawat.getText(),"Ranap"); 
             billing.periksalab.tampiltarif();
             billing.periksalab.tampil();
             billing.periksalab.isCek();
@@ -3759,7 +3756,7 @@ private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         DlgTagihanOperasi dlgro=new DlgTagihanOperasi(null,false);
                         dlgro.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                         dlgro.setLocationRelativeTo(internalFrame1);
-                        dlgro.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+", "+rs2.getString("nm_pasien"));  
+                         dlgro.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+", "+rs2.getString("nm_pasien"),"Ranap");   
                         dlgro.setVisible(true);
                     }else{
                           JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
@@ -3782,7 +3779,7 @@ private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             DlgTagihanOperasi dlgro=new DlgTagihanOperasi(null,false);
             dlgro.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             dlgro.setLocationRelativeTo(internalFrame1);
-            dlgro.setNoRm(norawat.getText(),TNoRM.getText()+", "+TPasien.getText());  
+            dlgro.setNoRm(norawat.getText(),TNoRM.getText()+", "+TPasien.getText(),"Ranap");   
             dlgro.setVisible(true);
         }
 }//GEN-LAST:event_MnOperasiActionPerformed
@@ -4764,7 +4761,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         billing.periksarad.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
                         billing.periksarad.setLocationRelativeTo(internalFrame1);
                         billing.periksarad.emptTeks();
-                        billing.periksarad.setNoRm(rs2.getString("no_rawat2"));
+                        billing.periksarad.setNoRm(rs2.getString("no_rawat2"),"Ranap");
                         billing.periksarad.tampil();
                         billing.periksarad.isCek();
                         billing.periksarad.setVisible(true);
@@ -4789,7 +4786,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             billing.periksarad.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             billing.periksarad.setLocationRelativeTo(internalFrame1);
             billing.periksarad.emptTeks();
-            billing.periksarad.setNoRm(norawat.getText());
+            billing.periksarad.setNoRm(norawat.getText(),"Ranap");
             billing.periksarad.tampil();
             billing.periksarad.isCek();
             billing.periksarad.setVisible(true);
