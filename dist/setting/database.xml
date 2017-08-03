@@ -7,7 +7,7 @@
     <entry key="PORT">3306</entry>
     <entry key="USER">DbRsKji</entry>
     <entry key="PAS">123456</entry>
-    <entry key="URLSERVERUPDATE">10.50.150.90/webapps/serverupdate</entry>
+    <entry key="URLSERVERUPDATE">localhost/webapps/serverupdate</entry>
     <entry key="AUTOUPDATESISTEM">no</entry>
     <entry key="CARICEPAT">nonaktif</entry>
     <entry key="HYBRIDWEB">webapps</entry>

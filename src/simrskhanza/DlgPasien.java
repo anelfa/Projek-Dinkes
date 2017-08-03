@@ -1276,7 +1276,7 @@ public class DlgPasien extends javax.swing.JDialog {
         DlgDemografi.setUndecorated(true);
         DlgDemografi.setResizable(false);
 
-        internalFrame3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Demografi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 50))); // NOI18N
+        internalFrame3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Demografi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DejaVu Sans", 1, 12), new java.awt.Color(50, 70, 50))); // NOI18N
         internalFrame3.setName("internalFrame3"); // NOI18N
         internalFrame3.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1445,7 +1445,7 @@ public class DlgPasien extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DejaVu Sans", 1, 12), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1683,7 +1683,6 @@ public class DlgPasien extends javax.swing.JDialog {
 
         cmbHlm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "100", "200", "300", "400", "500", "1000", "Semua" }));
         cmbHlm.setName("cmbHlm"); // NOI18N
-        cmbHlm.setOpaque(false);
         cmbHlm.setPreferredSize(new java.awt.Dimension(80, 23));
         panelGlass9.add(cmbHlm);
 
@@ -1742,7 +1741,6 @@ public class DlgPasien extends javax.swing.JDialog {
 
         CmbJk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LAKI-LAKI", "PEREMPUAN" }));
         CmbJk.setName("CmbJk"); // NOI18N
-        CmbJk.setOpaque(false);
         CmbJk.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CmbJkKeyPressed(evt);
@@ -1768,7 +1766,6 @@ public class DlgPasien extends javax.swing.JDialog {
 
         CMbGd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A", "B", "AB", "O" }));
         CMbGd.setName("CMbGd"); // NOI18N
-        CMbGd.setOpaque(false);
         CMbGd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CMbGdKeyPressed(evt);
@@ -1789,7 +1786,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
         DTPLahir.setEditable(false);
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-07-2017" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2017" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -1815,7 +1812,6 @@ public class DlgPasien extends javax.swing.JDialog {
         cmbAgama.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISLAM", "KRISTEN", "KATOLIK", "HINDU", "BUDHA", "KONG HU CHU", "-" }));
         cmbAgama.setLightWeightPopupEnabled(false);
         cmbAgama.setName("cmbAgama"); // NOI18N
-        cmbAgama.setOpaque(false);
         cmbAgama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbAgamaKeyPressed(evt);
@@ -1833,7 +1829,6 @@ public class DlgPasien extends javax.swing.JDialog {
         CmbStts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MENIKAH", "SINGLE", "JANDA", "DUDHA", "JOMBLO" }));
         CmbStts.setLightWeightPopupEnabled(false);
         CmbStts.setName("CmbStts"); // NOI18N
-        CmbStts.setOpaque(false);
         CmbStts.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CmbSttsKeyPressed(evt);
@@ -1927,7 +1922,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
         DTPDaftar.setEditable(false);
         DTPDaftar.setForeground(new java.awt.Color(50, 70, 50));
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-07-2017" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2017" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -1956,7 +1951,6 @@ public class DlgPasien extends javax.swing.JDialog {
 
         CMbPnd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "TS", "TK", "SD", "SMP", "SMA", "D1", "D2", "D3", "D4", "S1", "S2", "S3" }));
         CMbPnd.setName("CMbPnd"); // NOI18N
-        CMbPnd.setOpaque(false);
         CMbPnd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CMbPndKeyPressed(evt);
@@ -3359,28 +3353,6 @@ private void MnKartu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
 }//GEN-LAST:event_MnKartu3ActionPerformed
 
-private void KelurahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelurahanKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-       if(Kelurahan.getText().equals("")){
-           Kelurahan.setText("KELURAHAN");
-       }
-       if(Kecamatan.getText().equals("KECAMATAN")){
-           Kecamatan.setText("");
-       }
-       Kecamatan.requestFocus();
-   }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-       if(Kelurahan.getText().equals("")){
-           Kelurahan.setText("KELURAHAN");
-       }
-       if(Alamat.getText().equals("ALAMAT")){
-          Alamat.setText("");
-       }     
-       Alamat.requestFocus();
-   }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-       BtnKelurahanActionPerformed(null);
-   }
-}//GEN-LAST:event_KelurahanKeyPressed
-
 private void KecamatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KecamatanKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_ENTER){
        if(Kecamatan.getText().equals("")){
@@ -3634,12 +3606,6 @@ private void AlamatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event
         }
 }//GEN-LAST:event_AlamatMouseExited
 
-private void KelurahanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseExited
-        if(Kelurahan.getText().equals("")){
-            Kelurahan.setText("KELURAHAN");
-        }
-}//GEN-LAST:event_KelurahanMouseExited
-
 private void KecamatanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanMouseExited
         if(Kecamatan.getText().equals("")){
             Kecamatan.setText("KECAMATAN");
@@ -3657,12 +3623,6 @@ private void AlamatMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_
             Alamat.setText("");
         }
 }//GEN-LAST:event_AlamatMouseMoved
-
-private void KelurahanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseMoved
-        if(Kelurahan.getText().equals("KELURAHAN")){
-            Kelurahan.setText("");
-        }
-}//GEN-LAST:event_KelurahanMouseMoved
 
 private void KecamatanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KecamatanMouseMoved
         if(Kecamatan.getText().equals("KECAMATAN")){
@@ -4556,6 +4516,40 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     private void KelurahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KelurahanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_KelurahanActionPerformed
+
+    private void KelurahanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseExited
+        if(Kelurahan.getText().equals("")){
+            Kelurahan.setText("KELURAHAN");
+        }
+    }//GEN-LAST:event_KelurahanMouseExited
+
+    private void KelurahanMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KelurahanMouseMoved
+        if(Kelurahan.getText().equals("KELURAHAN")){
+            Kelurahan.setText("");
+        }
+    }//GEN-LAST:event_KelurahanMouseMoved
+
+    private void KelurahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelurahanKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(Kelurahan.getText().equals("")){
+                Kelurahan.setText("KELURAHAN");
+            }
+            if(Kecamatan.getText().equals("KECAMATAN")){
+                Kecamatan.setText("");
+            }
+            Kecamatan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            if(Kelurahan.getText().equals("")){
+                Kelurahan.setText("KELURAHAN");
+            }
+            if(Alamat.getText().equals("ALAMAT")){
+                Alamat.setText("");
+            }
+            Alamat.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            BtnKelurahanActionPerformed(null);
+        }
+    }//GEN-LAST:event_KelurahanKeyPressed
 
    
     public static void main(String args[]) {
