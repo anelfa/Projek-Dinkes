@@ -326,7 +326,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         while(rscariharga.next()){
                             beli=rscariharga.getDouble("h_beli");
                             if(kenaikan>0){
-                                harga=Math.round(rscariharga.getDouble("h_beli")+(rscariharga.getDouble("h_beli")*kenaikan));
+                                harga=Valid.roundUp(rscariharga.getDouble("h_beli")+(rscariharga.getDouble("h_beli")*kenaikan),100);
                             }else{
                                 if(Jeniskelas.getSelectedItem().equals("Kelas 1")){
                                     harga=rscariharga.getDouble("kelas1");
@@ -490,7 +490,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             
                     }                  
                                
-                    psobatsimpan= koneksi.prepareStatement("insert into detail_pemberian_obat values(?,?,?,?,?,?,?,?,?,?)");
+                    psobatsimpan= koneksi.prepareStatement("insert into detail_pemberian_obat values(?,?,?,?,?,?,?,?,?,?,?)");
                     try {
                         if(pagi>0){
                             psobatsimpan.setString(1,Valid.SetTgl(Tanggal.getSelectedItem()+""));
@@ -501,19 +501,20 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             psobatsimpan.setDouble(6,harga);
                             if(tbObat.getValueAt(i,0).toString().equals("true")){                                
                                 psobatsimpan.setDouble(7,(pagi/kapasitas));
-                                psobatsimpan.setDouble(10,Math.round(
+                                psobatsimpan.setDouble(10,Valid.roundUp(
                                         Double.parseDouble(tbObat.getValueAt(i,13).toString())+
                                         Double.parseDouble(tbObat.getValueAt(i,14).toString())+
-                                                (harga*(pagi/kapasitas))));  
+                                                (harga*(pagi/kapasitas)),100));  
                             }else{                                
                                 psobatsimpan.setDouble(7,pagi);
-                                psobatsimpan.setDouble(10,Math.round(
+                                psobatsimpan.setDouble(10,Valid.roundUp(
                                         Double.parseDouble(tbObat.getValueAt(i,13).toString())+
                                         Double.parseDouble(tbObat.getValueAt(i,14).toString())+
-                                                (harga*pagi)));
+                                                (harga*pagi),100));
                             }
                             psobatsimpan.setString(8,tbObat.getValueAt(i,13).toString());
                             psobatsimpan.setString(9,tbObat.getValueAt(i,14).toString());
+                            psobatsimpan.setString(11,"Ranap");
                             psobatsimpan.executeUpdate();  
                         }
 
@@ -526,18 +527,19 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             psobatsimpan.setDouble(6,harga);
                             if(tbObat.getValueAt(i,0).toString().equals("true")){                                
                                 psobatsimpan.setDouble(7,(siang/kapasitas));
-                                psobatsimpan.setDouble(10,Math.round(
+                                psobatsimpan.setDouble(10,Valid.roundUp(
                                         Double.parseDouble(tbObat.getValueAt(i,13).toString())+
                                         Double.parseDouble(tbObat.getValueAt(i,14).toString())+
-                                                (harga*(siang/kapasitas))));    
+                                                (harga*(siang/kapasitas)),100));    
                             }else{                                
                                 psobatsimpan.setDouble(7,siang);
-                                psobatsimpan.setDouble(10,Math.round(
+                                psobatsimpan.setDouble(10,Valid.roundUp(
                                         Double.parseDouble(tbObat.getValueAt(i,13).toString())+
-                                        Double.parseDouble(tbObat.getValueAt(i,14).toString())+(harga*siang)));
+                                        Double.parseDouble(tbObat.getValueAt(i,14).toString())+(harga*siang),100));
                             }
                             psobatsimpan.setString(8,tbObat.getValueAt(i,13).toString());
                             psobatsimpan.setString(9,tbObat.getValueAt(i,14).toString());
+                            psobatsimpan.setString(11,"Ranap");
                             psobatsimpan.executeUpdate();  
                         }
 
@@ -550,19 +552,20 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             psobatsimpan.setDouble(6,harga);
                             if(tbObat.getValueAt(i,0).toString().equals("true")){                                
                                 psobatsimpan.setDouble(7,(sore/kapasitas));
-                                psobatsimpan.setDouble(10,Math.round(
+                                psobatsimpan.setDouble(10,Valid.roundUp(
                                       Double.parseDouble(tbObat.getValueAt(i,13).toString())+
                                       Double.parseDouble(tbObat.getValueAt(i,14).toString())+
-                                      (harga*(sore/kapasitas))));    
+                                      (harga*(sore/kapasitas)),100));    
                             }else{                                
                                 psobatsimpan.setDouble(7,sore);
-                                psobatsimpan.setDouble(10,Math.round(
+                                psobatsimpan.setDouble(10,Valid.roundUp(
                                       Double.parseDouble(tbObat.getValueAt(i,13).toString())+
                                       Double.parseDouble(tbObat.getValueAt(i,14).toString())+
-                                      (harga*sore)));
+                                      (harga*sore),100));
                             }
                             psobatsimpan.setString(8,tbObat.getValueAt(i,13).toString());
                             psobatsimpan.setString(9,tbObat.getValueAt(i,14).toString());
+                            psobatsimpan.setString(11,"Ranap");
                             psobatsimpan.executeUpdate();  
                         }
 
@@ -575,19 +578,20 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             psobatsimpan.setDouble(6,harga);
                             if(tbObat.getValueAt(i,0).toString().equals("true")){                                
                                 psobatsimpan.setDouble(7,(malam/kapasitas));
-                                psobatsimpan.setDouble(10,Math.round(
+                                psobatsimpan.setDouble(10,Valid.roundUp(
                                        Double.parseDouble(tbObat.getValueAt(i,13).toString())+
                                        Double.parseDouble(tbObat.getValueAt(i,14).toString())+
-                                       (harga*(malam/kapasitas))));  
+                                       (harga*(malam/kapasitas)),100));  
                             }else{                                
                                 psobatsimpan.setDouble(7,malam);
-                                psobatsimpan.setDouble(10,Math.round(
+                                psobatsimpan.setDouble(10,Valid.roundUp(
                                        Double.parseDouble(tbObat.getValueAt(i,13).toString())+
                                        Double.parseDouble(tbObat.getValueAt(i,14).toString())+
-                                       (harga*malam)));
+                                       (harga*malam),100));
                             }
                             psobatsimpan.setString(8,tbObat.getValueAt(i,13).toString());
                             psobatsimpan.setString(9,tbObat.getValueAt(i,14).toString());
+                            psobatsimpan.setString(11,"Ranap");
                             psobatsimpan.executeUpdate();  
                         }
                     } catch (Exception e) {
@@ -1011,13 +1015,13 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
                     stokmasuk=0;
                 }
                 if(tbObat.getValueAt(row,0).toString().equals("false")){
-                    if((stokmasuk-(pagi+siang+sore+malam))<0){
+                    /*if((stokmasuk-(pagi+siang+sore+malam))<0){
                         JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                         tbObat.requestFocus();
                         tbObat.setValueAt("0", row,kolom);  
-                    }else{
+                    }else{*/
                         tbObat.setValueAt((pagi+siang+sore+malam), row,9);  
-                    }  
+                    //}  
                 }else{
                     try {
                         kapasitas=1;
@@ -1044,14 +1048,14 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
                             }
                         }
                             
-                        if((stokmasuk-((pagi/kapasitas)+(siang/kapasitas)+(sore/kapasitas)+(malam/kapasitas)))<0){
+                        /*if((stokmasuk-((pagi/kapasitas)+(siang/kapasitas)+(sore/kapasitas)+(malam/kapasitas)))<0){
                             JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                             tbObat.requestFocus();
                             tbObat.setValueAt("0", row,kolom);  
-                        }else{
+                        }else{*/
                             tbObat.setValueAt(((pagi/kapasitas)+(siang/kapasitas)+(sore/kapasitas)+(malam/kapasitas)), row,9);  
-                        }
-                    } catch (SQLException ex) {
+                        //}
+                    } catch (Exception ex) {
                         System.out.println(ex);
                     }
                 }
@@ -1069,13 +1073,13 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
                 } catch (Exception e) {
                     stokmasuk=0;
                 }
-                if((stokmasuk-retur)<0){
+                /*if((stokmasuk-retur)<0){
                     JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                     tbObat.requestFocus();
                     tbObat.setValueAt("0", row,kolom);  
-                }else{
+                }else{*/
                     tbObat.setValueAt((stokmasuk-retur), row,12);   
-                }   
+                //}   
             }
         }
     }

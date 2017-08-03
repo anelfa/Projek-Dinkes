@@ -53,7 +53,9 @@ public final class var {
             utd_pemisahan_darah=false,harian_kamar=false,rincian_piutang_pasien=false,keuntungan_beri_obat_nonpiutang=false,reklasifikasi_ralan=false,
             reklasifikasi_ranap=false,utd_penyerahan_darah=false,hutang_obat=false,riwayat_obat_alkes_bhp=false,sensus_harian_poli=false,rl4a=false,
             aplicare_referensi_kamar=false,aplicare_ketersediaan_kamar=false,inacbg_klaim_baru_otomatis=false,inacbg_klaim_baru_manual=false,inacbg_coder_nik=false,
-           mutasi_berkas=false,akun_piutang=false,harian_kso=false,bulanan_kso=false,harian_menejemen=false,bulanan_menejemen=false,inhealth_cek_eligibilitas=false;
+           mutasi_berkas=false,akun_piutang=false,harian_kso=false,bulanan_kso=false,harian_menejemen=false,bulanan_menejemen=false,inhealth_cek_eligibilitas=false,
+            inhealth_referensi_jenpel_ruang_rawat=false,inhealth_referensi_poli=false,inhealth_referensi_faskes=false,inhealth_sjp=false,piutang_ralan=false,
+            piutang_ranap=false,detail_piutang_penjab=false;
      private static String u_username;
    
     
@@ -300,6 +302,13 @@ public final class var {
                         var.harian_menejemen=true;
                         var.bulanan_menejemen=true;
                         var.inhealth_cek_eligibilitas=true;
+                        var.inhealth_referensi_jenpel_ruang_rawat=true;
+                        var.inhealth_referensi_poli=true;
+                        var.inhealth_referensi_faskes=true;
+                        var.inhealth_sjp=true;
+                        var.piutang_ralan=true;
+                        var.piutang_ranap=true;
+                        var.detail_piutang_penjab=true;
                     }else */
                     if(rs.getRow()>=1){
                         var.kode="Admin Utama";
@@ -527,6 +536,13 @@ public final class var {
                         var.harian_menejemen=true;
                         var.bulanan_menejemen=true;
                         var.inhealth_cek_eligibilitas=true;
+                        var.inhealth_referensi_jenpel_ruang_rawat=true;
+                        var.inhealth_referensi_poli=true;
+                        var.inhealth_referensi_faskes=true;
+                        var.inhealth_sjp=true;
+                        var.piutang_ralan=true;
+                        var.piutang_ranap=true;
+                        var.detail_piutang_penjab=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -754,6 +770,13 @@ public final class var {
                         var.harian_menejemen=rs2.getBoolean("harian_menejemen");
                         var.bulanan_menejemen=rs2.getBoolean("bulanan_menejemen");
                         var.inhealth_cek_eligibilitas=rs2.getBoolean("inhealth_cek_eligibilitas");
+                        var.inhealth_referensi_jenpel_ruang_rawat=rs2.getBoolean("inhealth_referensi_jenpel_ruang_rawat");
+                        var.inhealth_referensi_poli=rs2.getBoolean("inhealth_referensi_poli");
+                        var.inhealth_referensi_faskes=rs2.getBoolean("inhealth_referensi_faskes");
+                        var.inhealth_sjp=rs2.getBoolean("inhealth_sjp");
+                        var.piutang_ralan=rs2.getBoolean("piutang_ralan");
+                        var.piutang_ranap=rs2.getBoolean("piutang_ranap");
+                        var.detail_piutang_penjab=rs2.getBoolean("detail_piutang_penjab");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         var.kode="";                  
                         var.penyakit= false;
@@ -979,6 +1002,13 @@ public final class var {
                         var.harian_menejemen=false;
                         var.bulanan_menejemen=false;
                         var.inhealth_cek_eligibilitas=false;
+                        var.inhealth_referensi_jenpel_ruang_rawat=false;
+                        var.inhealth_referensi_poli=false;
+                        var.inhealth_referensi_faskes=false;
+                        var.inhealth_sjp=false;
+                        var.piutang_ralan=false;
+                        var.piutang_ranap=false;
+                        var.detail_piutang_penjab=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -1257,4 +1287,11 @@ public final class var {
     public static boolean getharian_menejemen(){return var.harian_menejemen;}
     public static boolean getbulanan_menejemen(){return var.bulanan_menejemen;}
     public static boolean getinhealth_cek_eligibilitas(){return var.inhealth_cek_eligibilitas;}
+    public static boolean getinhealth_referensi_jenpel_ruang_rawat(){return var.inhealth_referensi_jenpel_ruang_rawat;}
+    public static boolean getinhealth_referensi_poli(){return var.inhealth_referensi_poli;}
+    public static boolean getinhealth_referensi_faskes(){return var.inhealth_referensi_faskes;}
+    public static boolean getinhealth_sjp(){return var.inhealth_sjp;}
+    public static boolean getpiutang_ralan(){return var.piutang_ralan;}
+    public static boolean getpiutang_ranap(){return var.piutang_ranap;}
+    public static boolean getdetail_piutang_penjab(){return var.detail_piutang_penjab;}
 }
