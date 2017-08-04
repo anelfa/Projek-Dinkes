@@ -672,7 +672,7 @@ public final class sekuel {
         }
     }
     
-    public void AutoComitTrue(){
+   public void AutoComitTrue(){
         try {
             connect.setAutoCommit(true);
         } catch (Exception e) {

@@ -2756,9 +2756,6 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }  
             
             Sequel.AutoComitFalse();
-            Sequel.queryu2("insert into kelurahan values(?,?)",2,new String[]{"0",Kelurahan.getText().replaceAll("KELURAHAN","-")});
-            Sequel.queryu2("insert into kecamatan values(?,?)",2,new String[]{"0",Kecamatan.getText().replaceAll("KECAMATAN","-")});
-            Sequel.queryu2("insert into kabupaten values(?,?)",2,new String[]{"0",Kabupaten.getText().replaceAll("KABUPATEN","-")});
             Valid.editTable(tabMode,"pasien","no_rkm_medis","?","no_rkm_medis=?,nm_pasien=?,no_ktp=?,jk=?,tmp_lahir=?,"+
                         "tgl_lahir=?,alamat=?,gol_darah=?,pekerjaan=?,stts_nikah=?,agama=?,tgl_daftar=?,no_tlp=?,umur=?"+
                         ",pnd=?,keluarga=?,namakeluarga=?,kd_pj=?,no_peserta=?,kd_kel=?,kd_kec=?,kd_kab=?,nm_ibu=?,pekerjaanpj=?,"+
@@ -4977,7 +4974,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                 
                 pscariwilayah=koneksi.prepareStatement(
                         "select pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,pasien.pekerjaanpj,"+
-                        "pasien.alamatpj,pasien.kelurahanpj,pasien.kecamatanpj,pasien.kabupatenpj from pasien "+
+                        "pasien.alamatpj,pasien.kelurahanpj,pasien.kecamatanpj,pasien.kabupatenpj, pasien.kd_kel,pasien.kd_kec,pasien.kd_kab from pasien "+
                         "inner join kelurahan inner join kecamatan inner join kabupaten on pasien.kd_kel=kelurahan.kd_kel "+
                         "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "+
                         "where pasien.no_rkm_medis=?");
@@ -4989,6 +4986,9 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                         Kabupaten.setText(rs.getString("nm_kab"));
                         Kecamatan.setText(rs.getString("nm_kec"));
                         Kelurahan.setText(rs.getString("nm_kel"));
+                        id_kab=rs.getString("kd_kab");
+                        id_kec=rs.getString("kd_kec");
+                        id_kel=rs.getString("kd_kel");
                         PekerjaanPj.setText(rs.getString("pekerjaanpj"));
                         AlamatPj.setText(rs.getString("alamatpj"));
                         KelurahanPj.setText(rs.getString("kelurahanpj"));
