@@ -160,7 +160,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class,java.lang.Object.class
+                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -4279,9 +4279,24 @@ public void cetakregister() {
             
             
             rs=ps.executeQuery();
+             
             while(rs.next()){
-                String[] tgllahir= rs.getString(10).split("-");
+               
                 
+                String tgl_lahir_pas ;
+               
+            if(  String.valueOf(rs.getString(10)).equalsIgnoreCase("")||String.valueOf(rs.getString(10)).equalsIgnoreCase(null)||String.valueOf(rs.getString(10)).equalsIgnoreCase("0000-00-00"))
+                {
+                  String[] tgllahir= rs.getString(10).split("-");   
+               tgl_lahir_pas =tgllahir[2]+"-"+tgllahir[1]+"-"+tgllahir[0];
+                
+                }
+                else
+                {
+                 
+                tgl_lahir_pas = rs.getString(10);
+                
+                }
                 tabMode.addRow(new Object[] {false,
                    
                     rs.getString(1),
@@ -4293,7 +4308,7 @@ public void cetakregister() {
                                rs.getString(7),
                                rs.getString(8),
                                rs.getString(9),
-                               tgllahir[2]+"-"+tgllahir[1]+"-"+tgllahir[0],
+                              tgl_lahir_pas,
                                
                                rs.getString(11),
                                rs.getString(12),
@@ -4347,6 +4362,7 @@ public void cetakregister() {
             TDokter.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),6).toString());
             TNoRM.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString());            
             isPas();
+            
             TPngJwb.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),12).toString());
             TAlmt.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),13).toString());
             THbngn.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),14).toString());

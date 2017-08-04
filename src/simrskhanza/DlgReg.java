@@ -174,7 +174,7 @@ public final class DlgReg extends javax.swing.JDialog {
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class
+                 java.lang.Object.class, java.lang.Object.class,java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -5375,7 +5375,19 @@ if(TPasien.getText().trim().equals("")){
                 ps.setString(65,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    String[] tgllahir= rs.getString(10).split("-");
+                    String tgl_lahir_pas ;
+            if(  String.valueOf(rs.getString(10)).equalsIgnoreCase("")||String.valueOf(rs.getString(10)).equalsIgnoreCase(null)||String.valueOf(rs.getString(10)).equalsIgnoreCase("0000-00-00"))
+                {
+                  String[] tgllahir= rs.getString(10).split("-");   
+               tgl_lahir_pas =tgllahir[2]+"-"+tgllahir[1]+"-"+tgllahir[0];
+                
+                }
+                else
+                {
+                 
+                tgl_lahir_pas = rs.getString(10);
+                
+                }
                     tabMode.addRow(new Object[] {false,rs.getString(1),
                                    rs.getString(2),
                                    rs.getString(3),
@@ -5387,7 +5399,7 @@ if(TPasien.getText().trim().equals("")){
                                    rs.getString(7),
                                    rs.getString(8),
                                    rs.getString(9),
-                                    tgllahir[2]+"-"+tgllahir[1]+"-"+tgllahir[0],
+                                   tgl_lahir_pas,
                                
                                   rs.getString(11),
                                    
