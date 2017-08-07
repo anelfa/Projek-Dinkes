@@ -3,7 +3,7 @@
 <properties>
     <comment>KhanzaHMS</comment>
     <entry key="HOST">10.50.150.90</entry>
-    <entry key="DATABASE">db_rsukramatjati_production2</entry>
+    <entry key="DATABASE">sik-tester</entry>
     <entry key="PORT">3306</entry>
     <entry key="USER">DbRsKji</entry>
     <entry key="PAS">123456</entry>
