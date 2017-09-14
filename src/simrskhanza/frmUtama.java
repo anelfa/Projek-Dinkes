@@ -40,6 +40,7 @@ import laporan.DlgDkkPenyakitTidakMenularRalan;
 import laporan.DlgDkkSurveilansPD3I;
 import setting.DlgVakum;
 import setting.DlgUser;
+import setting.DlgSetAntrian;
 import setting.DlgSetKamarInap;
 import setting.DlgSetOtoLokasi;
 import setting.DlgSetTarif;
@@ -603,6 +604,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangRalan = new widget.ButtonBig();
         btnPiutangRanap = new widget.ButtonBig();
         btnPiutangPerCaraBayar = new widget.ButtonBig();
+        btnSetAntrian = new widget.ButtonBig();
         tanggal = new widget.Tanggal();
         btnDataPenjualan = new widget.ButtonBig();
         btnInputPenjualan = new widget.ButtonBig();
@@ -792,7 +794,7 @@ public class frmUtama extends javax.swing.JFrame {
         WindowInput.setUndecorated(true);
         WindowInput.setResizable(false);
 
-        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DejaVu Sans", 1, 12), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame6.setName("internalFrame6"); // NOI18N
         internalFrame6.setWarnaBawah(new java.awt.Color(235, 245, 225));
         internalFrame6.setLayout(null);
@@ -875,7 +877,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.setUndecorated(true);
         DlgHome.setResizable(false);
 
-        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DejaVu Sans", 1, 12), new java.awt.Color(40, 70, 50))); // NOI18N
+        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(40, 70, 50))); // NOI18N
         panelMenu.setName("panelMenu"); // NOI18N
         panelMenu.setPreferredSize(new java.awt.Dimension(2412, 3653));
         panelMenu.setWarnaAtas(new java.awt.Color(250, 255, 250));
@@ -920,6 +922,11 @@ public class frmUtama extends javax.swing.JFrame {
         cmbMenu.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbMenuItemStateChanged(evt);
+            }
+        });
+        cmbMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMenuActionPerformed(evt);
             }
         });
         panelisi2.add(cmbMenu);
@@ -3911,6 +3918,19 @@ public class frmUtama extends javax.swing.JFrame {
         });
         Panelmenu.add(btnPiutangPerCaraBayar);
 
+        btnSetAntrian.setForeground(new java.awt.Color(40, 70, 50));
+        btnSetAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/antrian2.png"))); // NOI18N
+        btnSetAntrian.setText("No Antrian");
+        btnSetAntrian.setIconTextGap(0);
+        btnSetAntrian.setName("btnSetAntrian"); // NOI18N
+        btnSetAntrian.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetAntrian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetAntrianActionPerformed(evt);
+            }
+        });
+        Panelmenu.add(btnSetAntrian);
+
         scrollPane2.setViewportView(Panelmenu);
 
         panelMenu.add(scrollPane2, java.awt.BorderLayout.CENTER);
@@ -3919,7 +3939,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03/08/2017" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14/09/2017" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -4803,12 +4823,12 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu4.setName("jMenu4"); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(124, 30));
         jMenu4.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenu4MenuSelected(evt);
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu4MenuSelected(evt);
             }
         });
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -8335,6 +8355,23 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
         // TODO add your handling code here:
     }//GEN-LAST:event_TCariActionPerformed
 
+    private void btnSetAntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetAntrianActionPerformed
+        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSetAntrian user=new DlgSetAntrian(this,false);
+        user.emptTeks();
+        user.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        user.setLocationRelativeTo(PanelUtama);
+        user.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnSetAntrianActionPerformed
+
+    private void cmbMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbMenuActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -8562,6 +8599,7 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
     private widget.ButtonBig btnSMS;
     private widget.ButtonBig btnSatuan;
     private widget.ButtonBig btnSensusHarianPoli;
+    private widget.ButtonBig btnSetAntrian;
     private widget.ButtonBig btnSetBiayaHarian;
     private widget.ButtonBig btnSetBiayaMasukSekali;
     private widget.ButtonBig btnSetHargaKamar;
@@ -10032,6 +10070,10 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
                Panelmenu.add(btnDisplay); 
                jmlmenu++;
             }
+            if(var.getdisplay()==true){
+               Panelmenu.add(btnSetAntrian); 
+               jmlmenu++;
+            }
 
             if(var.getset_harga_obat()==true){
                 Panelmenu.add(btnSetupHarga);
@@ -11177,6 +11219,10 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
 
         if(var.getdisplay()==true){
            Panelmenu.add(btnDisplay); 
+           jmlmenu++;
+        }
+        if(var.getdisplay()==true){
+           Panelmenu.add(btnSetAntrian); 
            jmlmenu++;
         }
 
@@ -12761,6 +12807,12 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
         if(var.getdisplay()==true){
             if(btnDisplay.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnDisplay); 
+                jmlmenu++;
+            }                
+        }
+        if(var.getdisplay()==true){
+            if(btnSetAntrian.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSetAntrian); 
                 jmlmenu++;
             }                
         }
