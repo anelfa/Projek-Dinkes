@@ -1,4 +1,4 @@
-Ini adalah simrs projek dinas kesehatan Prov DKI Jakarta menggunakan SIMRS Khanza
+Ini adalah simrs projek dinas kesehatan Prov. DKI Jakarta menggunakan SIMRS Khanza
 
 	Software ini adalah Software Menejemen Rumah Sakit/Klinik/
   Puskesmas yang  gratis, open source dan boleh digunakan siapa saja tanpa dikenai 

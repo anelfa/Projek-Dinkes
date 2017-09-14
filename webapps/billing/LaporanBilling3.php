@@ -46,8 +46,9 @@
             </tr>
             <tr>
               <td colspan='7' padding='0'>
-               <hr/>
-                <center><font color='333333' size='1'  face='Tahoma'>BILLING</font> </center>
+              
+                <center><font color='333333' size='2'  face='Tahoma' style='font-weight: bold' >RINCIAN BIAYA RAWAT INAP</font> </center>
+                 <hr/>
               </td>
             </tr>
             ";  $z=1;

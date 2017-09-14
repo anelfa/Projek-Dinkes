@@ -2,11 +2,11 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>KhanzaHMS</comment>
-    <entry key="HOST">localhost</entry>
-    <entry key="DATABASE">db_simrs_dev</entry>
+    <entry key="HOST">10.50.150.96</entry>
+    <entry key="DATABASE">db_rsukramatjati_production</entry>
     <entry key="PORT">3306</entry>
-    <entry key="USER">root</entry>
-    <entry key="PAS"></entry>
+    <entry key="USER">DbRsKji</entry>
+    <entry key="PAS">kji**</entry>
     <entry key="URLSERVERUPDATE">localhost/webapps/serverupdate</entry>
     <entry key="AUTOUPDATESISTEM">no</entry>
     <entry key="CARICEPAT">nonaktif</entry>
@@ -16,9 +16,9 @@
     <entry key="URLAPIBPJS">http://10.50.150.20:9090/WsLokalRest_2.1</entry>
     <entry key="SECRETKEYAPIBPJS">7IH3C91B3A</entry>
     <entry key="CONSIDAPIBPJS">17643</entry>
-    <entry key="URLAPIAPLICARE">http://dvlp.bpjs-kesehatan.go.id:9080/aplicaresws</entry>
-    <entry key="SECRETKEYAPIAPLICARE">1112</entry>
-    <entry key="CONSIDAPIAPLICARE">1000</entry>
+    <entry key="URLAPIAPLICARE">http://api.bpjs-kesehatan.go.id/aplicaresws</entry>
+    <entry key="SECRETKEYAPIAPLICARE">8cG0606137</entry>
+    <entry key="CONSIDAPIAPLICARE">12151</entry>
     <entry key="KAMARAKTIFRANAP"></entry>
     <entry key="DOKTERAKTIFKASIRRALAN"></entry>
     <entry key="POLIAKTIFKASIRRALAN"></entry>
