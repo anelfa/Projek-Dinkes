@@ -5569,7 +5569,7 @@ if(TPasien.getText().trim().equals("")){
             TDokter.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),6).toString());
             TNoRM.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),8).toString());            
             isPas();
-            TPoli.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),11).toString());          
+            TPoli.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),7).toString());          
             nmpnj.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),12).toString());
             TPngJwb.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),13).toString());
             TAlmt.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),14).toString());
