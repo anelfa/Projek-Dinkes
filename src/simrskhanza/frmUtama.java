@@ -177,6 +177,7 @@ import bridging.ReklasifikasiRanap;
 import inventory.DlgRiwayatBarangMedis;
 import inventory.DlgDaftarPermintaanResep;
 import java.awt.event.KeyListener;
+import javax.swing.event.DocumentEvent;
 import keuangan.DlgAkunPiutang;
 import keuangan.DlgHutangObatBelumLunas;
 import keuangan.DlgPiutangPercaraBayar;
@@ -185,6 +186,7 @@ import keuangan.DlgPiutangRanap;
 import keuangan.DlgRBKSO;
 import keuangan.DlgRBMenejemen;
 import keuangan.DlgRHKSO;
+import laporan.DlgHitungBOR;
 import keuangan.DlgRHMenejemen;
 import keuangan.DlgRincianPiutangPasien;
 import laporan.DlgDkkPenyakitTidakMenularRanap;
@@ -325,7 +327,16 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu8.setText("VERSI "+propVer.getProperty("VERSION"));
         FlayMenu.setVisible(false);
         TCari.setVisible(false);
-            
+           if(koneksiDB.cariCepat().equals("aktif")){
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {isTampil();}
+                @Override
+                public void removeUpdate(DocumentEvent e) {isTampil();}
+                @Override
+                public void changedUpdate(DocumentEvent e) {isTampil();}
+            });
+        }  
     }
     
     public static frmUtama getInstance() {
@@ -608,6 +619,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangRanap = new widget.ButtonBig();
         btnPiutangPerCaraBayar = new widget.ButtonBig();
         btnSetAntrian = new widget.ButtonBig();
+        btnHitungBor = new widget.ButtonBig();
         tanggal = new widget.Tanggal();
         btnDataPenjualan = new widget.ButtonBig();
         btnInputPenjualan = new widget.ButtonBig();
@@ -3944,6 +3956,19 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         Panelmenu.add(btnSetAntrian);
+
+        btnHitungBor.setForeground(new java.awt.Color(40, 70, 50));
+        btnHitungBor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png"))); // NOI18N
+        btnHitungBor.setText("Hitung BOR");
+        btnHitungBor.setIconTextGap(0);
+        btnHitungBor.setName("btnHitungBor"); // NOI18N
+        btnHitungBor.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnHitungBor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHitungBorActionPerformed(evt);
+            }
+        });
+        Panelmenu.add(btnHitungBor);
 
         scrollPane2.setViewportView(Panelmenu);
 
@@ -8443,6 +8468,17 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu8MouseClicked
 
+    private void btnHitungBorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungBorActionPerformed
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgHitungBOR aplikasi=new DlgHitungBOR(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnHitungBorActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -8542,6 +8578,7 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
     private widget.ButtonBig btnFrekuensiRalan;
     private widget.ButtonBig btnFrekuensiRanap;
     private widget.ButtonBig btnHarianKamar;
+    private widget.ButtonBig btnHitungBor;
     private widget.ButtonBig btnHutangObat;
     private widget.ButtonBig btnICD;
     private widget.ButtonBig btnICD9;
@@ -9754,6 +9791,10 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
                 Panelmenu.add(btnRl4a);                 
                 jmlmenu++;
             }
+            if(var.gethitung_bor()==true){  
+                Panelmenu.add(btnHitungBor);                 
+                jmlmenu++;
+            }
         }else if(cmbMenu.getSelectedIndex()==9){   
             jmlmenu=0;
             if(var.getkamar()==true){
@@ -9889,7 +9930,8 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
             if(var.getkeuangan()==true){
                 Panelmenu.add(btnLabaRugi);
                 jmlmenu++;
-            }                               
+            }   
+            
 
         }else if(cmbMenu.getSelectedIndex()==10){ 
             jmlmenu=0;
@@ -10914,7 +10956,7 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
             Panelmenu.add(btnRl4a);                 
             jmlmenu++;
         }
-
+        
         if(var.getkamar()==true){
             Panelmenu.add(btnKamar);
             jmlmenu++;
@@ -11359,6 +11401,10 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
             Panelmenu.add(btnKeterlambatanPresensi);
             jmlmenu++;
         }
+        if(var.gethitung_bor()==true){  
+            Panelmenu.add(btnHitungBor);                 
+            jmlmenu++;
+        }
     }
     private void isCariIsi() {
         jmlmenu=0;     
@@ -11396,7 +11442,12 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
                 jmlmenu++;
             }                
         }
-
+if(var.gethitung_bor()==true){  
+            if(btnHitungBor.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnHitungBor);                 
+                jmlmenu++;
+            }                
+        }
         if(var.getkamar_inap()==true){
             if(btnKamarInap.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnKamarInap);
