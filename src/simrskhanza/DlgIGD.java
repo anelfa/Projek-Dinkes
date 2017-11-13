@@ -2652,9 +2652,18 @@ if (var.getkode()=="Admin Utama")
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if (var.getkode()=="Admin Utama")
+        {
+        username=var.getkode();
+        }
+        else{
+        username=Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode());
+        }
         for(i=0;i<tbPetugas.getRowCount();i++){ 
             if(tbPetugas.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("reg_periksa","no_rawat",tbPetugas.getValueAt(i,2).toString());
+                Sequel.menyimpan("reg_hapus","'"+tbPetugas.getValueAt(i,2).toString()+"','"+tbPetugas.getValueAt(i,7).toString()+"','"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"','"+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+"','"+username+"'","No.Rawat");
+                
             }
         } 
         tampil();
