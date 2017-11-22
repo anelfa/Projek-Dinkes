@@ -299,7 +299,7 @@ private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                         totalx+"','"+tabModeRwJlDr.getValueAt(r,8).toString().replaceAll("'","`")+"','','','','','','','','',''","Rekap Nota Pembayaran"); 
                     }              
                 }
-                Valid.panggilUrl("billing/LaporanBilling2.php?petugas="+var.getkode().replaceAll(" ","_")+"&ttl="+totalx);
+                Valid.panggilUrlWebService("billing/LaporanBilling2.php?petugas="+var.getkode().replaceAll(" ","_")+"&ttl="+totalx);
         }
         this.setCursor(Cursor.getDefaultCursor());
 }//GEN-LAST:event_BtnPrintActionPerformed
