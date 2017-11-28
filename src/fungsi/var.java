@@ -21,7 +21,7 @@ public final class var {
      private final sekuel Sequel=new sekuel();
     private static String userea="",kode="",kdbangsal="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
-    private static boolean admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
+    private static boolean apotek=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
             tindakan_ralan=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
             resep_pulang=false,pasien_meninggal=false,diet_pasien=false,kelahiran_bayi=false,periksa_lab=false,periksa_radiologi=false,
             kasir_ralan=false,deposit_pasien=false,piutang_pasien=false,peminjaman_berkas=false,barcode=false,presensi_harian=false,
@@ -322,6 +322,7 @@ public final class var {
                         var.petugas=true;
                         var.pasien=true;
                         var.registrasi=true;
+                        var.apotek=true;
                         var.tindakan_ralan=true;
                         var.kamar_inap=true;
                         var.tindakan_ranap=true;
@@ -553,6 +554,7 @@ public final class var {
                         rs2.beforeFirst();
                         rs2.next();
                         var.kode=user;
+                        var.apotek=rs2.getBoolean("apotek");
                         var.penyakit=rs2.getBoolean("penyakit");
                         var.obat_penyakit=rs2.getBoolean("obat_penyakit");
                         var.dokter=rs2.getBoolean("dokter");
@@ -789,6 +791,7 @@ public final class var {
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         var.kode="";                  
                         var.penyakit= false;
+                        var.apotek= false;
                         var.obat_penyakit= false;
                         var.dokter= false;
                         var.jadwal_praktek= false;
@@ -1062,7 +1065,8 @@ public final class var {
     public static boolean getjadwal_praktek(){return var.jadwal_praktek;} 
     public static boolean getpetugas(){return var.petugas;} 
     public static boolean getpasien(){return var.pasien;} 
-    public static boolean getregistrasi(){return var.registrasi;} 
+    public static boolean getregistrasi(){return var.registrasi;}
+    public static boolean getapotek(){return var.apotek;}
     public static boolean gettindakan_ralan(){return var.tindakan_ralan;} 
     public static boolean getkamar_inap(){return var.kamar_inap;} 
     public static boolean gettindakan_ranap(){return var.tindakan_ranap;} 

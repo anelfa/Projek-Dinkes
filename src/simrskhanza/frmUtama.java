@@ -237,6 +237,7 @@ import tranfusidarah.UTDPenyerahanDarah;
 import tranfusidarah.UTDStokDarah;
 import viabarcode.DlgBarcodeRalan;
 import viabarcode.DlgBarcodeRanap;
+import apotek.DlgApotek;
 
 
 /**
@@ -5021,7 +5022,7 @@ public class frmUtama extends javax.swing.JFrame {
                     lblUser.setText("Admin Utama");
                 }else if(var.getjml2()>=1){  
                     BtnMenu.setEnabled(true);
-					frmUtama.cobaa=Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode());
+                    frmUtama.cobaa=Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode());
                     DlgLogin.dispose();
                     BtnLog.setText("Log Out");
                     MnLogin.setText("Log Out");
@@ -5035,7 +5036,8 @@ public class frmUtama extends javax.swing.JFrame {
                     btnToolRad.setEnabled(var.getperiksa_radiologi());
                     btnToolIGD.setEnabled(var.getigd());                    
                     btnToolBcdRalan.setEnabled(var.getbarcoderalan());
-                    btnToolBcdRanap.setEnabled(var.getbarcoderanap());   
+                    btnToolBcdRanap.setEnabled(var.getbarcoderanap());
+                     BtnToolApotek.setEnabled(var.getapotek());    
                     Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");
                 }else if((var.getjml1()==0)&&(var.getjml2()==0)){
                     JOptionPane.showMessageDialog(null,"Maaf, Gagal login. ID User atau password ada yang salah ...!");
@@ -8462,8 +8464,9 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
 
     private void BtnToolApotekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolApotekActionPerformed
           this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgDaftarPermintaanResep daftar=new DlgDaftarPermintaanResep(null,false);
-        daftar.emptTeks();
+    //    DlgDaftarPermintaanResep daftar=new DlgDaftarPermintaanResep(null,false);
+    DlgApotek daftar=new DlgApotek(null,false);   
+    daftar.emptTeks();
         daftar.isCek();
         daftar.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         daftar.setLocationRelativeTo(PanelUtama);
