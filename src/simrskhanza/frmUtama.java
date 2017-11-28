@@ -225,6 +225,7 @@ import setting.DlgSetHargaObatRalan;
 import setting.DlgSetHargaObatRanap;
 import setting.DlgSetKeterlambatan;
 import setting.DlgSetNota;
+import setting.DlgSetDatabase;
 import smsui.frmSmsView;
 import tranfusidarah.UTDCariPenyerahanDarah;
 import tranfusidarah.UTDDonor;
@@ -623,6 +624,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetAntrian = new widget.ButtonBig();
         btnHitungBor = new widget.ButtonBig();
         btnHitungAlos = new widget.ButtonBig();
+        btnSetDatabase = new widget.ButtonBig();
         tanggal = new widget.Tanggal();
         btnDataPenjualan = new widget.ButtonBig();
         btnInputPenjualan = new widget.ButtonBig();
@@ -3986,6 +3988,19 @@ public class frmUtama extends javax.swing.JFrame {
         });
         Panelmenu.add(btnHitungAlos);
 
+        btnSetDatabase.setForeground(new java.awt.Color(40, 70, 50));
+        btnSetDatabase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047007_02.png"))); // NOI18N
+        btnSetDatabase.setText("Seting Database");
+        btnSetDatabase.setIconTextGap(0);
+        btnSetDatabase.setName("btnSetDatabase"); // NOI18N
+        btnSetDatabase.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetDatabase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetDatabaseActionPerformed(evt);
+            }
+        });
+        Panelmenu.add(btnSetDatabase);
+
         scrollPane2.setViewportView(Panelmenu);
 
         panelMenu.add(scrollPane2, java.awt.BorderLayout.CENTER);
@@ -3994,7 +4009,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08/11/2017" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28/11/2017" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -8508,6 +8523,17 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnHitungAlosActionPerformed
 
+    private void btnSetDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetDatabaseActionPerformed
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSetDatabase aplikasi=new DlgSetDatabase(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor()); // TODO add your handling code here:
+    }//GEN-LAST:event_btnSetDatabaseActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -8742,6 +8768,7 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
     private widget.ButtonBig btnSetAntrian;
     private widget.ButtonBig btnSetBiayaHarian;
     private widget.ButtonBig btnSetBiayaMasukSekali;
+    private widget.ButtonBig btnSetDatabase;
     private widget.ButtonBig btnSetHargaKamar;
     private widget.ButtonBig btnSetObatRalan;
     private widget.ButtonBig btnSetObatRanap;
@@ -10207,7 +10234,10 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
                 Panelmenu.add(btnUser);
                 jmlmenu++;
             }
-
+            if(var.getuser()==true){
+                Panelmenu.add(btnSetDatabase);
+                jmlmenu++;
+            }
             if(var.gettracer_login()==true){
                 Panelmenu.add(btnTracker);
                 jmlmenu++;
@@ -12968,6 +12998,12 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
                 jmlmenu++;
             }                
         }
+        if(var.getuser()==true){
+            if(btnSetDatabase.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSetDatabase);
+                jmlmenu++;
+            }                
+        }
 
         if(var.gettracer_login()==true){
             if(btnTracker.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
@@ -13073,5 +13109,6 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
             }                
         }
     }
+    
 
 }
