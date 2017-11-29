@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>KhanzaHMS</comment>
-<entry key="HOST">90XW9tIevgxN7fbS5izbFw==</entry>
-<entry key="PAS">mYdBO65wWCGRlRk2loclSg==</entry>
-<entry key="DATABASE">bIBdjPrQdWqxrtmoQKXo5Q==</entry>
-<entry key="USER">OEYtNjoAm2iVAgvisKryQw==</entry>
+<entry key="HOST">/6u20r9hqwtxAoeFpNE+gg==</entry>
+<entry key="PAS">wLV3sgaCJbgZSg2N/0ITwA==</entry>
+<entry key="DATABASE">kCYAlhQfyx7HHkITnH1kO06/Ckmz/2FCvTLm8AnFQTo=</entry>
+<entry key="USER">SCOzEXw/3oN3wj1o1fe+7w==</entry>
 <entry key="PORT">/ot+b5hfzNwo8HyiQIvchg==</entry>
 </properties>

@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import setting.DlgSetDatabase;
+import static setting.DlgSetDatabase.decryptAES;
 
 /**
  *
@@ -20,14 +22,16 @@ public final class koneksiDB {
     private static Connection connection=null;
     private static final Properties prop = new Properties();  
     private static final MysqlDataSource dataSource=new MysqlDataSource();
-    private static String caricepat="";
+    private static String caricepat="",kunciEnkripsi = "",hostEn="",databaseEn="",portEn="",userEn="",pasEn="",
+                    hostDe="",databaseDe="",portDe="",userDe="",pasDe=""; ;
     public static Connection condb(){      
         if(connection == null){
             try{
-                prop.loadFromXML(new FileInputStream("setting/database.xml"));
-                dataSource.setURL("jdbc:mysql://"+prop.getProperty("HOST")+":"+prop.getProperty("PORT")+"/"+prop.getProperty("DATABASE")+"?zeroDateTimeBehavior=convertToNull");
-                dataSource.setUser(prop.getProperty("USER"));
-                dataSource.setPassword(prop.getProperty("PAS"));
+                kunciEnkripsi="thama";
+                prop.loadFromXML(new FileInputStream("setting/config.xml"));
+                dataSource.setURL("jdbc:mysql://"+decryptAES(prop.getProperty("HOST"),kunciEnkripsi)+":"+decryptAES(prop.getProperty("PORT"),kunciEnkripsi)+"/"+decryptAES(prop.getProperty("DATABASE"),kunciEnkripsi)+"?zeroDateTimeBehavior=convertToNull");
+                dataSource.setUser(decryptAES(prop.getProperty("USER"),kunciEnkripsi));
+                dataSource.setPassword(decryptAES(prop.getProperty("PAS"),kunciEnkripsi));
                 connection=dataSource.getConnection();       
                 System.out.println("Koneksi Berhasil. Sorry bro loading, silahkan baca dulu.... \n\n"+
                         "	Software ini adalah Software Menejemen Rumah Sakit/Klinik/\n" +
@@ -48,7 +52,9 @@ public final class koneksiDB {
                         "#   |____/|___||_|  |_||_| \\_\\|____/  |_|\\_\\|_| |_| \\__,_||_| |_|/___|\\__,_|\n" +
                         "#                                                                           ");
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null,"Koneksi Putus : "+e);
+  
+ JOptionPane.showMessageDialog(null,"Koneksi Putus : "+e);
+ 
             }
         }
         return connection;        

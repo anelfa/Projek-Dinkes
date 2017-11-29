@@ -5,6 +5,7 @@
  */
 package simrskhanza;
 
+import fungsi.koneksiDB;
 import java.io.FileInputStream;
 import java.util.Properties;
 import usu.widget.util.WidgetUtilities;
@@ -53,6 +54,14 @@ public static String version;
         } catch (Exception ex) {
          ex.printStackTrace();
     }
+         }
+         if(koneksiDB.condb() == null){
+              String[] run = {"java","-jar","updater/SetKoneksiServer.jar"};
+        try {
+            Runtime.getRuntime().exec(run);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
          }
          else
              {

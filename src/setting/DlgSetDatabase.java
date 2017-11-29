@@ -19,6 +19,7 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -104,10 +105,11 @@ private static byte[] konversiKeByte(String kunci) {
      * @param modal */
     public DlgSetDatabase(java.awt.Frame parent, boolean modal) throws Exception {
         
-        super(parent, modal);
+        super();
         initComponents();
         this.setLocation(10,10);
         setSize(457,249);
+//this.setSize(screen.width,screen.height);
 
         Object[] row={"ID Admin",
                       "Password"};
@@ -116,12 +118,13 @@ private static byte[] konversiKeByte(String kunci) {
         };
 
         try {
-            prop.loadFromXML(new FileInputStream("setting/test.xml"));
+            prop.loadFromXML(new FileInputStream("setting/config.xml"));
              
             
         } catch (Exception e) {
             System.out.println("Notif Setting : "+e);
         }
+        
         kunciEnkripsi="thama";
         hostDe = decryptAES(prop.getProperty("HOST"), kunciEnkripsi);
         databaseDe = decryptAES(prop.getProperty("DATABASE"), kunciEnkripsi);
@@ -136,8 +139,11 @@ private static byte[] konversiKeByte(String kunci) {
         TPassword.setText(pasDe);
         
         //THost.setDocument(new batasInput((byte)30).getKata(THost));
+        
     }
+ private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
 
+   
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -147,26 +153,25 @@ private static byte[] konversiKeByte(String kunci) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        internalFrame1 = new widget.InternalFrame();
-        panelGlass7 = new widget.panelisi();
-        jLabel3 = new widget.Label();
+        widget.InternalFrame internalFrame2 = new widget.InternalFrame();
+        internalFrame3 = new widget.InternalFrame();
+        panelGlass1 = new usu.widget.glass.PanelGlass();
+        jLabel11 = new widget.Label();
         TPassword = new widget.TextBox();
-        jLabel5 = new widget.Label();
+        jLabel12 = new widget.Label();
         THost = new widget.TextBox();
-        jLabel6 = new widget.Label();
+        jLabel13 = new widget.Label();
         TDatabase = new widget.TextBox();
-        jLabel7 = new widget.Label();
-        jLabel8 = new widget.Label();
+        jLabel14 = new widget.Label();
+        jLabel15 = new widget.Label();
         TPort = new widget.TextBox();
         TUser = new widget.TextBox();
-        panelGlass5 = new widget.panelisi();
         BtnSimpan = new widget.Button();
-        BtnEdit = new widget.Button();
         BtnKeluar = new widget.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setUndecorated(true);
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -175,22 +180,33 @@ private static byte[] konversiKeByte(String kunci) {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.BorderLayout(110, 100));
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Setup Database Server ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
-        internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
-        internalFrame1.setName("internalFrame1"); // NOI18N
-        internalFrame1.setPreferredSize(new java.awt.Dimension(65, 56));
-        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+        internalFrame2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(80, 120, 40)));
+        internalFrame2.setMaximumSize(new java.awt.Dimension(400, 400));
+        internalFrame2.setMinimumSize(new java.awt.Dimension(400, 400));
+        internalFrame2.setName("internalFrame2"); // NOI18N
+        internalFrame2.setWarnaAtas(new java.awt.Color(100, 140, 60));
+        internalFrame2.setWarnaBawah(new java.awt.Color(100, 140, 60));
+        internalFrame2.setLayout(null);
 
-        panelGlass7.setName("panelGlass7"); // NOI18N
-        panelGlass7.setPreferredSize(new java.awt.Dimension(44, 180));
-        panelGlass7.setLayout(null);
+        internalFrame3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(100, 125, 90), 1, true), ".: Setting Database Server :.", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame3.setName("internalFrame3"); // NOI18N
+        internalFrame3.setWarnaAtas(new java.awt.Color(195, 215, 170));
+        internalFrame3.setWarnaBawah(new java.awt.Color(245, 255, 220));
+        internalFrame3.setLayout(null);
 
-        jLabel3.setText("Password :");
-        jLabel3.setName("jLabel3"); // NOI18N
-        jLabel3.setPreferredSize(new java.awt.Dimension(55, 14));
-        panelGlass7.add(jLabel3);
-        jLabel3.setBounds(0, 130, 65, 23);
+        panelGlass1.setBackground(java.awt.Color.lightGray);
+        panelGlass1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(145, 185, 145)));
+        panelGlass1.setOpaqueImage(false);
+        panelGlass1.setRound(false);
+        panelGlass1.setLayout(null);
+
+        jLabel11.setText("Password :");
+        jLabel11.setName("jLabel11"); // NOI18N
+        jLabel11.setPreferredSize(new java.awt.Dimension(55, 14));
+        panelGlass1.add(jLabel11);
+        jLabel11.setBounds(0, 130, 65, 23);
 
         TPassword.setHighlighter(null);
         TPassword.setName("TPassword"); // NOI18N
@@ -199,13 +215,13 @@ private static byte[] konversiKeByte(String kunci) {
                 TPasswordKeyPressed(evt);
             }
         });
-        panelGlass7.add(TPassword);
+        panelGlass1.add(TPassword);
         TPassword.setBounds(70, 130, 260, 23);
 
-        jLabel5.setText("Host : ");
-        jLabel5.setName("jLabel5"); // NOI18N
-        panelGlass7.add(jLabel5);
-        jLabel5.setBounds(0, 12, 69, 23);
+        jLabel12.setText("Host : ");
+        jLabel12.setName("jLabel12"); // NOI18N
+        panelGlass1.add(jLabel12);
+        jLabel12.setBounds(0, 12, 69, 23);
 
         THost.setHighlighter(null);
         THost.setName("THost"); // NOI18N
@@ -219,13 +235,13 @@ private static byte[] konversiKeByte(String kunci) {
                 THostKeyPressed(evt);
             }
         });
-        panelGlass7.add(THost);
+        panelGlass1.add(THost);
         THost.setBounds(70, 10, 260, 23);
 
-        jLabel6.setText("Database : ");
-        jLabel6.setName("jLabel6"); // NOI18N
-        panelGlass7.add(jLabel6);
-        jLabel6.setBounds(0, 40, 69, 23);
+        jLabel13.setText("Database : ");
+        jLabel13.setName("jLabel13"); // NOI18N
+        panelGlass1.add(jLabel13);
+        jLabel13.setBounds(0, 40, 69, 23);
 
         TDatabase.setHighlighter(null);
         TDatabase.setName("TDatabase"); // NOI18N
@@ -234,18 +250,18 @@ private static byte[] konversiKeByte(String kunci) {
                 TDatabaseKeyPressed(evt);
             }
         });
-        panelGlass7.add(TDatabase);
+        panelGlass1.add(TDatabase);
         TDatabase.setBounds(70, 40, 260, 23);
 
-        jLabel7.setText("Port : ");
-        jLabel7.setName("jLabel7"); // NOI18N
-        panelGlass7.add(jLabel7);
-        jLabel7.setBounds(0, 70, 69, 23);
+        jLabel14.setText("Port : ");
+        jLabel14.setName("jLabel14"); // NOI18N
+        panelGlass1.add(jLabel14);
+        jLabel14.setBounds(0, 70, 69, 23);
 
-        jLabel8.setText("User : ");
-        jLabel8.setName("jLabel8"); // NOI18N
-        panelGlass7.add(jLabel8);
-        jLabel8.setBounds(0, 100, 69, 23);
+        jLabel15.setText("User : ");
+        jLabel15.setName("jLabel15"); // NOI18N
+        panelGlass1.add(jLabel15);
+        jLabel15.setBounds(0, 100, 69, 23);
 
         TPort.setHighlighter(null);
         TPort.setName("TPort"); // NOI18N
@@ -254,7 +270,7 @@ private static byte[] konversiKeByte(String kunci) {
                 TPortKeyPressed(evt);
             }
         });
-        panelGlass7.add(TPort);
+        panelGlass1.add(TPort);
         TPort.setBounds(70, 70, 260, 23);
 
         TUser.setHighlighter(null);
@@ -264,14 +280,11 @@ private static byte[] konversiKeByte(String kunci) {
                 TUserKeyPressed(evt);
             }
         });
-        panelGlass7.add(TUser);
+        panelGlass1.add(TUser);
         TUser.setBounds(70, 100, 260, 23);
 
-        internalFrame1.add(panelGlass7, java.awt.BorderLayout.PAGE_START);
-
-        panelGlass5.setName("panelGlass5"); // NOI18N
-        panelGlass5.setPreferredSize(new java.awt.Dimension(55, 55));
-        panelGlass5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        internalFrame3.add(panelGlass1);
+        panelGlass1.setBounds(-1, 30, 342, 170);
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpan.setMnemonic('S');
@@ -289,26 +302,8 @@ private static byte[] konversiKeByte(String kunci) {
                 BtnSimpanKeyPressed(evt);
             }
         });
-        panelGlass5.add(BtnSimpan);
-
-        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
-        BtnEdit.setText("Ganti");
-        BtnEdit.setToolTipText("Alt+G");
-        BtnEdit.setIconTextGap(3);
-        BtnEdit.setName("BtnEdit"); // NOI18N
-        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEditActionPerformed(evt);
-            }
-        });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnEditKeyPressed(evt);
-            }
-        });
-        panelGlass5.add(BtnEdit);
+        internalFrame3.add(BtnSimpan);
+        BtnSimpan.setBounds(70, 200, 100, 30);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -327,18 +322,16 @@ private static byte[] konversiKeByte(String kunci) {
                 BtnKeluarKeyPressed(evt);
             }
         });
-        panelGlass5.add(BtnKeluar);
+        internalFrame3.add(BtnKeluar);
+        BtnKeluar.setBounds(180, 200, 100, 30);
 
-        internalFrame1.add(panelGlass5, java.awt.BorderLayout.PAGE_END);
+        internalFrame2.add(internalFrame3);
+        internalFrame3.setBounds(2, 15, 340, 240);
 
-        getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(internalFrame2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void TPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasswordKeyPressed
-   //     Valid.pindah(evt,BtnSimpan,TNm);
-}//GEN-LAST:event_TPasswordKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
 //AES_ENCRYPT
@@ -362,6 +355,8 @@ private static byte[] konversiKeByte(String kunci) {
         FileOutputStream fileOut = new FileOutputStream(file);
         properties.storeToXML(fileOut, "KhanzaHMS");
         fileOut.close();
+         //JOptionPane.showMessageDialog(null, "Seting Telah Disimpan");
+         System.exit(0);
       }catch(FileNotFoundException e)
       {
           e.printStackTrace();
@@ -381,68 +376,16 @@ private static byte[] konversiKeByte(String kunci) {
         }
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
-    private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-      try{
-         kunciEnkripsi="thama";
-       hostEn = encryptAES(THost.getText(), kunciEnkripsi);
-         databaseEn = encryptAES(TDatabase.getText(), kunciEnkripsi);
-         portEn = encryptAES(TPort.getText(), kunciEnkripsi);
-         userEn = encryptAES(TUser.getText(), kunciEnkripsi);
-         pasEn = encryptAES(TPassword.getText(), kunciEnkripsi);
-        Properties properties =new Properties();
-        properties.setProperty("HOST",hostEn);
-        properties.setProperty("DATABASE",databaseEn);
-        properties.setProperty("PORT",portEn);
-        properties.setProperty("USER",userEn);
-        properties.setProperty("PAS",pasEn);
-        File file = new File("setting/config.xml");
-        FileOutputStream fileOut = new FileOutputStream(file);
-        properties.storeToXML(fileOut, "KhanzaHMS");
-        fileOut.close();
-      }catch(FileNotFoundException e)
-      {
-          e.printStackTrace();
-      }catch(IOException e)
-      {
-          e.printStackTrace();
-      } catch (Exception ex) {
-            Logger.getLogger(DlgSetDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        
-        /*  if(TPassword.getText().trim().equals("")){
-            Valid.textKosong(TPassword,"kode jabatan");
-        }else if(TNm.getText().trim().equals("")){
-            Valid.textKosong(TNm,"nama jabatan");
-        }else{
-            Sequel.queryu("delete from admin");
-            Sequel.menyimpan("admin","AES_ENCRYPT('"+TPassword.getText()+"','nur'),AES_ENCRYPT('"+TNm.getText()+"','windi')","Kode Admin");
-            if(tabMode.getRowCount()!=0){tampil();}
-            emptTeks();
-        }*/
-}//GEN-LAST:event_BtnEditActionPerformed
-
-    private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            BtnEditActionPerformed(null);
-        }else{
-      //      Valid.pindah(evt, BtnHapus, BtnKeluar);
-        }
-}//GEN-LAST:event_BtnEditKeyPressed
-
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        if(tabMode.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, data admin tidak boleh kosong ...!!!!");
-            TPassword.requestFocus();
-        }else if(! (tabMode.getRowCount()==0)) {
+       
             dispose();
-        }
+        
 }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
-        }else{Valid.pindah(evt,BtnEdit,BtnKeluar);}
+        }else{}
 }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -453,12 +396,20 @@ private static byte[] konversiKeByte(String kunci) {
        // tampil();
     }//GEN-LAST:event_formWindowOpened
 
+    private void TPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasswordKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TPasswordKeyPressed
+
+    private void THostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_THostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_THostActionPerformed
+
     private void THostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_THostKeyPressed
-       Valid.pindah(evt,BtnSimpan,TDatabase);
+        // TODO add your handling code here:
     }//GEN-LAST:event_THostKeyPressed
 
     private void TDatabaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TDatabaseKeyPressed
-       Valid.pindah(evt,BtnSimpan,TPort); // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_TDatabaseKeyPressed
 
     private void TPortKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPortKeyPressed
@@ -468,10 +419,6 @@ private static byte[] konversiKeByte(String kunci) {
     private void TUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TUserKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_TUserKeyPressed
-
-    private void THostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_THostActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_THostActionPerformed
 
     /**
     * @param args the command line arguments
@@ -490,7 +437,6 @@ private static byte[] konversiKeByte(String kunci) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private widget.Button BtnEdit;
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
     private widget.TextBox TDatabase;
@@ -498,14 +444,13 @@ private static byte[] konversiKeByte(String kunci) {
     private widget.TextBox TPassword;
     private widget.TextBox TPort;
     private widget.TextBox TUser;
-    private widget.InternalFrame internalFrame1;
-    private widget.Label jLabel3;
-    private widget.Label jLabel5;
-    private widget.Label jLabel6;
-    private widget.Label jLabel7;
-    private widget.Label jLabel8;
-    private widget.panelisi panelGlass5;
-    private widget.panelisi panelGlass7;
+    private widget.InternalFrame internalFrame3;
+    private widget.Label jLabel11;
+    private widget.Label jLabel12;
+    private widget.Label jLabel13;
+    private widget.Label jLabel14;
+    private widget.Label jLabel15;
+    private usu.widget.glass.PanelGlass panelGlass1;
     // End of variables declaration//GEN-END:variables
 
 
@@ -525,15 +470,8 @@ private static byte[] konversiKeByte(String kunci) {
         }
     }
 
-    private void getData() {
-/*        int row=tbAdmin.getSelectedRow();
-        if(row!= -1){
-            String kode=tabMode.getValueAt(row,0).toString();
-            String nama=tabMode.getValueAt(row,1).toString();
-            TPassword.setText(kode);
-            TNm.setText(nama);
-        }*/
-    }
+ 
+    
 
     
 }
