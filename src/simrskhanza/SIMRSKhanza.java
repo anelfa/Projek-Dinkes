@@ -44,12 +44,17 @@ public static String version;
             }
             else
             {
+                
                 WidgetUtilities.invokeLater(() -> {
-           frmUtama utama=frmUtama.getInstance();
-           utama.isWall();
+                    main utama=new main();
+                     //hm = new main();
+                    utama.setVisible(true);
+         //  frmUtama utama=frmUtama.getInstance();
+           
+          // utama.isWall();
            //utama.setIconImage(new javax.swing.ImageIcon( getClass(). getResource("/picture/home.PNG")).getImage());
-           utama.setVisible(true);
-       });
+        //   utama.setVisible(true);
+             });
             }
         } catch (Exception ex) {
          ex.printStackTrace();
@@ -66,10 +71,13 @@ public static String version;
          else
              {
                 WidgetUtilities.invokeLater(() -> {
-           frmUtama utama=frmUtama.getInstance();
-           utama.isWall();
+                     main utama=new main();
+                     //hm = new main();
+                    utama.setVisible(true);
+       //    frmUtama utama=frmUtama.getInstance();
+         //  utama.isWall();
            //utama.setIconImage(new javax.swing.ImageIcon( getClass(). getResource("/picture/home.PNG")).getImage());
-           utama.setVisible(true);
+          // utama.setVisible(true);
        });
             }
              

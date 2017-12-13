@@ -8527,7 +8527,15 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
     }//GEN-LAST:event_btnHitungAlosActionPerformed
 
     private void btnSetDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetDatabaseActionPerformed
-            try {
+         
+        String[] run = {"java","-jar","updater/SetKoneksiServer.jar"};
+        try {
+            Runtime.getRuntime().exec(run);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.exit(0);
+        /*      try {
                 isTutup();
                 DlgHome.dispose();
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -8539,7 +8547,7 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
                 this.setCursor(Cursor.getDefaultCursor()); // TODO add your handling code here:
             } catch (Exception ex) {
                 Logger.getLogger(frmUtama.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } */
     }//GEN-LAST:event_btnSetDatabaseActionPerformed
 
     /**
