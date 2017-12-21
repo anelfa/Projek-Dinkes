@@ -44,6 +44,14 @@ public static String version;
             }
             else
             {
+                if(koneksiDB.condb() == null){
+             String[] run = {"java","-jar","updater/SetKoneksiServer.jar"};
+        try {
+            Runtime.getRuntime().exec(run);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+         }else{
                 
                 WidgetUtilities.invokeLater(() -> {
                     main utama=new main();
@@ -55,13 +63,13 @@ public static String version;
            //utama.setIconImage(new javax.swing.ImageIcon( getClass(). getResource("/picture/home.PNG")).getImage());
         //   utama.setVisible(true);
              });
-            }
+            }}
         } catch (Exception ex) {
          ex.printStackTrace();
     }
          }
-         if(koneksiDB.condb() == null){
-              String[] run = {"java","-jar","updater/SetKoneksiServer.jar"};
+       else  if(koneksiDB.condb() == null){
+             String[] run = {"java","-jar","updater/SetKoneksiServer.jar"};
         try {
             Runtime.getRuntime().exec(run);
         } catch (Exception ex) {

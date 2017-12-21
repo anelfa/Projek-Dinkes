@@ -2660,12 +2660,22 @@ if (var.getkode()=="Admin Utama")
         username=Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode());
         }
         for(i=0;i<tbPetugas.getRowCount();i++){ 
+         int quetion =   JOptionPane.showConfirmDialog(
+            null,
+            "Apakah Anda Ingin Menghapus Data Ini ?",
+            "Warning",
+            JOptionPane.YES_NO_OPTION);
+                 if(quetion == JOptionPane.YES_OPTION){   
             if(tbPetugas.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("reg_periksa","no_rawat",tbPetugas.getValueAt(i,2).toString());
-                Sequel.menyimpan("reg_hapus","'"+tbPetugas.getValueAt(i,2).toString()+"','"+tbPetugas.getValueAt(i,7).toString()+"','"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"','"+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+"','"+username+"'","No.Rawat");
-                
+                Sequel.menyimpan("reg_hapus","'"+tbPetugas.getValueAt(i,2).toString()+"','"+tbPetugas.getValueAt(i,7).toString()+"','"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"','"+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+"','"+username+"'","No.Rawat");  
             }
         } 
+                  else{}
+            
+        }
+                
+        
         tampil();
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed

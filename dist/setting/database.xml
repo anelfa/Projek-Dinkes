@@ -2,26 +2,23 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>KhanzaHMS</comment>
-    <entry key="HOST">10.50.150.96</entry>
-    <entry key="DATABASE">db_rsukramatjati_production</entry>
-    <entry key="PORT">3306</entry>
-    <entry key="USER">DbRsKji</entry>
-    <entry key="PAS">kji**</entry>
+    <entry key="HOSTWEBSERVICE">localhost</entry>
+    <entry key="PORTWEBSERVICE">80</entry>
+    <entry key="HYBRIDWEB">webapps</entry>
     <entry key="URLSERVERUPDATE">localhost/webapps/serverupdate</entry>
     <entry key="AUTOUPDATESISTEM">no</entry>
     <entry key="CARICEPAT">nonaktif</entry>
-    <entry key="HYBRIDWEB">webapps</entry>
     <entry key="ANTRIAN">sender</entry>
     <entry key="MENUTRANSPARAN">no</entry>
-    <entry key="URLAPIBPJS">http://10.50.150.20:9090/WsLokalRest_2.1</entry>
-    <entry key="SECRETKEYAPIBPJS">7IH3C91B3A</entry>
-    <entry key="CONSIDAPIBPJS">17643</entry>
-    <entry key="URLAPIAPLICARE">http://dvlp.bpjs-kesehatan.go.id:9080/aplicaresws</entry>
-    <entry key="SECRETKEYAPIAPLICARE">1112</entry>
-    <entry key="CONSIDAPIAPLICARE">1000</entry>
+    <entry key="URLAPIBPJS">http://api.bpjs-kesehatan.go.id/WsLokalRest_2.1</entry>
+    <entry key="SECRETKEYAPIBPJS">0000</entry>
+    <entry key="CONSIDAPIBPJS">1234</entry>
+    <entry key="URLAPIAPLICARE">http://api.bpjs-kesehatan.go.id/aplicaresws</entry>
+    <entry key="SECRETKEYAPIAPLICARE">0000</entry>
+    <entry key="CONSIDAPIAPLICARE">1234</entry>
     <entry key="KAMARAKTIFRANAP"></entry>
     <entry key="DOKTERAKTIFKASIRRALAN"></entry>
     <entry key="POLIAKTIFKASIRRALAN"></entry>
     <entry key="JADWALDOKTERDIREGISTRASI">no</entry>
-    <entry key="IPPRINTERTRACER">10.50.150.57/label2</entry>
+    <entry key="IPPRINTERTRACER">localhost/label</entry>
 </properties>
