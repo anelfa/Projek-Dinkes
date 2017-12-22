@@ -442,13 +442,7 @@ public class DlgPasien extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         } 
-        if (var.getkode()=="Admin Utama")
-        {
-        username=var.getkode();
-        }
-        else{
-        username=Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode());
-        }
+        
     }
     
 
@@ -2501,7 +2495,13 @@ private void tbPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
 private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
    // Tanggal tgl = new Tanggal();   
-   
+   if (var.getkode()=="Admin Utama")
+        {
+        username=var.getkode();
+        }
+        else{
+        username=Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode());
+        }
     if(TNo.getText().trim().equals("")){
             Valid.textKosong(TNo,"No.Rekam Medis");
         }else if(TNm.getText().trim().equals("")){
@@ -2716,7 +2716,14 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_BtnHapusKeyPressed
 
 private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if(TNo.getText().trim().equals("")){
+    if (var.getkode()=="Admin Utama")
+        {
+        username=var.getkode();
+        }
+        else{
+        username=Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode());
+        }   
+    if(TNo.getText().trim().equals("")){
             Valid.textKosong(TNo,"No.Rekam Medis");
         }else if(TNm.getText().trim().equals("")){
             Valid.textKosong(TNm,"nama pasien");

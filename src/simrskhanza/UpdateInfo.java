@@ -31,11 +31,13 @@ public class UpdateInfo extends JFrame{
     private JPanel pan2;
    
     public UpdateInfo(String info) {
-        Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+       
+        initComponents();
+         Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
         Dimension screensize=getSize();
         setLocation((screen.width-screensize.width)/2,
         (screen.height-screensize.height)/2)  ;
-        initComponents();
+      //  setLocationRelativeTo(this);
         infoPane.setText(info);
     }
 
@@ -81,7 +83,7 @@ public class UpdateInfo extends JFrame{
     }
     private void update()
     {
-        String[] run = {"java","-jar","updater/update.jar"};
+        String[] run = {"java","-jar","updater/updateNew.jar"};
         try {
             Runtime.getRuntime().exec(run);
         } catch (Exception ex) {
