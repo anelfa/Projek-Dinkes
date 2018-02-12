@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="null"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="555"
+		 columnSpacing="0"
+		 leftMargin="20"
+		 rightMargin="20"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.zoom" value="1.5" />
+	<property name="ireport.x" value="0" />
+	<property name="ireport.y" value="0" />
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<queryString><![CDATA[select no, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14 from temporary order by temp6 desc]]></queryString>
+
+	<field name="no" class="java.lang.Integer"/>
+	<field name="temp1" class="java.lang.String"/>
+	<field name="temp2" class="java.lang.String"/>
+	<field name="temp3" class="java.lang.String"/>
+	<field name="temp4" class="java.lang.String"/>
+	<field name="temp5" class="java.lang.String"/>
+	<field name="temp6" class="java.lang.String"/>
+	<field name="temp7" class="java.lang.String"/>
+	<field name="temp8" class="java.lang.String"/>
+	<field name="temp9" class="java.lang.String"/>
+	<field name="temp10" class="java.lang.String"/>
+	<field name="temp11" class="java.lang.String"/>
+	<field name="temp12" class="java.lang.String"/>
+	<field name="temp13" class="java.lang.String"/>
+	<field name="temp14" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="51"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="1"
+						y="10"
+						width="554"
+						height="23"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font fontName="Tahoma" size="11" isBold="false"/>
+					</textElement>
+				<text><![CDATA[DATA FREKUENSI PENYAKIT DI RAWAT INAP]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="50"
+						width="555"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="18"  isSplitAllowed="true" >
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="16"
+						width="555"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="0"
+						width="22"
+						height="16"
+						forecolor="#000000"
+						backcolor="#F0F0DC"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<text><![CDATA[ NO.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="22"
+						y="0"
+						width="75"
+						height="16"
+						forecolor="#000000"
+						backcolor="#F0F0DC"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<text><![CDATA[KODE PENYAKIT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="97"
+						y="0"
+						width="189"
+						height="16"
+						forecolor="#000000"
+						backcolor="#F0F0DC"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<text><![CDATA[NAMA PENYAKIT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="462"
+						y="0"
+						width="29"
+						height="16"
+						forecolor="#000000"
+						backcolor="#F0F0DC"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<text><![CDATA[LK]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="286"
+						y="0"
+						width="176"
+						height="16"
+						forecolor="#000000"
+						backcolor="#F0F0DC"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<text><![CDATA[CIRI-CIRI PENYAKIT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="518"
+						y="0"
+						width="37"
+						height="16"
+						forecolor="#000000"
+						backcolor="#F0F0DC"
+						key="staticText-1"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<text><![CDATA[JUMLAH]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="492"
+						y="0"
+						width="27"
+						height="16"
+						forecolor="#000000"
+						backcolor="#F0F0DC"
+						key="staticText-2"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<text><![CDATA[LK]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="16"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="97"
+						y="1"
+						width="189"
+						height="15"
+						key="textField"
+						stretchType="RelativeToBandHeight"/>
+					<box></box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{temp2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="22"
+						y="1"
+						width="75"
+						height="15"
+						key="textField"
+						stretchType="RelativeToBandHeight"/>
+					<box></box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{temp1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="461"
+						y="1"
+						width="29"
+						height="15"
+						key="textField"
+						stretchType="RelativeToBandHeight"/>
+					<box></box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{temp4}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="286"
+						y="1"
+						width="175"
+						height="15"
+						key="textField"
+						stretchType="RelativeToBandHeight"/>
+					<box></box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{temp3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="1"
+						width="21"
+						height="15"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$V{REPORT_COUNT}.toString()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="491"
+						y="1"
+						width="29"
+						height="15"
+						key="textField-1"
+						stretchType="RelativeToBandHeight"/>
+					<box></box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{temp5}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="521"
+						y="0"
+						width="29"
+						height="15"
+						key="textField-2"
+						stretchType="RelativeToBandHeight"/>
+					<box></box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{temp6}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="18"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="498"
+						y="3"
+						width="36"
+						height="15"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="328"
+						y="3"
+						width="170"
+						height="15"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement textAlignment="Right" lineSpacing="Single">
+						<font fontName="Tahoma" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Halaman " + $V{PAGE_NUMBER} + " dari "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy HH.mm.ss" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="3"
+						width="74"
+						height="15"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="158"
+						y="3"
+						width="87"
+						height="15"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+</box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$V{REPORT_COUNT}.toString()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="110"
+						y="3"
+						width="46"
+						height="15"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Right" lineSpacing="Single">
+						<font fontName="Tahoma" size="8" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Record :]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="0"
+						width="555"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="16"
+						width="555"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

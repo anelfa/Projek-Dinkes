@@ -35,8 +35,8 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
     private Connection koneksi=koneksiDB.condb();
-    private PreparedStatement ps,ps2,ps3,ps4;
-    private ResultSet rs,rs2,rs3,rs4;
+    private PreparedStatement ps,ps2,ps3,ps4,ps5,ps6;
+    private ResultSet rs,rs2,rs3,rs4,rs5,rs6;
     private String diagnosa="";
     
     /** Creates new form DlgProgramStudi
@@ -46,10 +46,10 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        tabMode=new DefaultTableModel(null,new Object[]{"Kode Penyakit","Nama Penyakit","Diagnosa Lain","Jumlah"}){
+        tabMode=new DefaultTableModel(null,new Object[]{"Kode Penyakit","Nama Penyakit","Diagnosa Lain","LK","PR","Jumlah"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class,java.lang.Object.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Object.class,java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -57,11 +57,10 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
              }
         };
         tbDokter.setModel(tabMode);
-
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int m = 0; m < 4; m++) {
+        for (int m = 0; m < 6; m++) {
             TableColumn column = tbDokter.getColumnModel().getColumn(m);
             if(m==0){
                 column.setPreferredWidth(100);
@@ -71,14 +70,19 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
                 column.setPreferredWidth(400);
             }else if(m==3){
                 column.setPreferredWidth(100);
+            }else if(m==4){
+                column.setPreferredWidth(100);
+            }else if(m==5){
+                column.setPreferredWidth(100);
             }
+            
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());   
         
-        tabMode2=new DefaultTableModel(null,new Object[]{"Kode Penyakit","Nama Penyakit","Diagnosa Lain","Jumlah"}){
+        tabMode2=new DefaultTableModel(null,new Object[]{"Kode Penyakit","Nama Penyakit","Diagnosa Lain","LK","PR","Jumlah"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class,java.lang.Object.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Object.class,java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -90,7 +94,7 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
         tbDokter2.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbDokter2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int m = 0; m < 4; m++) {
+        for (int m = 0; m < 6; m++) {
             TableColumn column = tbDokter2.getColumnModel().getColumn(m);
             if(m==0){
                 column.setPreferredWidth(100);
@@ -99,6 +103,10 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
             }else if(m==2){
                 column.setPreferredWidth(400);
             }else if(m==3){
+                column.setPreferredWidth(100);
+            }else if(m==4){
+                column.setPreferredWidth(100);
+            }else if(m==5){
                 column.setPreferredWidth(100);
             }
         }
@@ -131,7 +139,7 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
     }
     private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     private DlgCariPenyakit penyakit=new DlgCariPenyakit(null,false);
-    private int i=0;
+    private int i=0,a=0,b=0;
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -502,7 +510,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     tbDokter.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
                                     tbDokter.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
                                     tbDokter.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                    tbDokter.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Frekuensi Penyakit"); 
+                                    tbDokter.getValueAt(r,3).toString()+"','"+
+                                    tbDokter.getValueAt(r,4).toString()+"','"+
+                                    tbDokter.getValueAt(r,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Frekuensi Penyakit"); 
                 }
             }else if(TabRawat.getSelectedIndex()==1){
                 int row=tbDokter2.getRowCount();
@@ -511,7 +521,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     tbDokter2.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
                                     tbDokter2.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
                                     tbDokter2.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                    tbDokter2.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Frekuensi Penyakit"); 
+                                    tbDokter2.getValueAt(r,3).toString()+"','"+
+                                    tbDokter.getValueAt(r,4).toString()+"','"+
+                                    tbDokter.getValueAt(r,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Frekuensi Penyakit"); 
                 }
             }
             Valid.MyReport("rptFrekuensiPenyakitRanap.jrxml","report","[ Frekuensi Penyakit Di Rawat Inap ]",
@@ -2235,6 +2247,8 @@ private void ppGrafikTerkecilPieActionPerformed(java.awt.event.ActionEvent evt) 
                 ps.setString(1,"%"+kdpenyakit.getText()+"%");
                 ps.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+              //   ps.setString(4,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+               //   ps.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                 rs=ps.executeQuery();
                 while(rs.next()){
                     i=0;
@@ -2243,10 +2257,22 @@ private void ppGrafikTerkecilPieActionPerformed(java.awt.event.ActionEvent evt) 
                         "on pasien.no_rkm_medis=reg_periksa.no_rkm_medis and reg_periksa.no_rawat=diagnosa_pasien.no_rawat where "+
                         "diagnosa_pasien.status='Ranap' and diagnosa_pasien.prioritas='1' and reg_periksa.tgl_registrasi between ? and ? "+
                         "and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat");
+                     ps5=koneksi.prepareStatement(
+                        "select diagnosa_pasien.no_rawat from pasien inner join reg_periksa inner join diagnosa_pasien inner join kamar_inap "+
+                        "on pasien.no_rkm_medis=reg_periksa.no_rkm_medis and reg_periksa.no_rawat=diagnosa_pasien.no_rawat and reg_periksa.no_rawat=kamar_inap.no_rawat where "+
+                        "diagnosa_pasien.status='Ranap' and pasien.jk='L' and diagnosa_pasien.prioritas='1' and kamar_inap.tgl_keluar between ? and ? "+
+                        "and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat");
+                      ps6=koneksi.prepareStatement(
+                        "select diagnosa_pasien.no_rawat from pasien inner join reg_periksa inner join diagnosa_pasien inner join kamar_inap "+
+                        "on pasien.no_rkm_medis=reg_periksa.no_rkm_medis and reg_periksa.no_rawat=diagnosa_pasien.no_rawat and reg_periksa.no_rawat=kamar_inap.no_rawat where "+
+                        "diagnosa_pasien.status='Ranap' and pasien.jk='P' and diagnosa_pasien.prioritas='1' and kamar_inap.tgl_keluar between ? and ? "+
+                        "and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat");
                     try {
                         ps2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                         ps2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                         ps2.setString(3,rs.getString("kd_penyakit"));
+                     //    ps2.setString(4,rs.getString("kd_penyakit"));
+                      //    ps2.setString(5,rs.getString("kd_penyakit"));
                         rs2=ps2.executeQuery();
                         Sequel.queryu("delete from temporary_surveilens_penyakit");
                         while(rs2.next()){
@@ -2296,6 +2322,20 @@ private void ppGrafikTerkecilPieActionPerformed(java.awt.event.ActionEvent evt) 
                             }                                                        
                         }
                         i=rs2.getRow();
+                         a=0;
+               ps5.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+               ps5.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+               ps5.setString(3,rs.getString("kd_penyakit"));
+               rs5=ps5.executeQuery();
+               rs5.last();
+               if(rs5.getRow()>0) a=rs5.getRow();
+               b=0;
+               ps6.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+               ps6.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+               ps6.setString(3,rs.getString("kd_penyakit"));
+               rs6=ps6.executeQuery();
+               rs6.last();
+               if(rs6.getRow()>0) b=rs6.getRow();
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
                     } finally{
@@ -2306,7 +2346,7 @@ private void ppGrafikTerkecilPieActionPerformed(java.awt.event.ActionEvent evt) 
                             ps2.close();
                         }
                     }
-                    tabMode.addRow(new Object[]{rs.getString("kd_penyakit"),rs.getString("penyakit"),diagnosa,i});                  
+                    tabMode.addRow(new Object[]{rs.getString("kd_penyakit"),rs.getString("penyakit"),rs.getString("penyakit"),a,b,i});                  
                 } 
                 label9.setText("      Record : "+tabMode.getRowCount());   
             } catch (Exception e) {
@@ -2335,10 +2375,17 @@ private void ppGrafikTerkecilPieActionPerformed(java.awt.event.ActionEvent evt) 
                     "and reg_periksa.no_rawat=kamar_inap.no_rawat where diagnosa_pasien.status='Ranap' and diagnosa_pasien.prioritas='1' and "+
                     "penyakit.kd_penyakit like ? and kamar_inap.tgl_keluar between ? and ? "+
                     "group by penyakit.kd_penyakit order by penyakit.kd_penyakit");
+             ps5=koneksi.prepareStatement(
+                        "select diagnosa_pasien.no_rawat from pasien inner join reg_periksa inner join diagnosa_pasien inner join kamar_inap "+
+                        "on pasien.no_rkm_medis=reg_periksa.no_rkm_medis and reg_periksa.no_rawat=diagnosa_pasien.no_rawat and reg_periksa.no_rawat=kamar_inap.no_rawat where "+
+                        "diagnosa_pasien.status='Ranap' and pasien.jk='L' and diagnosa_pasien.prioritas='1' and kamar_inap.tgl_keluar between ? and ? "+
+                        "and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat");
             try {
                 ps.setString(1,"%"+kdpenyakit.getText()+"%");
                 ps.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                ps.setString(4,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                ps.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                 rs=ps.executeQuery();
                 while(rs.next()){
                     i=0;
@@ -2351,6 +2398,8 @@ private void ppGrafikTerkecilPieActionPerformed(java.awt.event.ActionEvent evt) 
                         ps2.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                         ps2.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                         ps2.setString(3,rs.getString("kd_penyakit"));
+                         ps2.setString(4,rs.getString("kd_penyakit"));
+                          ps2.setString(5,rs.getString("kd_penyakit"));
                         rs2=ps2.executeQuery();
                         Sequel.queryu("delete from temporary_surveilens_penyakit");
                         while(rs2.next()){
@@ -2400,6 +2449,13 @@ private void ppGrafikTerkecilPieActionPerformed(java.awt.event.ActionEvent evt) 
                             }                                                        
                         }
                         i=rs2.getRow();
+                         a=0;
+               ps5.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+               ps5.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+               ps5.setString(3,rs.getString("kd_penyakit"));
+               rs5=ps5.executeQuery();
+               rs5.last();
+               if(rs5.getRow()>0) a=rs5.getRow();
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
                     } finally{
@@ -2410,7 +2466,7 @@ private void ppGrafikTerkecilPieActionPerformed(java.awt.event.ActionEvent evt) 
                             ps2.close();
                         }
                     }
-                    tabMode2.addRow(new Object[]{rs.getString("kd_penyakit"),rs.getString("penyakit"),diagnosa,i});                  
+                    tabMode2.addRow(new Object[]{rs.getString("kd_penyakit"),rs.getString("penyakit"),a,rs.getString("penyakit"),diagnosa,i});                  
                 } 
                 label9.setText("      Record : "+tabMode2.getRowCount());   
             } catch (Exception e) {
