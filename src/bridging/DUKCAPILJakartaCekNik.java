@@ -37,7 +37,6 @@ public class DUKCAPILJakartaCekNik {
     }
     
     public void tampil(String nik) {
-        BPJSApi api=new BPJSApi();
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             String URL = prop.getProperty("URLDUKCAPILJAKARTA")+"?usernm="+prop.getProperty("USERDUKCAPILJAKARTA")+"&pass="+prop.getProperty("PASSDUKCAPILJAKARTA")+"&app=SILaporLahir&pget=Kelahiran&pusr=admin&proc=GETNIK&nik="+nik+"&pkey="+Sequel.cariIsi("select md5(concat('"+prop.getProperty("VAR1DUKCAPILJAKARTA")+"',md5(date_format(current_date(),'%d%m%Y')),'"+prop.getProperty("VAR2DUKCAPILJAKARTA")+"'))");	
@@ -50,6 +49,7 @@ public class DUKCAPILJakartaCekNik {
             
             JSONObject xmlJSONObj = XML.toJSONObject(data);
             String jsonPrettyPrintString = xmlJSONObj.toString(4);
+            //System.out.println(jsonPrettyPrintString);
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(jsonPrettyPrintString);
             JsonNode nameNode = root.path("DATA");

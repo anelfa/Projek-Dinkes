@@ -4742,8 +4742,8 @@ Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
         writer.write(command);
     }
     
-    private void cetakStruk2(  String title, FileWriter writer) throws  IOException{
-           
+    private void cetakStruk2(  String title, FileWriter writer) {
+           try{
             String tgll= Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+TNoRw.getText()+"'");
            String status = Sequel.cariIsi("select stts_daftar from reg_periksa where no_rawat='"+TNoRw.getText()+"'");
             String tgllhr= Sequel.cariIsi("select tgl_lahir from pasien where no_rkm_medis='"+TNoRM.getText()+"'");
@@ -4785,7 +4785,9 @@ Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
             gantiBaris(writer);
             gantiBaris(writer);
             gantiBaris(writer);
-          
+           } catch (Exception ex) {
+            System.out.println("Notif : "+ex);
+        }
     }
     
     private void boltText(Writer writer){

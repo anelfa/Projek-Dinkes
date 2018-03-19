@@ -75,8 +75,8 @@ public class DlgPasien extends javax.swing.JDialog {
             umur="",namakeluarga="",no_peserta="",kelurahan="",kecamatan="",
             kabupaten="",pekerjaanpj="",alamatpj="",kelurahanpj="",kecamatanpj="",
             kabupatenpj="";
-    private PreparedStatement ps,ps2,pscariwilayah,pssetalamat,pskelengkapan;
-    private ResultSet rs;
+    private PreparedStatement ps3,ps,ps2,pscariwilayah,pssetalamat,pskelengkapan;
+    private ResultSet rs,rs3;
     private BPJSCekNIK cekViaBPJS=new BPJSCekNIK();
     private BPJSCekNoKartu cekViaBPJSKartu=new BPJSCekNoKartu();
      private DUKCAPILJakartaCekNik cekViaDukcapilJakarta=new DUKCAPILJakartaCekNik();
@@ -3224,7 +3224,8 @@ private void MnLaporanIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+TNo.getText()+"' ");
         }
 }//GEN-LAST:event_MnLaporanIGDActionPerformed
-
+ 
+      
 private void ppKelahiranBayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppKelahiranBayiActionPerformed
     if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -4175,11 +4176,11 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         cekViaBPJS.tampil(TKtp.getText());
         TNm.setText(cekViaBPJS.nama);
-        CmbJk.setSelectedItem(cekViaBPJS.jk);
-        TNoPeserta.setText(cekViaBPJS.nokartu);
-        Pekerjaan.setText(cekViaBPJS.pekerjaan);
-        TUmurTh.setText(cekViaBPJS.umur);
-        Valid.SetTgl(DTPLahir,cekViaBPJS.tgl_lahir);
+        CmbJk.setSelectedItem(cekViaBPJS.sex);
+        TNoPeserta.setText(cekViaBPJS.noKartu);
+        Pekerjaan.setText(cekViaBPJS.jenisPesertaketerangan);
+        TUmurTh.setText(cekViaBPJS.umurumurSekarang);
+        Valid.SetTgl(DTPLahir,cekViaBPJS.tglLahir);
         jPopupMenu2.setVisible(false);
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnViaBPJSNikActionPerformed
@@ -4188,11 +4189,11 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         cekViaBPJSKartu.tampil(TNoPeserta.getText());
         TNm.setText(cekViaBPJSKartu.nama);
-        CmbJk.setSelectedItem(cekViaBPJSKartu.jk);
+        CmbJk.setSelectedItem(cekViaBPJSKartu.sex);
         TKtp.setText(cekViaBPJSKartu.nik);
-        Pekerjaan.setText(cekViaBPJSKartu.pekerjaan);
-        TUmurTh.setText(cekViaBPJSKartu.umur);
-        Valid.SetTgl(DTPLahir,cekViaBPJSKartu.tgl_lahir);
+        Pekerjaan.setText(cekViaBPJSKartu.jenisPesertaketerangan);
+        TUmurTh.setText(cekViaBPJSKartu.umurumurSekarang);
+        Valid.SetTgl(DTPLahir,cekViaBPJSKartu.tglLahir);
         jPopupMenu2.setVisible(false);
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnViaBPJSNoKartuActionPerformed
@@ -5115,7 +5116,8 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         return tbPasien;
     }
     
-    private void isForm(){
+    public void isForm(){
+        
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,309));
@@ -5358,5 +5360,8 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                 }
             }
         }
+        
     }
+
+
 }

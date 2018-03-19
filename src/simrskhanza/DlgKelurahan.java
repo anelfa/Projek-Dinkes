@@ -133,12 +133,17 @@ public class DlgKelurahan extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Kelurahan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Kelurahan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
+        Scroll.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ScrollKeyPressed(evt);
+            }
+        });
 
         tbkelurahan.setAutoCreateRowSorter(true);
         tbkelurahan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
@@ -188,7 +193,6 @@ public class DlgKelurahan extends javax.swing.JDialog {
 
         CMbTCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kelurahan","Kecamatan" }));
         CMbTCari.setName("CMbTCari"); // NOI18N
-        CMbTCari.setOpaque(false);
         CMbTCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CMbTCariActionPerformed(evt);
@@ -363,7 +367,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        Valid.hapusTable(tabMode,Nama,"kelurahan","nm_kel");
+         Valid.hapusTable(tabMode,Nama,"kelurahan","nm_kel");
         tampil();
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -470,6 +474,10 @@ public class DlgKelurahan extends javax.swing.JDialog {
     private void CMbTCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMbTCariActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CMbTCariActionPerformed
+
+    private void ScrollKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ScrollKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ScrollKeyPressed
 
     /**
     * @param args the command line arguments
