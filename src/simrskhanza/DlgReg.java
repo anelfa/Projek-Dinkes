@@ -1098,7 +1098,6 @@ tabMode2=new DefaultTableModel(null,new Object[]{
         BtnSimpan = new widget.Button();
         BtnSimpan1 = new widget.Button();
         BtnBatal = new widget.Button();
-        coba_api = new widget.Button();
         BtnEdit = new widget.Button();
         BtnHapus = new widget.Button();
         BtnPrint = new widget.Button();
@@ -2273,7 +2272,7 @@ tabMode2=new DefaultTableModel(null,new Object[]{
 
         TglSakit1.setEditable(false);
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-03-2018" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-03-2018" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -2321,7 +2320,7 @@ tabMode2=new DefaultTableModel(null,new Object[]{
 
         TglSakit2.setEditable(false);
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-03-2018" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-03-2018" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -2680,7 +2679,7 @@ tabMode2=new DefaultTableModel(null,new Object[]{
 
         DTPReg.setEditable(false);
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-03-2018" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-03-2018" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -2978,7 +2977,6 @@ tabMode2=new DefaultTableModel(null,new Object[]{
         ChkTracer.setBackground(new java.awt.Color(235, 255, 235));
         ChkTracer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
         ChkTracer.setForeground(new java.awt.Color(153, 0, 51));
-        ChkTracer.setSelected(true);
         ChkTracer.setBorderPainted(true);
         ChkTracer.setBorderPaintedFlat(true);
         ChkTracer.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -3123,7 +3121,7 @@ tabMode2=new DefaultTableModel(null,new Object[]{
 
         DTPReg1.setEditable(false);
         DTPReg1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-03-2018" }));
+        DTPReg1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-03-2018" }));
         DTPReg1.setDisplayFormat("dd-MM-yyyy");
         DTPReg1.setName("DTPReg1"); // NOI18N
         DTPReg1.setOpaque(false);
@@ -3392,7 +3390,6 @@ tabMode2=new DefaultTableModel(null,new Object[]{
         ChkTracer1.setBackground(new java.awt.Color(235, 255, 235));
         ChkTracer1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
         ChkTracer1.setForeground(new java.awt.Color(153, 0, 51));
-        ChkTracer1.setSelected(true);
         ChkTracer1.setBorderPainted(true);
         ChkTracer1.setBorderPaintedFlat(true);
         ChkTracer1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -3567,28 +3564,11 @@ tabMode2=new DefaultTableModel(null,new Object[]{
         });
         panelGlass6.add(BtnBatal);
 
-        coba_api.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        coba_api.setMnemonic('S');
-        coba_api.setText("Coba Api");
-        coba_api.setToolTipText("Alt+S");
-        coba_api.setName("coba_api"); // NOI18N
-        coba_api.setPreferredSize(new java.awt.Dimension(150, 30));
-        coba_api.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coba_apiActionPerformed(evt);
-            }
-        });
-        coba_api.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                coba_apiKeyPressed(evt);
-            }
-        });
-        panelGlass6.add(coba_api);
-
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
         BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
+        BtnEdit.setEnabled(false);
         BtnEdit.setName("BtnEdit"); // NOI18N
         BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
         BtnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -3699,7 +3679,7 @@ tabMode2=new DefaultTableModel(null,new Object[]{
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-03-2018" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-03-2018" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -3714,7 +3694,7 @@ tabMode2=new DefaultTableModel(null,new Object[]{
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-03-2018" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-03-2018" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6248,6 +6228,7 @@ if(Scroll.isShowing()==true)
         PanelInput1.setVisible(false);
         BtnSimpan.setVisible(true);
         BtnSimpan1.setVisible(false);
+        BtnHapus.setVisible(true);
 }
 else{
     ChkInput1.setSelected(true);
@@ -6255,6 +6236,7 @@ else{
      PanelInput.setVisible(false);
         PanelInput1.setVisible(true);
     BtnSimpan.setVisible(false);
+    BtnHapus.setVisible(false);
     isNumber2();
     
     if(TNoRM1.getText().trim().equals(""))
@@ -6699,15 +6681,6 @@ else{
     private void DokterPerujukKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DokterPerujukKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_DokterPerujukKeyPressed
-
-    private void coba_apiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coba_apiActionPerformed
-    konfirmasiKedatangan();
-// TODO add your handling code here:
-    }//GEN-LAST:event_coba_apiActionPerformed
-
-    private void coba_apiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_coba_apiKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_coba_apiKeyPressed
     
     /**
     * @param args the command line arguments
@@ -6881,7 +6854,6 @@ else{
     private widget.Button btnPenjab1;
     private widget.Button btnPenjab2;
     private javax.swing.ButtonGroup buttonGroup1;
-    private widget.Button coba_api;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame3;
     private widget.InternalFrame internalFrame4;
@@ -7584,7 +7556,7 @@ Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
         DTPCari2.setDate(new Date());
         BtnSimpan.setEnabled(var.getregistrasi());
         BtnHapus.setEnabled(var.getregistrasi());
-        BtnEdit.setEnabled(var.getregistrasi());
+      //  BtnEdit.setEnabled(var.getregistrasi());
         BtnPrint.setEnabled(var.getregistrasi());
         MnOperasi.setEnabled(var.getoperasi());
         MnKamarInap.setEnabled(var.getkamar_inap());
