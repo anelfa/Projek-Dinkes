@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>KhanzaHMS</comment>
+    <entry key="HOSTWEBSERVICE">localhost</entry>
+    <entry key="PORTWEBSERVICE">80</entry>
+    <entry key="HYBRIDWEB">webapps</entry>
+    <entry key="URLSERVERUPDATE">10.50.150.90/webapps/serverupdate</entry>
+    <entry key="AUTOUPDATESISTEM">no</entry>
+    <entry key="CARICEPAT">nonaktif</entry>
+    <entry key="ANTRIAN">sender</entry>
+    <entry key="MENUTRANSPARAN">no</entry>
+   <entry key="MENUTRANSPARAN">no</entry>
+    <entry key="URLAPIBPJS">http://10.50.150.20:9090/WsLokalRest_2.1</entry>
+    <entry key="SECRETKEYAPIBPJS">8cG0606137</entry>
+    <entry key="CONSIDAPIBPJS">12151</entry>
+    <entry key="URLAPIAPLICARE">http://api.bpjs-kesehatan.go.id/aplicaresws</entry>
+    <entry key="SECRETKEYAPIAPLICARE">8cG0606137</entry>
+    <entry key="CONSIDAPIAPLICARE">12151</entry>
+    <entry key="KAMARAKTIFRANAP"></entry>
+    <entry key="DOKTERAKTIFKASIRRALAN"></entry>
+    <entry key="POLIAKTIFKASIRRALAN"></entry>
+    <entry key="JADWALDOKTERDIREGISTRASI">no</entry>
+    <entry key="IPPRINTERTRACER">192.168.150.16/label2</entry>
+    <entry key="URLDUKCAPILJAKARTA">http://kependudukan.jakarta.go.id/rsudxxx/xml.jsp</entry>
+    <entry key="USERDUKCAPILJAKARTA">WSRSIABK</entry>
+    <entry key="PASSDUKCAPILJAKARTA">R8ud!KSW5</entry>
+    <entry key="VAR1DUKCAPILJAKARTA">RSIABK</entry>
+    <entry key="VAR2DUKCAPILJAKARTA">12</entry>
+</properties>
