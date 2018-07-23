@@ -1250,7 +1250,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         beli=new double[z]; 
         z=0;        
         for(i=0;i<tbObat.getRowCount();i++){
-            if(!tbObat.getValueAt(i,1).toString().equals("1")){
+            if(!tbObat.getValueAt(i,1).toString().equals("")){
                 pilih[z]=Boolean.parseBoolean(tbObat.getValueAt(i,0).toString());                
                 try {
                     jumlah[z]=Double.parseDouble(tbObat.getValueAt(i,1).toString());

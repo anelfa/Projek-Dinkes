@@ -236,6 +236,7 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);   
         }            
     }
+    
     public void menyimpan(String table,String value,int i,String[] a,String acuan_field,String update,int j,String[] b){
         try{ 
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
@@ -262,21 +263,6 @@ public final class sekuel {
                 System.out.println("Notifikasi : "+e2);
             }                         
         }
-    }
-    public void update(String table,String acuan_field,String update){
-       
-            try {
-                ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
-                
-                ps.executeUpdate();   
-                
-                if(ps != null){
-                    ps.close();
-                } 
-            } catch (Exception e2) {
-                System.out.println("Notifikasi : "+e2);
-            }                         
-        
     }
     
     public void menyimpan2(String table,String value,int i,String[] a,String acuan_field,String update,int j,String[] b){

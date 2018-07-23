@@ -347,6 +347,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         NmPerujuk = new widget.TextBox();
         btnDokter1 = new widget.Button();
         btnDokterPj = new widget.Button();
+        TUmur = new widget.TextBox();
 
         Penjab.setEditable(false);
         Penjab.setFocusTraversalPolicyProvider(true);
@@ -604,19 +605,19 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         PanelInput.add(TNoRw);
-        TNoRw.setBounds(95, 12, 148, 23);
+        TNoRw.setBounds(95, 12, 130, 23);
 
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         PanelInput.add(TNoRM);
-        TNoRM.setBounds(245, 12, 125, 23);
+        TNoRM.setBounds(228, 12, 125, 23);
 
         TPasien.setEditable(false);
         TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         PanelInput.add(TPasien);
-        TPasien.setBounds(372, 12, 400, 23);
+        TPasien.setBounds(355, 12, 300, 23);
 
         jLabel11.setText("Pemeriksaan :");
         jLabel11.setName("jLabel11"); // NOI18N
@@ -676,7 +677,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-07-2017" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-06-2018" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -799,7 +800,6 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         rbAnak.setBounds(165, 102, 80, 23);
 
         buttonGroup1.add(rbDewasa);
-        rbDewasa.setSelected(true);
         rbDewasa.setText("Dewasa");
         rbDewasa.setIconTextGap(1);
         rbDewasa.setName("rbDewasa"); // NOI18N
@@ -859,6 +859,12 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         });
         PanelInput.add(btnDokterPj);
         btnDokterPj.setBounds(359, 42, 28, 23);
+
+        TUmur.setEditable(false);
+        TUmur.setHighlighter(null);
+        TUmur.setName("TUmur"); // NOI18N
+        PanelInput.add(TUmur);
+        TUmur.setBounds(660, 12, 170, 23);
 
         FormInput.add(PanelInput, java.awt.BorderLayout.CENTER);
 
@@ -1454,7 +1460,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 }                
             }
             Sequel.menyimpan("temporary","'0','','Total Biaya Pemeriksaan Lab','"+ttl+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Transaksi Biaya Lab");
-            Valid.panggilUrlWebService("billing/LaporanBiayaLab.php?norm="+TNoRM.getText()+"&pasien="+TPasien.getText().replaceAll(" ","_")+"&tanggal="+Tanggal.getSelectedItem()+"&jam="+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+"&pjlab="+NmDokterPj.getText().replaceAll(" ","_")+"&petugas="+NmPtg.getText().replaceAll(" ","_")+"&kasir="+Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode()));
+            Valid.panggilUrl("billing/LaporanBiayaLab.php?norm="+TNoRM.getText()+"&pasien="+TPasien.getText().replaceAll(" ","_")+"&tanggal="+Tanggal.getSelectedItem()+"&jam="+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+"&pjlab="+NmDokterPj.getText().replaceAll(" ","_")+"&petugas="+NmPtg.getText().replaceAll(" ","_")+"&kasir="+Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode()));
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnNotaActionPerformed
@@ -1565,6 +1571,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
+    private widget.TextBox TUmur;
     private widget.Tanggal Tanggal;
     private widget.TextBox Umur;
     private widget.Button btnDokter;
@@ -1752,11 +1759,21 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
 
     private void isRawat(){
+        String hr,bl,th;
         Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat=? ",TNoRM,TNoRw.getText());
+         hr=Sequel.cariIsi("select hr_umur from reg_periksa where no_rawat=? ",TNoRw.getText());
+         bl=Sequel.cariIsi("select bln_umur from reg_periksa where no_rawat=? ",TNoRw.getText());
+          th=Sequel.cariIsi("select thn_umur from reg_periksa where no_rawat=? ",TNoRw.getText());
+         TUmur.setText(th+" Thn "+bl+" Bl "+hr+" Hr" );
         Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat=? ",Penjab,TNoRw.getText());
         Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=? ",KodePerujuk,TNoRw.getText());
         Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=? ",NmPerujuk,KodePerujuk.getText());
-        
+        int thn = Integer.parseInt(th);
+        if(thn<17){
+            rbAnak.setSelected(true);
+        }else {
+            rbDewasa.setSelected(true);
+        }
         kamar=Sequel.cariIsi("select ifnull(kd_kamar,'') from kamar_inap where no_rawat=? order by tgl_masuk desc limit 1",TNoRw.getText());
         if(!kamar.equals("")){
             namakamar=kamar+", "+Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar on bangsal.kd_bangsal=kamar.kd_bangsal "+
@@ -1771,6 +1788,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void isPsien(){
         Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=? ",TPasien,TNoRM.getText());
+      
         Sequel.cariIsi("select jk from pasien where no_rkm_medis=? ",Jk,TNoRM.getText());
         Sequel.cariIsi("select umur from pasien where no_rkm_medis=?",Umur,TNoRM.getText());
         Sequel.cariIsi("select alamat from pasien where no_rkm_medis=? ",Alamat,TNoRM.getText());

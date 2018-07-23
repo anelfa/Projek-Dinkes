@@ -5,7 +5,6 @@
  */
 package fungsi;
 
-import AESsecurity.EnkripsiAES;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -23,7 +22,7 @@ public final class koneksiDB {
     private static Connection connection=null;
     private static final Properties prop = new Properties();  
     private static final MysqlDataSource dataSource=new MysqlDataSource();
-    private static String caricepat="",var="",kunciEnkripsi = "",hostEn="",databaseEn="",portEn="",userEn="",pasEn="",
+    private static String caricepat="",kunciEnkripsi = "",hostEn="",databaseEn="",portEn="",userEn="",pasEn="",
                     hostDe="",databaseDe="",portDe="",userDe="",pasDe=""; ;
     public static Connection condb(){      
         if(connection == null){
@@ -71,33 +70,4 @@ public final class koneksiDB {
         return caricepat;
     }
     
-    public static String HOST(){
-        try{
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var=EnkripsiAES.decrypt(prop.getProperty("HOSTWEBSERVICE"));
-        }catch(Exception e){
-            var="localhost"; 
-        }
-        return var;
-    }
-    
-    public static String PORT(){
-        try{
-            prop.loadFromXML(new FileInputStream("setting/config.xml"));
-            var=EnkripsiAES.decrypt(prop.getProperty("PORT"));
-        }catch(Exception e){
-            var="3306"; 
-        }
-        return var;
-    }
-    
-    public static String DATABASE(){
-        try{
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            var=EnkripsiAES.decrypt(prop.getProperty("DATABASE"));
-        }catch(Exception e){
-            var="sik"; 
-        }
-        return var;
-    }
 }

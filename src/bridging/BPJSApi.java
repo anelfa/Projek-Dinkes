@@ -7,9 +7,6 @@ import java.util.Properties;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.springframework.security.crypto.codec.Base64;
-import java.security.MessageDigest;
-import java.math.BigInteger;
-import java.security.NoSuchAlgorithmException;
 
 public class BPJSApi {        
     private static final Properties prop = new Properties();
@@ -56,5 +53,5 @@ public class BPJSApi {
         long millis = System.currentTimeMillis();   
         return millis/1000;
     }
-    
+
 }

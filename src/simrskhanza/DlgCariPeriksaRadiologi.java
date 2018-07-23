@@ -1180,7 +1180,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             param.put("hasil",HasilPeriksa.getText());
             param.put("logo",Sequel.cariGambar("select logo from setting"));
 
-            pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih hasil pemeriksaan..!","Hasil Pemeriksaan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Model 1","Model 2", "Model 3"},"Model 1");
+            pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih hasil pemeriksaan..!","Hasil Pemeriksaan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Model 1","Model 2", "Model 3","Model 4"},"Model 1");
             switch (pilihan) {
                 case "Model 1":
                       Valid.MyReport("rptPeriksaRadiologi.jrxml","report","::[ Pemeriksaan Radiologi ]::",
@@ -1192,6 +1192,11 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                       break;
                 case "Model 3":
                       Valid.MyReport("rptPeriksaRadiologi3.jrxml","report","::[ Pemeriksaan Radiologi ]::",
+                                "select current_date as tanggal",param);
+                      break;
+                      
+                 case "Model 4":
+                      Valid.MyReport("rptPeriksaRadiologi4.jrxml","report","::[ Pemeriksaan Radiologi ]::",
                                 "select current_date as tanggal",param);
                       break;
             }                        
@@ -1216,7 +1221,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 HasilPeriksa.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),
                 tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()
             });
-            JOptionPane.showMessageDialog(null,"Proses update selesai...!!!!"); 
+            JOptionPane.showMessageDialog(null,"Proses update selesai...!!!!" ); 
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
