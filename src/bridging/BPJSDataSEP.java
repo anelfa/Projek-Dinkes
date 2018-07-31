@@ -1542,24 +1542,20 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             }else{
                 cekViaBPJSKartu.tampil(no_peserta);
                 if(cekViaBPJSKartu.informasi.equals("OK")){
-                    if(cekViaBPJSKartu.keterangan.equals("AKTIF")){
-                        TPasien.setText(cekViaBPJSKartu.nama);
-                        TglLahir.setText(cekViaBPJSKartu.tgl_lahir);
-                        JK.setText(cekViaBPJSKartu.jk);
+                    if(cekViaBPJSKartu.statusPesertaketerangan.equals("AKTIF")){
+                       TPasien.setText(cekViaBPJSKartu.nama);
+                        TglLahir.setText(cekViaBPJSKartu.tglLahir);
+                        JK.setText(cekViaBPJSKartu.sex);
                         NoKartu.setText(no_peserta);
-                        JenisPeserta.setText(cekViaBPJSKartu.pekerjaan);
-                        Status.setText(cekViaBPJSKartu.keterangan);
-                        KdPpkRujukan.setText(cekViaBPJSKartu.kdProvider);
-                        NmPpkRujukan.setText(cekViaBPJSKartu.nmProvider);
-                        //TNoRM.setText(cekViaBPJSKartu.noMr);
-                        //if(cekViaBPJSKartu.noMr.equals("")){
-                            TNoRM.setText(TNoRM2.getText());
-                        //}
-                        if(cekViaBPJSKartu.kdKelas.equals("1")){
+                        JenisPeserta.setText(cekViaBPJSKartu.jenisPesertaketerangan);
+                        Status.setText(cekViaBPJSKartu.statusPesertaketerangan);
+                        KdPpkRujukan.setText(cekViaBPJSKartu.provUmumkdProvider);
+                        NmPpkRujukan.setText(cekViaBPJSKartu.provUmumnmProvider);
+                       if(cekViaBPJSKartu.hakKelaskode.equals("1")){
                             Kelas.setSelectedIndex(0);
-                        }else if(cekViaBPJSKartu.kdKelas.equals("2")){
+                        }else if(cekViaBPJSKartu.hakKelaskode.equals("2")){
                             Kelas.setSelectedIndex(1);
-                        }else if(cekViaBPJSKartu.kdKelas.equals("3")){
+                        }else if(cekViaBPJSKartu.hakKelaskode.equals("3")){
                             Kelas.setSelectedIndex(2);
                         }
                         NoRujukan.requestFocus();                                               
