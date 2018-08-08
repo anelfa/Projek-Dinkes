@@ -21,7 +21,7 @@ public final class var {
      private final sekuel Sequel=new sekuel();
     private static String userea="",kode="",kdbangsal="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
-    private static boolean bpjs_cek_nomor_rujukan_rs=false,apotek=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
+    private static boolean bpjs_cek_rujukan_kartu_rs=false, bpjs_cek_rujukan_kartu_pcare=false,bpjs_cek_nomor_rujukan_rs=false,apotek=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
             tindakan_ralan=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
             resep_pulang=false,pasien_meninggal=false,diet_pasien=false,kelahiran_bayi=false,periksa_lab=false,periksa_radiologi=false,
             kasir_ralan=false,deposit_pasien=false,piutang_pasien=false,peminjaman_berkas=false,barcode=false,presensi_harian=false,
@@ -488,6 +488,8 @@ public final class var {
                         var.bayar_piutang=true;
                         var.payment_point=true;
                         var.bpjs_cek_nomor_rujukan=true;
+                        var.bpjs_cek_rujukan_kartu_pcare=true;
+                        var.bpjs_cek_rujukan_kartu_rs=true;
                         var.icd9=true;
                         var.darurat_stok=true;
                         var.retensi_rm=true;
@@ -726,6 +728,8 @@ public final class var {
                         var.bayar_piutang=rs2.getBoolean("bayar_piutang");
                         var.payment_point=rs2.getBoolean("payment_point");
                         var.bpjs_cek_nomor_rujukan=rs2.getBoolean("bpjs_cek_nomor_rujukan");
+                         var.bpjs_cek_rujukan_kartu_pcare=rs2.getBoolean("bpjs_cek_rujukan_kartu_pcare");
+                        var.bpjs_cek_rujukan_kartu_rs=rs2.getBoolean("bpjs_cek_rujukan_kartu_rs");
                         var.icd9=rs2.getBoolean("icd9");
                         var.darurat_stok=rs2.getBoolean("darurat_stok");
                         var.retensi_rm=rs2.getBoolean("retensi_rm");
@@ -962,6 +966,8 @@ public final class var {
                         var.bayar_piutang=false;
                         var.payment_point=false;
                         var.bpjs_cek_nomor_rujukan=false;
+                        var.bpjs_cek_rujukan_kartu_pcare=false;
+                        var.bpjs_cek_rujukan_kartu_rs=false;
                         var.icd9=false;
                         var.darurat_stok=false;
                         var.retensi_rm=false;
@@ -1250,7 +1256,9 @@ public final class var {
     public static boolean getbayar_piutang(){return var.bayar_piutang;} 
     public static boolean getpayment_point(){return var.payment_point;} 
     public static boolean getbpjs_cek_nomor_rujukan(){return var.bpjs_cek_nomor_rujukan;}
-     public static boolean getbpjs_cek_nomor_rujukan_rs(){return var.bpjs_cek_nomor_rujukan_rs;}
+    public static boolean getbpjs_cek_nomor_rujukan_rs(){return var.bpjs_cek_nomor_rujukan_rs;}
+    public static boolean getbpjs_cek_rujukan_kartu_pcare(){return var.bpjs_cek_rujukan_kartu_pcare;}
+    public static boolean getbpjs_cek_rujukan_kartu_rs(){return var.bpjs_cek_rujukan_kartu_rs;}
     public static boolean geticd9(){return var.icd9;}
     public static boolean getdarurat_stok(){return var.darurat_stok;}
     public static boolean getretensi_rm(){return var.retensi_rm;}
