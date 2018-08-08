@@ -21,7 +21,8 @@ public final class var {
      private final sekuel Sequel=new sekuel();
     private static String userea="",kode="",kdbangsal="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
-    private static boolean bpjs_cek_rujukan_kartu_rs=false, bpjs_cek_rujukan_kartu_pcare=false,bpjs_cek_nomor_rujukan_rs=false,apotek=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
+    private static boolean bpjs_rujukan_keluar=false,bpjs_cek_kelas_rawat=false,bpjs_cek_dokter=false,
+            bpjs_cek_spesialistik=false,bpjs_cek_ruangrawat=false,bpjs_cek_carakeluar=false,bpjs_cek_pasca_pulang=false,bpjs_cek_prosedur=false,bpjs_cek_rujukan_kartu_rs=false, bpjs_cek_rujukan_kartu_pcare=false,bpjs_cek_nomor_rujukan_rs=false,apotek=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
             tindakan_ralan=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
             resep_pulang=false,pasien_meninggal=false,diet_pasien=false,kelahiran_bayi=false,periksa_lab=false,periksa_radiologi=false,
             kasir_ralan=false,deposit_pasien=false,piutang_pasien=false,peminjaman_berkas=false,barcode=false,presensi_harian=false,
@@ -482,6 +483,7 @@ public final class var {
                         var.bpjs_cek_nik=true;
                         var.bpjs_cek_kartu=true;
                         var.bpjs_cek_riwayat=true;
+                         var.bpjs_rujukan_keluar=true;
                         var.bpjs_cek_nomor_rujukan_rs=true;
                         var.obat_per_cara_bayar=true;
                         var.kunjungan_ranap=true;
@@ -499,6 +501,13 @@ public final class var {
                         var.edit_registrasi=true;
                         var.bpjs_referensi_diagnosa=true;
                         var.bpjs_referensi_poli=true;
+                        var.bpjs_cek_prosedur=true;
+                        var.bpjs_cek_kelas_rawat=true;
+                        var.bpjs_cek_dokter=true;
+                        var.bpjs_cek_spesialistik=true;
+                        var.bpjs_cek_ruangrawat=true;
+                        var.bpjs_cek_carakeluar=true;
+                        var.bpjs_cek_pasca_pulang=true;
                         var.industrifarmasi=true;
                         var.harian_js=true;
                         var.bulanan_js=true;
@@ -557,6 +566,7 @@ public final class var {
                         rs2.beforeFirst();
                         rs2.next();
                         var.kode=user;
+                        var.bpjs_rujukan_keluar=rs2.getBoolean("bpjs_rujukan_keluar");
                         var.apotek=rs2.getBoolean("apotek");
                         var.penyakit=rs2.getBoolean("penyakit");
                         var.obat_penyakit=rs2.getBoolean("obat_penyakit");
@@ -728,8 +738,15 @@ public final class var {
                         var.bayar_piutang=rs2.getBoolean("bayar_piutang");
                         var.payment_point=rs2.getBoolean("payment_point");
                         var.bpjs_cek_nomor_rujukan=rs2.getBoolean("bpjs_cek_nomor_rujukan");
-                         var.bpjs_cek_rujukan_kartu_pcare=rs2.getBoolean("bpjs_cek_rujukan_kartu_pcare");
+                        var.bpjs_cek_rujukan_kartu_pcare=rs2.getBoolean("bpjs_cek_rujukan_kartu_pcare");
                         var.bpjs_cek_rujukan_kartu_rs=rs2.getBoolean("bpjs_cek_rujukan_kartu_rs");
+                        var.bpjs_cek_prosedur=rs2.getBoolean("bpjs_cek_prosedur");
+                        var.bpjs_cek_kelas_rawat=rs2.getBoolean("bpjs_cek_kelas_rawat");
+                        var.bpjs_cek_dokter=rs2.getBoolean("bpjs_cek_dokter");
+                        var.bpjs_cek_spesialistik=rs2.getBoolean("bpjs_cek_spesialistik");
+                        var.bpjs_cek_ruangrawat=rs2.getBoolean("bpjs_cek_ruangrawat");                        
+                        var.bpjs_cek_carakeluar=rs2.getBoolean("bpjs_cek_carakeluar");
+                        var.bpjs_cek_pasca_pulang=rs2.getBoolean("bpjs_cek_pasca_pulang");
                         var.icd9=rs2.getBoolean("icd9");
                         var.darurat_stok=rs2.getBoolean("darurat_stok");
                         var.retensi_rm=rs2.getBoolean("retensi_rm");
@@ -794,7 +811,8 @@ public final class var {
                         var.hitung_bor=rs2.getBoolean("hitung_bor");
                         var.hitung_alos=rs2.getBoolean("hitung_alos");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
-                        var.kode="";                  
+                        var.kode="";   
+                         var.bpjs_rujukan_keluar=false;
                         var.penyakit= false;
                         var.apotek= false;
                         var.obat_penyakit= false;
@@ -961,6 +979,13 @@ public final class var {
                         var.bpjs_cek_nik=false;
                         var.bpjs_cek_kartu=false;
                         var.bpjs_cek_riwayat=false;
+                        var.bpjs_cek_prosedur=false;
+                        var.bpjs_cek_kelas_rawat=false;
+                        var.bpjs_cek_dokter=false;
+                        var.bpjs_cek_spesialistik=false;
+                        var.bpjs_cek_ruangrawat=false;
+                        var.bpjs_cek_carakeluar=false;
+                        var.bpjs_cek_pasca_pulang=false;
                         var.obat_per_cara_bayar=false;
                         var.kunjungan_ranap=false;
                         var.bayar_piutang=false;
@@ -1275,6 +1300,13 @@ public final class var {
     public static boolean getbulanan_paket_bhp(){return var.bulanan_paket_bhp;}
     public static boolean getpiutang_pasien2(){return var.piutang_pasien2;}
     public static boolean getbpjs_referensi_faskes(){return var.bpjs_referensi_faskes;} 
+    public static boolean getbpjs_cek_prosedur(){return var.bpjs_cek_prosedur;}
+    public static boolean getbpjs_cek_kelas_rawat(){return var.bpjs_cek_kelas_rawat;}
+    public static boolean getbpjs_cek_dokter(){return var.bpjs_cek_dokter;}
+    public static boolean getbpjs_cek_spesialistik(){return var.bpjs_cek_spesialistik;}
+    public static boolean getbpjs_cek_ruangrawat(){return var.bpjs_cek_ruangrawat;}
+    public static boolean getbpjs_cek_carakeluar(){return  var.bpjs_cek_carakeluar;}
+    public static boolean getbpjs_cek_pasca_pulang(){return var.bpjs_cek_pasca_pulang;} 
     public static boolean getbpjs_sep(){return var.bpjs_sep;} 
     public static boolean getpengambilan_utd(){return var.pengambilan_utd;} 
     public static boolean gettarif_utd(){return var.tarif_utd;} 
@@ -1324,4 +1356,5 @@ public final class var {
     public static void setresep_dokterfalse(){var.resep_dokter=false;}
     public static boolean gethitung_bor(){return var.hitung_bor;}
     public static boolean gethitung_alos(){return var.hitung_alos;}
+    public static boolean getbpjs_rujukan_keluar(){return var.bpjs_rujukan_keluar;}
 }

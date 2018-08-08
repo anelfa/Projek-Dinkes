@@ -7,7 +7,7 @@
 		 printOrder="Vertical"
 		 orientation="Portrait"
 		 pageWidth="595"
-		 pageHeight="288"
+		 pageHeight="842"
 		 columnWidth="533"
 		 columnSpacing="0"
 		 leftMargin="42"
@@ -17,9 +17,9 @@
 		 whenNoDataType="NoPages"
 		 isTitleNewPage="false"
 		 isSummaryNewPage="false">
-	<property name="ireport.zoom" value="1.0" />
+	<property name="ireport.zoom" value="1.5" />
 	<property name="ireport.x" value="0" />
-	<property name="ireport.y" value="0" />
+	<property name="ireport.y" value="375" />
 	<property name="ireport.scriptlethandling" value="0" />
 	<property name="ireport.encoding" value="UTF-8" />
 	<import value="java.util.*" />
@@ -34,6 +34,9 @@
 	<parameter name="kontakrs" isForPrompting="true" class="java.lang.String"/>
 	<parameter name="emailrs" isForPrompting="true" class="java.lang.String"/>
 	<parameter name="logo" isForPrompting="true" class="java.io.InputStream"/>
+	<parameter name="norawat" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="noreg" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="dokter" isForPrompting="true" class="java.lang.String"/>
 	<queryString><![CDATA[select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,
 bridging_sep.tglrujukan,bridging_sep.no_rujukan,bridging_sep.kdppkrujukan,
 bridging_sep.nmppkrujukan,bridging_sep.kdppkpelayanan,bridging_sep.nmppkpelayanan,
@@ -92,7 +95,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 			</band>
 		</columnHeader>
 		<detail>
-			<band height="248"  isSplitAllowed="true" >
+			<band height="802"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="true" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
@@ -496,7 +499,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="341"
-						y="76"
+						y="86"
 						width="50"
 						height="11"
 						key="staticText"/>
@@ -509,7 +512,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="392"
-						y="76"
+						y="86"
 						width="7"
 						height="11"
 						key="staticText"/>
@@ -523,7 +526,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 					<reportElement
 						mode="Transparent"
 						x="400"
-						y="76"
+						y="86"
 						width="132"
 						height="11"
 						key="textField"/>
@@ -536,7 +539,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="392"
-						y="89"
+						y="99"
 						width="7"
 						height="11"
 						key="staticText"/>
@@ -549,7 +552,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="341"
-						y="89"
+						y="99"
 						width="50"
 						height="11"
 						key="staticText"/>
@@ -562,7 +565,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="392"
-						y="102"
+						y="112"
 						width="7"
 						height="11"
 						key="staticText"/>
@@ -576,7 +579,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 					<reportElement
 						mode="Transparent"
 						x="400"
-						y="102"
+						y="112"
 						width="132"
 						height="11"
 						key="textField"/>
@@ -589,7 +592,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="341"
-						y="102"
+						y="112"
 						width="50"
 						height="11"
 						key="staticText"/>
@@ -602,7 +605,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="392"
-						y="115"
+						y="125"
 						width="7"
 						height="11"
 						key="staticText"/>
@@ -615,7 +618,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="341"
-						y="115"
+						y="125"
 						width="50"
 						height="11"
 						key="staticText"/>
@@ -711,7 +714,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 					<reportElement
 						mode="Transparent"
 						x="400"
-						y="115"
+						y="125"
 						width="132"
 						height="11"
 						key="textField"/>
@@ -725,7 +728,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 					<reportElement
 						mode="Transparent"
 						x="400"
-						y="89"
+						y="99"
 						width="132"
 						height="11"
 						key="textField"/>
@@ -739,7 +742,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 					<reportElement
 						mode="Transparent"
 						x="400"
-						y="128"
+						y="138"
 						width="132"
 						height="11"
 						key="textField"/>
@@ -752,7 +755,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="392"
-						y="128"
+						y="138"
 						width="7"
 						height="11"
 						key="staticText"/>
@@ -765,7 +768,7 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<staticText>
 					<reportElement
 						x="341"
-						y="128"
+						y="138"
 						width="50"
 						height="11"
 						key="staticText"/>
@@ -812,6 +815,569 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 					<graphicElement stretchType="NoStretch"/>
 					<imageExpression class="java.io.InputStream"><![CDATA[$P{logo}]]></imageExpression>
 				</image>
+				<staticText>
+					<reportElement
+						x="392"
+						y="46"
+						width="7"
+						height="11"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="341"
+						y="46"
+						width="50"
+						height="11"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[No. Rawat]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="400"
+						y="46"
+						width="132"
+						height="11"
+						key="textField"/>
+					<box></box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="9"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{norawat}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="341"
+						y="58"
+						width="50"
+						height="11"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[No. Reg]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="392"
+						y="58"
+						width="7"
+						height="11"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="400"
+						y="58"
+						width="132"
+						height="11"
+						key="textField"/>
+					<box></box>
+					<textElement lineSpacing="Single">
+						<font fontName="Tahoma" size="9"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{noreg}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="121"
+						y="565"
+						width="411"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<staticText>
+					<reportElement
+						x="10"
+						y="310"
+						width="484"
+						height="18"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="13" isBold="false"/>
+					</textElement>
+				<text><![CDATA[RESUME MEDIS RAWAT JALAN JKN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="121"
+						y="450"
+						width="270"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[1.]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="121"
+						y="485"
+						width="411"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<staticText>
+					<reportElement
+						x="0"
+						y="450"
+						width="113"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Prosedur/Tindakan]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="510"
+						width="113"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Laporan Tindakan]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="121"
+						y="545"
+						width="411"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<rectangle>
+					<reportElement
+						x="120"
+						y="590"
+						width="14"
+						height="14"
+						key="rectangle"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="451"
+						y="435"
+						width="81"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Kode ICD IX]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="121"
+						y="415"
+						width="411"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="10"
+						y="329"
+						width="484"
+						height="17"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font fontName="Tahoma" size="11"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{namars}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="121"
+						y="510"
+						width="270"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="121"
+						y="530"
+						width="270"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="121"
+						y="380"
+						width="270"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[1.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="121"
+						y="550"
+						width="270"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[-]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="121"
+						y="395"
+						width="411"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<staticText>
+					<reportElement
+						x="0"
+						y="590"
+						width="113"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Kunjungan Awal]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="380"
+						width="113"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Diagnosa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="121"
+						y="400"
+						width="270"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[2.]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="348"
+						y="675"
+						width="183"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="121"
+						y="465"
+						width="411"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<staticText>
+					<reportElement
+						x="451"
+						y="400"
+						width="81"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[(                         )]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="451"
+						y="470"
+						width="81"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[(                         )]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="341"
+						y="610"
+						width="192"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Dokter,]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="113"
+						y="510"
+						width="7"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="451"
+						y="365"
+						width="81"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Kode ICD X]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="451"
+						y="380"
+						width="81"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[(                         )]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="113"
+						y="380"
+						width="7"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="121"
+						y="525"
+						width="411"
+						height="1"
+						key="line"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</line>
+				<staticText>
+					<reportElement
+						x="113"
+						y="450"
+						width="7"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement
+						x="120"
+						y="606"
+						width="14"
+						height="14"
+						key="rectangle"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="451"
+						y="450"
+						width="81"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[(                         )]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="121"
+						y="470"
+						width="270"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[2.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="606"
+						width="113"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Kunjungan Lanjutan]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement
+						x="120"
+						y="622"
+						width="14"
+						height="14"
+						key="rectangle"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="0"
+						y="622"
+						width="113"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Observasi]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement
+						x="120"
+						y="638"
+						width="14"
+						height="14"
+						key="rectangle"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.5"/>
+</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="0"
+						y="638"
+						width="113"
+						height="14"
+						key="staticText"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Post Operasi]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="341"
+						y="660"
+						width="192"
+						height="14"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none" lineSpacing="Single">
+						<font fontName="Tahoma" size="9" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{dokter}]]></textFieldExpression>
+				</textField>
 			</band>
 		</detail>
 		<columnFooter>

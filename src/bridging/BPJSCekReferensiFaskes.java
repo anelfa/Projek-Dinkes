@@ -48,6 +48,8 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private sekuel Sequel=new sekuel();
     private int i=0;
+    private BPJSApi api=new BPJSApi();
+    private String URL="";
 
     /** Creates new form DlgKamar
      * @param parent
@@ -59,7 +61,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(628,674);
 
-        tabMode=new DefaultTableModel(null,new String[]{"No.","Kode Cabang","Nama Cabang","Kode Provider","Nama Provider"}){
+        tabMode=new DefaultTableModel(null,new String[]{"No.","Kode Faskes","Nama Faskes"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbKamar.setModel(tabMode);
@@ -68,7 +70,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(40);
@@ -76,10 +78,6 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
                 column.setPreferredWidth(100);
             }else if(i==2){
                 column.setPreferredWidth(200);
-            }else if(i==3){
-                column.setPreferredWidth(100);
-            }else if(i==4){
-                column.setPreferredWidth(250);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -262,6 +260,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
     private void diagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_diagnosaKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             tampil(diagnosa.getText());
+            tampil2(diagnosa.getText());
             BtnPrint.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             tampil(diagnosa.getText());
@@ -275,6 +274,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         tampil(diagnosa.getText());
+        tampil2(diagnosa.getText());
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -316,10 +316,10 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil(String faskes) {
-        BPJSApi api=new BPJSApi();
+       
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            String URL = prop.getProperty("URLAPIBPJS")+"/provider/ref/provider/query?nama="+faskes+"&start=0&limit=1000";	
+            String URL = prop.getProperty("URLAPIBPJS")+"/referensi/faskes/"+faskes+"/1";	
 
 	    HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -332,20 +332,20 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
             //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            JsonNode nameNode = root.path("metadata");
+            JsonNode nameNode = root.path("metaData");
             //System.out.println("code : "+nameNode.path("code").asText());
             //System.out.println("message : "+nameNode.path("message").asText());
-            if(nameNode.path("message").asText().equals("OK")){
-                Valid.tabelKosong(tabMode);
+            if(nameNode.path("message").asText().equals("Sukses")){ 
+                tabMode.addRow(new Object[]{
+                    "A","Faskes 1",""
+                });
                 JsonNode response = root.path("response");
-                if(response.path("list").isArray()){
+                if(response.path("faskes").isArray()){
                     i=1;
-                    for(JsonNode list:response.path("list")){
+                    for(JsonNode list:response.path("faskes")){
                         tabMode.addRow(new Object[]{
-                            i+".",list.path("kdCabang").asText(),
-                            list.path("nmCabang").asText(),
-                            list.path("kdProvider").asText(),
-                            list.path("nmProvider").asText()
+                            i+".",list.path("kode").asText(),
+                            list.path("nama").asText()
                         });
                         i++;
                     }
@@ -359,8 +359,54 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
+        
+        
     }    
- 
+ public void tampil2(String faskes) {        
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            URL = prop.getProperty("URLAPIBPJS")+"/referensi/faskes/"+faskes+"/2";	
+
+	    HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.add("X-Cons-ID",prop.getProperty("CONSIDAPIBPJS"));
+	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));            
+	    headers.add("X-Signature",api.getHmac());
+	    HttpEntity requestEntity = new HttpEntity(headers);
+	    RestTemplate rest = new RestTemplate();	
+            
+            //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+            JsonNode nameNode = root.path("metaData");
+            if(nameNode.path("message").asText().equals("Sukses")){ 
+                tabMode.addRow(new Object[]{
+                    "","",""
+                });
+                tabMode.addRow(new Object[]{
+                    "B","Faskes 2/RS",""
+                });
+                JsonNode response = root.path("response");
+                if(response.path("faskes").isArray()){
+                    i=1;
+                    for(JsonNode list:response.path("faskes")){
+                        tabMode.addRow(new Object[]{
+                            i+".",list.path("kode").asText(),
+                            list.path("nama").asText()
+                        });
+                        i++;
+                    }
+                }
+            }else {
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
+            }   
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : "+ex);
+            if(ex.toString().contains("UnknownHostException")){
+                JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
+            }
+        }
+    }
     public JTable getTable(){
         return tbKamar;
     }
