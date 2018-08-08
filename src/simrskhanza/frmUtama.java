@@ -297,7 +297,12 @@ public class frmUtama extends javax.swing.JFrame {
         DlgLogin.setSize(344,201);
         DlgLogin.setVisible(true);
         DlgLogin.setLocationRelativeTo(null);
+        //button
+        btnToolOnline.setVisible(false);
+        btnToolPenunjang.setVisible(false);
+        BtnToolJualObat.setVisible(false);
         
+        //-----
         WindowInput.setSize(349,180);
         WindowInput.setVisible(false);
         WindowInput.setLocationRelativeTo(null);
@@ -658,6 +663,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolReg = new widget.ButtonBig();
         btnToolIGD = new widget.ButtonBig();
         btnToolPenunjang = new widget.ButtonBig();
+        btnToolOnline = new widget.ButtonBig();
         jSeparator5 = new javax.swing.JSeparator();
         btnToolBcdRalan = new widget.ButtonBig();
         btnToolBcdRanap = new widget.ButtonBig();
@@ -837,7 +843,7 @@ public class frmUtama extends javax.swing.JFrame {
         WindowInput.setUndecorated(true);
         WindowInput.setResizable(false);
 
-        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame6.setName("internalFrame6"); // NOI18N
         internalFrame6.setWarnaBawah(new java.awt.Color(235, 245, 225));
         internalFrame6.setLayout(null);
@@ -917,7 +923,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.setUndecorated(true);
         DlgHome.setResizable(false);
 
-        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(40, 70, 50))); // NOI18N
+        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(40, 70, 50))); // NOI18N
         panelMenu.setName("panelMenu"); // NOI18N
         panelMenu.setPreferredSize(new java.awt.Dimension(2412, 3653));
         panelMenu.setWarnaAtas(new java.awt.Color(250, 255, 250));
@@ -4300,7 +4306,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolPenunjang.setMnemonic('D');
         btnToolPenunjang.setText("Penunjang");
         btnToolPenunjang.setToolTipText("Alt+D");
-        btnToolPenunjang.setEnabled(false);
         btnToolPenunjang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolPenunjang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolPenunjang.setIconTextGap(3);
@@ -4315,6 +4320,28 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         internalFrame1.add(btnToolPenunjang);
+
+        btnToolOnline.setForeground(new java.awt.Color(80, 100, 80));
+        btnToolOnline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/online.png"))); // NOI18N
+        btnToolOnline.setMnemonic('D');
+        btnToolOnline.setText("Online");
+        btnToolOnline.setToolTipText("Alt+D");
+        btnToolOnline.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnToolOnline.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnToolOnline.setIconTextGap(3);
+        btnToolOnline.setMargin(new java.awt.Insets(1, 2, 1, 0));
+        btnToolOnline.setMaximumSize(new java.awt.Dimension(60, 50));
+        btnToolOnline.setMinimumSize(new java.awt.Dimension(60, 50));
+        btnToolOnline.setName("btnToolOnline"); // NOI18N
+        btnToolOnline.setPreferredSize(new java.awt.Dimension(80, 40));
+        btnToolOnline.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnToolOnline.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnToolOnline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToolOnlineActionPerformed(evt);
+            }
+        });
+        internalFrame1.add(btnToolOnline);
 
         jSeparator5.setBackground(new java.awt.Color(175, 195, 150));
         jSeparator5.setForeground(new java.awt.Color(175, 195, 150));
@@ -5058,12 +5085,12 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu4.setName("jMenu4"); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(124, 30));
         jMenu4.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu4MenuSelected(evt);
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenu4MenuSelected(evt);
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
         });
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -5084,12 +5111,12 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu8.setName("jMenu8"); // NOI18N
         jMenu8.setPreferredSize(new java.awt.Dimension(124, 30));
         jMenu8.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu8MenuSelected(evt);
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenu8MenuSelected(evt);
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
         });
         jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -5142,6 +5169,8 @@ public class frmUtama extends javax.swing.JFrame {
                 BtnToolKasir.setEnabled(false);
                 btnToolLab.setEnabled(false);
                 btnToolRad.setEnabled(false);
+                btnToolPenunjang.setVisible(false);
+                btnToolOnline.setVisible(false);
                 btnToolIGD.setEnabled(false);
                 MnGantiPassword.setEnabled(false);
                 btnToolBcdRalan.setEnabled(false);
@@ -5196,7 +5225,8 @@ public class frmUtama extends javax.swing.JFrame {
                     BtnToolKasir.setEnabled(true);                
                     btnToolLab.setEnabled(true);   
                     btnToolIGD.setEnabled(true);
-                    btnToolPenunjang.setEnabled(true);
+                    btnToolPenunjang.setVisible(true);
+                    btnToolOnline.setVisible(true);
                     btnToolRad.setEnabled(true);
                     btnToolBcdRalan.setEnabled(true);
                     btnToolBcdRanap.setEnabled(true);
@@ -5217,7 +5247,8 @@ public class frmUtama extends javax.swing.JFrame {
                     lblUser.setText(cobaa);
                     MnGantiPassword.setEnabled(true);
                     BtnToolReg.setEnabled(var.getregistrasi());
-                    btnToolPenunjang.setEnabled(var.getregistrasi());
+                    btnToolPenunjang.setVisible(var.getregistrasi());
+                    btnToolOnline.setVisible(var.getregistrasi());
                     BtnToolKamnap.setEnabled(var.getkamar_inap());
                     BtnToolKasir.setEnabled(var.getkasir_ralan());                
                     btnToolLab.setEnabled(var.getperiksa_lab());  
@@ -5235,7 +5266,8 @@ public class frmUtama extends javax.swing.JFrame {
                     MnGantiPassword.setEnabled(false);         
                     btnToolLab.setEnabled(false);   
                     btnToolIGD.setEnabled(false);
-                    btnToolPenunjang.setEnabled(false);
+                    btnToolPenunjang.setVisible(false);
+                    btnToolOnline.setVisible(false);
                     btnToolRad.setEnabled(false);
                     btnToolBcdRalan.setEnabled(false);
                     btnToolBcdRanap.setEnabled(false);   
@@ -8722,7 +8754,7 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
     }//GEN-LAST:event_btnSetDatabaseActionPerformed
 
     private void btnToolPenunjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToolPenunjangActionPerformed
-isTutup();
+        isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgPenunjang penunjang=new DlgPenunjang(this,false);
         penunjang.tampil();
@@ -8845,6 +8877,20 @@ isTutup();
         form.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnCekReferensiCaraKeluarBPJSActionPerformed
+
+    private void btnToolOnlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToolOnlineActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgOnline online=new DlgOnline(this,false);
+        online.tampil();
+        online.emptTeks();
+        online.isCek();
+        online.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        online.setLocationRelativeTo(PanelUtama);
+        online.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());         // TODO add your handling code here:
+    }//GEN-LAST:event_btnToolOnlineActionPerformed
 
     /**
     * @param args the command line arguments
@@ -9134,6 +9180,7 @@ isTutup();
     private widget.ButtonBig btnToolBcdRanap;
     private widget.ButtonBig btnToolIGD;
     private widget.ButtonBig btnToolLab;
+    private widget.ButtonBig btnToolOnline;
     private widget.ButtonBig btnToolPenunjang;
     private widget.ButtonBig btnToolRad;
     private widget.ButtonBig btnTracker;
