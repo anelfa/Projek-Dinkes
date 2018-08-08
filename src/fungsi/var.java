@@ -21,7 +21,7 @@ public final class var {
      private final sekuel Sequel=new sekuel();
     private static String userea="",kode="",kdbangsal="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
-    private static boolean apotek=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
+    private static boolean bpjs_cek_nomor_rujukan_rs=false,apotek=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
             tindakan_ralan=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
             resep_pulang=false,pasien_meninggal=false,diet_pasien=false,kelahiran_bayi=false,periksa_lab=false,periksa_radiologi=false,
             kasir_ralan=false,deposit_pasien=false,piutang_pasien=false,peminjaman_berkas=false,barcode=false,presensi_harian=false,
@@ -482,6 +482,7 @@ public final class var {
                         var.bpjs_cek_nik=true;
                         var.bpjs_cek_kartu=true;
                         var.bpjs_cek_riwayat=true;
+                        var.bpjs_cek_nomor_rujukan_rs=true;
                         var.obat_per_cara_bayar=true;
                         var.kunjungan_ranap=true;
                         var.bayar_piutang=true;
@@ -1249,6 +1250,7 @@ public final class var {
     public static boolean getbayar_piutang(){return var.bayar_piutang;} 
     public static boolean getpayment_point(){return var.payment_point;} 
     public static boolean getbpjs_cek_nomor_rujukan(){return var.bpjs_cek_nomor_rujukan;}
+     public static boolean getbpjs_cek_nomor_rujukan_rs(){return var.bpjs_cek_nomor_rujukan_rs;}
     public static boolean geticd9(){return var.icd9;}
     public static boolean getdarurat_stok(){return var.darurat_stok;}
     public static boolean getretensi_rm(){return var.retensi_rm;}
