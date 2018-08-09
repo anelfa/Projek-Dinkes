@@ -225,8 +225,6 @@ import setting.DlgSetHargaObatRalan;
 import setting.DlgSetHargaObatRanap;
 import setting.DlgSetKeterlambatan;
 import setting.DlgSetNota;
-import setting.DlgSetDatabase;
-import setting.DlgTest;
 import smsui.frmSmsView;
 import tranfusidarah.UTDCariPenyerahanDarah;
 import tranfusidarah.UTDDonor;
@@ -250,8 +248,6 @@ import bridging.BPJSCekReferensiRuangRawat;
 import bridging.BPJSCekReferensiSpesialistik;
 import bridging.BPJSCekRujukanKartuPCare;
 import bridging.BPJSCekRujukanKartuRS;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**

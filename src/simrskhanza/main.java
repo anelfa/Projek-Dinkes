@@ -41,7 +41,7 @@ public class main extends javax.swing.JFrame {
                  timer.stop();
                   
              frmUtama utama=frmUtama.getInstance();
-           utama.isWall();
+          utama.isWall();
            //utama.setIconImage(new javax.swing.ImageIcon( getClass(). getResource("/picture/home.PNG")).getImage());
           utama.setVisible(true);
           dispose();
