@@ -294,8 +294,11 @@ public class frmUtama extends javax.swing.JFrame {
         DlgLogin.setVisible(true);
         DlgLogin.setLocationRelativeTo(null);
         //button
+        btnToolIGD.setVisible(false);
         btnToolOnline.setVisible(false);
         btnToolPenunjang.setVisible(false);
+        btnToolBcdRalan.setVisible(false);
+        btnToolBcdRanap.setVisible(false);
         BtnToolJualObat.setVisible(false);
         
         //-----
@@ -839,7 +842,7 @@ public class frmUtama extends javax.swing.JFrame {
         WindowInput.setUndecorated(true);
         WindowInput.setResizable(false);
 
-        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame6.setName("internalFrame6"); // NOI18N
         internalFrame6.setWarnaBawah(new java.awt.Color(235, 245, 225));
         internalFrame6.setLayout(null);
@@ -919,7 +922,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.setUndecorated(true);
         DlgHome.setResizable(false);
 
-        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(40, 70, 50))); // NOI18N
+        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(40, 70, 50))); // NOI18N
         panelMenu.setName("panelMenu"); // NOI18N
         panelMenu.setPreferredSize(new java.awt.Dimension(2412, 3653));
         panelMenu.setWarnaAtas(new java.awt.Color(250, 255, 250));
@@ -4152,7 +4155,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08/08/2018" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10/08/2018" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -4260,7 +4263,6 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolReg.setMnemonic('R');
         BtnToolReg.setText("Registrasi");
         BtnToolReg.setToolTipText("Alt+R");
-        BtnToolReg.setEnabled(false);
         BtnToolReg.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnToolReg.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         BtnToolReg.setIconTextGap(3);
@@ -4281,7 +4283,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolIGD.setMnemonic('D');
         btnToolIGD.setText("IGD/UGD");
         btnToolIGD.setToolTipText("Alt+D");
-        btnToolIGD.setEnabled(false);
         btnToolIGD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolIGD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolIGD.setIconTextGap(3);
@@ -5081,12 +5082,12 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu4.setName("jMenu4"); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(124, 30));
         jMenu4.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenu4MenuSelected(evt);
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu4MenuSelected(evt);
             }
         });
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -5107,12 +5108,12 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu8.setName("jMenu8"); // NOI18N
         jMenu8.setPreferredSize(new java.awt.Dimension(124, 30));
         jMenu8.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenu8MenuSelected(evt);
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu8MenuSelected(evt);
             }
         });
         jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -5159,7 +5160,7 @@ public class frmUtama extends javax.swing.JFrame {
         
         switch (BtnLog.getText().trim()) {
             case "Log Out":
-                BtnToolReg.setEnabled(false);
+                BtnToolReg.setVisible(false);
                 BtnToolKamnap.setEnabled(false);
                 BtnToolApotek.setEnabled(false);
                 BtnToolKasir.setEnabled(false);
@@ -5169,8 +5170,8 @@ public class frmUtama extends javax.swing.JFrame {
                 btnToolOnline.setVisible(false);
                 btnToolIGD.setEnabled(false);
                 MnGantiPassword.setEnabled(false);
-                btnToolBcdRalan.setEnabled(false);
-                btnToolBcdRanap.setEnabled(false);
+                btnToolBcdRalan.setVisible(false);
+                btnToolBcdRanap.setVisible(false);
                 edAdmin.setText("");
                 edPwd.setText("");
                 BtnLog.setText("Log In");
@@ -5215,7 +5216,7 @@ public class frmUtama extends javax.swing.JFrame {
                 }else */
                 if(var.getjml1()>=1){    
                     BtnMenu.setEnabled(true);
-                    BtnToolReg.setEnabled(true);
+                    BtnToolReg.setVisible(true);
                     BtnToolKamnap.setEnabled(true);
                     BtnToolApotek.setEnabled(true);
                     BtnToolKasir.setEnabled(true);                
@@ -5242,7 +5243,7 @@ public class frmUtama extends javax.swing.JFrame {
                     lblStts.setText("Admin : ");
                     lblUser.setText(cobaa);
                     MnGantiPassword.setEnabled(true);
-                    BtnToolReg.setEnabled(var.getregistrasi());
+                    BtnToolReg.setVisible(var.getregistrasi());
                     btnToolPenunjang.setVisible(var.getregistrasi());
                     btnToolOnline.setVisible(var.getregistrasi());
                     BtnToolKamnap.setEnabled(var.getkamar_inap());
@@ -5250,8 +5251,8 @@ public class frmUtama extends javax.swing.JFrame {
                     btnToolLab.setEnabled(var.getperiksa_lab());  
                     btnToolRad.setEnabled(var.getperiksa_radiologi());
                     btnToolIGD.setEnabled(var.getigd());                    
-                    btnToolBcdRalan.setEnabled(var.getbarcoderalan());
-                    btnToolBcdRanap.setEnabled(var.getbarcoderanap());
+                    btnToolBcdRalan.setVisible(var.getbarcoderalan());
+                    btnToolBcdRanap.setVisible(var.getbarcoderanap());
                      BtnToolApotek.setEnabled(var.getapotek());    
                     Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");
                 }else if((var.getjml1()==0)&&(var.getjml2()==0)){

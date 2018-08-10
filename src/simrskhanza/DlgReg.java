@@ -5693,6 +5693,7 @@ if(TPasien.getText().trim().equals("")){
             TBiaya.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),17).toString());
             TStatus.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),18).toString()); 
              nopoli.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),19).toString()); 
+            
             Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat=?", kdpnj,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
             Sequel.cariIsi("select kd_poli from reg_periksa where no_rawat=?", kdpoli,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
             Sequel.cariIsi("select perujuk from rujuk_masuk where no_rawat=?", AsalRujukan,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
