@@ -12,6 +12,7 @@
 
 package simrskhanza;
 
+import casemix.DlgCasemix;
 import bridging.AplicareCekReferensiKamar;
 import bridging.AplicareKetersediaanKamar;
 import bridging.BPJSCekKartu;
