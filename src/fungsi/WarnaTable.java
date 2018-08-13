@@ -25,5 +25,7 @@ public class WarnaTable extends DefaultTableCellRenderer {
         } 
         return component;
     }
+  
 
 }
+

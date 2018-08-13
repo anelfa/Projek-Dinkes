@@ -260,6 +260,7 @@ public class frmUtama extends javax.swing.JFrame {
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
     private final DlgKasirRalan kasirralan=new DlgKasirRalan(this,false);
+    private final DlgCasemix casemix=new DlgCasemix(this,false);
     private final DlgAbout About=new DlgAbout(this,false);   
     private final DlgPenggajian penggajian=new DlgPenggajian(this,false); 
     private final DlgRetensi retensi=new DlgRetensi(this,false); 
@@ -300,6 +301,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolBcdRalan.setVisible(false);
         btnToolBcdRanap.setVisible(false);
         BtnToolJualObat.setVisible(false);
+        BtnToolCasemix.setVisible(false);
         
         //-----
         WindowInput.setSize(349,180);
@@ -666,6 +668,8 @@ public class frmUtama extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         btnToolBcdRalan = new widget.ButtonBig();
         btnToolBcdRanap = new widget.ButtonBig();
+        BtnToolCasemix = new widget.ButtonBig();
+        jSeparator6 = new javax.swing.JSeparator();
         btnToolLab = new widget.ButtonBig();
         btnToolRad = new widget.ButtonBig();
         BtnToolJualObat = new widget.ButtonBig();
@@ -4354,7 +4358,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolBcdRalan.setText("Bar.RL");
         btnToolBcdRalan.setToolTipText("Alt+B");
         btnToolBcdRalan.setAlignmentX(0.6F);
-        btnToolBcdRalan.setEnabled(false);
         btnToolBcdRalan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolBcdRalan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolBcdRalan.setIconTextGap(3);
@@ -4376,7 +4379,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolBcdRanap.setText("Bar.RI");
         btnToolBcdRanap.setToolTipText("Alt+I");
         btnToolBcdRanap.setAlignmentX(0.6F);
-        btnToolBcdRanap.setEnabled(false);
         btnToolBcdRanap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolBcdRanap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolBcdRanap.setIconTextGap(3);
@@ -4391,6 +4393,34 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         internalFrame1.add(btnToolBcdRanap);
+
+        BtnToolCasemix.setForeground(new java.awt.Color(80, 100, 80));
+        BtnToolCasemix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Money-32x32.png"))); // NOI18N
+        BtnToolCasemix.setMnemonic('R');
+        BtnToolCasemix.setText("Casemix");
+        BtnToolCasemix.setToolTipText("Alt+R");
+        BtnToolCasemix.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnToolCasemix.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnToolCasemix.setIconTextGap(3);
+        BtnToolCasemix.setMargin(new java.awt.Insets(1, 2, 1, 0));
+        BtnToolCasemix.setName("BtnToolCasemix"); // NOI18N
+        BtnToolCasemix.setPreferredSize(new java.awt.Dimension(88, 40));
+        BtnToolCasemix.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        BtnToolCasemix.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnToolCasemix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnToolCasemixActionPerformed(evt);
+            }
+        });
+        internalFrame1.add(BtnToolCasemix);
+
+        jSeparator6.setBackground(new java.awt.Color(175, 195, 150));
+        jSeparator6.setForeground(new java.awt.Color(175, 195, 150));
+        jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator6.setName("jSeparator6"); // NOI18N
+        jSeparator6.setOpaque(true);
+        jSeparator6.setPreferredSize(new java.awt.Dimension(1, 38));
+        internalFrame1.add(jSeparator6);
 
         btnToolLab.setForeground(new java.awt.Color(80, 100, 80));
         btnToolLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/addressbook-search24.png"))); // NOI18N
@@ -5160,18 +5190,20 @@ public class frmUtama extends javax.swing.JFrame {
         
         switch (BtnLog.getText().trim()) {
             case "Log Out":
+                btnToolIGD.setVisible(false);
+                btnToolOnline.setVisible(false);
+                btnToolPenunjang.setVisible(false);
+                btnToolBcdRalan.setVisible(false);
+                btnToolBcdRanap.setVisible(false);
+                BtnToolCasemix.setVisible(false);
+                //
                 BtnToolReg.setVisible(false);
                 BtnToolKamnap.setEnabled(false);
                 BtnToolApotek.setEnabled(false);
                 BtnToolKasir.setEnabled(false);
                 btnToolLab.setEnabled(false);
                 btnToolRad.setEnabled(false);
-                btnToolPenunjang.setVisible(false);
-                btnToolOnline.setVisible(false);
-                btnToolIGD.setEnabled(false);
                 MnGantiPassword.setEnabled(false);
-                btnToolBcdRalan.setVisible(false);
-                btnToolBcdRanap.setVisible(false);
                 edAdmin.setText("");
                 edPwd.setText("");
                 BtnLog.setText("Log In");
@@ -5214,19 +5246,21 @@ public class frmUtama extends javax.swing.JFrame {
                     lblStts.setText("Admin : ");
                     lblUser.setText("Admin Utama");
                 }else */
-                if(var.getjml1()>=1){    
+                if(var.getjml1()>=1){  
+                    btnToolIGD.setVisible(true);
+                    btnToolOnline.setVisible(true);
+                    btnToolPenunjang.setVisible(true);
+                    btnToolBcdRalan.setVisible(true);
+                    btnToolBcdRanap.setVisible(true);
+                    BtnToolCasemix.setVisible(true);
+                    //
                     BtnMenu.setEnabled(true);
                     BtnToolReg.setVisible(true);
                     BtnToolKamnap.setEnabled(true);
                     BtnToolApotek.setEnabled(true);
                     BtnToolKasir.setEnabled(true);                
-                    btnToolLab.setEnabled(true);   
-                    btnToolIGD.setEnabled(true);
-                    btnToolPenunjang.setVisible(true);
-                    btnToolOnline.setVisible(true);
+                    btnToolLab.setEnabled(true); 
                     btnToolRad.setEnabled(true);
-                    btnToolBcdRalan.setEnabled(true);
-                    btnToolBcdRanap.setEnabled(true);
                     MnGantiPassword.setEnabled(false);
 
                     DlgLogin.dispose();
@@ -5242,17 +5276,19 @@ public class frmUtama extends javax.swing.JFrame {
                     MnLogin.setText("Log Out");
                     lblStts.setText("Admin : ");
                     lblUser.setText(cobaa);
+                    btnToolIGD.setVisible(var.getigd());
+                    btnToolOnline.setVisible(var.getregistrasi());
+                    btnToolPenunjang.setVisible(var.getregistrasi());
+                    btnToolBcdRalan.setVisible(var.getbarcoderalan());
+                    btnToolBcdRanap.setVisible(var.getbarcoderanap());
+                    BtnToolCasemix.setVisible(var.getcasemix());
+                    //
                     MnGantiPassword.setEnabled(true);
                     BtnToolReg.setVisible(var.getregistrasi());
-                    btnToolPenunjang.setVisible(var.getregistrasi());
-                    btnToolOnline.setVisible(var.getregistrasi());
                     BtnToolKamnap.setEnabled(var.getkamar_inap());
                     BtnToolKasir.setEnabled(var.getkasir_ralan());                
                     btnToolLab.setEnabled(var.getperiksa_lab());  
                     btnToolRad.setEnabled(var.getperiksa_radiologi());
-                    btnToolIGD.setEnabled(var.getigd());                    
-                    btnToolBcdRalan.setVisible(var.getbarcoderalan());
-                    btnToolBcdRanap.setVisible(var.getbarcoderanap());
                      BtnToolApotek.setEnabled(var.getapotek());    
                     Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");
                 }else if((var.getjml1()==0)&&(var.getjml2()==0)){
@@ -8889,6 +8925,18 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
         this.setCursor(Cursor.getDefaultCursor());         // TODO add your handling code here:
     }//GEN-LAST:event_btnToolOnlineActionPerformed
 
+    private void BtnToolCasemixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolCasemixActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        isTutup();
+        casemix.isCek();        
+        casemix.tampilkasir();
+        casemix.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        casemix.setLocationRelativeTo(PanelUtama);
+        casemix.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());  
+    }//GEN-LAST:event_BtnToolCasemixActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -8909,6 +8957,7 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
     private widget.ButtonBig BtnMenu;
     private widget.Button BtnSimpanPass;
     private widget.ButtonBig BtnToolApotek;
+    private widget.ButtonBig BtnToolCasemix;
     private widget.ButtonBig BtnToolJualObat;
     private widget.ButtonBig BtnToolKamnap;
     private widget.ButtonBig BtnToolKasir;
@@ -9227,6 +9276,7 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JSeparator jSeparator9;

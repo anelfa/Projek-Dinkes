@@ -5388,6 +5388,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 }
 
                 Valid.editTable(tabModeRwJlDr,"reg_periksa","no_rawat",TNoRw,"stts='Bayar'");
+                Valid.editTable(tabModeRwJlDr,"reg_periksa","no_rawat",TNoRw,"status_bayar='Sudah Bayar'");
                 Sequel.meghapus("temporary_tambahan_potongan","no_rawat",TNoRw.getText());
                 koneksi.setAutoCommit(true);
                 JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");     

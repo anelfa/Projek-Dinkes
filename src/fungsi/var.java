@@ -21,7 +21,7 @@ public final class var {
      private final sekuel Sequel=new sekuel();
     private static String userea="",kode="",kdbangsal="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
-    private static boolean bpjs_rujukan_keluar=false,bpjs_cek_kelas_rawat=false,bpjs_cek_dokter=false,
+    private static boolean casemix=false,bpjs_rujukan_keluar=false,bpjs_cek_kelas_rawat=false,bpjs_cek_dokter=false,
             bpjs_cek_spesialistik=false,bpjs_cek_ruangrawat=false,bpjs_cek_carakeluar=false,bpjs_cek_pasca_pulang=false,bpjs_cek_prosedur=false,bpjs_cek_rujukan_kartu_rs=false, bpjs_cek_rujukan_kartu_pcare=false,bpjs_cek_nomor_rujukan_rs=false,apotek=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
             tindakan_ralan=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
             resep_pulang=false,pasien_meninggal=false,diet_pasien=false,kelahiran_bayi=false,periksa_lab=false,periksa_radiologi=false,
@@ -562,6 +562,7 @@ public final class var {
                         var.resep_dokter=true;
                         var.hitung_bor=true;
                         var.hitung_alos=true;
+                        var.casemix=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -810,6 +811,7 @@ public final class var {
                         var.resep_dokter=rs2.getBoolean("resep_dokter");
                         var.hitung_bor=rs2.getBoolean("hitung_bor");
                         var.hitung_alos=rs2.getBoolean("hitung_alos");
+                         var.casemix=rs2.getBoolean("casemix");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         var.kode="";   
                          var.bpjs_rujukan_keluar=false;
@@ -1056,6 +1058,8 @@ public final class var {
                          var.resep_dokter=false;
                          var.hitung_bor=false;
                          var.hitung_alos=false;
+                          var.casemix=false;
+                         
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -1221,7 +1225,8 @@ public final class var {
     public static boolean getjm_ranap_dokter(){return var.jm_ranap_dokter;}     
     public static boolean getigd(){return var.igd;}     
     public static boolean getbarcoderalan(){return var.barcoderalan;}     
-    public static boolean getbarcoderanap(){return var.barcoderanap;}    
+    public static boolean getbarcoderanap(){return var.barcoderanap;}  
+    public static boolean getcasemix(){return var.casemix;}  
     public static boolean getset_harga_obat_ralan(){return var.set_harga_obat_ralan;}  
     public static boolean getset_harga_obat_ranap(){return var.set_harga_obat_ranap;}  
     public static boolean getpenyakit_pd3i(){return var.penyakit_pd3i;}  

@@ -2,12 +2,16 @@ package simrskhanza;
 import laporan.DlgDiagnosaPenyakit;
 import keuangan.DlgBilingRalan;
 import fungsi.WarnaTable;
+import fungsi.WarnaTable2;
+import fungsi.WarnaTable3;
+import fungsi.TableKasir;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.var;
 import inventory.DlgPenjualan;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -114,7 +118,9 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 column.setPreferredWidth(47);
             }
         }
-        tbKasirRalan.setDefaultRenderer(Object.class, new WarnaTable());
+     
+        tbKasirRalan.setDefaultRenderer(Object.class, new TableKasir());
+          
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         CrPoli.setDocument(new batasInput((byte)100).getKata(CrPoli));
         TotalObat.setDocument(new batasInput((byte)20).getOnlyAngka(TotalObat));
@@ -3628,7 +3634,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                if(pskasir!=null){
                    pskasir.close();
                } 
-            }            
+            }   
+            
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
