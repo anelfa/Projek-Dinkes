@@ -5,15 +5,20 @@
     <entry key="HOSTWEBSERVICE">localhost</entry>
     <entry key="PORTWEBSERVICE">80</entry>
     <entry key="HYBRIDWEB">webapps</entry>
+    
+     <entry key="PROXY">NO</entry> <!--NO:YES-->
+     <entry key="PROXY_IP">10.15.3.20</entry>
+     <entry key="PROXY_PORT">80</entry>
+     
     <entry key="URLSERVERUPDATE">10.50.150.90/webapps/serverupdate</entry>
-    <entry key="AUTOUPDATESISTEM">no</entry>
+    <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
     <entry key="CARICEPAT">nonaktif</entry>
     <entry key="ANTRIAN">sender</entry>
     <entry key="MENUTRANSPARAN">no</entry>
-   <entry key="MENUTRANSPARAN">no</entry>
-    <entry key="URLAPIBPJS">http://10.50.150.20:9090/WsLokalRest_2.1</entry>
-    <entry key="SECRETKEYAPIBPJS">8cG0606137</entry>
-    <entry key="CONSIDAPIBPJS">12151</entry>
+    <entry key="MENUTRANSPARAN">no</entry>
+    <entry key="URLAPIBPJS">http://dvlp.bpjs-kesehatan.go.id:8081/VClaim-rest</entry>
+    <entry key="SECRETKEYAPIBPJS">7lH3C91B3A</entry>
+    <entry key="CONSIDAPIBPJS">17643</entry>
     <entry key="URLAPIAPLICARE">http://api.bpjs-kesehatan.go.id/aplicaresws</entry>
     <entry key="SECRETKEYAPIAPLICARE">8cG0606137</entry>
     <entry key="CONSIDAPIAPLICARE">12151</entry>
@@ -22,9 +27,18 @@
     <entry key="POLIAKTIFKASIRRALAN"></entry>
     <entry key="JADWALDOKTERDIREGISTRASI">no</entry>
     <entry key="IPPRINTERTRACER">192.168.150.16/label2</entry>
+    
     <entry key="URLDUKCAPILJAKARTA">http://kependudukan.jakarta.go.id/rsudxxx/xml.jsp</entry>
     <entry key="USERDUKCAPILJAKARTA">WSRSIABK</entry>
     <entry key="PASSDUKCAPILJAKARTA">R8ud!KSW5</entry>
     <entry key="VAR1DUKCAPILJAKARTA">RSIABK</entry>
     <entry key="VAR2DUKCAPILJAKARTA">12</entry>
+    
+    <entry key="DISKOMINFODUKCAPILJAKARTA">YES</entry> <!--NO:YES-->
+    <entry key="DISKOMINFOURLDUKCAPILJAKARTA">http://soadev.jakarta.go.id/rest/gov/dki/dukcapil/ws/</entry>
+    <entry key="DISKOMINFOUSERDUKCAPILJAKARTA">dinkes</entry>
+    <entry key="DISKOMINFOPASSDUKCAPILJAKARTA">dinkes123!!</entry>
+    <entry key="DISKOMINFOVAR1DUKCAPILJAKARTA">DINKES</entry>
+    <entry key="DISKOMINFOVAR2DUKCAPILJAKARTA">SIDINKES</entry>
+    <entry key="DISKOMINFOVAR3DUKCAPILJAKARTA">DINKES</entry>
 </properties>
