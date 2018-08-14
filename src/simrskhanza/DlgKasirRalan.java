@@ -75,7 +75,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         setSize(885,674);
 
         Object[] rowkasir={"Kd.Dokter","Dokter Dituju","Nomer RM","Pasien","Poliklinik","Penanggung Jawab","Alamat P.J.","Hubungan P.J.",
-                           "Biaya Regristrasi","Jenis Bayar","Status","No.Rawat","Tanggal","Jam","No.Reg"};
+                           "Status Bayar","Jenis Bayar","Status","No.Rawat","Tanggal","Jam","No.Reg"};
         tabModekasir=new DefaultTableModel(null,rowkasir){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -3519,7 +3519,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         try{   
             pskasir=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
                 "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,poliklinik.nm_poli,"+
-                "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab "+
+                "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.status_bayar,reg_periksa.stts,penjab.png_jawab "+
                 "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
                 "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.kd_pj=penjab.kd_pj "+
                 "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_poli=poliklinik.kd_poli  where  "+
@@ -3618,7 +3618,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                    rskasir.getString(10),
                                    rskasir.getString(11),
                                    rskasir.getString(12),
-                                   Valid.SetAngka(rskasir.getDouble(13)),
+                                   rskasir.getString("status_bayar"),
+                                   
                                    rskasir.getString("png_jawab"),
                                    rskasir.getString(14),
                                    rskasir.getString("no_rawat"),

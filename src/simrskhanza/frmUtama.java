@@ -296,6 +296,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgLogin.setVisible(true);
         DlgLogin.setLocationRelativeTo(null);
         //button
+        BtnToolReg.setVisible(false);
         btnToolIGD.setVisible(false);
         btnToolOnline.setVisible(false);
         btnToolPenunjang.setVisible(false);

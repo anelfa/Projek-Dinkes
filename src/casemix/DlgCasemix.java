@@ -285,7 +285,6 @@ public final class DlgCasemix extends javax.swing.JDialog {
         MnBilling = new javax.swing.JMenuItem();
         MnDataRalan = new javax.swing.JMenuItem();
         MnDataPemberianObat = new javax.swing.JMenuItem();
-        MnPoli = new javax.swing.JMenuItem();
         MnDokter = new javax.swing.JMenuItem();
         MnPenjab = new javax.swing.JMenuItem();
         MnPenjualan = new javax.swing.JMenuItem();
@@ -567,22 +566,6 @@ public final class DlgCasemix extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnDataPemberianObat);
-
-        MnPoli.setBackground(new java.awt.Color(255, 255, 255));
-        MnPoli.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnPoli.setForeground(new java.awt.Color(60, 80, 50));
-        MnPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnPoli.setText("Ganti Poliklinik");
-        MnPoli.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnPoli.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnPoli.setName("MnPoli"); // NOI18N
-        MnPoli.setPreferredSize(new java.awt.Dimension(250, 25));
-        MnPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnPoliActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnPoli);
 
         MnDokter.setBackground(new java.awt.Color(255, 255, 255));
         MnDokter.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2677,13 +2660,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         billing.poli.setVisible(true);
     }//GEN-LAST:event_btnCariPoliActionPerformed
 
-    private void MnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPoliActionPerformed
-        WindowGantiPoli.setSize(630,80);
-        WindowGantiPoli.setLocationRelativeTo(internalFrame1);
-        WindowGantiPoli.setAlwaysOnTop(false);
-        WindowGantiPoli.setVisible(true);
-    }//GEN-LAST:event_MnPoliActionPerformed
-
     private void MnDiagnosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDiagnosaActionPerformed
         if(TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
@@ -3260,6 +3236,19 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }//GEN-LAST:event_MnKamarInapActionPerformed
 
+    private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnOperasiActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+            TCari.requestFocus();
+        }else{
+            DlgTagihanOperasi dlgro=new DlgTagihanOperasi(null,false);
+            dlgro.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+            dlgro.setLocationRelativeTo(internalFrame1);
+            dlgro.setNoRm(TNoRw.getText(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString()+", "+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString(),"Ralan");
+            dlgro.setVisible(true);
+        }
+    }//GEN-LAST:event_MnOperasiActionPerformed
+
     private void MnPemberianObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemberianObatActionPerformed
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -3297,19 +3286,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }
         }
     }//GEN-LAST:event_MnPemberianObatActionPerformed
-
-    private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnOperasiActionPerformed
-        if(TNoRw.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-            TCari.requestFocus();
-        }else{
-            DlgTagihanOperasi dlgro=new DlgTagihanOperasi(null,false);
-            dlgro.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
-            dlgro.setLocationRelativeTo(internalFrame1);
-            dlgro.setNoRm(TNoRw.getText(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),2).toString()+", "+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString(),"Ralan");
-            dlgro.setVisible(true);
-        }
-    }//GEN-LAST:event_MnOperasiActionPerformed
 
     /**
     * @param args the command line arguments
@@ -3402,7 +3378,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem MnPenjualan;
     private javax.swing.JMenuItem MnPeriksaLab;
     private javax.swing.JMenuItem MnPeriksaRadiologi;
-    private javax.swing.JMenuItem MnPoli;
     private javax.swing.JMenu MnRekap;
     private javax.swing.JMenuItem MnRekapBulananDokter;
     private javax.swing.JMenuItem MnRekapBulananParamedis;

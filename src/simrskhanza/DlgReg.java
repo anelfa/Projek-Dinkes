@@ -12,6 +12,7 @@
 
 package simrskhanza;
 import bridging.BPJSDataSEP;
+import fungsi.TableReg;
 import laporan.DlgDiagnosaPenyakit;
 import laporan.DlgFrekuensiPenyakitRalan;
 import keuangan.DlgBilingRalan;
@@ -161,7 +162,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         Object[] row={"P","No.Reg","No.Rawat","Tanggal","Jam","Kd.Dokter","Dokter Dituju","Poliklinik","Nomer RM",
             "Pasien","J.K.","Tgl.Lahir","Umur","Jenis Bayar","Penanggung Jawab","Alamat P.J.","Hubungan P.J.",
-            "Biaya Regristrasi","Status","No.Poli"};
+            "Biaya Regristrasi","Status","No.Poli","Stts Periksa"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -175,7 +176,7 @@ public final class DlgReg extends javax.swing.JDialog {
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
+                 java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -187,7 +188,7 @@ public final class DlgReg extends javax.swing.JDialog {
         tbPetugas.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbPetugas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < 21; i++) {
             TableColumn column = tbPetugas.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -229,9 +230,11 @@ public final class DlgReg extends javax.swing.JDialog {
                 column.setPreferredWidth(80);
             }else if(i==19){
                 column.setPreferredWidth(80);
+            }else if(i==20){
+                column.setPreferredWidth(80);
             }
         }
-        tbPetugas.setDefaultRenderer(Object.class, new WarnaTable());
+        tbPetugas.setDefaultRenderer(Object.class, new TableReg());
 
         TNoReg.setDocument(new batasInput((byte)8).getKata(TNoReg));
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
@@ -5510,7 +5513,7 @@ if(TPasien.getText().trim().equals("")){
         try {
             ps=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
                        "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,poliklinik.nm_poli,"+
-                       "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.no_poli "+
+                       "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.no_poli,reg_periksa.stts "+
                        "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
                        "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                        "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli  where  "+
@@ -5629,7 +5632,8 @@ if(TPasien.getText().trim().equals("")){
                                    rs.getString(15),
                                     rs.getString(16),
                                    rs.getString(17),
-                                   rs.getString(19)});
+                                   rs.getString(19),
+                                    rs.getString("stts")});
                 }                    
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);

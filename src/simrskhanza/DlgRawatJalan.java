@@ -1370,6 +1370,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     TNoRw.getText(),TSuhu.getText(),TTensi.getText(),TNadi.getText(),TRespirasi.getText(),TTinggi.getText(),
                     TBerat.getText(),TGCS.getText(),TKeluhan.getText(),TPemeriksaan.getText(),TAlergi.getText()
                 });
+                
+                
             }
             if(TabRawat.getSelectedIndex()==0){
                 if(KdDok.getText().trim().equals("")||TDokter.getText().trim().equals("")){

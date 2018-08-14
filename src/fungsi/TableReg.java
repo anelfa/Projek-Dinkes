@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Owner
  */
-public class TableKasir extends DefaultTableCellRenderer {
+public class TableReg extends DefaultTableCellRenderer {
     private Color batal;
    
 
@@ -22,8 +22,8 @@ public class TableKasir extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-         String status = table.getValueAt(row, 10).toString();
-         String status_bayar = table.getValueAt(row, 8).toString();
+         String status = table.getValueAt(row, 20).toString();
+      //   String status_bayar = table.getValueAt(row, 8).toString();
        if (row % 2 == 1){
             component.setBackground(new Color(250,240,230));
             
@@ -32,7 +32,7 @@ public class TableKasir extends DefaultTableCellRenderer {
             component.setBackground(new Color(255,255,255));
         } 
        if( status.equals("Batal")){component.setBackground(new Color(247,169,169));}
-       if( status_bayar.equals("Sudah Bayar")){component.setBackground(new Color(152,221,242));}
+     //  if( status_bayar.equals("Sudah Bayar")){component.setBackground(new Color(152,221,242));}
       
         
   
