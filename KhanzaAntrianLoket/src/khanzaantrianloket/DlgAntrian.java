@@ -37,9 +37,10 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private final Connection koneksi=koneksiDB.condb();
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
     private static final Properties prop = new Properties();
-    private String antri="0",loket="0";
-    private PreparedStatement pshapus,pssimpan,pscari;
-    private ResultSet rs;
+    private String antri="0",loket="0",status="0";
+    private PreparedStatement pshapus,pssimpan,pscari,psupdate,pssimpan_tmp,pscari_tmp,psupdate_tmp;
+    private ResultSet rs,rs2;
+    private int urut;
     private BackgroundMusic music;
     /** Creates new form DlgBiling
      * @param parent
@@ -55,15 +56,34 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         } catch (IOException ex) {
             System.out.println(ex);
         }
-        
+        txtLoket.setText(prop.getProperty("LOKET"));
         try {
             pshapus=koneksi.prepareStatement("delete from antriloket");
-            pssimpan=koneksi.prepareStatement("insert into antriloket values(?,?)");
-            pscari=koneksi.prepareStatement("select antrian,loket from antriloket");
+            pssimpan=koneksi.prepareStatement("insert into antriloket values(?,?,?)");
+            
+            psupdate=koneksi.prepareStatement("update antriloket SET status=? where loket=?");
+            pscari=koneksi.prepareStatement("select antrian,loket,status from antriloket");
+            
+            pssimpan_tmp=koneksi.prepareStatement("insert into antrianloket_tmp values(?,?)");
+            psupdate_tmp=koneksi.prepareStatement("update antrianloket_tmp SET antrian=? where loket=?");
+            pscari_tmp=koneksi.prepareStatement("select loket,antrian from antrianloket_tmp where loket=?");
+            pscari_tmp.setString(1,prop.getProperty("LOKET"));
+            rs2=pscari_tmp.executeQuery();
+            if(!rs2.next())
+           {
+            Antrian.setText("0");
+            
+           }
+           else{
+            Antrian.setText(rs2.getString("antrian"));
+           }
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+       
+            
+           
+           
         jam();
         javax.swing.Timer timer = new javax.swing.Timer(100, this);
         timer.start();
@@ -97,10 +117,11 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         BtnAntri1 = new widget.Button();
         BtnBatal1 = new widget.Button();
         label1 = new widget.Label();
-        cmbloket = new widget.ComboBox();
         label2 = new widget.Label();
         Antrian = new widget.TextBox();
         BtnBatal2 = new widget.Button();
+        BtnPanggil = new widget.Button();
+        txtLoket = new widget.TextBox();
 
         DlgDisplay.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         DlgDisplay.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
@@ -222,9 +243,9 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         panelisi5.setPreferredSize(new java.awt.Dimension(12, 44));
         panelisi5.setLayout(null);
 
-        BtnAntri1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
+        BtnAntri1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/2rightarrow.png"))); // NOI18N
         BtnAntri1.setMnemonic('7');
-        BtnAntri1.setText("Antri");
+        BtnAntri1.setText("Next Call");
         BtnAntri1.setToolTipText("Alt+7");
         BtnAntri1.setIconTextGap(3);
         BtnAntri1.setName("BtnAntri1"); // NOI18N
@@ -250,24 +271,20 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }
         });
         panelisi5.add(BtnBatal1);
-        BtnBatal1.setBounds(130, 60, 100, 30);
+        BtnBatal1.setBounds(180, 130, 100, 30);
 
         label1.setText("Antrian :");
         label1.setName("label1"); // NOI18N
         panelisi5.add(label1);
         label1.setBounds(145, 12, 60, 23);
 
-        cmbloket.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
-        cmbloket.setName("cmbloket"); // NOI18N
-        panelisi5.add(cmbloket);
-        cmbloket.setBounds(65, 12, 60, 23);
-
         label2.setText("Loket :");
         label2.setName("label2"); // NOI18N
         panelisi5.add(label2);
         label2.setBounds(0, 12, 60, 23);
 
-        Antrian.setText("1");
+        Antrian.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Antrian.setText("0");
         Antrian.setName("Antrian"); // NOI18N
         panelisi5.add(Antrian);
         Antrian.setBounds(210, 12, 60, 24);
@@ -285,7 +302,34 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }
         });
         panelisi5.add(BtnBatal2);
-        BtnBatal2.setBounds(20, 100, 100, 30);
+        BtnBatal2.setBounds(20, 130, 100, 30);
+
+        BtnPanggil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/42a.png"))); // NOI18N
+        BtnPanggil.setMnemonic('7');
+        BtnPanggil.setText("Re-Call");
+        BtnPanggil.setToolTipText("Alt+7");
+        BtnPanggil.setIconTextGap(3);
+        BtnPanggil.setName("BtnPanggil"); // NOI18N
+        BtnPanggil.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPanggil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPanggilActionPerformed(evt);
+            }
+        });
+        panelisi5.add(BtnPanggil);
+        BtnPanggil.setBounds(180, 60, 100, 30);
+
+        txtLoket.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtLoket.setText("1");
+        txtLoket.setEnabled(false);
+        txtLoket.setName("txtLoket"); // NOI18N
+        txtLoket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLoketActionPerformed(evt);
+            }
+        });
+        panelisi5.add(txtLoket);
+        txtLoket.setBounds(60, 12, 60, 24);
 
         internalFrame1.add(panelisi5, java.awt.BorderLayout.CENTER);
 
@@ -309,11 +353,32 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
     private void BtnAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntri1ActionPerformed
         try {
+            urut=Integer.parseInt(Antrian.getText())+1;
+             Antrian.setText(""+urut);
             pshapus.executeUpdate();
-            pssimpan.setString(1,cmbloket.getSelectedItem().toString());
-            pssimpan.setString(2,Antrian.getText());
+            
+            pscari_tmp.setString(1,prop.getProperty("LOKET"));
+            rs2=pscari_tmp.executeQuery();
+            
+           
+           if(!rs2.next())
+           {
+            pssimpan_tmp.setString(1,prop.getProperty("LOKET"));
+            pssimpan_tmp.setString(2,Integer.toString(urut));          
+            pssimpan_tmp.executeUpdate();
+           }
+           else{
+            psupdate_tmp.setString(1,Integer.toString(urut));
+            psupdate_tmp.setString(2,prop.getProperty("LOKET"));          
+            psupdate_tmp.executeUpdate();  
+           }
+            pssimpan.setString(1,prop.getProperty("LOKET"));
+            pssimpan.setString(2,Integer.toString(urut));
+            pssimpan.setString(3,"0");
             pssimpan.executeUpdate();
-            System.out.println("Loket : "+cmbloket.getSelectedItem().toString()+" Antrian : "+Antrian.getText());
+            
+            
+         //   System.out.println("Loket : "+cmbloket.getSelectedItem().toString()+" Antrian : "+Antrian.getText());
         } catch (Exception e) {
             System.out.println(e);
         }                          
@@ -343,6 +408,29 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         }  
     }//GEN-LAST:event_BtnBatal2ActionPerformed
 
+    private void BtnPanggilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPanggilActionPerformed
+ try {
+     pshapus.executeUpdate();
+     
+            pscari_tmp.setString(1,prop.getProperty("LOKET"));
+            rs2=pscari_tmp.executeQuery();
+            while(rs2.next())
+            {
+             pssimpan.setString(1,prop.getProperty("LOKET"));
+            pssimpan.setString(2,rs2.getString("antrian"));
+            pssimpan.setString(3,"0");
+            pssimpan.executeUpdate();  
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_BtnPanggilActionPerformed
+
+    private void txtLoketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoketActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLoketActionPerformed
+
 
 
     /**
@@ -371,8 +459,8 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private widget.Button BtnBatal2;
     private widget.Button BtnDisplay;
     private widget.Button BtnKeluar;
+    private widget.Button BtnPanggil;
     private javax.swing.JDialog DlgDisplay;
-    private widget.ComboBox cmbloket;
     private widget.InternalFrame form1;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame5;
@@ -385,6 +473,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi5;
     private javax.swing.JPanel panelruntext;
+    private widget.TextBox txtLoket;
     // End of variables declaration//GEN-END:variables
     
     
@@ -412,11 +501,18 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     } 
     
     private void panggil(int antrian){
-        String[] urut={"","./suara/satu.mp3","./suara/dua.mp3","./suara/tiga.mp3","./suara/empat.mp3",
-                       "./suara/lima.mp3","./suara/enam.mp3","./suara/tujuh.mp3","./suara/delapan.mp3",
-                       "./suara/sembilan.mp3","./suara/sepuluh.mp3","./suara/sebelas.mp3"};
+        String[] urut={"","./suara/1.mp3","./suara/2.mp3","./suara/3.mp3","./suara/4.mp3",
+                       "./suara/5.mp3","./suara/6.mp3","./suara/7.mp3","./suara/8.mp3",
+                       "./suara/9.mp3","./suara/10.mp3","./suara/11.mp3","./suara/12.mp3",
+                       "./suara/13.mp3","./suara/14.mp3","./suara/15.mp3","./suara/16.mp3",
+                        "./suara/17.mp3","./suara/18.mp3","./suara/19.mp3","./suara/20.mp3",
+                        "./suara/30.mp3","./suara/40.mp3","./suara/50.mp3","./suara/60.mp3",
+                       "./suara/70.mp3","./suara/80.mp3","./suara/90.mp3","./suara/100.mp3",
+                       "./suara/200.mp3","./suara/300.mp3","./suara/400.mp3","./suara/500.mp3",
+                        "./suara/600.mp3","./suara/700.mp3","./suara/800.mp3","./suara/900.mp3",
+                        "./suara/1000.mp3"};
         
-        if (antrian < 12){
+        if (antrian <= 20){
             try {
                 music = new BackgroundMusic(urut[antrian]);
                 music.start();
@@ -424,17 +520,124 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }            
-        }else if (antrian < 20){
+        }else if (antrian < 30){
             try {
-                music = new BackgroundMusic(urut[antrian-10]);
+                music = new BackgroundMusic(urut[20]);
                 music.start();
                 Thread.sleep(1000);                
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
             
+            
+            panggil(antrian%10);
+        }else if (antrian == 30){
             try {
-                music = new BackgroundMusic("./suara/belas.mp3");
+                music = new BackgroundMusic(urut[21]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 40){
+            try {
+                music = new BackgroundMusic(urut[21]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            panggil(antrian%10);
+        }else if (antrian == 40){
+            try {
+                music = new BackgroundMusic(urut[22]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 50){
+            try {
+                music = new BackgroundMusic(urut[22]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            panggil(antrian%10);
+        }
+        else if (antrian == 50){
+            try {
+                music = new BackgroundMusic(urut[23]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 60){
+            try {
+                music = new BackgroundMusic(urut[23]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            panggil(antrian%10);
+        }else if (antrian == 60){
+            try {
+                music = new BackgroundMusic(urut[24]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 70){
+            try {
+                music = new BackgroundMusic(urut[24]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            panggil(antrian%10);
+        }
+        else if (antrian == 70){
+            try {
+                music = new BackgroundMusic(urut[25]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 80){
+            try {
+                music = new BackgroundMusic(urut[25]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            panggil(antrian%10);
+        }else if (antrian == 80){
+            try {
+                music = new BackgroundMusic(urut[26]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 90){
+            try {
+                music = new BackgroundMusic(urut[26]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            panggil(antrian%10);
+        }else if (antrian == 90){
+            try {
+                music = new BackgroundMusic(urut[27]);
                 music.start();
                 Thread.sleep(1000);                
             } catch (InterruptedException ex) {
@@ -442,45 +645,185 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }
         }else if (antrian < 100){
             try {
-                music = new BackgroundMusic(urut[antrian/10]);
+                music = new BackgroundMusic(urut[27]);
                 music.start();
                 Thread.sleep(1000);                
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
-            try {
-                music = new BackgroundMusic("./suara/puluh.mp3");
-                music.start();
-                Thread.sleep(1000);                
-            } catch (InterruptedException ex) {
-                System.out.println(ex);
-            }
-            
             panggil(antrian%10);
+        }else if (antrian == 100){
+            try {
+                music = new BackgroundMusic(urut[28]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
         }else if (antrian < 200){
             try {
-                music = new BackgroundMusic("./suara/seratus.mp3");
+                music = new BackgroundMusic(urut[28]);
                 music.start();
                 Thread.sleep(1000);                
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
             panggil(antrian-100);
-        }else if (antrian < 1000){
-            panggil(antrian/100);
-            
+        }else if (antrian == 200){
             try {
-                music = new BackgroundMusic("./suara/ratus.mp3");
+                music = new BackgroundMusic(urut[29]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 300){
+            try {
+                music = new BackgroundMusic(urut[29]);
                 music.start();
                 Thread.sleep(1000);                
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
             
-            panggil(antrian%100);
+            panggil(antrian-200);
+        }else if (antrian == 300){
+            try {
+                music = new BackgroundMusic(urut[30]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 400){
+            try {
+                music = new BackgroundMusic(urut[30]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            
+            panggil(antrian-300);
+        }else if (antrian == 400){
+            try {
+                music = new BackgroundMusic(urut[31]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 500){
+            try {
+                music = new BackgroundMusic(urut[31]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            
+            panggil(antrian-400);
+        }else if (antrian == 500){
+            try {
+                music = new BackgroundMusic(urut[32]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 600){
+            try {
+                music = new BackgroundMusic(urut[32]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            
+            panggil(antrian-500);
+        }else if (antrian == 600){
+            try {
+                music = new BackgroundMusic(urut[33]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 700){
+            try {
+                music = new BackgroundMusic(urut[33]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            
+            panggil(antrian-600);
+        }else if (antrian == 700){
+            try {
+                music = new BackgroundMusic(urut[34]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 800){
+            try {
+                music = new BackgroundMusic(urut[34]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            
+            panggil(antrian-700);
+        }else if (antrian == 800){
+            try {
+                music = new BackgroundMusic(urut[35]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 900){
+            try {
+                music = new BackgroundMusic(urut[35]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            
+            panggil(antrian-800);
+        }else if (antrian == 900){
+            try {
+                music = new BackgroundMusic(urut[36]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+        }else if (antrian < 1000){
+            try {
+                music = new BackgroundMusic(urut[36]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+            
+            panggil(antrian-900);
+        }else if (antrian == 1000){
+            try {
+                music = new BackgroundMusic(urut[37]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+           
         }
+        
     }
     
     private void jam(){
@@ -495,7 +838,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                 }
                 
                 String detik = nol_detik + Integer.toString(nilai_detik);
-                System.out.println("detik : "+detik);
+                //System.out.println("detik : "+detik);
                 if(detik.equals("05")||detik.equals("10")||detik.equals("15")||detik.equals("20")||detik.equals("25")||detik.equals("30")||detik.equals("35")||detik.equals("40")||detik.equals("45")||detik.equals("50")||detik.equals("55")||detik.equals("00")){                    
                     antri="";
                     loket="";
@@ -503,38 +846,82 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                         rs=pscari.executeQuery();
                         if(rs.next()){
                             antri=rs.getString("antrian");
-                            loket=rs.getString("loket");
+                           // loket=rs.getString("loket");
+                           loket=prop.getProperty("LOKET");
+                           
+                             status=rs.getString("status");
                         }
                     } catch (Exception ez) {
                         System.out.println(ez);
                     }
+                    if(status.equals("0")){
                     if(!antri.equals("")){
                         Antrian.setText(antri);                    
                         labelLoket.setText(loket);
                         labelantri1.setText(antri);
                         if(prop.getProperty("ANTRIAN").equals("player")){
                             try {
-                                music=new BackgroundMusic("./suara/nomor-urut.mp3");
+                                music=new BackgroundMusic("./suara/Nomor_Antrian.mp3");
                                 music.start();
                                 Thread.sleep(1500);
                                 panggil(Integer.parseInt(antri));
-                                music=new BackgroundMusic("./suara/loket.mp3");
+                                if(prop.getProperty("STATUSLOKET").equals("poly"))
+                                {
+                                 music=new BackgroundMusic("./suara/Dipoly.mp3");   
+                                }
+                                if(prop.getProperty("STATUSLOKET").equals("loket"))
+                                {
+                                 music=new BackgroundMusic("./suara/Diloket.mp3");   
+                                }
+                                if(prop.getProperty("STATUSLOKET").equals("counter"))
+                                {
+                                 music=new BackgroundMusic("./suara/Dicounter.mp3");   
+                                }
                                 music.start();
-                                Thread.sleep(1500);
+                                Thread.sleep(1400);
+//                                if(prop.getProperty("LOKET").equals("1"))
+//                                {
+//                                music=new BackgroundMusic("./suara/A.mp3"); 
+//                                }
+//                                if(prop.getProperty("LOKET").equals("2"))
+//                                {
+//                                music=new BackgroundMusic("./suara/B.mp3"); 
+//                                }
+//                                if(prop.getProperty("LOKET").equals("3"))
+//                                {
+//                                music=new BackgroundMusic("./suara/C.mp3"); 
+//                                }
+//                                if(prop.getProperty("LOKET").equals("4"))
+//                                {
+//                                music=new BackgroundMusic("./suara/D.mp3"); 
+//                                }
+//                                music.start();
                                 panggil(Integer.parseInt(loket));
                             } catch (InterruptedException ex) {
                                System.out.println(e);
                             }
+                           
                         }                               
 
-                        i=Integer.parseInt(antri)+1;
-                        Antrian.setText(""+i);
+                        i=Integer.parseInt(antri);
+                       // Antrian.setText(""+i);
+                        
                         /*try {
                             pshapus.executeUpdate();
                         } catch (Exception ex) {
                             System.out.println(ex);
                         }*/
-                    }                          
+                        try {
+            //pshapus.executeUpdate();
+            psupdate.setString(1,"1");
+            psupdate.setString(2,loket);
+            psupdate.executeUpdate();
+//            System.out.println("Loket : "+cmbloket.getSelectedItem().toString()+" Antrian : "+Antrian.getText());
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+                    }  
+                   }
                 }
             }
         };

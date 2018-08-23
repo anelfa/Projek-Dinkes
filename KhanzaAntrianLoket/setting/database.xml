@@ -3,10 +3,12 @@
 <properties>
     <comment>KhanzaHMS</comment>
     <entry key="HOST">localhost</entry>
-    <entry key="DATABASE">sik</entry>
+    <entry key="DATABASE">db_rsukramatjati_fix</entry>
     <entry key="PORT">3306</entry>
     <entry key="USER">root</entry>
-    <entry key="PAS">akusayangsamakamu</entry>
+    <entry key="PAS"></entry>
     <entry key="ANTRIAN">player</entry>
+    <entry key="LOKET">2</entry>
+    <entry key="STATUSLOKET">loket</entry> <!-- poly,loket,counter -->
 </properties>
 
