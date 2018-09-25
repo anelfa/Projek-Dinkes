@@ -848,7 +848,7 @@ public class frmUtama extends javax.swing.JFrame {
         WindowInput.setUndecorated(true);
         WindowInput.setResizable(false);
 
-        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ubah Password ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame6.setName("internalFrame6"); // NOI18N
         internalFrame6.setWarnaBawah(new java.awt.Color(235, 245, 225));
         internalFrame6.setLayout(null);
@@ -906,6 +906,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         Passbaru1.setName("Passbaru1"); // NOI18N
         Passbaru1.setSelectionColor(new java.awt.Color(255, 255, 255));
+        Passbaru1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Passbaru1ActionPerformed(evt);
+            }
+        });
         internalFrame6.add(Passbaru1);
         Passbaru1.setBounds(128, 60, 190, 23);
 
@@ -928,7 +933,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.setUndecorated(true);
         DlgHome.setResizable(false);
 
-        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(40, 70, 50))); // NOI18N
+        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(40, 70, 50))); // NOI18N
         panelMenu.setName("panelMenu"); // NOI18N
         panelMenu.setPreferredSize(new java.awt.Dimension(2412, 3653));
         panelMenu.setWarnaAtas(new java.awt.Color(250, 255, 250));
@@ -4161,7 +4166,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10/08/2018" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07/09/2018" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -4203,14 +4208,14 @@ public class frmUtama extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("::[ Khanza Hospital Management System 2017 ]::");
+        setTitle("::[ Khanza Hospital Management System 2018 ]::");
         setIconImages(null);
         addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentMoved(java.awt.event.ComponentEvent evt) {
-                formComponentMoved(evt);
-            }
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
+            }
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                formComponentMoved(evt);
             }
         });
         addWindowStateListener(new java.awt.event.WindowStateListener() {
@@ -4219,11 +4224,11 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
@@ -4397,7 +4402,7 @@ public class frmUtama extends javax.swing.JFrame {
         internalFrame1.add(btnToolBcdRanap);
 
         BtnToolCasemix.setForeground(new java.awt.Color(80, 100, 80));
-        BtnToolCasemix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Money-32x32.png"))); // NOI18N
+        BtnToolCasemix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/logoBPJS2.png"))); // NOI18N
         BtnToolCasemix.setMnemonic('R');
         BtnToolCasemix.setText("Casemix");
         BtnToolCasemix.setToolTipText("Alt+R");
@@ -5114,12 +5119,12 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu4.setName("jMenu4"); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(124, 30));
         jMenu4.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu4MenuSelected(evt);
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenu4MenuSelected(evt);
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
         });
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -5140,12 +5145,12 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu8.setName("jMenu8"); // NOI18N
         jMenu8.setPreferredSize(new java.awt.Dimension(124, 30));
         jMenu8.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu8MenuSelected(evt);
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jMenu8MenuSelected(evt);
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
         });
         jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -8931,13 +8936,17 @@ private void btnReferensiKamarInhealthActionPerformed(java.awt.event.ActionEvent
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         casemix.isCek();        
-        casemix.tampilkasir();
+        casemix.tampil();
         casemix.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         casemix.setLocationRelativeTo(PanelUtama);
         casemix.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());  
     }//GEN-LAST:event_BtnToolCasemixActionPerformed
+
+    private void Passbaru1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Passbaru1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Passbaru1ActionPerformed
 
     /**
     * @param args the command line arguments
