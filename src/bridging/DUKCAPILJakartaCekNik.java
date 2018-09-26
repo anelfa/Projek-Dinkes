@@ -72,6 +72,8 @@ public class DUKCAPILJakartaCekNik {
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode root = mapper.readTree(jsonPrettyPrintString);
                 nameNode = root.path("DATA");
+                System.out.println(nameNode);
+                
             }
              try {
                 DSC_JENIS_PKRJN=nameNode.path("DSC_JENIS_PKRJN").asText();

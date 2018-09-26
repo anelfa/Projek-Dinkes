@@ -664,6 +664,23 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
+    public void queryu4(String qry,int i,String[] a){
+        try {
+            try{            
+                ps=connect.prepareStatement(qry);
+                for(angka=1;angka<=i;angka++){
+                    ps.setString(angka,a[angka-1]);
+                } 
+                ps.executeUpdate(); 
+             }catch(Exception e){
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
     
     public void AutoComitFalse(){
         try {
