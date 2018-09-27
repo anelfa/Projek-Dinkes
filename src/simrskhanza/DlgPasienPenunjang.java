@@ -92,7 +92,13 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
     public DlgPasienPenunjang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+if(var.getjml1()>=1){  
+            BtnHapus.setVisible(true);
+        }
+        else
+        {
+         BtnHapus.setVisible(false);   
+        }
         Object[] row={"P","No.R.M","Nama Pasien","No.SIM/KTP","J.K.","Tmp.Lahir","Tgl.Lahir","Nama Ibu","Alamat",
                       "G.D.","Pekerjaan","Stts.Nikah","Agama","Tgl.Daftar","No.Telp/HP","Umur","Pendidikan",
                       "Keluarga","Nama Keluarga","Asuransi/Askes","No.Peserta","Daftar","Pekerjaan P.J.","Alamat P.J."};

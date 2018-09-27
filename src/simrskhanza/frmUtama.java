@@ -304,6 +304,11 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolBcdRanap.setVisible(false);
         BtnToolJualObat.setVisible(false);
         BtnToolCasemix.setVisible(false);
+        BtnToolKamnap.setVisible(false);
+        BtnToolApotek.setVisible(false);
+         BtnToolKasir.setVisible(false);
+                btnToolLab.setVisible(false);
+                btnToolRad.setVisible(false);
         
         //-----
         WindowInput.setSize(349,180);
@@ -4435,7 +4440,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolLab.setText("Laborat");
         btnToolLab.setToolTipText("Alt+O");
         btnToolLab.setAlignmentX(0.6F);
-        btnToolLab.setEnabled(false);
         btnToolLab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolLab.setIconTextGap(3);
@@ -4457,7 +4461,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolRad.setText("Radiologi");
         btnToolRad.setToolTipText("Alt+A");
         btnToolRad.setAlignmentX(0.6F);
-        btnToolRad.setEnabled(false);
         btnToolRad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolRad.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolRad.setIconTextGap(3);
@@ -4479,7 +4482,6 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolJualObat.setText("Penjualan");
         BtnToolJualObat.setToolTipText("Alt+J");
         BtnToolJualObat.setAlignmentX(0.6F);
-        BtnToolJualObat.setEnabled(false);
         BtnToolJualObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnToolJualObat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         BtnToolJualObat.setIconTextGap(3);
@@ -4501,7 +4503,6 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolApotek.setText("Apotek");
         BtnToolApotek.setToolTipText("Alt+A");
         BtnToolApotek.setAlignmentX(0.6F);
-        BtnToolApotek.setEnabled(false);
         BtnToolApotek.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnToolApotek.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         BtnToolApotek.setIconTextGap(3);
@@ -4531,7 +4532,6 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolKamnap.setText("Kamar Inap");
         BtnToolKamnap.setToolTipText("Alt+K");
         BtnToolKamnap.setAlignmentX(0.6F);
-        BtnToolKamnap.setEnabled(false);
         BtnToolKamnap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnToolKamnap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         BtnToolKamnap.setIconTextGap(3);
@@ -4553,7 +4553,6 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolKasir.setText("Kasir Ralan");
         BtnToolKasir.setToolTipText("Alt+S");
         BtnToolKasir.setAlignmentX(0.6F);
-        BtnToolKasir.setEnabled(false);
         BtnToolKasir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnToolKasir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         BtnToolKasir.setIconTextGap(3);
@@ -5205,11 +5204,11 @@ public class frmUtama extends javax.swing.JFrame {
                 BtnToolCasemix.setVisible(false);
                 //
                 BtnToolReg.setVisible(false);
-                BtnToolKamnap.setEnabled(false);
-                BtnToolApotek.setEnabled(false);
-                BtnToolKasir.setEnabled(false);
-                btnToolLab.setEnabled(false);
-                btnToolRad.setEnabled(false);
+                BtnToolKamnap.setVisible(false);
+                BtnToolApotek.setVisible(false);
+                BtnToolKasir.setVisible(false);
+                btnToolLab.setVisible(false);
+                btnToolRad.setVisible(false);
                 MnGantiPassword.setEnabled(false);
                 edAdmin.setText("");
                 edPwd.setText("");
@@ -5263,11 +5262,11 @@ public class frmUtama extends javax.swing.JFrame {
                     //
                     BtnMenu.setEnabled(true);
                     BtnToolReg.setVisible(true);
-                    BtnToolKamnap.setEnabled(true);
-                    BtnToolApotek.setEnabled(true);
-                    BtnToolKasir.setEnabled(true);                
-                    btnToolLab.setEnabled(true); 
-                    btnToolRad.setEnabled(true);
+                    BtnToolKamnap.setVisible(true);
+                    BtnToolApotek.setVisible(true);
+                    BtnToolKasir.setVisible(true);                
+                    btnToolLab.setVisible(true); 
+                    btnToolRad.setVisible(true);
                     MnGantiPassword.setEnabled(false);
 
                     DlgLogin.dispose();
@@ -5293,24 +5292,24 @@ public class frmUtama extends javax.swing.JFrame {
                     MnGantiPassword.setEnabled(true);
                     BtnToolReg.setVisible(var.getregistrasi());
                     BtnToolKamnap.setEnabled(var.getkamar_inap());
-                    BtnToolKasir.setEnabled(var.getkasir_ralan());                
-                    btnToolLab.setEnabled(var.getperiksa_lab());  
-                    btnToolRad.setEnabled(var.getperiksa_radiologi());
-                     BtnToolApotek.setEnabled(var.getapotek());    
+                    BtnToolKasir.setVisible(var.getkasir_ralan());                
+                    btnToolLab.setVisible(var.getperiksa_lab());  
+                    btnToolRad.setVisible(var.getperiksa_radiologi());
+                     BtnToolApotek.setVisible(var.getapotek());    
                     Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");
                 }else if((var.getjml1()==0)&&(var.getjml2()==0)){
                     JOptionPane.showMessageDialog(null,"Maaf, Gagal login. ID User atau password ada yang salah ...!");
-                    BtnToolReg.setEnabled(false);
-                    BtnToolKamnap.setEnabled(false);
-                    BtnToolKasir.setEnabled(false);
+                    BtnToolReg.setVisible(false);
+                    BtnToolKamnap.setVisible(false);
+                    BtnToolKasir.setVisible(false);
                     MnGantiPassword.setEnabled(false);         
-                    btnToolLab.setEnabled(false);   
-                    btnToolIGD.setEnabled(false);
+                    btnToolLab.setVisible(false);   
+                    btnToolIGD.setVisible(false);
                     btnToolPenunjang.setVisible(false);
                     btnToolOnline.setVisible(false);
-                    btnToolRad.setEnabled(false);
-                    btnToolBcdRalan.setEnabled(false);
-                    btnToolBcdRanap.setEnabled(false);   
+                    btnToolRad.setVisible(false);
+                    btnToolBcdRalan.setVisible(false);
+                    btnToolBcdRanap.setVisible(false);   
                     edAdmin.setText("");
                     edPwd.setText("");           
                      

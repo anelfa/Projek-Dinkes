@@ -21,7 +21,7 @@ public final class var {
      private final sekuel Sequel=new sekuel();
     private static String userea="",kode="",kdbangsal="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
-    private static boolean casemix=false,bpjs_rujukan_keluar=false,bpjs_cek_kelas_rawat=false,bpjs_cek_dokter=false,
+    private static boolean cacat_fisik=false,suku_bangsa=false,bahasa_pasien=false,casemix=false,bpjs_rujukan_keluar=false,bpjs_cek_kelas_rawat=false,bpjs_cek_dokter=false,
             bpjs_cek_spesialistik=false,bpjs_cek_ruangrawat=false,bpjs_cek_carakeluar=false,bpjs_cek_pasca_pulang=false,bpjs_cek_prosedur=false,bpjs_cek_rujukan_kartu_rs=false, bpjs_cek_rujukan_kartu_pcare=false,bpjs_cek_nomor_rujukan_rs=false,apotek=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
             tindakan_ralan=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
             resep_pulang=false,pasien_meninggal=false,diet_pasien=false,kelahiran_bayi=false,periksa_lab=false,periksa_radiologi=false,
@@ -1362,4 +1362,7 @@ public final class var {
     public static boolean gethitung_bor(){return var.hitung_bor;}
     public static boolean gethitung_alos(){return var.hitung_alos;}
     public static boolean getbpjs_rujukan_keluar(){return var.bpjs_rujukan_keluar;}
+    public static boolean getsuku_bangsa(){return var.suku_bangsa;}
+    public static boolean getbahasa_pasien(){return var.bahasa_pasien;}
+    public static boolean getcacat_fisik(){return var.cacat_fisik;}
 }

@@ -156,7 +156,13 @@ public final class DlgReg extends javax.swing.JDialog {
         
         super(parent, modal);
         initComponents();
-
+if(var.getjml1()>=1){  
+            BtnHapus.setVisible(true);
+        }
+        else
+        {
+         BtnHapus.setVisible(false);   
+        }
         this.setLocation(8,1);
         setSize(885,674);
 
