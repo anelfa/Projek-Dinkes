@@ -50,10 +50,10 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private DecimalFormat df2 = new DecimalFormat("####");
     private double operator1=0,operator2=0,operator3=0,
-               asistenoperator1=0,asistenoperator2=0,instrumen=0,
+               asistenoperator1=0,asistenoperator2=0,asistenoperator3=0,instrumen=0,
                dokteranak=0,perawatresusitas=0,bidan1=0,bidan2=0,bidan3=0,
-               alat=0,anastesi=0,perawatluar=0,asistenanas=0,sewaok=0,sewavk=0,
-               bagianrs=0,omloop1=0,omloop2=0,omloop3=0,sarpras=0,dokterumum=0,dokterpjanak=0;
+               alat=0,anastesi=0,perawatluar=0,asistenanas=0,asistenanas2=0,sewaok=0,sewavk=0,
+               bagianrs=0,omloop1=0,omloop2=0,omloop3=0,omloop4=0,omloop5=0,sarpras=0,dokterumum=0,dokterpjanak=0;
     private PreparedStatement pstampil;
     private ResultSet rs;
     private int i=0;
@@ -70,10 +70,10 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         setSize(628,674);
 
         Object[] row={"P","Kode Paket","Nama Operasi","Kategori","Operator 1","Operator 2","Operator 3",
-                      "Asisten Op 1","Asisten Op 2","Instrumen","dr Anestesi","Asisten Anestesi","dr Anak",
+                      "Asisten Op 1","Asisten Op 2","Asisten Op 3","Instrumen","dr Anestesi","Asisten Anes 1","Asisten Anes 2","dr Anak",
                       "Perawat Resus","Bidan 1","Bidan 2","Bidan 3","Perawat Luar","Alat","Sewa OK/VK",
-                      "Akomodasi","N.M.S.","Onloop 1","Onloop 2","Onloop 3","Sarpras","dr Pj Anak","dr Umum",
-                      "Total","Jenis Bayar"};
+                      "Akomodasi","N.M.S.","Onloop 1","Onloop 2","Onloop 3","Onloop 4","Onloop 5","Sarpras","dr Pj Anak","dr Umum",
+                      "Total","Jenis Bayar","Kelas"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -90,7 +90,8 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.String.class
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
+                 java.lang.String.class,java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -103,18 +104,22 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         tbJnsPerawatan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbJnsPerawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 30; i++) {
+        for (i = 0; i < 35; i++) {
             TableColumn column = tbJnsPerawatan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
             }else if(i==1){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(90);
             }else if(i==2){
-                column.setPreferredWidth(250);
+                column.setPreferredWidth(220);
             }else if(i==3){
                 column.setPreferredWidth(100);
+            }else if(i==33){
+                column.setPreferredWidth(200);
+            }else if(i==34){
+                column.setPreferredWidth(70);
             }else{
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(85);
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
@@ -127,9 +132,11 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         TOperator3.setDocument(new batasInput((byte)13).getOnlyAngka(TOperator3));
         TAsisOperator1.setDocument(new batasInput((byte)13).getOnlyAngka(TAsisOperator1));
         TAsisOperator2.setDocument(new batasInput((byte)13).getOnlyAngka(TAsisOperator2));
+        TAsisOperator3.setDocument(new batasInput((byte)13).getOnlyAngka(TAsisOperator3));
         TInstrumen.setDocument(new batasInput((byte)13).getOnlyAngka(TInstrumen));
         TAnastesi.setDocument(new batasInput((byte)13).getOnlyAngka(TAnastesi));
         TAsisAnastesi.setDocument(new batasInput((byte)13).getOnlyAngka(TAsisAnastesi));
+        TAsisAnastesi1.setDocument(new batasInput((byte)13).getOnlyAngka(TAsisAnastesi1));
         TAnak.setDocument(new batasInput((byte)13).getOnlyAngka(TAnak));
         TResusitas.setDocument(new batasInput((byte)13).getOnlyAngka(TResusitas));
         TBidan1.setDocument(new batasInput((byte)13).getOnlyAngka(TBidan1));
@@ -143,6 +150,8 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         TOmloop1.setDocument(new batasInput((byte)13).getOnlyAngka(TOmloop1));
         TOmloop2.setDocument(new batasInput((byte)13).getOnlyAngka(TOmloop2));
         TOmloop3.setDocument(new batasInput((byte)13).getOnlyAngka(TOmloop3));
+        TOmloop4.setDocument(new batasInput((byte)13).getOnlyAngka(TOmloop4));
+        TOmloop5.setDocument(new batasInput((byte)13).getOnlyAngka(TOmloop5));
         TSarpras.setDocument(new batasInput((byte)13).getOnlyAngka(TSarpras));
         TdrPJAnak.setDocument(new batasInput((byte)13).getOnlyAngka(TdrPJAnak));        
         TdrUmum.setDocument(new batasInput((byte)13).getOnlyAngka(TdrUmum));
@@ -289,6 +298,16 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         kdpnj = new widget.TextBox();
         nmpnj = new widget.TextBox();
         BtnPenjab = new widget.Button();
+        jLabel35 = new widget.Label();
+        TAsisOperator3 = new widget.TextBox();
+        jLabel36 = new widget.Label();
+        TAsisAnastesi1 = new widget.TextBox();
+        jLabel37 = new widget.Label();
+        TOmloop4 = new widget.TextBox();
+        jLabel38 = new widget.Label();
+        TOmloop5 = new widget.TextBox();
+        jLabel5 = new widget.Label();
+        Kelas = new widget.ComboBox();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbJnsPerawatan = new widget.Table();
@@ -297,7 +316,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
 
         MnRestore.setBackground(new java.awt.Color(255, 255, 255));
         MnRestore.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnRestore.setForeground(new java.awt.Color(60, 80, 50));
+        MnRestore.setForeground(new java.awt.Color(130, 100, 100));
         MnRestore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnRestore.setText("Data Sampah");
         MnRestore.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -323,7 +342,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Paket Tindakan Operasi/VK ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Paket Tindakan Operasi/VK ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130, 100, 100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -516,7 +535,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
 
         TabRawat.setBackground(new java.awt.Color(250, 255, 245));
         TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)));
-        TabRawat.setForeground(new java.awt.Color(50, 70, 40));
+        TabRawat.setForeground(new java.awt.Color(130, 100, 100));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -624,12 +643,12 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(TSewaOK);
-        TSewaOK.setBounds(370, 252, 122, 23);
+        TSewaOK.setBounds(370, 282, 122, 23);
 
         jLabel10.setText("Sewa Ok/VK : RP");
         jLabel10.setName("jLabel10"); // NOI18N
         FormInput.add(jLabel10);
-        jLabel10.setBounds(225, 252, 140, 23);
+        jLabel10.setBounds(225, 282, 140, 23);
 
         TAnastesi.setText("0");
         TAnastesi.setHighlighter(null);
@@ -647,7 +666,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         FormInput.add(jLabel14);
         jLabel14.setBounds(0, 162, 96, 23);
 
-        jLabel15.setText("Asisten Anestesi : Rp");
+        jLabel15.setText("Asisten Anestesi 1 : Rp");
         jLabel15.setName("jLabel15"); // NOI18N
         FormInput.add(jLabel15);
         jLabel15.setBounds(225, 162, 140, 23);
@@ -666,7 +685,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         jLabel11.setText("Prw Luar : RP");
         jLabel11.setName("jLabel11"); // NOI18N
         FormInput.add(jLabel11);
-        jLabel11.setBounds(225, 282, 140, 23);
+        jLabel11.setBounds(225, 312, 140, 23);
 
         TPerawatLuar.setText("0");
         TPerawatLuar.setHighlighter(null);
@@ -677,19 +696,19 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(TPerawatLuar);
-        TPerawatLuar.setBounds(370, 282, 122, 23);
+        TPerawatLuar.setBounds(370, 312, 122, 23);
 
         jLabel16.setText("Total : Rp");
         jLabel16.setName("jLabel16"); // NOI18N
         FormInput.add(jLabel16);
-        jLabel16.setBounds(495, 282, 98, 23);
+        jLabel16.setBounds(495, 312, 98, 23);
 
         TTotal.setEditable(false);
         TTotal.setText("0");
         TTotal.setHighlighter(null);
         TTotal.setName("TTotal"); // NOI18N
         FormInput.add(TTotal);
-        TTotal.setBounds(598, 282, 122, 23);
+        TTotal.setBounds(598, 312, 122, 23);
 
         jLabel17.setText("Operator 2 : Rp");
         jLabel17.setName("jLabel17"); // NOI18N
@@ -742,7 +761,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         jLabel20.setText("Instrumen : Rp");
         jLabel20.setName("jLabel20"); // NOI18N
         FormInput.add(jLabel20);
-        jLabel20.setBounds(225, 132, 140, 23);
+        jLabel20.setBounds(0, 340, 96, 23);
 
         TInstrumen.setText("0");
         TInstrumen.setHighlighter(null);
@@ -753,7 +772,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(TInstrumen);
-        TInstrumen.setBounds(370, 132, 122, 23);
+        TInstrumen.setBounds(100, 342, 122, 23);
 
         jLabel21.setText("dr Anak : Rp");
         jLabel21.setName("jLabel21"); // NOI18N
@@ -774,7 +793,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         jLabel22.setText("Perawat Resusitasi : Rp");
         jLabel22.setName("jLabel22"); // NOI18N
         FormInput.add(jLabel22);
-        jLabel22.setBounds(225, 192, 140, 23);
+        jLabel22.setBounds(225, 222, 140, 23);
 
         TResusitas.setText("0");
         TResusitas.setHighlighter(null);
@@ -785,7 +804,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(TResusitas);
-        TResusitas.setBounds(370, 192, 122, 23);
+        TResusitas.setBounds(370, 222, 122, 23);
 
         jLabel23.setText("Bidan 1 : Rp");
         jLabel23.setName("jLabel23"); // NOI18N
@@ -822,7 +841,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         jLabel25.setText("Akomodasi : Rp");
         jLabel25.setName("jLabel25"); // NOI18N
         FormInput.add(jLabel25);
-        jLabel25.setBounds(225, 222, 140, 23);
+        jLabel25.setBounds(225, 252, 140, 23);
 
         TAkomodasi.setText("0");
         TAkomodasi.setHighlighter(null);
@@ -833,7 +852,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(TAkomodasi);
-        TAkomodasi.setBounds(370, 222, 122, 23);
+        TAkomodasi.setBounds(370, 252, 122, 23);
 
         jLabel26.setText("Onloop 1 : Rp");
         jLabel26.setName("jLabel26"); // NOI18N
@@ -856,7 +875,6 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 42, 96, 23);
 
-        Kategori.setForeground(new java.awt.Color(153, 0, 51));
         Kategori.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kebidanan", "Operasi" }));
         Kategori.setName("Kategori"); // NOI18N
         Kategori.setOpaque(false);
@@ -935,7 +953,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         jLabel31.setText("Sarpras : Rp");
         jLabel31.setName("jLabel31"); // NOI18N
         FormInput.add(jLabel31);
-        jLabel31.setBounds(495, 252, 98, 23);
+        jLabel31.setBounds(270, 342, 98, 23);
 
         TSarpras.setText("0");
         TSarpras.setHighlighter(null);
@@ -946,7 +964,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             }
         });
         FormInput.add(TSarpras);
-        TSarpras.setBounds(598, 252, 122, 23);
+        TSarpras.setBounds(370, 342, 122, 23);
 
         jLabel32.setText("dr Umum : Rp");
         jLabel32.setName("jLabel32"); // NOI18N
@@ -1013,11 +1031,91 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         FormInput.add(BtnPenjab);
         BtnPenjab.setBounds(692, 42, 28, 23);
 
+        jLabel35.setText("Asisten Operator 3 : Rp");
+        jLabel35.setName("jLabel35"); // NOI18N
+        FormInput.add(jLabel35);
+        jLabel35.setBounds(225, 132, 140, 23);
+
+        TAsisOperator3.setText("0");
+        TAsisOperator3.setHighlighter(null);
+        TAsisOperator3.setName("TAsisOperator3"); // NOI18N
+        TAsisOperator3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TAsisOperator3KeyPressed(evt);
+            }
+        });
+        FormInput.add(TAsisOperator3);
+        TAsisOperator3.setBounds(370, 132, 122, 23);
+
+        jLabel36.setText("Asisten Anestesi 2 : Rp");
+        jLabel36.setName("jLabel36"); // NOI18N
+        FormInput.add(jLabel36);
+        jLabel36.setBounds(225, 192, 140, 23);
+
+        TAsisAnastesi1.setText("0");
+        TAsisAnastesi1.setHighlighter(null);
+        TAsisAnastesi1.setName("TAsisAnastesi1"); // NOI18N
+        TAsisAnastesi1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TAsisAnastesi1KeyPressed(evt);
+            }
+        });
+        FormInput.add(TAsisAnastesi1);
+        TAsisAnastesi1.setBounds(370, 192, 122, 23);
+
+        jLabel37.setText("Onloop 4 : Rp");
+        jLabel37.setName("jLabel37"); // NOI18N
+        FormInput.add(jLabel37);
+        jLabel37.setBounds(495, 252, 98, 23);
+
+        TOmloop4.setText("0");
+        TOmloop4.setHighlighter(null);
+        TOmloop4.setName("TOmloop4"); // NOI18N
+        TOmloop4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TOmloop4KeyPressed(evt);
+            }
+        });
+        FormInput.add(TOmloop4);
+        TOmloop4.setBounds(598, 252, 122, 23);
+
+        jLabel38.setText("Onloop 5 : Rp");
+        jLabel38.setName("jLabel38"); // NOI18N
+        FormInput.add(jLabel38);
+        jLabel38.setBounds(495, 282, 98, 23);
+
+        TOmloop5.setText("0");
+        TOmloop5.setHighlighter(null);
+        TOmloop5.setName("TOmloop5"); // NOI18N
+        TOmloop5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TOmloop5KeyPressed(evt);
+            }
+        });
+        FormInput.add(TOmloop5);
+        TOmloop5.setBounds(598, 282, 122, 23);
+
+        jLabel5.setText("Kelas :");
+        jLabel5.setName("jLabel5"); // NOI18N
+        FormInput.add(jLabel5);
+        jLabel5.setBounds(495, 342, 98, 23);
+
+        Kelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Rawat Jalan", "Kelas 1", "Kelas 2", "Kelas 3", "Kelas Utama", "Kelas VIP", "Kelas VVIP" }));
+        Kelas.setName("Kelas"); // NOI18N
+        Kelas.setOpaque(false);
+        Kelas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KelasKeyPressed(evt);
+            }
+        });
+        FormInput.add(Kelas);
+        Kelas.setBounds(598, 342, 122, 23);
+
         Scroll1.setViewportView(FormInput);
 
         internalFrame2.add(Scroll1, java.awt.BorderLayout.CENTER);
 
-        TabRawat.addTab(".: Input Paket  ", internalFrame2);
+        TabRawat.addTab("Input Paket", internalFrame2);
 
         internalFrame3.setBorder(null);
         internalFrame3.setName("internalFrame3"); // NOI18N
@@ -1045,7 +1143,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
 
         internalFrame3.add(Scroll, java.awt.BorderLayout.CENTER);
 
-        TabRawat.addTab(".: Daftar Paket ", internalFrame3);
+        TabRawat.addTab("Daftar Paket", internalFrame3);
 
         internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
 
@@ -1079,7 +1177,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
-            TdrPJAnak.requestFocus();
+            TInstrumen.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             TAsisOperator2.requestFocus();
@@ -1112,7 +1210,9 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else if(TAsisOperator1.getText().trim().equals("")){
             Valid.textKosong(TAsisOperator1,"Asisten Operator 1");
         }else if(TAsisOperator2.getText().trim().equals("")){
-            Valid.textKosong(TAsisOperator1,"Asisten Operator 2");
+            Valid.textKosong(TAsisOperator2,"Asisten Operator 2");
+        }else if(TAsisOperator3.getText().trim().equals("")){
+            Valid.textKosong(TAsisOperator3,"Asisten Operator 2");
         }else if(TInstrumen.getText().trim().equals("")){
             Valid.textKosong(TAsisOperator1,"Asisten Operator 3");
         }else if(TAlat.getText().trim().equals("")){
@@ -1120,7 +1220,9 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else if(TAnastesi.getText().trim().equals("")){
             Valid.textKosong(TAnastesi,"Dokter Anetesi");
         }else if(TAsisAnastesi.getText().trim().equals("")){
-            Valid.textKosong(TAsisAnastesi,"Asisten Anestesi");
+            Valid.textKosong(TAsisAnastesi,"Asisten Anestesi 1");
+        }else if(TAsisAnastesi1.getText().trim().equals("")){
+            Valid.textKosong(TAsisAnastesi1,"Asisten Anestesi 2");
         }else if(TAnak.getText().trim().equals("")){
             Valid.textKosong(TAnak,"Dokter Anak");
         }else if(TResusitas.getText().trim().equals("")){
@@ -1145,6 +1247,10 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             Valid.textKosong(TOmloop2,"Onloop 2");
         }else if(TOmloop3.getText().trim().equals("")){
             Valid.textKosong(TOmloop3,"Onloop 3");
+        }else if(TOmloop4.getText().trim().equals("")){
+            Valid.textKosong(TOmloop4,"Onloop 4");
+        }else if(TOmloop5.getText().trim().equals("")){
+            Valid.textKosong(TOmloop5,"Onloop 5");
         }else if(TSarpras.getText().trim().equals("")){
             Valid.textKosong(TSarpras,"Sarpras");
         }else if(TdrPJAnak.getText().trim().equals("")){
@@ -1156,11 +1262,12 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else{
             Sequel.menyimpan("paket_operasi","'"+TKd.getText()+"', '"+TNm.getText()+"','"+Kategori.getSelectedItem()+"','"+TOperator1.getText()+
                     "','"+TOperator2.getText()+"','"+TOperator3.getText()+"','"+TAsisOperator1.getText()+
-                    "','"+TAsisOperator2.getText()+"','"+TInstrumen.getText()+"','"+TAnak.getText()+
-                    "','"+TResusitas.getText()+"','"+TAnastesi.getText()+"','"+TAsisAnastesi.getText()+
+                    "','"+TAsisOperator2.getText()+"','"+TAsisOperator3.getText()+"','"+TInstrumen.getText()+"','"+TAnak.getText()+
+                    "','"+TResusitas.getText()+"','"+TAnastesi.getText()+"','"+TAsisAnastesi.getText()+"','"+TAsisAnastesi1.getText()+
                     "','"+TBidan1.getText()+"','"+TBidan2.getText()+"','"+TBidan3.getText()+"','"+TPerawatLuar.getText()+"','"+TSewaOK.getText()+
                     "','"+TAlat.getText()+"','"+TAkomodasi.getText()+"','"+TBagianRS.getText()+"','"+TOmloop1.getText()+"','"+TOmloop2.getText()+
-                    "','"+TOmloop3.getText()+"','"+TSarpras.getText()+"','"+TdrPJAnak.getText()+"','"+TdrUmum.getText()+"','"+kdpnj.getText()+"','1'","Kode Jenis");
+                    "','"+TOmloop3.getText()+"','"+TOmloop4.getText()+"','"+TOmloop5.getText()+"','"+TSarpras.getText()+"','"+TdrPJAnak.getText()+
+                    "','"+TdrUmum.getText()+"','"+kdpnj.getText()+"','1','"+Kelas.getSelectedItem()+"'","Kode Jenis");
             tampil();
             emptTeks();
         }
@@ -1170,7 +1277,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
-            Valid.pindah(evt,TOmloop3,BtnBatal);
+            Valid.pindah(evt,Kelas,BtnBatal);
         }
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
@@ -1217,7 +1324,9 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else if(TAsisOperator1.getText().trim().equals("")){
             Valid.textKosong(TAsisOperator1,"Asisten Operator 1");
         }else if(TAsisOperator2.getText().trim().equals("")){
-            Valid.textKosong(TAsisOperator1,"Asisten Operator 2");
+            Valid.textKosong(TAsisOperator2,"Asisten Operator 2");
+        }else if(TAsisOperator3.getText().trim().equals("")){
+            Valid.textKosong(TAsisOperator3,"Asisten Operator 2");
         }else if(TInstrumen.getText().trim().equals("")){
             Valid.textKosong(TAsisOperator1,"Asisten Operator 3");
         }else if(TAlat.getText().trim().equals("")){
@@ -1225,7 +1334,9 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else if(TAnastesi.getText().trim().equals("")){
             Valid.textKosong(TAnastesi,"Dokter Anetesi");
         }else if(TAsisAnastesi.getText().trim().equals("")){
-            Valid.textKosong(TAsisAnastesi,"Asisten Anestesi");
+            Valid.textKosong(TAsisAnastesi,"Asisten Anestesi 1");
+        }else if(TAsisAnastesi1.getText().trim().equals("")){
+            Valid.textKosong(TAsisAnastesi1,"Asisten Anestesi 2");
         }else if(TAnak.getText().trim().equals("")){
             Valid.textKosong(TAnak,"Dokter Anak");
         }else if(TResusitas.getText().trim().equals("")){
@@ -1250,6 +1361,10 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
             Valid.textKosong(TOmloop2,"Onloop 2");
         }else if(TOmloop3.getText().trim().equals("")){
             Valid.textKosong(TOmloop3,"Onloop 3");
+        }else if(TOmloop4.getText().trim().equals("")){
+            Valid.textKosong(TOmloop4,"Onloop 4");
+        }else if(TOmloop5.getText().trim().equals("")){
+            Valid.textKosong(TOmloop5,"Onloop 5");
         }else if(TSarpras.getText().trim().equals("")){
             Valid.textKosong(TSarpras,"Sarpras");
         }else if(TdrPJAnak.getText().trim().equals("")){
@@ -1259,17 +1374,19 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
         }else if(kdpnj.getText().trim().equals("")||nmpnj.getText().trim().equals("")){
             Valid.textKosong(kdpnj,"Jenis Bayar");
         }else{
-            Sequel.mengedit("paket_operasi","kode_paket='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1) +"'",
-                    "kode_paket='"+TKd.getText()+"',nm_perawatan='"+TNm.getText()+"',operator1='"+TOperator1.getText()+"',operator2='"+TOperator2.getText()+"',operator3='"+TOperator3.getText()+
-                    "',asisten_operator1='"+TAsisOperator1.getText()+"',asisten_operator2='"+TAsisOperator2.getText()+"',instrumen='"+TInstrumen.getText()+
-                    "',dokter_anak='"+TAnak.getText()+"',perawaat_resusitas='"+TResusitas.getText()+"',kategori='"+Kategori.getSelectedItem()+
-                    "',alat='"+TAlat.getText()+"',dokter_anestesi='"+TAnastesi.getText()+"',asisten_anestesi='"+TAsisAnastesi.getText()+
-                    "',bidan='"+TBidan1.getText()+"',bidan2='"+TBidan2.getText()+"',bidan3='"+TBidan3.getText()+"',perawat_luar='"+TPerawatLuar.getText()+"'"+
-                    ",sewa_ok='"+TSewaOK.getText()+"',akomodasi='"+TAkomodasi.getText()+"',bagian_rs='"+TBagianRS.getText()+"',omloop='"+TOmloop1.getText()+"',"+
-                    "omloop2='"+TOmloop2.getText()+"',omloop3='"+TOmloop3.getText()+"',sarpras='"+TSarpras.getText()+"',dokter_pjanak='"+TdrPJAnak.getText()+"',"+
-                    "dokter_umum='"+TdrUmum.getText()+"',kd_pj='"+kdpnj.getText()+"'");
-            if(tabMode.getRowCount()!=0){tampil();}
-            emptTeks();
+            if(tbJnsPerawatan.getSelectedRow()!= -1){
+                Sequel.mengedit("paket_operasi","kode_paket='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1) +"'",
+                        "kode_paket='"+TKd.getText()+"',nm_perawatan='"+TNm.getText()+"',operator1='"+TOperator1.getText()+"',operator2='"+TOperator2.getText()+"',operator3='"+TOperator3.getText()+
+                        "',asisten_operator1='"+TAsisOperator1.getText()+"',asisten_operator2='"+TAsisOperator2.getText()+"',asisten_operator3='"+TAsisOperator3.getText()+"',instrumen='"+TInstrumen.getText()+
+                        "',dokter_anak='"+TAnak.getText()+"',perawaat_resusitas='"+TResusitas.getText()+"',kategori='"+Kategori.getSelectedItem()+
+                        "',alat='"+TAlat.getText()+"',dokter_anestesi='"+TAnastesi.getText()+"',asisten_anestesi='"+TAsisAnastesi.getText()+"',asisten_anestesi2='"+TAsisAnastesi1.getText()+
+                        "',bidan='"+TBidan1.getText()+"',bidan2='"+TBidan2.getText()+"',bidan3='"+TBidan3.getText()+"',perawat_luar='"+TPerawatLuar.getText()+"'"+
+                        ",sewa_ok='"+TSewaOK.getText()+"',akomodasi='"+TAkomodasi.getText()+"',bagian_rs='"+TBagianRS.getText()+"',omloop='"+TOmloop1.getText()+"',"+
+                        "omloop2='"+TOmloop2.getText()+"',omloop3='"+TOmloop3.getText()+"',omloop4='"+TOmloop4.getText()+"',omloop5='"+TOmloop5.getText()+"',sarpras='"+TSarpras.getText()+"',dokter_pjanak='"+TdrPJAnak.getText()+"',"+
+                        "dokter_umum='"+TdrUmum.getText()+"',kd_pj='"+kdpnj.getText()+"',kelas='"+Kelas.getSelectedItem()+"'");
+                if(tabMode.getRowCount()!=0){tampil();}
+                emptTeks();
+            }                
         }
         
 }//GEN-LAST:event_BtnEditActionPerformed
@@ -1311,16 +1428,17 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                 param.put("logo",Sequel.cariGambar("select logo from setting")); 
             Valid.MyReport("rptPaketOperasi.jrxml","report","::[ Data Paket Operasi ]::",
                    "select paket_operasi.kode_paket, paket_operasi.nm_perawatan,(paket_operasi.operator1+paket_operasi.operator2+paket_operasi.operator3+"+
-                   "paket_operasi.asisten_operator1+paket_operasi.asisten_operator2+paket_operasi.instrumen+"+
-                   "paket_operasi.dokter_anak+paket_operasi.perawaat_resusitas+"+
-                   "paket_operasi.alat+paket_operasi.dokter_anestesi+paket_operasi.asisten_anestesi+"+
-                   "paket_operasi.bidan+paket_operasi.bidan2+paket_operasi.bidan3+paket_operasi.perawat_luar+"+
-                   "paket_operasi.sewa_ok+paket_operasi.akomodasi+paket_operasi.bagian_rs+"+
-                   "paket_operasi.omloop+paket_operasi.omloop2+paket_operasi.omloop3+"+
-                   "paket_operasi.sarpras+paket_operasi.dokter_pjanak+paket_operasi.dokter_umum) as jumlah "+
+                       "paket_operasi.asisten_operator1+paket_operasi.asisten_operator2+paket_operasi.asisten_operator3+paket_operasi.instrumen+"+
+                       "paket_operasi.dokter_anak+paket_operasi.perawaat_resusitas+"+
+                       "paket_operasi.alat+paket_operasi.dokter_anestesi+paket_operasi.asisten_anestesi+paket_operasi.asisten_anestesi2+"+
+                       "paket_operasi.bidan+paket_operasi.bidan2+paket_operasi.bidan3+paket_operasi.perawat_luar+"+
+                       "paket_operasi.sewa_ok+paket_operasi.akomodasi+paket_operasi.bagian_rs+"+
+                       "paket_operasi.omloop+paket_operasi.omloop2+paket_operasi.omloop3+paket_operasi.omloop4+paket_operasi.omloop5+"+
+                       "paket_operasi.sarpras+paket_operasi.dokter_pjanak+paket_operasi.dokter_umum) as jumlah "+
                    "from paket_operasi inner join penjab on penjab.kd_pj=paket_operasi.kd_pj "+
                    "where paket_operasi.status='1' and paket_operasi.kode_paket like '%"+TCari.getText()+"%' or "+
                    "paket_operasi.status='1' and paket_operasi.nm_perawatan like '%"+TCari.getText()+"%' or "+
+                   "paket_operasi.status='1' and paket_operasi.kelas like '%"+TCari.getText()+"%' or "+
                    "paket_operasi.status='1' and penjab.png_jawab like '%"+TCari.getText()+"%' order by paket_operasi.kode_paket ",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -1376,6 +1494,7 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                 getData();
                 if(evt.getClickCount()==2){
                     TabRawat.setSelectedIndex(0);
+                    Kelas.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),34).toString());
                 }
             } catch (java.lang.NullPointerException e) {
             }
@@ -1393,9 +1512,14 @@ public final class DlgJnsPerawatanOperasi extends javax.swing.JDialog {
                 try {
                     getData();
                     TabRawat.setSelectedIndex(0);
+                    Kelas.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),34).toString());
                 } catch (java.lang.NullPointerException e) {
                 }
-            }
+            }else if(evt.getKeyCode()==KeyEvent.VK_A){                
+                for(i=0;i<tbJnsPerawatan.getRowCount();i++){ 
+                    tbJnsPerawatan.setValueAt(true,i,0);
+                }
+            } 
         }
 }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
@@ -1428,10 +1552,10 @@ private void TAsisAnastesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
-            TInstrumen.requestFocus();
+            TAsisOperator3.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
-            TResusitas.requestFocus();
+            TAsisAnastesi1.requestFocus();
         }
 }//GEN-LAST:event_TAsisAnastesiKeyPressed
 
@@ -1443,7 +1567,7 @@ private void TPerawatLuarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:ev
             TSewaOK.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
-            TBidan1.requestFocus();
+            TSarpras.requestFocus();
         }
 }//GEN-LAST:event_TPerawatLuarKeyPressed
 
@@ -1479,7 +1603,7 @@ private void TAsisOperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:
             TAsisOperator1.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
-            TInstrumen.requestFocus();
+            TAsisOperator3.requestFocus();
         }
 }//GEN-LAST:event_TAsisOperator2KeyPressed
 
@@ -1491,7 +1615,7 @@ private void TInstrumenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             TAsisOperator2.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
-            TAsisAnastesi.requestFocus();
+            TAsisOperator1.requestFocus();
         }
 }//GEN-LAST:event_TInstrumenKeyPressed
 
@@ -1512,7 +1636,7 @@ private void TResusitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
-            TAsisAnastesi.requestFocus();
+            TAsisAnastesi1.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
             TAkomodasi.requestFocus();
@@ -1619,7 +1743,7 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             TOmloop2.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
-            TSarpras.requestFocus();
+            TOmloop4.requestFocus();
         }
     }//GEN-LAST:event_TOmloop3KeyPressed
 
@@ -1628,10 +1752,10 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             isjml();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             isjml();
-            TOmloop3.requestFocus();
+            TPerawatLuar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
-            BtnSimpan.requestFocus();
+            TBidan1.requestFocus();
         }
     }//GEN-LAST:event_TSarprasKeyPressed
 
@@ -1661,7 +1785,7 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             TdrUmum.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             isjml();
-            TAsisOperator1.requestFocus();
+            TInstrumen.requestFocus();
         }
     }//GEN-LAST:event_TdrPJAnakKeyPressed
 
@@ -1682,25 +1806,25 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private void BtnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenjabActionPerformed
         penjab.isCek();
         penjab.onCari();
-        penjab.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penjab.setLocationRelativeTo(internalFrame1);
         penjab.setVisible(true);
     }//GEN-LAST:event_BtnPenjabActionPerformed
 
     private void MnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRestoreActionPerformed
         DlgRestoreTarifOperasi restore=new DlgRestoreTarifOperasi(null,true);
-        restore.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        restore.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         restore.setLocationRelativeTo(internalFrame1);
         restore.setVisible(true);
     }//GEN-LAST:event_MnRestoreActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        if(FormInput.getHeight()<350){   
+        if(FormInput.getHeight()<390){   
             Scroll1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            FormInput.setPreferredSize(new Dimension(FormInput.WIDTH,350));
+            FormInput.setPreferredSize(new Dimension(FormInput.WIDTH,390));
             if(FormInput.getWidth()<740){
                 Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);                                
-                FormInput.setPreferredSize(new Dimension(740,350));
+                FormInput.setPreferredSize(new Dimension(740,390));
             }else{
                 Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);                
             }
@@ -1714,6 +1838,58 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             }
         }
     }//GEN-LAST:event_formWindowActivated
+
+    private void TAsisOperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisOperator3KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            isjml();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TAsisOperator2.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TAsisAnastesi.requestFocus();
+        }
+    }//GEN-LAST:event_TAsisOperator3KeyPressed
+
+    private void TAsisAnastesi1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAsisAnastesi1KeyPressed
+       if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            isjml();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TAsisAnastesi1.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TResusitas.requestFocus();
+        }
+    }//GEN-LAST:event_TAsisAnastesi1KeyPressed
+
+    private void TOmloop4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOmloop4KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            isjml();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TOmloop4.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            TOmloop5.requestFocus();
+        }
+    }//GEN-LAST:event_TOmloop4KeyPressed
+
+    private void TOmloop5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TOmloop5KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            isjml();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            isjml();
+            TOmloop4.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isjml();
+            Kelas.requestFocus();
+        }
+    }//GEN-LAST:event_TOmloop5KeyPressed
+
+    private void KelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelasKeyPressed
+        Valid.pindah(evt,TOmloop5,BtnSimpan);
+    }//GEN-LAST:event_KelasKeyPressed
 
     /**
     * @param args the command line arguments
@@ -1743,6 +1919,7 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Button BtnSimpan;
     private widget.PanelBiasa FormInput;
     private widget.ComboBox Kategori;
+    private widget.ComboBox Kelas;
     private widget.Label LCount;
     private javax.swing.JMenuItem MnRestore;
     private widget.ScrollPane Scroll;
@@ -1752,8 +1929,10 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.TextBox TAnak;
     private widget.TextBox TAnastesi;
     private widget.TextBox TAsisAnastesi;
+    private widget.TextBox TAsisAnastesi1;
     private widget.TextBox TAsisOperator1;
     private widget.TextBox TAsisOperator2;
+    private widget.TextBox TAsisOperator3;
     private widget.TextBox TBagianRS;
     private widget.TextBox TBidan1;
     private widget.TextBox TBidan2;
@@ -1765,6 +1944,8 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.TextBox TOmloop1;
     private widget.TextBox TOmloop2;
     private widget.TextBox TOmloop3;
+    private widget.TextBox TOmloop4;
+    private widget.TextBox TOmloop5;
     private widget.TextBox TOperator1;
     private widget.TextBox TOperator2;
     private widget.TextBox TOperator3;
@@ -1805,7 +1986,12 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Label jLabel32;
     private widget.Label jLabel33;
     private widget.Label jLabel34;
+    private widget.Label jLabel35;
+    private widget.Label jLabel36;
+    private widget.Label jLabel37;
+    private widget.Label jLabel38;
     private widget.Label jLabel4;
+    private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
@@ -1825,29 +2011,31 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             pstampil=koneksi.prepareStatement(
                        "select paket_operasi.kode_paket, paket_operasi.nm_perawatan,paket_operasi.kategori,"+
                        "paket_operasi.operator1, paket_operasi.operator2, paket_operasi.operator3, "+
-                       "paket_operasi.asisten_operator1, paket_operasi.asisten_operator2,"+
-                       "paket_operasi.instrumen, paket_operasi.dokter_anestesi,paket_operasi.asisten_anestesi,"+
+                       "paket_operasi.asisten_operator1, paket_operasi.asisten_operator2,paket_operasi.asisten_operator3,"+
+                       "paket_operasi.instrumen, paket_operasi.dokter_anestesi,paket_operasi.asisten_anestesi,paket_operasi.asisten_anestesi2,"+
                        "paket_operasi.dokter_anak,paket_operasi.perawaat_resusitas, paket_operasi.bidan, "+
                        "paket_operasi.bidan2, paket_operasi.bidan3, paket_operasi.perawat_luar, paket_operasi.alat,"+
                        "paket_operasi.sewa_ok,paket_operasi.akomodasi,paket_operasi.bagian_rs,"+
-                       "paket_operasi.omloop,paket_operasi.omloop2,paket_operasi.omloop3,"+
+                       "paket_operasi.omloop,paket_operasi.omloop2,paket_operasi.omloop3,paket_operasi.omloop4,paket_operasi.omloop5,"+
                        "paket_operasi.sarpras,paket_operasi.dokter_pjanak,paket_operasi.dokter_umum, "+
                        "(paket_operasi.operator1+paket_operasi.operator2+paket_operasi.operator3+"+
-                       "paket_operasi.asisten_operator1+paket_operasi.asisten_operator2+paket_operasi.instrumen+"+
+                       "paket_operasi.asisten_operator1+paket_operasi.asisten_operator2+paket_operasi.asisten_operator3+paket_operasi.instrumen+"+
                        "paket_operasi.dokter_anak+paket_operasi.perawaat_resusitas+"+
-                       "paket_operasi.alat+paket_operasi.dokter_anestesi+paket_operasi.asisten_anestesi+"+
+                       "paket_operasi.alat+paket_operasi.dokter_anestesi+paket_operasi.asisten_anestesi+paket_operasi.asisten_anestesi2+"+
                        "paket_operasi.bidan+paket_operasi.bidan2+paket_operasi.bidan3+paket_operasi.perawat_luar+"+
                        "paket_operasi.sewa_ok+paket_operasi.akomodasi+paket_operasi.bagian_rs+"+
-                       "paket_operasi.omloop+paket_operasi.omloop2+paket_operasi.omloop3+"+
+                       "paket_operasi.omloop+paket_operasi.omloop2+paket_operasi.omloop3+paket_operasi.omloop4+paket_operasi.omloop5+"+
                        "paket_operasi.sarpras+paket_operasi.dokter_pjanak+paket_operasi.dokter_umum) as jumlah, "+
-                       "penjab.png_jawab from paket_operasi inner join penjab on penjab.kd_pj=paket_operasi.kd_pj "+
+                       "penjab.png_jawab,paket_operasi.kelas from paket_operasi inner join penjab on penjab.kd_pj=paket_operasi.kd_pj "+
                        "where paket_operasi.status='1' and paket_operasi.kode_paket like ? or "+
                        "paket_operasi.status='1' and paket_operasi.nm_perawatan like ? or "+
+                       "paket_operasi.status='1' and paket_operasi.kelas like ? or "+
                        "paket_operasi.status='1' and penjab.png_jawab like ? order by paket_operasi.kode_paket ");
             try{
                 pstampil.setString(1,"%"+TCari.getText()+"%");
                 pstampil.setString(2,"%"+TCari.getText()+"%");
                 pstampil.setString(3,"%"+TCari.getText()+"%");
+                pstampil.setString(4,"%"+TCari.getText()+"%");
                 rs=pstampil.executeQuery();
                 while(rs.next()){                    
                     tabMode.addRow(new Object[]{false,rs.getString("kode_paket"),
@@ -1858,9 +2046,11 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                    rs.getDouble("operator3"), 
                                    rs.getDouble("asisten_operator1"), 
                                    rs.getDouble("asisten_operator2"), 
+                                   rs.getDouble("asisten_operator3"), 
                                    rs.getDouble("instrumen"), 
                                    rs.getDouble("dokter_anestesi"), 
-                                   rs.getDouble("asisten_anestesi"), 
+                                   rs.getDouble("asisten_anestesi"),
+                                   rs.getDouble("asisten_anestesi2"), 
                                    rs.getDouble("dokter_anak"), 
                                    rs.getDouble("perawaat_resusitas"), 
                                    rs.getDouble("bidan"), 
@@ -1874,11 +2064,14 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                    rs.getDouble("omloop"), 
                                    rs.getDouble("omloop2"), 
                                    rs.getDouble("omloop3"), 
+                                   rs.getDouble("omloop4"), 
+                                   rs.getDouble("omloop5"), 
                                    rs.getDouble("sarpras"), 
                                    rs.getDouble("dokter_pjanak"), 
                                    rs.getDouble("dokter_umum"), 
                                    rs.getDouble("jumlah"),
-                                   rs.getString("png_jawab")
+                                   rs.getString("png_jawab"),
+                                   rs.getString("kelas")
                     });
                 }  
             } catch(Exception e){
@@ -1905,9 +2098,11 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         TOperator3.setText("0");
         TAsisOperator1.setText("0");
         TAsisOperator2.setText("0");
+        TAsisOperator3.setText("0");
         TInstrumen.setText("0");
         TAnastesi.setText("0");
-        TAsisAnastesi.setText("0");
+        TAsisAnastesi.setText("0");        
+        TAsisAnastesi1.setText("0");
         TAnak.setText("0");
         TResusitas.setText("0");
         TBidan1.setText("0");
@@ -1922,12 +2117,15 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         TOmloop1.setText("0");
         TOmloop2.setText("0");
         TOmloop3.setText("0");
+        TOmloop4.setText("0");
+        TOmloop5.setText("0");
         TSarpras.setText("0");
         TdrPJAnak.setText("0");        
         TdrUmum.setText("0");
         TTotal.setText("0");
+        Kelas.setSelectedIndex(0);
         //Valid.autoNomer(" paket_operasi ","JP",6,TKd);
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(kode_paket,4),signed)),0) from paket_operasi  ","PK",6,TKd);
+        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(kode_paket,5),signed)),0) from paket_operasi  ","PK",6,TKd);
         TKd.requestFocus();
     }
 
@@ -1941,28 +2139,32 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             TOperator3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString())));
             TAsisOperator1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString())));
             TAsisOperator2.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString())));
-            TInstrumen.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString())));
-            TAnastesi.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString())));
-            TAsisAnastesi.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString())));
-            TAnak.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString())));
-            TResusitas.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString())));
-            TBidan1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString())));
-            TBidan2.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString())));
-            TBidan3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),16).toString())));
-            TPerawatLuar.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),17).toString())));
-            TAlat.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),18).toString())));
-            TSewaOK.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),19).toString())));
-            TAkomodasi.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),20).toString())));
-            TBagianRS.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),21).toString())));
-            TOmloop1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),22).toString())));
-            TOmloop2.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),23).toString())));
-            TOmloop3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),24).toString())));
-            TSarpras.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),25).toString())));
-            TdrPJAnak.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),26).toString())));
-            TdrUmum.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),27).toString())));
-            TTotal.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),28).toString())));
+            TAsisOperator3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString())));
+            TInstrumen.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString())));
+            TAnastesi.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString())));
+            TAsisAnastesi.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString())));
+            TAsisAnastesi1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString())));
+            TAnak.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString())));
+            TResusitas.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString())));
+            TBidan1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),16).toString())));
+            TBidan2.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),17).toString())));
+            TBidan3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),18).toString())));
+            TPerawatLuar.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),19).toString())));
+            TAlat.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),20).toString())));
+            TSewaOK.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),21).toString())));
+            TAkomodasi.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),22).toString())));
+            TBagianRS.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),23).toString())));
+            TOmloop1.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),24).toString())));
+            TOmloop2.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),25).toString())));
+            TOmloop3.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),26).toString())));
+            TOmloop4.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),27).toString())));
+            TOmloop5.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),28).toString())));
+            TSarpras.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),29).toString())));
+            TdrPJAnak.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),30).toString())));
+            TdrUmum.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),31).toString())));
+            TTotal.setText(Valid.SetAngka2(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),32).toString())));
             Sequel.cariIsi("select kd_pj from paket_operasi where kode_paket=?", kdpnj,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            nmpnj.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),29).toString());
+            nmpnj.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),33).toString());
         }
     }
 
@@ -1984,6 +2186,9 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         if((!TAsisOperator2.getText().equals(""))){
            asistenoperator2=Double.parseDouble(TAsisOperator2.getText().trim());            
         }
+        if((!TAsisOperator3.getText().equals(""))){
+           asistenoperator3=Double.parseDouble(TAsisOperator3.getText().trim());            
+        }
         if((!TInstrumen.getText().equals(""))){
            instrumen=Double.parseDouble(TInstrumen.getText().trim());            
         }
@@ -1992,6 +2197,9 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }
         if((!TAsisAnastesi.getText().equals(""))){
            asistenanas=Double.parseDouble(TAsisAnastesi.getText().trim());            
+        }
+        if((!TAsisAnastesi1.getText().equals(""))){
+           asistenanas2=Double.parseDouble(TAsisAnastesi1.getText().trim());            
         }
         if((!TAnak.getText().equals(""))){
            dokteranak=Double.parseDouble(TAnak.getText().trim());            
@@ -2032,6 +2240,12 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         if((!TOmloop3.getText().equals(""))){
            omloop3=Double.parseDouble(TOmloop3.getText().trim());            
         }
+        if((!TOmloop4.getText().equals(""))){
+           omloop4=Double.parseDouble(TOmloop4.getText().trim());            
+        }
+        if((!TOmloop5.getText().equals(""))){
+           omloop5=Double.parseDouble(TOmloop5.getText().trim());            
+        }
         if((!TSarpras.getText().equals(""))){
            sarpras=Double.parseDouble(TSarpras.getText().trim());            
         }
@@ -2042,9 +2256,9 @@ private void TOmloop1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
            dokterumum=Double.parseDouble(TdrUmum.getText().trim());            
         }
         TTotal.setText(Valid.SetAngka2(operator1+operator2+operator3+asistenoperator1+
-                asistenoperator2+instrumen+dokteranak+perawatresusitas+bidan1+bidan2+bidan3+
-                alat+anastesi+perawatluar+asistenanas+sewaok+sewavk+bagianrs+omloop1+omloop2+
-                omloop3+sarpras+dokterpjanak+dokterumum));
+                asistenoperator2+asistenoperator3+instrumen+dokteranak+perawatresusitas+bidan1+bidan2+bidan3+
+                alat+anastesi+perawatluar+asistenanas+asistenanas2+sewaok+sewavk+bagianrs+omloop1+omloop2+
+                omloop3+omloop4+omloop5+sarpras+dokterpjanak+dokterumum));
     }
     
     public JTextField getTextField(){

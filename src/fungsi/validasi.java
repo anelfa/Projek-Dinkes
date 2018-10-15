@@ -53,21 +53,32 @@ import uz.ncipro.calendar.JDateTimePicker;
  * @author Owner
  */
 public final class validasi {
-    private int a,j,i;
-    private String s,s1,auto;
+    private int a,j,i,result=0;
+    private String s,s1,auto,PEMBULATANHARGAOBAT="";
     private final Connection connect=koneksiDB.condb();
     private final sekuel sek=new sekuel();
     private final java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
     private final DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");  
-    private final DecimalFormat df4 = new DecimalFormat("###,###,###,###,###,###,###.###");  
-    private final DecimalFormat df5 = new DecimalFormat("###,###,###,###,###,###,###.##"); 
+    private final DecimalFormat df4 = new DecimalFormat("###,###,###,###,###,###,###.#################");  
+    private final DecimalFormat df5 = new DecimalFormat("###,###,###,###,###,###,###.##");  
     private final DecimalFormat df3 = new DecimalFormat("######"); 
+    private final DecimalFormat df6 = new DecimalFormat("######.###"); 
+    private final DecimalFormat df7 = new DecimalFormat("######.#"); 
     private PreparedStatement ps;
     private ResultSet rs;
     private final Calendar now = Calendar.getInstance();
     private final int year=(now.get(Calendar.YEAR));
+    private static final Properties prop = new Properties();  
     
-    public validasi(){super();};
+    public validasi(){
+        super();
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            PEMBULATANHARGAOBAT=prop.getProperty("PEMBULATANHARGAOBAT");
+        }catch(Exception e){
+            PEMBULATANHARGAOBAT="no"; 
+        }
+    };
 
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){        
         s=Integer.toString(tabMode.getRowCount()+1);
@@ -78,39 +89,7 @@ public final class validasi {
         }
         teks.setText(strAwal+s1+s);
     }
- public void autoNomer6(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
-        try {
-            ps=connect.prepareStatement(sql);
-            try{   
-                rs=ps.executeQuery();
-                s="1";
-                while(rs.next()){
-                    s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
-                }            
 
-                j=s.length();
-                s1="";
-                for(i = 1;i<=pnj-j;i++){
-                    s1=s1+"0";
-                }
-                teks.setText(s1+s+strAwal);
-             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
-             }finally{
-                if(rs != null){
-                    rs.close();
-                }
-                
-                if(ps != null){
-                    ps.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
-        }
-    }
-    
     public void autoNomer(String tabel,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             ps=connect.prepareStatement("select * from "+tabel);
@@ -251,6 +230,39 @@ public final class validasi {
                     s1=s1+"0";
                 }
                 teks.setText((strAwal+s1+s).substring(2,4)+(strAwal+s1+s).substring(0,2)+(strAwal+s1+s).substring(4,6));
+             }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+             }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+    }
+    
+    public void autoNomer6(String sql,String strAwal,Integer pnj,javax.swing.JTextField teks){
+        try {
+            ps=connect.prepareStatement(sql);
+            try{   
+                rs=ps.executeQuery();
+                s="1";
+                while(rs.next()){
+                    s=Integer.toString(Integer.parseInt(rs.getString(1))+1);
+                }            
+
+                j=s.length();
+                s1="";
+                for(i = 1;i<=pnj-j;i++){
+                    s1=s1+"0";
+                }
+                teks.setText(s1+s+strAwal);
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
@@ -668,9 +680,9 @@ public final class validasi {
                 if (fileRpt.isFile()) { // Cek apakah file RptMaster.jrxml ada
                     fullPath = fileRpt.toString();
                     System.out.println("Found Report File at : " + fullPath);
-                } // end if
-            } // end for i
-        } // end if
+                } 
+            } 
+        } 
 
         // Ambil Direktori tempat file RptMaster.jrxml berada
         String[] subRptDir = fullPath.split(reportName);
@@ -898,50 +910,26 @@ public final class validasi {
             Properties prop = new Properties();
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             if(os.contains("win")) {
-                rt.exec( "rundll32 url.dll,FileProtocolHandler " + "http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/"+url);
+                rt.exec( "rundll32 url.dll,FileProtocolHandler " + "http://"+koneksiDB.HOST()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+url);
             }else if (os.contains("mac")) {
-                rt.exec( "open " + "http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/"+url);
+                rt.exec( "open " + "http://"+koneksiDB.HOST()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+url);
             }else if (os.contains("nix") || os.contains("nux")) {
                 String[] browsers = {"x-www-browser","epiphany", "firefox", "mozilla", "konqueror","chrome","chromium","netscape","opera","links","lynx","midori"};
                 // Build a command string which looks like "browser1 "url" || browser2 "url" ||..."
                 StringBuilder cmd = new StringBuilder();
-                for(i=0; i<browsers.length; i++) cmd.append(i==0  ? "" : " || ").append(browsers[i]).append(" \"").append("http://").append(prop.getProperty("HOST")).append("/").append(prop.getProperty("HYBRIDWEB")).append("/").append(url).append( "\" ");
+                for(i=0; i<browsers.length; i++) cmd.append(i==0  ? "" : " || ").append(browsers[i]).append(" \"").append("http://").append(koneksiDB.HOST()+":"+prop.getProperty("PORTWEB")).append("/").append(prop.getProperty("HYBRIDWEB")).append("/").append(url).append( "\" ");
                 rt.exec(new String[] { "sh", "-c", cmd.toString() });
             } 
         }catch (Exception e){
             System.out.println("Notif Browser : "+e);
         } 
-       
     }
-    
-   public void panggilUrlWebService(String url){
-        String os = System.getProperty("os.name").toLowerCase();
-        Runtime rt = Runtime.getRuntime();                                
-        try{ 
-            Properties prop = new Properties();
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            if(os.contains("win")) {
-                rt.exec( "rundll32 url.dll,FileProtocolHandler " + "http://"+prop.getProperty("HOSTWEBSERVICE")+":"+prop.getProperty("PORTWEBSERVICE")+"/"+prop.getProperty("HYBRIDWEB")+"/"+url);
-            }else if (os.contains("mac")) {
-                rt.exec( "open " + "http://"+prop.getProperty("HOSTWEBSERVICE")+":"+prop.getProperty("PORTWEBSERVICE")+"/"+prop.getProperty("HYBRIDWEB")+"/"+url);
-            }else if (os.contains("nix") || os.contains("nux")) {
-                String[] browsers = {"x-www-browser","epiphany", "firefox", "mozilla", "konqueror","chrome","chromium","netscape","opera","links","lynx","midori"};
-                // Build a command string which looks like "browser1 "url" || browser2 "url" ||..."
-                StringBuilder cmd = new StringBuilder();
-                for(i=0; i<browsers.length; i++) cmd.append(i==0  ? "" : " || ").append(browsers[i]).append(" \"").append("http://").append(prop.getProperty("HOSTWEBSERVICE")+":"+prop.getProperty("PORTWEBSERVICE")).append("/").append(prop.getProperty("HYBRIDWEB")).append("/").append(url).append( "\" ");
-                rt.exec(new String[] { "sh", "-c", cmd.toString() });
-            } 
-        }catch (Exception e){
-            System.out.println("Notif Browser : "+e);
-        } 
-       
-    } 
     
     public void printUrl(String url) throws URISyntaxException{
         try{
            Properties prop = new Properties();
            prop.loadFromXML(new FileInputStream("setting/database.xml"));            
-           desktop.print(new File(new java.net.URI("http://"+prop.getProperty("HOST")+"/"+url)));  
+           desktop.print(new File(new java.net.URI("http://"+koneksiDB.HOST()+":"+prop.getProperty("PORTWEB")+"/"+url)));  
         }catch (Exception e) {
            System.out.println(e);
         }
@@ -1011,7 +999,11 @@ public final class validasi {
         JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
         teks.requestFocus();
     }
-
+    
+    public void textKosong(JButton teks,String pesan){
+        JOptionPane.showMessageDialog(null,"Maaf, "+pesan+" tidak boleh kosong...!!!");
+        teks.requestFocus();
+    }
 
     public void tabelKosong(DefaultTableModel tabMode) {
         j=tabMode.getRowCount();
@@ -1032,29 +1024,23 @@ public final class validasi {
     public String SetAngka3(double nilai){        
        return df4.format(nilai);
     }
+    
     public String SetAngka4(double nilai){        
        return df5.format(nilai);
     }
+    
     public String SetAngka2(double nilai){        
        return df3.format(nilai);
     }
-     public double roundUp(double number, int multiple) {
-        int result = multiple;
-
-        if (number % multiple == 0) {
-            return (int) number;
-        }
-
-        if (number % multiple != 0) {
-
-            int division = (int) ((number / multiple) + 1);
-
-            result = division * multiple;
-
-        }
-        return result;
-
+    
+    public String SetAngka5(double nilai){        
+       return df6.format(nilai);
     }
+    
+    public String SetAngka6(double nilai){        
+       return df7.format(nilai);
+    }
+    
     public double SetAngka(String txt){
         double x;         
             if(txt.equals("")){
@@ -1063,6 +1049,24 @@ public final class validasi {
                 x=Double.parseDouble(txt);
             }
             return x;
+    }
+    
+    public double roundUp(double number, int multiple) {
+        if(PEMBULATANHARGAOBAT.equals("yes")){
+            result = multiple;
+            if (number % multiple == 0) {
+                return (int) number;
+            }
+
+            if (number % multiple != 0) {
+                int division = (int) ((number / multiple) + 1);
+                result = division * multiple;
+            }
+            return result;
+        }else{
+            return Math.round(number);
+        }
+
     }
 
        

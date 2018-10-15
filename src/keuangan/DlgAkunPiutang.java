@@ -125,12 +125,12 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(var.getform().equals("DlgAkunPiutang")){
                     if(rekening.getTabel().getSelectedRow()!= -1){      
-                        if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("R")&&
+                        if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                             rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                             nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
                         }else{
-                            JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe R dan Balance D..!!");
+                            JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance D..!!");
                         }
                                                                       
                         kdrek.requestFocus();
@@ -251,7 +251,7 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Akun Piutang ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Akun Piutang ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130, 100, 100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -620,8 +620,8 @@ public class DlgAkunPiutang extends javax.swing.JDialog {
             Valid.textKosong(kdrek,"Rekening");
         }else{
             if(tbJadwal.getSelectedRow()>-1){
-                Sequel.mengedit("akun_piutang","nama_bayar=?","nama_bayar=?,kd_rek=?",3,new String[]{
-                    nama.getText(),kdrek.getText(),tbJadwal.getValueAt(tbJadwal.getSelectedRow(),1).toString()
+                Sequel.mengedit("akun_piutang","nama_bayar=?","nama_bayar=?,kd_rek=?,kd_pj=?",4,new String[]{
+                    nama.getText(),kdrek.getText(),kdpnj.getText(),tbJadwal.getValueAt(tbJadwal.getSelectedRow(),1).toString()
                 });
                 tampil();
                 emptTeks();
@@ -754,7 +754,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         rekening.emptTeks();
         rekening.tampil();
         rekening.isCek();
-        rekening.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        rekening.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         rekening.setLocationRelativeTo(internalFrame1);
         rekening.setVisible(true);
 }//GEN-LAST:event_BtnPoliActionPerformed
@@ -784,7 +784,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private void BtnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenjabActionPerformed
         penjab.isCek();
         penjab.onCari();
-        penjab.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penjab.setLocationRelativeTo(internalFrame1);
         penjab.setVisible(true);
     }//GEN-LAST:event_BtnPenjabActionPerformed

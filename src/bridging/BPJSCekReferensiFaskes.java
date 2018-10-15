@@ -36,7 +36,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -49,7 +48,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private int i=0;
     private BPJSApi api=new BPJSApi();
-    private String URL="";
+    private String URL="",link="";
 
     /** Creates new form DlgKamar
      * @param parent
@@ -75,9 +74,9 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
             if(i==0){
                 column.setPreferredWidth(40);
             }else if(i==1){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(120);
             }else if(i==2){
-                column.setPreferredWidth(200);
+                column.setPreferredWidth(500);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -92,7 +91,13 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
                 @Override
                 public void changedUpdate(DocumentEvent e) {tampil(diagnosa.getText());}
             });
-        }     
+        }   
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml")); 
+            link=prop.getProperty("URLAPIBPJS");
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+        }
     }
     
     
@@ -123,7 +128,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Data Referensi Faskes ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Data Referensi Faskes VClaim ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130,100,100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -237,9 +242,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
                 Sequel.menyimpan("temporary","'0','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
                                 tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Harian Pengadaan Ipsrs"); 
+                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Harian Pengadaan Ipsrs"); 
             }
             Sequel.AutoComitTrue();
             Map<String, Object> param = new HashMap<>();                 
@@ -251,7 +254,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
             param.put("kontakrs",var.getkontakrs());
             param.put("emailrs",var.getemailrs());   
             param.put("logo",Sequel.cariGambar("select logo from setting")); 
-            Valid.MyReport("rptCariBPJSReferensiFaskes.jrxml","report","[ Pencarian Referensi Diagnosa ]",
+            Valid.MyReport("rptCariBPJSReferensiFaskes.jrxml","report","[ Pencarian Referensi Faskes ]",
                 "select no, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14 from temporary order by no asc",param);
             this.setCursor(Cursor.getDefaultCursor());
         }        
@@ -264,6 +267,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
             BtnPrint.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             tampil(diagnosa.getText());
+            tampil2(diagnosa.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -316,10 +320,9 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil(String faskes) {
-       
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            String URL = prop.getProperty("URLAPIBPJS")+"/referensi/faskes/"+faskes+"/1";	
+            Valid.tabelKosong(tabMode);
+            URL = link+"/referensi/faskes/"+faskes+"/1";	
 
 	    HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -327,15 +330,11 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
 	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));            
 	    headers.add("X-Signature",api.getHmac());
 	    HttpEntity requestEntity = new HttpEntity(headers);
-	    RestTemplate rest = new RestTemplate();	
-            
-            //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+	    //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             ObjectMapper mapper = new ObjectMapper();
-            JsonNode root = mapper.readTree(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            JsonNode nameNode = root.path("metaData");
-            //System.out.println("code : "+nameNode.path("code").asText());
-            //System.out.println("message : "+nameNode.path("message").asText());
-            if(nameNode.path("message").asText().equals("Sukses")){ 
+            JsonNode root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+            JsonNode nameNode = root.path("metaData");            
+            if(nameNode.path("code").asText().equals("200")){ 
                 tabMode.addRow(new Object[]{
                     "A","Faskes 1",""
                 });
@@ -359,13 +358,12 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
-        
-        
     }    
- public void tampil2(String faskes) {        
+    
+    public void tampil2(String faskes) {        
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            URL = prop.getProperty("URLAPIBPJS")+"/referensi/faskes/"+faskes+"/2";	
+            URL = link+"/referensi/faskes/"+faskes+"/2";	
 
 	    HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -373,11 +371,9 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
 	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));            
 	    headers.add("X-Signature",api.getHmac());
 	    HttpEntity requestEntity = new HttpEntity(headers);
-	    RestTemplate rest = new RestTemplate();	
-            
-            //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+	    //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             ObjectMapper mapper = new ObjectMapper();
-            JsonNode root = mapper.readTree(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+            JsonNode root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             JsonNode nameNode = root.path("metaData");
             if(nameNode.path("message").asText().equals("Sukses")){ 
                 tabMode.addRow(new Object[]{
@@ -407,6 +403,7 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
             }
         }
     }
+ 
     public JTable getTable(){
         return tbKamar;
     }

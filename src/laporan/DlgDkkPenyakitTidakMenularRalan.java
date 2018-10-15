@@ -91,7 +91,7 @@ public final class DlgDkkPenyakitTidakMenularRalan extends javax.swing.JDialog {
                     "where diagnosa_pasien.status='Ralan' and diagnosa_pasien.prioritas='1'  and reg_periksa.tgl_registrasi between ? and ? and left(upper(diagnosa_pasien.kd_penyakit),1)<>'A' and "+
                     "diagnosa_pasien.status='Ralan' and diagnosa_pasien.prioritas='1'  and reg_periksa.tgl_registrasi between ? and ? and left(upper(diagnosa_pasien.kd_penyakit),1)<>'B' and "+
                     "diagnosa_pasien.status='Ralan' and diagnosa_pasien.prioritas='1'  and reg_periksa.tgl_registrasi between ? and ? and left(upper(diagnosa_pasien.kd_penyakit),1)<>'-' group by diagnosa_pasien.kd_penyakit ");
-            ps2=koneksi.prepareStatement("select concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr') as umur,pasien.jk,pasien.no_rkm_medis from pasien inner join reg_periksa inner join diagnosa_pasien "+
+            ps2=koneksi.prepareStatement("select concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,pasien.jk,pasien.no_rkm_medis from pasien inner join reg_periksa inner join diagnosa_pasien "+
                     "on pasien.no_rkm_medis=reg_periksa.no_rkm_medis and reg_periksa.no_rawat=diagnosa_pasien.no_rawat where "+
                     "diagnosa_pasien.status='Ralan' and diagnosa_pasien.prioritas='1' and reg_periksa.tgl_registrasi between ? and ? and diagnosa_pasien.kd_penyakit=? "+
                     "group by diagnosa_pasien.no_rawat");
@@ -127,7 +127,6 @@ public final class DlgDkkPenyakitTidakMenularRalan extends javax.swing.JDialog {
 
         TKd.setForeground(new java.awt.Color(255, 255, 255));
         TKd.setName("TKd"); // NOI18N
-        TKd.setSelectionColor(new java.awt.Color(255, 255, 255));
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -154,7 +153,7 @@ public final class DlgDkkPenyakitTidakMenularRalan extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Penyakit Tidak Menular di Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Penyakit Tidak Menular di Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130, 100, 100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 

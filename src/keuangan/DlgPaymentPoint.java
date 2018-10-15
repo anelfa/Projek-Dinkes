@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -42,7 +43,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
     private ResultSet rs,rsjamshift;
     private double all=0,pagi=0,siang=0,sore=0,malam=0;
     private int i;
-    private String shift="",tanggal2="",nonota="";
+    private String shift="",tanggal2="",nonota="",petugas="";
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -53,12 +54,13 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        Object[] rowRwJlDr={"No.","Tanggal","Shift","No.Rawat/No.Nota","Nama Pasien","Pembayaran"};
+        Object[] rowRwJlDr={"No.","Tanggal","Shift","No.Rawat/No.Nota","Nama Pasien","Pembayaran","Petugas"};
         tabMode=new DefaultTableModel(null,rowRwJlDr){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
                 java.lang.String.class,java.lang.String.class,java.lang.String.class,
-                java.lang.String.class,java.lang.String.class,java.lang.Double.class
+                java.lang.String.class,java.lang.String.class,java.lang.Double.class,
+                java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -70,7 +72,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
         Tabel.setPreferredScrollableViewportSize(new Dimension(500,500));
         Tabel.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < 7; i++) {
             TableColumn column = Tabel.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(30);
@@ -84,9 +86,31 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                 column.setPreferredWidth(300);
             }else if(i==5){
                 column.setPreferredWidth(110);
+            }else if(i==6){
+                column.setPreferredWidth(100);
             }
         }
         Tabel.setDefaultRenderer(Object.class, new WarnaTable());
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+        User.setDocument(new batasInput((byte)100).getKata(User));
+        if(koneksiDB.cariCepat().equals("aktif")){
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {tampil();}
+                @Override
+                public void removeUpdate(DocumentEvent e) {tampil();}
+                @Override
+                public void changedUpdate(DocumentEvent e) {tampil();}
+            });
+            User.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {tampil();}
+                @Override
+                public void removeUpdate(DocumentEvent e) {tampil();}
+                @Override
+                public void changedUpdate(DocumentEvent e) {tampil();}
+            });
+        }  
         InputModalAwal.setDocument(new batasInput((byte)16).getOnlyAngka(InputModalAwal));
         Sequel.cariIsiAngka("select modal_awal from set_modal_payment",ModalAwal);
     }    
@@ -114,6 +138,8 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
         panelGlass5 = new widget.panelisi();
         label17 = new widget.Label();
         TCari = new widget.TextBox();
+        label19 = new widget.Label();
+        User = new widget.TextBox();
         BtnCari = new widget.Button();
         BtnAll = new widget.Button();
         jLabel11 = new javax.swing.JLabel();
@@ -133,7 +159,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
         WindowModalAwal.setUndecorated(true);
         WindowModalAwal.setResizable(false);
 
-        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Input Modal Awal ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Input Modal Awal ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130, 100, 100))); // NOI18N
         internalFrame2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setWarnaBawah(new java.awt.Color(240, 245, 235));
@@ -141,7 +167,6 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
 
         InputModalAwal.setHighlighter(null);
         InputModalAwal.setName("InputModalAwal"); // NOI18N
-        InputModalAwal.setSelectionColor(new java.awt.Color(255, 255, 255));
         InputModalAwal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 InputModalAwalKeyPressed(evt);
@@ -202,7 +227,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Payment Point ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Payment Point ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130, 100, 100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -221,17 +246,31 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
 
         label17.setText("Key Word :");
         label17.setName("label17"); // NOI18N
-        label17.setPreferredSize(new java.awt.Dimension(70, 23));
+        label17.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass5.add(label17);
 
         TCari.setName("TCari"); // NOI18N
-        TCari.setPreferredSize(new java.awt.Dimension(200, 23));
+        TCari.setPreferredSize(new java.awt.Dimension(150, 23));
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
             }
         });
         panelGlass5.add(TCari);
+
+        label19.setText("User :");
+        label19.setName("label19"); // NOI18N
+        label19.setPreferredSize(new java.awt.Dimension(40, 23));
+        panelGlass5.add(label19);
+
+        User.setName("User"); // NOI18N
+        User.setPreferredSize(new java.awt.Dimension(150, 23));
+        User.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                UserKeyPressed(evt);
+            }
+        });
+        panelGlass5.add(User);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari.setMnemonic('2');
@@ -268,10 +307,10 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
         panelGlass5.add(BtnAll);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(153, 0, 51));
+        jLabel11.setForeground(new java.awt.Color(130, 100, 100));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setName("jLabel11"); // NOI18N
-        jLabel11.setPreferredSize(new java.awt.Dimension(40, 23));
+        jLabel11.setPreferredSize(new java.awt.Dimension(30, 23));
         panelGlass5.add(jLabel11);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
@@ -316,9 +355,9 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
         panelGlass6.setPreferredSize(new java.awt.Dimension(55, 45));
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        label11.setText("Tgl.Tagihan :");
+        label11.setText("Tanggal Bayar :");
         label11.setName("label11"); // NOI18N
-        label11.setPreferredSize(new java.awt.Dimension(70, 23));
+        label11.setPreferredSize(new java.awt.Dimension(100, 23));
         panelGlass6.add(label11);
 
         Tgl1.setEditable(false);
@@ -329,10 +368,9 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
 
         jLabel9.setText("Shift :");
         jLabel9.setName("jLabel9"); // NOI18N
-        jLabel9.setPreferredSize(new java.awt.Dimension(50, 23));
+        jLabel9.setPreferredSize(new java.awt.Dimension(90, 23));
         panelGlass6.add(jLabel9);
 
-        CmbStatus.setForeground(new java.awt.Color(153, 0, 51));
         CmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Pagi", "Siang", "Sore", "Malam" }));
         CmbStatus.setName("CmbStatus"); // NOI18N
         CmbStatus.setOpaque(false);
@@ -341,7 +379,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
 
         label18.setText("Modal Awal :");
         label18.setName("label18"); // NOI18N
-        label18.setPreferredSize(new java.awt.Dimension(80, 23));
+        label18.setPreferredSize(new java.awt.Dimension(130, 23));
         panelGlass6.add(label18);
 
         ModalAwal.setEditable(false);
@@ -383,7 +421,8 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                                     tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
                                     tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
                                     tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,5).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","data");
+                                    Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(r,5).toString()))+"','"+
+                                    tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","data");
             }
             Sequel.AutoComitTrue();
             Map<String, Object> param = new HashMap<>();                 
@@ -498,6 +537,10 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
         Valid.pindah(evt,InputModalAwal,BtnCloseIn);
     }//GEN-LAST:event_BtnSimpan2KeyPressed
 
+    private void UserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UserKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UserKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -529,6 +572,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
     private widget.TextBox TCari;
     private widget.Table Tabel;
     private widget.Tanggal Tgl1;
+    private widget.TextBox User;
     private javax.swing.JDialog WindowModalAwal;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
@@ -538,6 +582,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
     private widget.Label label11;
     private widget.Label label17;
     private widget.Label label18;
+    private widget.Label label19;
     private widget.panelisi panelGlass5;
     private widget.panelisi panelGlass6;
     // End of variables declaration//GEN-END:variables
@@ -556,7 +601,7 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                 malam=0;
                 while(rsjamshift.next()){ 
                     ps= koneksi.prepareStatement(
-                            "select no_nota,tgl_bayar,nama_pasien,jumlah_bayar from tagihan_sadewa "+
+                            "select no_nota,tgl_bayar,nama_pasien,jumlah_bayar,petugas from tagihan_sadewa "+
                             "where tgl_bayar between ? and ? and nama_pasien like ? or "+
                             "tgl_bayar between ? and ? and no_nota like ? order by tgl_bayar,no_nota");
                     try {
@@ -574,17 +619,8 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                         ps.setString(6,"%"+TCari.getText().trim()+"%");
                         rs=ps.executeQuery();
                         i=1;
-                        while(rs.next()){
-                            if(rsjamshift.getString("shift").equals("Pagi")){
-                                pagi=pagi+rs.getDouble("jumlah_bayar");
-                            }else if(rsjamshift.getString("shift").equals("Siang")){
-                                siang=siang+rs.getDouble("jumlah_bayar");
-                            }else if(rsjamshift.getString("shift").equals("Sore")){
-                                sore=sore+rs.getDouble("jumlah_bayar");
-                            }else if(rsjamshift.getString("shift").equals("Malam")){
-                                malam=malam+rs.getDouble("jumlah_bayar");
-                            }
-                            all=all+rs.getDouble("jumlah_bayar");
+                        while(rs.next()){                            
+                            petugas=rs.getString("petugas")+" "+Sequel.cariIsi("select nama from pegawai where nik=?",rs.getString("petugas"));
                             if(CmbStatus.getSelectedItem().toString().equals("Semua")){
                                 nonota=Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_nota"));
                                 if(nonota.equals("")){
@@ -593,9 +629,21 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                                         nonota=rs.getString("no_nota");
                                     }
                                 }
-                                tabMode.addRow(new Object[]{
-                                    i,rs.getString("tgl_bayar"),rsjamshift.getString("shift"),nonota,rs.getString("nama_pasien"),rs.getDouble("jumlah_bayar")
-                                });
+                                if(petugas.toLowerCase().trim().contains(User.getText().toLowerCase().trim())){
+                                    if(rsjamshift.getString("shift").equals("Pagi")){
+                                        pagi=pagi+rs.getDouble("jumlah_bayar");
+                                    }else if(rsjamshift.getString("shift").equals("Siang")){
+                                        siang=siang+rs.getDouble("jumlah_bayar");
+                                    }else if(rsjamshift.getString("shift").equals("Sore")){
+                                        sore=sore+rs.getDouble("jumlah_bayar");
+                                    }else if(rsjamshift.getString("shift").equals("Malam")){
+                                        malam=malam+rs.getDouble("jumlah_bayar");
+                                    }
+                                    all=all+rs.getDouble("jumlah_bayar");
+                                    tabMode.addRow(new Object[]{
+                                        i,rs.getString("tgl_bayar"),rsjamshift.getString("shift"),nonota,rs.getString("nama_pasien"),rs.getDouble("jumlah_bayar"),petugas
+                                    });
+                                }                                    
                             }else if(rsjamshift.getString("shift").equals(CmbStatus.getSelectedItem().toString())){
                                 nonota=Sequel.cariIsi("select no_nota from nota_inap where no_rawat=?",rs.getString("no_nota"));
                                 if(nonota.equals("")){
@@ -604,9 +652,21 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
                                         nonota=rs.getString("no_nota");
                                     }
                                 }
-                                tabMode.addRow(new Object[]{
-                                    i,rs.getString("tgl_bayar"),rsjamshift.getString("shift"),nonota,rs.getString("nama_pasien"),rs.getDouble("jumlah_bayar")
-                                });
+                                if(petugas.toLowerCase().trim().contains(User.getText().toLowerCase().trim())){
+                                    if(rsjamshift.getString("shift").equals("Pagi")){
+                                        pagi=pagi+rs.getDouble("jumlah_bayar");
+                                    }else if(rsjamshift.getString("shift").equals("Siang")){
+                                        siang=siang+rs.getDouble("jumlah_bayar");
+                                    }else if(rsjamshift.getString("shift").equals("Sore")){
+                                        sore=sore+rs.getDouble("jumlah_bayar");
+                                    }else if(rsjamshift.getString("shift").equals("Malam")){
+                                        malam=malam+rs.getDouble("jumlah_bayar");
+                                    }
+                                    all=all+rs.getDouble("jumlah_bayar");
+                                    tabMode.addRow(new Object[]{
+                                        i,rs.getString("tgl_bayar"),rsjamshift.getString("shift"),nonota,rs.getString("nama_pasien"),rs.getDouble("jumlah_bayar"),petugas
+                                    });
+                                }                                    
                             }
                             i++;                            
                         }
@@ -633,53 +693,53 @@ public final class DlgPaymentPoint extends javax.swing.JDialog {
             }
             if(CmbStatus.getSelectedItem().toString().equals("Semua")){
                 tabMode.addRow(new Object[]{
-                        "","Modal Awal",":","","",Double.parseDouble(ModalAwal.getText())
+                        "","Modal Awal",":","","",Double.parseDouble(ModalAwal.getText()),""
                 });
                 tabMode.addRow(new Object[]{
-                        "","Uang Masuk",":","","",all
+                        "","Uang Masuk",":","","",all,""
                 });
                 tabMode.addRow(new Object[]{
-                        "",">> Total",":","","",(all+Double.parseDouble(ModalAwal.getText()))
+                        "",">> Total",":","","",(all+Double.parseDouble(ModalAwal.getText())),""
                 });
             }else if(CmbStatus.getSelectedItem().toString().equals("Pagi")){
                 tabMode.addRow(new Object[]{
-                        "","Modal Awal",":","","",Double.parseDouble(ModalAwal.getText())
+                        "","Modal Awal",":","","",Double.parseDouble(ModalAwal.getText()),""
                 });
                 tabMode.addRow(new Object[]{
-                        "","Uang Masuk",":","","",pagi
+                        "","Uang Masuk",":","","",pagi,""
                 });
                 tabMode.addRow(new Object[]{
-                        "",">> Total",":","","",(pagi+Double.parseDouble(ModalAwal.getText()))
+                        "",">> Total",":","","",(pagi+Double.parseDouble(ModalAwal.getText())),""
                 });
             }else if(CmbStatus.getSelectedItem().toString().equals("Siang")){
                 tabMode.addRow(new Object[]{
-                        "","Modal Awal",":","","",(Double.parseDouble(ModalAwal.getText())+pagi)
+                        "","Modal Awal",":","","",(Double.parseDouble(ModalAwal.getText())+pagi),""
                 });
                 tabMode.addRow(new Object[]{
-                        "","Uang Masuk",":","","",siang
+                        "","Uang Masuk",":","","",siang,""
                 });
                 tabMode.addRow(new Object[]{
-                        "",">> Total",":","","",(pagi+siang+Double.parseDouble(ModalAwal.getText()))
+                        "",">> Total",":","","",(pagi+siang+Double.parseDouble(ModalAwal.getText())),""
                 });
             }else if(CmbStatus.getSelectedItem().toString().equals("Sore")){
                 tabMode.addRow(new Object[]{
-                        "","Modal Awal",":","","",(Double.parseDouble(ModalAwal.getText())+pagi+siang)
+                        "","Modal Awal",":","","",(Double.parseDouble(ModalAwal.getText())+pagi+siang),""
                 });
                 tabMode.addRow(new Object[]{
-                        "","Uang Masuk",":","","",sore
+                        "","Uang Masuk",":","","",sore,""
                 });
                 tabMode.addRow(new Object[]{
-                        "",">> Total",":","","",(pagi+siang+sore+Double.parseDouble(ModalAwal.getText()))
+                        "",">> Total",":","","",(pagi+siang+sore+Double.parseDouble(ModalAwal.getText())),""
                 });
             }else if(CmbStatus.getSelectedItem().toString().equals("Malam")){
                 tabMode.addRow(new Object[]{
-                        "","Modal Awal",":","","",(Double.parseDouble(ModalAwal.getText())+pagi+siang+sore)
+                        "","Modal Awal",":","","",(Double.parseDouble(ModalAwal.getText())+pagi+siang+sore),""
                 });
                 tabMode.addRow(new Object[]{
-                        "","Uang Masuk",":","","",malam
+                        "","Uang Masuk",":","","",malam,""
                 });
                 tabMode.addRow(new Object[]{
-                        "",">> Total",":","","",(pagi+siang+sore+malam+Double.parseDouble(ModalAwal.getText()))
+                        "",">> Total",":","","",(pagi+siang+sore+malam+Double.parseDouble(ModalAwal.getText())),""
                 });
             }                
         }catch(Exception e){

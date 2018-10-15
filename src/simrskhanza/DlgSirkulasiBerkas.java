@@ -1,6 +1,7 @@
 
 
 package simrskhanza;
+import kepegawaian.DlgCariPetugas;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -120,7 +121,41 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
                         RmCari.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),1).toString());
                         RmCari.requestFocus();
                     }
-                }                
+                } 
+                if(pasien.getTable2().getSelectedRow()!= -1){                   
+                    if(pilihan==1){                           
+                           try {
+                                NoRm.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),1).toString());
+                                NmPasien.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),2).toString());
+                                Umur.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),15).toString());
+                                Alamat.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),8).toString());
+                                Pekerjaan.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),10).toString());   
+                                PertamaDaftar.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),13).toString());                       
+                           } catch (Exception z) {
+                           }                           
+                           NoRm.requestFocus();
+                    }else if(pilihan==2){
+                        RmCari.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(),1).toString());
+                        RmCari.requestFocus();
+                    }
+                } 
+                if(pasien.getTable3().getSelectedRow()!= -1){                   
+                    if(pilihan==1){                           
+                           try {
+                                NoRm.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),1).toString());
+                                NmPasien.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),2).toString());
+                                Umur.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),15).toString());
+                                Alamat.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),8).toString());
+                                Pekerjaan.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),10).toString());   
+                                PertamaDaftar.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),13).toString());                       
+                           } catch (Exception z) {
+                           }                           
+                           NoRm.requestFocus();
+                    }else if(pilihan==2){
+                        RmCari.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(),1).toString());
+                        RmCari.requestFocus();
+                    }
+                } 
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -133,6 +168,30 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
         });
         
         pasien.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    pasien.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        pasien.getTable2().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    pasien.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        pasien.getTable3().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
             @Override
@@ -221,7 +280,7 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
                     " peminjaman_berkas.status_pinjam=? and tgl_pinjam between ? and ? and peminjaman_berkas.no_rkm_medis like ? and peminjaman_berkas.peminjam like ? order by peminjaman_berkas.tgl_pinjam desc ");
             pspasien=koneksi.prepareStatement("select pasien.nm_pasien,pasien.pekerjaan, "+
                    "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,"+
-                   "pasien.tgl_daftar,concat(year(from_days(datediff(now(), pasien.tgl_lahir))),' Th ',month(from_days(datediff(now(),pasien.tgl_lahir))),' Bl ',day(from_days(datediff(now(),pasien.tgl_lahir))),' Hr') as umur from pasien inner join kelurahan inner join kecamatan inner join kabupaten "+
+                   "pasien.tgl_daftar,pasien.umur from pasien inner join kelurahan inner join kecamatan inner join kabupaten "+
                    "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "+
                    "where pasien.no_rkm_medis=?");
@@ -308,7 +367,7 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
         WindowInput.setUndecorated(true);
         WindowInput.setResizable(false);
 
-        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Transaki Peminjaman & Pengembalian Berkas Rekam Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Transaki Peminjaman & Pengembalian Berkas Rekam Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130,100,100))); // NOI18N
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setWarnaBawah(new java.awt.Color(240, 245, 235));
         internalFrame2.setLayout(null);
@@ -494,7 +553,7 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-10-2016" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-05-2018" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -551,7 +610,6 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
         TOut.setForeground(new java.awt.Color(255, 255, 255));
         TOut.setHighlighter(null);
         TOut.setName("TOut"); // NOI18N
-        TOut.setSelectionColor(new java.awt.Color(255, 255, 255));
         TOut.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TOutKeyPressed(evt);
@@ -562,7 +620,6 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
         TIn.setForeground(new java.awt.Color(255, 255, 255));
         TIn.setHighlighter(null);
         TIn.setName("TIn"); // NOI18N
-        TIn.setSelectionColor(new java.awt.Color(255, 255, 255));
         TIn.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TInKeyPressed(evt);
@@ -578,7 +635,7 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Peminjaman & Pengembalian Berkas Rekam Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Peminjaman & Pengembalian Berkas Rekam Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130,100,100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -808,7 +865,7 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
 
         TglPinjam1.setEditable(false);
         TglPinjam1.setForeground(new java.awt.Color(50, 70, 50));
-        TglPinjam1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-10-2016" }));
+        TglPinjam1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-05-2018" }));
         TglPinjam1.setDisplayFormat("dd-MM-yyyy");
         TglPinjam1.setName("TglPinjam1"); // NOI18N
         TglPinjam1.setOpaque(false);
@@ -833,7 +890,7 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
 
         TglPinjam2.setEditable(false);
         TglPinjam2.setForeground(new java.awt.Color(50, 70, 50));
-        TglPinjam2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-10-2016" }));
+        TglPinjam2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-05-2018" }));
         TglPinjam2.setDisplayFormat("dd-MM-yyyy");
         TglPinjam2.setName("TglPinjam2"); // NOI18N
         TglPinjam2.setOpaque(false);
@@ -1160,7 +1217,7 @@ public class DlgSirkulasiBerkas extends javax.swing.JDialog {
 private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
         pilihan=2;
     pasien.isCek();
-    pasien.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+    pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     pasien.setLocationRelativeTo(internalFrame1);
     pasien.setAlwaysOnTop(false);
     pasien.setVisible(true);     
@@ -1205,7 +1262,7 @@ private void peminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvActionPerformed
     pilihan=1;
     pasien.isCek();
-    pasien.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+    pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     pasien.setLocationRelativeTo(internalFrame1);
     pasien.setAlwaysOnTop(false);
     pasien.setVisible(true);        
@@ -1227,7 +1284,7 @@ private void NipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NipKe
 
 private void btnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPtgActionPerformed
     petugas.isCek();
-    petugas.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+    petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     petugas.setLocationRelativeTo(internalFrame1);
     petugas.setAlwaysOnTop(false);
     petugas.setVisible(true);
@@ -1259,7 +1316,7 @@ private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_T
 
     private void btnRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuangActionPerformed
         ruang.isCek();
-        ruang.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        ruang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         ruang.setLocationRelativeTo(internalFrame1);
         ruang.setAlwaysOnTop(false);
         ruang.setVisible(true);

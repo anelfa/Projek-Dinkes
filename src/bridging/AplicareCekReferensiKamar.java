@@ -27,8 +27,6 @@ import fungsi.var;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -38,8 +36,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -51,8 +47,8 @@ public final class AplicareCekReferensiKamar extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private sekuel Sequel=new sekuel();
     private int i=0;
-    private String proxy_ip,proxy_port;
     private BPJSApiAplicare api=new BPJSApiAplicare();
+    private String URL="";
 
     /** Creates new form DlgKamar
      * @param parent
@@ -97,7 +93,13 @@ public final class AplicareCekReferensiKamar extends javax.swing.JDialog {
                 public void changedUpdate(DocumentEvent e) {tampil();}
             });
         } 
-              
+        
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            URL = prop.getProperty("URLAPIAPLICARE")+"/rest/ref/kelas";	
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+        }     
     }
     
     
@@ -128,7 +130,7 @@ public final class AplicareCekReferensiKamar extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Data Referensi Kamar Aplicare BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(90, 120, 80))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Data Referensi Kamar Aplicare BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130,100,100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -316,31 +318,16 @@ public final class AplicareCekReferensiKamar extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {   
-        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+    public void tampil() {        
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-            String URL = prop.getProperty("URLAPIAPLICARE")+"/rest/ref/kelas";	
-
-	    HttpHeaders headers = new HttpHeaders();
+            HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.add("X-Cons-ID",prop.getProperty("CONSIDAPIAPLICARE"));
 	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));            
 	    headers.add("X-Signature",api.getHmac());
 	    HttpEntity requestEntity = new HttpEntity(headers);
-            if( prop.getProperty("PROXY").equals("YES")){
-                proxy_ip=prop.getProperty("PROXY_IP");
-                proxy_port=prop.getProperty("PROXY_PORT");
-                int port=Integer.parseInt(proxy_port);
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxy_ip, port));
-            requestFactory.setProxy(proxy);
-        }
-            
-	    RestTemplate rest = new RestTemplate(requestFactory);	
-            
-            //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode root = mapper.readTree(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+	    ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             JsonNode nameNode = root.path("metadata");
             //System.out.println("code : "+nameNode.path("code").asText());
             //System.out.println("message : "+nameNode.path("message").asText());

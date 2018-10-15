@@ -114,8 +114,7 @@ public class DlgRHPengeluaranIPSRS extends javax.swing.JDialog {
                     "from ipsrsdetailpengeluaran inner join ipsrspengeluaran on ipsrsdetailpengeluaran.no_keluar=ipsrspengeluaran.no_keluar "+
                     "where ipsrsdetailpengeluaran.kode_brng=? and ipsrspengeluaran.tanggal between ? and ?");
             ps3=koneksi.prepareStatement("select sum(beri_bhp_radiologi.jumlah) as jumlah,sum(beri_bhp_radiologi.total) as total "+
-                    "from beri_bhp_radiologi inner join periksa_radiologi on beri_bhp_radiologi.no_rawat=periksa_radiologi.no_rawat "+
-                    "where beri_bhp_radiologi.tgl_periksa=periksa_radiologi.tgl_periksa and beri_bhp_radiologi.jam=periksa_radiologi.jam and beri_bhp_radiologi.kode_brng=? and periksa_radiologi.tgl_periksa between ? and ?");
+                    "from beri_bhp_radiologi where beri_bhp_radiologi.kode_brng=? and beri_bhp_radiologi.tgl_periksa between ? and ?");
         } catch (Exception e) {
             System.out.println(e);
         }     
@@ -159,7 +158,7 @@ public class DlgRHPengeluaranIPSRS extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Rekap Stok Keluar Barang Non Medis dan Penunjang ( Lab & RO ) ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Rekap Stok Keluar Barang Non Medis dan Penunjang ( Lab & RO ) ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130,100,100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -430,7 +429,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
 private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
         barang.isCek();
-        barang.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         barang.setLocationRelativeTo(internalFrame1);
         barang.setAlwaysOnTop(false);
         barang.setVisible(true);

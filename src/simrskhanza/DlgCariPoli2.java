@@ -23,8 +23,8 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -43,7 +43,7 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
     private ResultSet rs;
     private Calendar cal = Calendar.getInstance();
     private int day = cal.get(Calendar.DAY_OF_WEEK);
-    private String hari="",dokter="";
+    private String hari="";
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -53,7 +53,7 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"Kode Unit","Nama Unit","Registrasi Baru","Registrasi Lama"};
+        Object[] row={"Kode Unit","Nama Unit","Registrasi Baru","Registrasi Lama","Kuota"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -62,7 +62,7 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(90);
@@ -72,6 +72,8 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
                 column.setPreferredWidth(120);
             }else if(i==3){
                 column.setPreferredWidth(120);
+            }else if(i==4){
+                column.setPreferredWidth(50);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -120,7 +122,7 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Unit/Poliklinik ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Unit/Poliklinik ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130,100,100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -350,11 +352,11 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try {
             ps=koneksi.prepareStatement(
-                    "select poliklinik.kd_poli,poliklinik.nm_poli,poliklinik.registrasi,poliklinik.registrasilama "+
+                    "select poliklinik.kd_poli,poliklinik.nm_poli,poliklinik.registrasi,poliklinik.registrasilama,jadwal.kuota "+
                     "from poliklinik inner join jadwal inner join dokter on poliklinik.kd_poli=jadwal.kd_poli "+
                     "and dokter.kd_dokter=jadwal.kd_dokter "+
-                    "where jadwal.hari_kerja=? and poliklinik.kd_poli like ? and dokter.nm_dokter like ? or "+
-                    "jadwal.hari_kerja=? and poliklinik.nm_poli like ? and dokter.nm_dokter like ? group by poliklinik.kd_poli order by poliklinik.nm_poli "); 
+                    "where jadwal.hari_kerja=? and poliklinik.kd_poli like ?  or "+
+                    "jadwal.hari_kerja=? and poliklinik.nm_poli like ? group by poliklinik.kd_poli order by poliklinik.nm_poli "); 
             try{                
                 switch (day) {
                     case 1:
@@ -383,13 +385,11 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
                 }
                 ps.setString(1,hari);
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
-                ps.setString(3,"%"+dokter+"%");
-                ps.setString(4,hari);
-                ps.setString(5,"%"+TCari.getText().trim()+"%");
-                ps.setString(6,"%"+dokter+"%");
+                ps.setString(3,hari);
+                ps.setString(4,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery(); 
                 while(rs.next()){
-                    tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)});
+                    tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
                 }  
             }catch(Exception ex){
                 System.out.println(ex);
@@ -407,9 +407,7 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
     
-    public void setDokter(String namadokter){
-        this.dokter=namadokter;
-    }
+    
 
     public void emptTeks() {   
         TCari.requestFocus();
@@ -421,5 +419,10 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
     
     public void isCek(){        
         BtnTambah.setEnabled(var.getregistrasi());
+    }
+    
+    public void SetHari(Date tanggal){
+        cal.setTime(tanggal);
+        day=cal.get(Calendar.DAY_OF_WEEK);
     }
 }

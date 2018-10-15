@@ -8,8 +8,6 @@ package bridging;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileInputStream;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,8 +17,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -33,46 +29,37 @@ public class BPJSCekNoKartu {
             mrnoMR="",mrnoTelepon="",nama="",nik="",noKartu="",pisa="",
             provUmumkdProvider="",provUmumnmProvider="",sex="",statusPesertaketerangan="",
             statusPesertakode="",tglCetakKartu="",tglLahir="",tglTAT="",
-            tglTMT="",umurumurSaatPelayanan="",umurumurSekarang="",informasi="",proxy_ip,proxy_port;
+            tglTMT="",umurumurSaatPelayanan="",umurumurSekarang="",informasi="";
     private final Properties prop = new Properties();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date date = new Date();
     private BPJSApi api=new BPJSApi();
+    private String URL="";
+        
     public BPJSCekNoKartu(){
         super();
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            URL = prop.getProperty("URLAPIBPJS")+"/Peserta/nokartu/";	
+	} catch (Exception e) {
+            System.out.println("E : "+e);
+        }
     }
     
     public void tampil(String nokartu) {
-     SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-        try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-           String URL = prop.getProperty("URLAPIBPJS")+"/Peserta/nokartu/"+nokartu+"/tglSEP/"+dateFormat.format(date);
-
+        try {            
 	    HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.add("X-Cons-ID",prop.getProperty("CONSIDAPIBPJS"));
 	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
 	    headers.add("X-Signature",api.getHmac());
 	    HttpEntity requestEntity = new HttpEntity(headers);
-            if( prop.getProperty("PROXY").equals("YES")){
-                proxy_ip=prop.getProperty("PROXY_IP");
-                proxy_port=prop.getProperty("PROXY_PORT");
-                int port=Integer.parseInt(proxy_port);
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxy_ip, port));
-            requestFactory.setProxy(proxy);
-        }
-            
-	    RestTemplate rest = new RestTemplate(requestFactory);
-	    	
-            
-            System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode root = mapper.readTree(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+	    ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(api.getRest().exchange(URL+nokartu+"/tglSEP/"+dateFormat.format(date), HttpMethod.GET, requestEntity, String.class).getBody());
             JsonNode nameNode = root.path("metaData");
             //System.out.println("code : "+nameNode.path("code").asText());
-            System.out.println("message : "+nameNode.path("code").asText());
+            //System.out.println("message : "+nameNode.path("message").asText());
             informasi=nameNode.path("message").asText();
-           
             if(nameNode.path("code").asText().equals("200")){
                 JsonNode response = root.path("response");
                 nik=response.path("peserta").path("nik").asText();

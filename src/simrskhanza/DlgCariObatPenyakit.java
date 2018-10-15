@@ -209,7 +209,6 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
 
         Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
-        Kd2.setSelectionColor(new java.awt.Color(255, 255, 255));
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Kd2KeyPressed(evt);
@@ -225,7 +224,7 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Obat Penyakit/Alkes Dibutuhkan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Obat Penyakit/Alkes Dibutuhkan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130,100,100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -413,7 +412,7 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
 
         DTPBeri.setEditable(false);
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2016-10-27" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2018-05-23" }));
         DTPBeri.setDisplayFormat("yyyy-MM-dd");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -460,7 +459,7 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
 
         ChkJln.setBackground(new java.awt.Color(234, 255, 235));
         ChkJln.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ChkJln.setForeground(new java.awt.Color(153, 0, 51));
+        ChkJln.setForeground(new java.awt.Color(130,100,100));
         ChkJln.setSelected(true);
         ChkJln.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
         ChkJln.setBorderPainted(true);
@@ -625,7 +624,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                     Valid.SetAngka(tabMode.getValueAt(r,4).toString())+"','"+
                                     Valid.SetAngka(tabMode.getValueAt(r,5).toString())+"','"+
                                     Valid.SetAngka(tabMode.getValueAt(r,6).toString())+"','"+
-                                    Valid.SetAngka(tabMode.getValueAt(r,7).toString())+"'","data")==true){
+                                    Valid.SetAngka(tabMode.getValueAt(r,7).toString())+"','Ralan'","data")==true){
                             Trackobat.catatRiwayat(tabMode.getValueAt(r,0).toString(),0,Valid.SetAngka(tabMode.getValueAt(r,4).toString()),"Pemberian Obat",var.getkode(),bangsal,"Simpan");
                             Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(r,0).toString()+"','"+bangsal+"','-"+tabMode.getValueAt(r,4).toString()+"'", 
                                             "stok=stok-'"+tabMode.getValueAt(r,4).toString()+"'","kode_brng='"+tabMode.getValueAt(r,0).toString()+"' and kd_bangsal='"+bangsal+"'");

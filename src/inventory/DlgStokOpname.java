@@ -58,7 +58,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         setSize(628,674);
 
         Object[] row={"Kode Barang","Nama Barang","Harga Beli","Satuan","Tanggal","Stok","Real",
-                      "Selisih","Nominal Hilang(Rp)","Keterangan","Kode Lokasi","Nama Lokasi"};
+                      "Selisih","Total Real","Nominal Hilang(Rp)","Keterangan","Kode Lokasi","Nama Lokasi"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -67,7 +67,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 13; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(80);
@@ -88,10 +88,12 @@ public final class DlgStokOpname extends javax.swing.JDialog {
             }else if(i==8){
                 column.setPreferredWidth(100);
             }else if(i==9){
-                column.setPreferredWidth(120);
+                column.setPreferredWidth(100);
             }else if(i==10){
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(120);
             }else if(i==11){
+                column.setPreferredWidth(90);
+            }else if(i==12){
                 column.setPreferredWidth(130);
             }
         }
@@ -112,27 +114,10 @@ public final class DlgStokOpname extends javax.swing.JDialog {
                 @Override
                 public void changedUpdate(DocumentEvent e) {tampil();}
             });
-        }           
-                
-        try {
-             pstampil=koneksi.prepareStatement("select opname.kode_brng, databarang.nama_brng,opname.h_beli, databarang.kode_sat, opname.tanggal, opname.stok, "+
-                  "opname.real, opname.selisih, opname.nomihilang, opname.keterangan, bangsal.kd_bangsal, bangsal.nm_bangsal "+
-                  "from opname inner join databarang inner join bangsal "+
-                  "on opname.kode_brng=databarang.kode_brng and opname.kd_bangsal=bangsal.kd_bangsal "+
-                  "where opname.tanggal between ? and ? and opname.kode_brng like ? or "+
-                  "opname.tanggal between ? and ? and databarang.nama_brng like ? or "+
-                  "opname.tanggal between ? and ? and opname.kode_brng like ? or "+
-                  "opname.tanggal between ? and ? and bangsal.kd_bangsal like ? or "+
-                  "opname.tanggal between ? and ? and bangsal.nm_bangsal like ? or "+
-                  "opname.tanggal between ? and ? and databarang.kode_sat like ? or "+ 
-                  "opname.tanggal between ? and ? and opname.keterangan like ? order by opname.tanggal");
-        } catch (Exception e) {
-            System.out.println(e);
         }
-        
     } 
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
-    double total=0;
+    double total=0,totalreal=0;
 
 
     /** This method is called from within the constructor to
@@ -186,6 +171,8 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         BtnPrint = new widget.Button();
         label10 = new widget.Label();
         LCount = new widget.Label();
+        label13 = new widget.Label();
+        LTotalBeli = new widget.Label();
         label12 = new widget.Label();
         LTotal = new widget.Label();
         BtnKeluar = new widget.Button();
@@ -194,7 +181,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
 
         ppHapus.setBackground(new java.awt.Color(242, 242, 242));
         ppHapus.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ppHapus.setForeground(new java.awt.Color(102, 51, 0));
+        ppHapus.setForeground(new java.awt.Color(130, 100, 100));
         ppHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
         ppHapus.setText("Hapus");
         ppHapus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -211,7 +198,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
 
         ppCetak.setBackground(new java.awt.Color(242, 242, 242));
         ppCetak.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ppCetak.setForeground(new java.awt.Color(102, 51, 0));
+        ppCetak.setForeground(new java.awt.Color(130, 100, 100));
         ppCetak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         ppCetak.setText("Cetak");
         ppCetak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -229,7 +216,6 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         Kd2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
-        Kd2.setSelectionColor(new java.awt.Color(255, 255, 255));
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Kd2KeyPressed(evt);
@@ -258,7 +244,6 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         Stok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Stok.setHighlighter(null);
         Stok.setName("Stok"); // NOI18N
-        Stok.setSelectionColor(new java.awt.Color(255, 255, 255));
         Stok.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 StokKeyPressed(evt);
@@ -298,7 +283,6 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         Harga.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Harga.setHighlighter(null);
         Harga.setName("Harga"); // NOI18N
-        Harga.setSelectionColor(new java.awt.Color(255, 255, 255));
         panelisi4.add(Harga);
         Harga.setBounds(410, 10, 110, 23);
 
@@ -312,7 +296,6 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         Real.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Real.setHighlighter(null);
         Real.setName("Real"); // NOI18N
-        Real.setSelectionColor(new java.awt.Color(255, 255, 255));
         Real.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 RealKeyPressed(evt);
@@ -325,7 +308,6 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         Selisih.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Selisih.setHighlighter(null);
         Selisih.setName("Selisih"); // NOI18N
-        Selisih.setSelectionColor(new java.awt.Color(255, 255, 255));
         panelisi4.add(Selisih);
         Selisih.setBounds(284, 40, 55, 23);
 
@@ -347,7 +329,6 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         Nominal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Nominal.setHighlighter(null);
         Nominal.setName("Nominal"); // NOI18N
-        Nominal.setSelectionColor(new java.awt.Color(255, 255, 255));
         Nominal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 NominalKeyPressed(evt);
@@ -359,7 +340,6 @@ public final class DlgStokOpname extends javax.swing.JDialog {
         Keterangan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
-        Keterangan.setSelectionColor(new java.awt.Color(255, 255, 255));
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 KeteranganKeyPressed(evt);
@@ -404,7 +384,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Stok Opname Obat, Alkes & BHP Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Stok Opname Obat, Alkes & BHP Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130, 100, 100))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -464,11 +444,11 @@ public final class DlgStokOpname extends javax.swing.JDialog {
 
         label9.setText("Key Word :");
         label9.setName("label9"); // NOI18N
-        label9.setPreferredSize(new java.awt.Dimension(90, 23));
+        label9.setPreferredSize(new java.awt.Dimension(100, 23));
         panelisi3.add(label9);
 
         TCari.setName("TCari"); // NOI18N
-        TCari.setPreferredSize(new java.awt.Dimension(250, 23));
+        TCari.setPreferredSize(new java.awt.Dimension(300, 23));
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
@@ -555,24 +535,35 @@ public final class DlgStokOpname extends javax.swing.JDialog {
 
         label10.setText("Record :");
         label10.setName("label10"); // NOI18N
-        label10.setPreferredSize(new java.awt.Dimension(90, 30));
+        label10.setPreferredSize(new java.awt.Dimension(55, 30));
         panelisi1.add(label10);
 
         LCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LCount.setText("0");
         LCount.setName("LCount"); // NOI18N
-        LCount.setPreferredSize(new java.awt.Dimension(60, 30));
+        LCount.setPreferredSize(new java.awt.Dimension(30, 30));
         panelisi1.add(LCount);
 
-        label12.setText("Total :");
+        label13.setText("Total Real :");
+        label13.setName("label13"); // NOI18N
+        label13.setPreferredSize(new java.awt.Dimension(60, 30));
+        panelisi1.add(label13);
+
+        LTotalBeli.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LTotalBeli.setText("0");
+        LTotalBeli.setName("LTotalBeli"); // NOI18N
+        LTotalBeli.setPreferredSize(new java.awt.Dimension(150, 30));
+        panelisi1.add(LTotalBeli);
+
+        label12.setText("Hilang :");
         label12.setName("label12"); // NOI18N
-        label12.setPreferredSize(new java.awt.Dimension(55, 30));
+        label12.setPreferredSize(new java.awt.Dimension(45, 30));
         panelisi1.add(label12);
 
         LTotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LTotal.setText("0");
         LTotal.setName("LTotal"); // NOI18N
-        LTotal.setPreferredSize(new java.awt.Dimension(175, 30));
+        LTotal.setPreferredSize(new java.awt.Dimension(105, 30));
         panelisi1.add(LTotal);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
@@ -642,7 +633,7 @@ public final class DlgStokOpname extends javax.swing.JDialog {
                 param.put("emailrs",var.getemailrs());   
                 param.put("logo",Sequel.cariGambar("select logo from setting")); 
             Valid.MyReport("rptOpname.jrxml","report","::[ Stok Opname ]::","select opname.kode_brng, databarang.nama_brng,opname.h_beli, databarang.kode_sat, opname.tanggal, opname.stok, "+
-                  "opname.real, opname.selisih, opname.nomihilang, opname.keterangan, bangsal.kd_bangsal, bangsal.nm_bangsal "+
+                  "opname.real, opname.selisih, opname.nomihilang, opname.keterangan, bangsal.kd_bangsal, bangsal.nm_bangsal, (opname.real*opname.h_beli) as totalreal "+
                   "from opname inner join databarang inner join bangsal "+
                   "on opname.kode_brng=databarang.kode_brng and opname.kd_bangsal=bangsal.kd_bangsal "+
                   "where opname.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and opname.kode_brng like '%"+TCari.getText().trim()+"%' or "+
@@ -773,6 +764,7 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
     private widget.TextBox Keterangan;
     private widget.Label LCount;
     private widget.Label LTotal;
+    private widget.Label LTotalBeli;
     private widget.TextBox Nmbar;
     private widget.TextBox Nominal;
     private javax.swing.JPopupMenu Popup;
@@ -790,6 +782,7 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
     private widget.Label label10;
     private widget.Label label11;
     private widget.Label label12;
+    private widget.Label label13;
     private widget.Label label17;
     private widget.Label label18;
     private widget.Label label19;
@@ -811,49 +804,76 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{           
-            pstampil.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-            pstampil.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-            pstampil.setString(3,"%"+TCari.getText().trim()+"%");
-            pstampil.setString(4,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-            pstampil.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-            pstampil.setString(6,"%"+TCari.getText().trim()+"%");
-            pstampil.setString(7,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-            pstampil.setString(8,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-            pstampil.setString(9,"%"+TCari.getText().trim()+"%");
-            pstampil.setString(10,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-            pstampil.setString(11,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-            pstampil.setString(12,"%"+TCari.getText().trim()+"%");
-            pstampil.setString(13,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-            pstampil.setString(14,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-            pstampil.setString(15,"%"+TCari.getText().trim()+"%");
-            pstampil.setString(16,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-            pstampil.setString(17,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-            pstampil.setString(18,"%"+TCari.getText().trim()+"%");
-            pstampil.setString(19,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-            pstampil.setString(20,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-            pstampil.setString(21,"%"+TCari.getText().trim()+"%");
-            rstampil=pstampil.executeQuery();
-            total=0;
-            while(rstampil.next()){                
-                total=total+rstampil.getDouble(8);
-                tabMode.addRow(new Object[]{rstampil.getString(1),
-                               rstampil.getString(2),
-                               df2.format(rstampil.getDouble(3)),
-                               rstampil.getString(4),
-                               rstampil.getString(5),
-                               rstampil.getString(6),
-                               rstampil.getString(7),                              
-                               rstampil.getString(8),
-                               df2.format(rstampil.getDouble(9)),
-                               rstampil.getString(10),
-                               rstampil.getString(11),
-                               rstampil.getString(12)});
+        total=0;
+        totalreal=0;
+        try{     
+            pstampil=koneksi.prepareStatement("select opname.kode_brng, databarang.nama_brng,opname.h_beli, databarang.kode_sat, opname.tanggal, opname.stok, "+
+                     "opname.real, opname.selisih, (opname.real*opname.h_beli) as totalreal,opname.nomihilang, opname.keterangan, bangsal.kd_bangsal, bangsal.nm_bangsal "+
+                     "from opname inner join databarang inner join bangsal "+
+                     "on opname.kode_brng=databarang.kode_brng and opname.kd_bangsal=bangsal.kd_bangsal "+
+                     "where opname.tanggal between ? and ? and opname.kode_brng like ? or "+
+                     "opname.tanggal between ? and ? and databarang.nama_brng like ? or "+
+                     "opname.tanggal between ? and ? and opname.kode_brng like ? or "+
+                     "opname.tanggal between ? and ? and bangsal.kd_bangsal like ? or "+
+                     "opname.tanggal between ? and ? and bangsal.nm_bangsal like ? or "+
+                     "opname.tanggal between ? and ? and databarang.kode_sat like ? or "+ 
+                     "opname.tanggal between ? and ? and opname.keterangan like ? order by opname.tanggal");
+            try {                
+                pstampil.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                pstampil.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                pstampil.setString(3,"%"+TCari.getText().trim()+"%");
+                pstampil.setString(4,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                pstampil.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                pstampil.setString(6,"%"+TCari.getText().trim()+"%");
+                pstampil.setString(7,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                pstampil.setString(8,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                pstampil.setString(9,"%"+TCari.getText().trim()+"%");
+                pstampil.setString(10,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                pstampil.setString(11,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                pstampil.setString(12,"%"+TCari.getText().trim()+"%");
+                pstampil.setString(13,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                pstampil.setString(14,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                pstampil.setString(15,"%"+TCari.getText().trim()+"%");
+                pstampil.setString(16,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                pstampil.setString(17,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                pstampil.setString(18,"%"+TCari.getText().trim()+"%");
+                pstampil.setString(19,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                pstampil.setString(20,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                pstampil.setString(21,"%"+TCari.getText().trim()+"%");
+                rstampil=pstampil.executeQuery();
+                total=0;
+                while(rstampil.next()){                
+                    totalreal=totalreal+rstampil.getDouble(9); 
+                    total=total+rstampil.getDouble(10);
+                    tabMode.addRow(new Object[]{rstampil.getString(1),
+                                   rstampil.getString(2),
+                                   df2.format(rstampil.getDouble(3)),
+                                   rstampil.getString(4),
+                                   rstampil.getString(5),
+                                   rstampil.getString(6),
+                                   rstampil.getString(7),                              
+                                   rstampil.getString(8),
+                                   df2.format(rstampil.getDouble(9)),
+                                   df2.format(rstampil.getDouble(10)),
+                                   rstampil.getString(11),
+                                   rstampil.getString(12),
+                                   rstampil.getString(13)});
+                }
+            } catch (Exception e) {
+               System.out.println("Notif Opname : "+e);
+            }finally{
+                if(rstampil!=null){
+                    rstampil.close();
+                }
+                if(pstampil!=null){
+                    pstampil.close();
+                }
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
+        LTotalBeli.setText(df2.format(totalreal));
         LTotal.setText(df2.format(total));
     }
 
@@ -881,8 +901,8 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
             Selisih.setText(tbKamar.getValueAt(row,7).toString());        
             Nominal.setText(tbKamar.getValueAt(row,8).toString());      
             Keterangan.setText(tbKamar.getValueAt(row,9).toString());   
-            kdgudang.setText(tbKamar.getValueAt(row,10).toString());   
-            nmgudang.setText(tbKamar.getValueAt(row,11).toString());       
+            kdgudang.setText(tbKamar.getValueAt(row,11).toString());   
+            nmgudang.setText(tbKamar.getValueAt(row,12).toString());       
             Valid.SetTgl(Tanggal,tbKamar.getValueAt(row,4).toString());
         }
     }
