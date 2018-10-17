@@ -286,6 +286,7 @@ import ipsrs.DlgRekapPenerimaanNonMedis;
 import ipsrs.DlgRekapPermintaanNonMedis;
 import ipsrs.DlgStokKeluarIPSRSPerTanggal;
 import ipsrs.DlgSuratPemesananNonMedis;
+import java.awt.Color;
 import java.awt.event.KeyListener;
 import javax.swing.event.DocumentEvent;
 import keuangan.DlgAkunPiutang;
@@ -444,7 +445,9 @@ public class frmUtama extends javax.swing.JFrame {
     private static frmUtama myInstance;
     private PreparedStatement ps;
     private ResultSet rs;
-    private final Properties prop = new Properties();     
+    private final Properties prop = new Properties(); 
+    private final Properties propVer = new Properties(); 
+    
     private int jmlmenu=0;
     private String coder_nik="",pilihpage="",judulform="",tampilkantni=Sequel.cariIsi("select tampilkan_tni_polri from set_tni_polri");
     /** Creates new form frmUtama */
@@ -502,10 +505,19 @@ public class frmUtama extends javax.swing.JFrame {
         lblTgl.setText(tanggal.getSelectedItem().toString());
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            propVer.loadFromXML(new FileInputStream("setting/version.xml"));
         } catch (Exception e) {
             System.out.println("Notif Setting : "+e);
         }
         
+          if( jMenu8.isEnabled() ) {
+         jMenu8.setForeground( Color.red );
+     } else {
+         jMenu8.setForeground( Color.red );
+     }
+          
+       jMenu8.setText("VERSI "+propVer.getProperty("VERSION"));
+      
         FlayMenu.setVisible(false);
         TCari.setVisible(false);
         if(koneksiDB.cariCepat().equals("aktif")){
@@ -1043,6 +1055,7 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapHadir3 = new javax.swing.JMenuItem();
         MnRekapHadir4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
 
         DlgLogin.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         DlgLogin.setName("DlgLogin"); // NOI18N
@@ -6087,7 +6100,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09/10/2018" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17/10/2018" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7041,6 +7054,34 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         MenuBar.add(jMenu4);
+
+        jMenu8.setBackground(new java.awt.Color(255, 153, 51));
+        jMenu8.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu8.setMnemonic('G');
+        jMenu8.setText("lblVersion");
+        jMenu8.setToolTipText("Alt+V");
+        jMenu8.setAutoscrolls(true);
+        jMenu8.setEnabled(false);
+        jMenu8.setFont(new java.awt.Font("Arial Black", 1, 11)); // NOI18N
+        jMenu8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu8.setName("jMenu8"); // NOI18N
+        jMenu8.setPreferredSize(new java.awt.Dimension(124, 30));
+        jMenu8.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu8MenuSelected(evt);
+            }
+        });
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
+        MenuBar.add(jMenu8);
 
         setJMenuBar(MenuBar);
 
@@ -12551,6 +12592,14 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         Valid.pindah(evt,BtnCancel, edPwd);
     }//GEN-LAST:event_edAdminKeyPressed
 
+    private void jMenu8MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu8MenuSelected
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu8MenuSelected
+
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu8MouseClicked
+
     /**
     * @param args the command line arguments
     */
@@ -13037,6 +13086,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

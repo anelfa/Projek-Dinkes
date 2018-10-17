@@ -11,6 +11,15 @@
     <entry key="HOSTHYBRIDWEB">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="HYBRIDWEB">webapps</entry>
     <entry key="PORTWEB">80</entry>
+    <!--    PROXY DISKOMINFO JAKARTA-->
+    <entry key="PROXY">YES</entry> <!--NO:YES-->
+    <entry key="PROXY_IP">10.15.3.20</entry>
+    <entry key="PROXY_PORT">80</entry>
+    <!--    END PROXY DISKOMINFO JAKARTA-->
+    <!--UPDATE-->
+    <entry key="URLSERVERUPDATE">192.168.128.4/webapps/serverupdate</entry> <!--link Update -->
+    <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
+    <!--End UPDATE-->
     <entry key="ANTRIAN">player</entry>
     <entry key="MENUTRANSPARAN">yes</entry>
     <entry key="URLAPIBPJS">https://dvlp.bpjs-kesehatan.go.id/vclaim-rest</entry>

@@ -24,6 +24,7 @@ public class main extends javax.swing.JFrame {
         
         initComponents();
         setLocationRelativeTo(this);
+        
          aksipo();
          timer = new Timer(100, action);
         timer.start();
@@ -31,17 +32,19 @@ public class main extends javax.swing.JFrame {
     }
      public void aksipo(){
         action = new ActionListener() {
-
+            
+          
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-                progressBar.setValue(progressBar.getValue() + 5); //persen progress bar bertambah setiap 5 kali
+               frmUtama utama=frmUtama.getInstance();
+                progressBar.setValue(progressBar.getValue() + 2); //persen progress bar bertambah setiap 5 kali
                 progressBar.setStringPainted(true);
+                
                 if (progressBar.getPercentComplete() == 1.0) {
+                    
                  timer.stop();
                   
-             frmUtama utama=frmUtama.getInstance();
-          utama.isWall();
+             utama.isWall();
            //utama.setIconImage(new javax.swing.ImageIcon( getClass(). getResource("/picture/home.PNG")).getImage());
           utama.setVisible(true);
           dispose();
@@ -76,6 +79,7 @@ public class main extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -97,16 +101,22 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        progressBar.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         progressBar.setForeground(new java.awt.Color(0, 153, 0));
         progressBar.setFocusable(false);
+        progressBar.setPreferredSize(new java.awt.Dimension(146, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/walDinke4strs.png"))); // NOI18N
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/walDinke4strs.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,11 +131,16 @@ public class main extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(219, Short.MAX_VALUE)
+                .addContainerGap(215, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,6 +148,11 @@ public class main extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         progressBar.getAccessibleContext().setAccessibleParent(progressBar);
@@ -149,6 +169,8 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JProgressBar progressBar;
     // End of variables declaration//GEN-END:variables
 }

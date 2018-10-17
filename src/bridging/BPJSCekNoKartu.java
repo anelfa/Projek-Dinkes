@@ -54,7 +54,9 @@ public class BPJSCekNoKartu {
 	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
 	    headers.add("X-Signature",api.getHmac());
 	    HttpEntity requestEntity = new HttpEntity(headers);
+            
 	    ObjectMapper mapper = new ObjectMapper();
+            //System.out.println(api.getRest());
             JsonNode root = mapper.readTree(api.getRest().exchange(URL+nokartu+"/tglSEP/"+dateFormat.format(date), HttpMethod.GET, requestEntity, String.class).getBody());
             JsonNode nameNode = root.path("metaData");
             //System.out.println("code : "+nameNode.path("code").asText());
