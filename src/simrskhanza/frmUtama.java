@@ -226,6 +226,8 @@ import keuangan.DlgRekening;
 import keuangan.DlgRekeningTahun;
 import bridging.ReklasifikasiRalan;
 import bridging.ReklasifikasiRanap;
+import custom.DlgOnline;
+import custom.DlgPenunjang;
 import grafikanalisa.GrafikDemografiRegistrasi;
 import grafikanalisa.GrafikKejadianIKPPerBulan;
 import grafikanalisa.GrafikKejadianIKPPerDampak;
@@ -533,7 +535,7 @@ public class frmUtama extends javax.swing.JFrame {
         
         try{    
             if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
-                com.sun.awt.AWTUtilities.setWindowOpacity(DlgHome,0.62f);
+              //  com.sun.awt.AWTUtilities.setWindowOpacity(DlgHome,0.62f);
             }     
         }catch(Exception e){            
         }             
@@ -995,6 +997,8 @@ public class frmUtama extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         BtnToolReg = new widget.ButtonBig();
         btnToolIGD = new widget.ButtonBig();
+        btnToolPenunjang = new widget.ButtonBig();
+        btnToolOnline = new widget.ButtonBig();
         jSeparator5 = new javax.swing.JSeparator();
         btnToolBcdRalan = new widget.ButtonBig();
         btnToolBcdRanap = new widget.ButtonBig();
@@ -6250,6 +6254,50 @@ public class frmUtama extends javax.swing.JFrame {
         });
         internalFrame1.add(btnToolIGD);
 
+        btnToolPenunjang.setForeground(new java.awt.Color(80, 100, 80));
+        btnToolPenunjang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/City.png"))); // NOI18N
+        btnToolPenunjang.setMnemonic('D');
+        btnToolPenunjang.setText("Penunjang");
+        btnToolPenunjang.setToolTipText("Alt+D");
+        btnToolPenunjang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnToolPenunjang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnToolPenunjang.setIconTextGap(3);
+        btnToolPenunjang.setMargin(new java.awt.Insets(1, 2, 1, 0));
+        btnToolPenunjang.setMaximumSize(new java.awt.Dimension(70, 42));
+        btnToolPenunjang.setMinimumSize(new java.awt.Dimension(70, 42));
+        btnToolPenunjang.setName("btnToolPenunjang"); // NOI18N
+        btnToolPenunjang.setPreferredSize(new java.awt.Dimension(90, 40));
+        btnToolPenunjang.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnToolPenunjang.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnToolPenunjang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToolPenunjangActionPerformed(evt);
+            }
+        });
+        internalFrame1.add(btnToolPenunjang);
+
+        btnToolOnline.setForeground(new java.awt.Color(80, 100, 80));
+        btnToolOnline.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/online.png"))); // NOI18N
+        btnToolOnline.setMnemonic('D');
+        btnToolOnline.setText("Online");
+        btnToolOnline.setToolTipText("Alt+D");
+        btnToolOnline.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnToolOnline.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnToolOnline.setIconTextGap(3);
+        btnToolOnline.setMargin(new java.awt.Insets(1, 2, 1, 0));
+        btnToolOnline.setMaximumSize(new java.awt.Dimension(60, 50));
+        btnToolOnline.setMinimumSize(new java.awt.Dimension(60, 50));
+        btnToolOnline.setName("btnToolOnline"); // NOI18N
+        btnToolOnline.setPreferredSize(new java.awt.Dimension(80, 40));
+        btnToolOnline.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnToolOnline.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnToolOnline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToolOnlineActionPerformed(evt);
+            }
+        });
+        internalFrame1.add(btnToolOnline);
+
         jSeparator5.setBackground(new java.awt.Color(170, 180, 135));
         jSeparator5.setForeground(new java.awt.Color(170, 180, 135));
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -6526,7 +6574,7 @@ public class frmUtama extends javax.swing.JFrame {
         scrollPane1.setName("scrollPane1"); // NOI18N
 
         PanelWall.setBackground(new java.awt.Color(29, 29, 29));
-        PanelWall.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/wallpaper.jpg"))); // NOI18N
+        PanelWall.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/walDinkes.jpg"))); // NOI18N
         PanelWall.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_STRECT);
         PanelWall.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 0, 0, 0));
         PanelWall.setPreferredSize(new java.awt.Dimension(200, 200));
@@ -7110,7 +7158,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private void BtnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogActionPerformed
         try{
-            com.sun.awt.AWTUtilities.setWindowOpacity(DlgLogin,0.7f);
+          //  com.sun.awt.AWTUtilities.setWindowOpacity(DlgLogin,0.7f);
         }catch(Exception e){            
         }
         FlayMenu.setVisible(false);
@@ -12600,6 +12648,35 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu8MouseClicked
 
+    private void btnToolPenunjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToolPenunjangActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgPenunjang penunjang=new DlgPenunjang(this,false);
+        penunjang.tampil();
+        penunjang.emptTeks();
+        penunjang.isCek();
+        penunjang.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        penunjang.setLocationRelativeTo(PanelUtama);
+        penunjang.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnToolPenunjangActionPerformed
+
+    private void btnToolOnlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToolOnlineActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgOnline online=new DlgOnline(this,false);
+        online.tampil();
+        online.emptTeks();
+        online.isCek();
+        online.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        online.setLocationRelativeTo(PanelUtama);
+        online.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());         // TODO add your handling code here:
+    }//GEN-LAST:event_btnToolOnlineActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -13044,6 +13121,8 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private widget.ButtonBig btnToolBcdRanap;
     private widget.ButtonBig btnToolIGD;
     private widget.ButtonBig btnToolLab;
+    private widget.ButtonBig btnToolOnline;
+    private widget.ButtonBig btnToolPenunjang;
     private widget.ButtonBig btnToolRad;
     private widget.ButtonBig btnTracker;
     private widget.ButtonBig btnUTDCekalDarah;
