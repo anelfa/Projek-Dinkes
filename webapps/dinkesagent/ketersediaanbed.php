@@ -57,7 +57,7 @@ $kosong = mysql_num_rows($result2);
 $result3 = bukaquery($query3);
 $total = mysql_num_rows($result3);
 $datatime=date("Y-m-d H:i:s");
-/*$datas[] = array(
+$datas[] = array(
 
 	
 		'koders'=>'0113R072',
@@ -68,7 +68,7 @@ $datatime=date("Y-m-d H:i:s");
 		'updatetime'=>$datatime,
 		
 
-	);*/
+	);
 $jumlah_kosong=$jumlah_kosong+$kosong;
 		$jumlah_isi=$jumlah_isi+$isi;
 }
@@ -88,8 +88,8 @@ $datas[] = array(
 		
 
 	);
-echo json_encode($datas);
-//echo "Kamar Berhasil Disimpan";
+//echo json_encode($datas);
+echo "Kamar Berhasil Disimpan";
 $myvars=json_encode($datas);
  
 ?>

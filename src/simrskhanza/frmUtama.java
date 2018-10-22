@@ -6104,7 +6104,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17/10/2018" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22/10/2018" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -6259,6 +6259,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolPenunjang.setMnemonic('D');
         btnToolPenunjang.setText("Penunjang");
         btnToolPenunjang.setToolTipText("Alt+D");
+        btnToolPenunjang.setEnabled(false);
         btnToolPenunjang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolPenunjang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolPenunjang.setIconTextGap(3);
@@ -6281,6 +6282,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolOnline.setMnemonic('D');
         btnToolOnline.setText("Online");
         btnToolOnline.setToolTipText("Alt+D");
+        btnToolOnline.setEnabled(false);
         btnToolOnline.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolOnline.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolOnline.setIconTextGap(3);
@@ -6350,6 +6352,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolLab.setMnemonic('O');
         btnToolLab.setText("Laborat");
         btnToolLab.setToolTipText("Alt+O");
+        btnToolLab.setEnabled(false);
         btnToolLab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolLab.setIconTextGap(3);
@@ -6369,6 +6372,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolRad.setMnemonic('A');
         btnToolRad.setText("Radiologi");
         btnToolRad.setToolTipText("Alt+A");
+        btnToolRad.setEnabled(false);
         btnToolRad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnToolRad.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnToolRad.setIconTextGap(3);
@@ -6388,6 +6392,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolJualObat.setMnemonic('j');
         BtnToolJualObat.setText("Penjualan");
         BtnToolJualObat.setToolTipText("Alt+J");
+        BtnToolJualObat.setEnabled(false);
         BtnToolJualObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnToolJualObat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         BtnToolJualObat.setIconTextGap(3);
@@ -7165,6 +7170,11 @@ public class frmUtama extends javax.swing.JFrame {
         
         switch (BtnLog.getText().trim()) {
             case "Log Out":
+                btnToolPenunjang.setEnabled(false);
+                btnToolOnline.setEnabled(false);
+                btnToolLab.setEnabled(false);
+                btnToolRad.setEnabled(false);
+                BtnToolJualObat.setEnabled(false);
                 BtnToolReg.setEnabled(false);
                 BtnToolKamnap.setEnabled(false);
                 BtnToolKasir.setEnabled(false);
@@ -7228,6 +7238,9 @@ public class frmUtama extends javax.swing.JFrame {
                     BtnToolKamnap.setEnabled(true);
                     BtnToolKasir.setEnabled(true); 
                     btnToolIGD.setEnabled(true);
+                    btnToolPenunjang.setEnabled(true);
+                    btnToolOnline.setEnabled(true);
+                    btnToolIGD.setEnabled(true);
                     btnToolBcdRalan.setEnabled(true);
                     btnToolBcdRanap.setEnabled(true);
                     btnPermintaanLab.setEnabled(true);
@@ -7235,6 +7248,10 @@ public class frmUtama extends javax.swing.JFrame {
                     btnPermintaanRadiologi.setEnabled(true);
                     btnPeriksaRadiologi.setEnabled(true);
                     MnGantiPassword.setEnabled(false);
+                    
+                    btnToolLab.setEnabled(true);
+                    btnToolRad.setEnabled(true);
+                    BtnToolJualObat.setEnabled(true);
 
                     DlgLogin.dispose();
                     BtnLog.setText("Log Out");
@@ -7262,11 +7279,18 @@ public class frmUtama extends javax.swing.JFrame {
                         BtnToolKasir.setEnabled(var.getkasir_ralan());
                     }
                         
-                    btnToolIGD.setEnabled(var.getigd());                    
+                    btnToolIGD.setEnabled(var.getigd());   
+                    btnToolIGD.setEnabled(var.getigd());
+                    btnToolPenunjang.setEnabled(var.getigd());
+                    btnToolOnline.setEnabled(var.getigd());
+                    
                     btnToolBcdRalan.setEnabled(var.getbarcoderalan());
                     btnToolBcdRanap.setEnabled(var.getbarcoderanap()); 
                     btnPermintaanLab.setEnabled(var.getpermintaan_lab());
                     btnLaboratorium.setEnabled(var.getperiksa_lab());
+                    btnToolLab.setEnabled(var.getperiksa_lab());
+                    btnToolRad.setEnabled(var.getpermintaan_radiologi());
+                    BtnToolJualObat.setEnabled(var.getbarcoderalan());
                     btnPermintaanRadiologi.setEnabled(var.getpermintaan_radiologi());
                     btnPeriksaRadiologi.setEnabled(var.getperiksa_radiologi());  
                     Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");

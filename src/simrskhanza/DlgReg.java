@@ -4847,7 +4847,14 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+          int quetion =   JOptionPane.showConfirmDialog(
+            null,
+            "Apakah Anda Ingin Menghapus Data Ini ?",
+            "Warning",
+            JOptionPane.YES_NO_OPTION);
+              if(quetion == JOptionPane.YES_OPTION){
         for(i=0;i<tbPetugas.getRowCount();i++){ 
+           
             if(tbPetugas.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("reg_periksa","no_rawat",tbPetugas.getValueAt(i,2).toString());
                 if(var.getkode().equals("Admin Utama")){
@@ -4855,7 +4862,11 @@ public final class DlgReg extends javax.swing.JDialog {
                     Sequel.meghapus("nota_jalan","no_rawat",tbPetugas.getValueAt(i,2).toString());
                 }
             }
+              }
+              
         } 
+              else
+              {}
         tampil();
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -8876,11 +8887,21 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }
     
     public void isCek(){
+        if (var.getkode()=="Admin Utama")
+        {
+        BtnHapus.setVisible(true);
+        }
+        else
+        {
+         BtnHapus.setVisible(false);   
+        }
         DTPReg.setDate(new Date());
         DTPCari1.setDate(new Date());
         DTPCari2.setDate(new Date());
         BtnSimpan.setEnabled(var.getregistrasi());
-        BtnHapus.setEnabled(var.getregistrasi());
+        //
+        //
+        
         BtnEdit.setEnabled(var.getregistrasi());
         BtnPrint.setEnabled(var.getregistrasi());
         MnOperasi.setEnabled(var.getoperasi());

@@ -3,7 +3,7 @@
     $db_hostname    ="localhost";
     $db_username    ="root";
     $db_password    ="";
-    $db_name        ="db_simrs_develope";
+    $db_name        ="db_rsudkramatjati_sinkron";
 
     function host(){
         global $db_hostname;
@@ -162,12 +162,6 @@
         or die (mysql_error()."<br/><font color=red><b>hmmmmmmm.....??????????</b>");
         return $result;
      }
-     
-     function bukaquery2($sql){
-       bukakoneksi();
-       $result=mysql_query($sql);
-        return $result;
-     }
 
      function bukainput($sql)
 	 {
@@ -200,12 +194,8 @@
      }
 
      function InsertData($tabelname,$attrib) {
+
              $command = bukaquery("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
-        return $command;
-     }
-     
-     function InsertData2($tabelname,$attrib) {
-             $command = bukaquery2("INSERT INTO ".$tabelname." VALUES (".$attrib.")");
         return $command;
      }
      
@@ -229,12 +219,6 @@
         $sql ="DELETE FROM ".$tabelname." WHERE ".$param." ";
              $command = hapusinput($sql);
         Zet($hal);
-        return $command;
-     }
-     
-     function Hapus2($tabelname,$param) {
-        $sql ="DELETE FROM ".$tabelname." WHERE ".$param." ";
-             $command = hapusinput($sql);
         return $command;
      }
 
@@ -328,7 +312,7 @@
   		return mysql_num_rows($result);
 	}
 
-     function getOne($sql) {
+	 function getOne($sql) {
      $hasil=bukaquery($sql);
      list($result) =mysql_fetch_array($hasil);
      return $result;
@@ -353,7 +337,7 @@
 	}
         
         function loadTglnow(){
-                $tglsekarang=date('d');
+                $tglsekarang=date('d');;
 		echo "<option>".$tglsekarang."</option>";
 		for($tgl=1; $tgl<=31; $tgl++){
 			$tgl_leng=strlen($tgl);

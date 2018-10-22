@@ -6985,7 +6985,7 @@
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="17/10/2018"/>
+            <StringItem index="0" value="22/10/2018"/>
           </StringArray>
         </Property>
         <Property name="displayFormat" type="java.lang.String" value="dd/MM/yyyy"/>
@@ -8071,6 +8071,7 @@
             <Property name="mnemonic" type="int" value="68"/>
             <Property name="text" type="java.lang.String" value="Penunjang"/>
             <Property name="toolTipText" type="java.lang.String" value="Alt+D"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="iconTextGap" type="int" value="3"/>
@@ -8105,6 +8106,7 @@
             <Property name="mnemonic" type="int" value="68"/>
             <Property name="text" type="java.lang.String" value="Online"/>
             <Property name="toolTipText" type="java.lang.String" value="Alt+D"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="iconTextGap" type="int" value="3"/>
@@ -8204,6 +8206,7 @@
             <Property name="mnemonic" type="int" value="79"/>
             <Property name="text" type="java.lang.String" value="Laborat"/>
             <Property name="toolTipText" type="java.lang.String" value="Alt+O"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="iconTextGap" type="int" value="3"/>
@@ -8229,6 +8232,7 @@
             <Property name="mnemonic" type="int" value="65"/>
             <Property name="text" type="java.lang.String" value="Radiologi"/>
             <Property name="toolTipText" type="java.lang.String" value="Alt+A"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="iconTextGap" type="int" value="3"/>
@@ -8254,6 +8258,7 @@
             <Property name="mnemonic" type="int" value="106"/>
             <Property name="text" type="java.lang.String" value="Penjualan"/>
             <Property name="toolTipText" type="java.lang.String" value="Alt+J"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
             <Property name="iconTextGap" type="int" value="3"/>
