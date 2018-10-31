@@ -37,9 +37,9 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private final Connection koneksi=koneksiDB.condb();
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
     private static final Properties prop = new Properties();
-    private String antri="0",loket="0",status="0",huruf="";
-    private PreparedStatement pshapus,pssimpan,pscari,psupdate,pssimpan_tmp,pscari_tmp,psupdate_tmp;
-    private ResultSet rs,rs2;
+    private String antri="0",loket="0",status="0",huruf="",awal="1";
+    private PreparedStatement pshapus,pssimpan,pscari,psupdate,pssimpan_tmp,pshapus_tmp,pscari_tmp,psupdate_tmp,pscari_tmp2;
+    private ResultSet rs,rs2,rs3;
     private int urut;
     private BackgroundMusic music;
     /** Creates new form DlgBiling
@@ -57,6 +57,41 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             System.out.println(ex);
         }
         txtLoket.setText(prop.getProperty("LOKET"));
+         switch ((String)cmbloket1.getSelectedItem()) { 
+        case "A": 
+            awal = "1"; 
+            break; 
+        case "B": 
+            awal = "2"; 
+            break; 
+        case "C": 
+            awal = "3"; 
+            break; 
+        case "D": 
+            awal = "4"; 
+            break; 
+        case "E": 
+            awal = "5"; 
+            break; 
+        case "F": 
+            awal = "6"; 
+            break; 
+        case "G": 
+            awal = "7"; 
+            break;
+        case "H": 
+            awal = "8"; 
+            break;
+        case "I": 
+            awal = "9"; 
+            break;
+        case "J": 
+            awal = "10"; 
+            break;
+        default: 
+            awal = "1"; 
+            break; 
+        } 
         try {
             pshapus=koneksi.prepareStatement("delete from antriloket");
             pssimpan=koneksi.prepareStatement("insert into antriloket values(?,?,?,?)");
@@ -65,9 +100,9 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             pscari=koneksi.prepareStatement("select antrian,loket,status,huruf from antriloket");
             
             pssimpan_tmp=koneksi.prepareStatement("insert into antrianloket_tmp values(?,?,?)");
-            psupdate_tmp=koneksi.prepareStatement("update antrianloket_tmp SET antrian=? where loket=?");
-            pscari_tmp=koneksi.prepareStatement("select loket,antrian,huruf from antrianloket_tmp where loket=?");
-            pscari_tmp.setString(1,prop.getProperty("LOKET"));
+            psupdate_tmp=koneksi.prepareStatement("update antrianloket_tmp SET antrian=? where huruf=?");
+            pscari_tmp=koneksi.prepareStatement("select loket,antrian,huruf from antrianloket_tmp where huruf=?");
+            pscari_tmp.setString(1,awal);
             rs2=pscari_tmp.executeQuery();
             if(!rs2.next())
            {
@@ -127,15 +162,16 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         DlgDisplay.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         DlgDisplay.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         DlgDisplay.setName("DlgDisplay"); // NOI18N
+        DlgDisplay.getContentPane().setLayout(new java.awt.BorderLayout());
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), "::[ Informasi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), "::[ Informasi ]::", 0, 0, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setPreferredSize(new java.awt.Dimension(500, 110));
         internalFrame5.setWarnaAtas(new java.awt.Color(255, 255, 255));
         internalFrame5.setWarnaBawah(new java.awt.Color(230, 255, 230));
         internalFrame5.setLayout(new java.awt.BorderLayout());
 
-        paneliklan.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/coba.gif"))); // NOI18N
+        paneliklan.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/simpan.gif"))); // NOI18N
         paneliklan.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_STRECT);
         paneliklan.setPreferredSize(new java.awt.Dimension(200, 140));
         paneliklan.setRound(false);
@@ -160,26 +196,26 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
         DlgDisplay.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
-        form1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), " Antrian Registrasi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 45), new java.awt.Color(50, 100, 50))); // NOI18N
+        form1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), " Antrian Registrasi", 0, 0, new java.awt.Font("Tahoma", 0, 45), new java.awt.Color(50, 100, 50))); // NOI18N
         form1.setName("form1"); // NOI18N
         form1.setPreferredSize(new java.awt.Dimension(550, 150));
         form1.setWarnaAtas(new java.awt.Color(255, 255, 255));
         form1.setWarnaBawah(new java.awt.Color(230, 255, 230));
         form1.setLayout(new java.awt.GridLayout(2, 0));
 
-        labelantri1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 250, 150)), "No.Antrian :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
+        labelantri1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 250, 150)), "No.Antrian :", 0, 0, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
         labelantri1.setForeground(new java.awt.Color(50, 100, 50));
         labelantri1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelantri1.setText("1");
+        labelantri1.setText("-");
         labelantri1.setFont(new java.awt.Font("Tahoma", 1, 200)); // NOI18N
         labelantri1.setName("labelantri1"); // NOI18N
         labelantri1.setPreferredSize(new java.awt.Dimension(300, 50));
         form1.add(labelantri1);
 
-        labelLoket.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 250, 150)), "Loket :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
+        labelLoket.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 250, 150)), "Loket :", 0, 0, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
         labelLoket.setForeground(new java.awt.Color(50, 100, 50));
         labelLoket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelLoket.setText("1");
+        labelLoket.setText("-");
         labelLoket.setFocusable(false);
         labelLoket.setFont(new java.awt.Font("Tahoma", 1, 200)); // NOI18N
         labelLoket.setName("labelLoket"); // NOI18N
@@ -201,14 +237,15 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Antrian Registrasi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Antrian Pasien ]::", 0, 0, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         panelisi1.setName("panelisi1"); // NOI18N
         panelisi1.setPreferredSize(new java.awt.Dimension(55, 55));
-        panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelisi1.setLayout(new java.awt.FlowLayout(0, 5, 9));
 
         BtnDisplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editcopy.png"))); // NOI18N
         BtnDisplay.setMnemonic('D');
@@ -339,6 +376,11 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
         cmbloket1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" }));
         cmbloket1.setName("cmbloket1"); // NOI18N
+        cmbloket1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbloket1ActionPerformed(evt);
+            }
+        });
         panelisi5.add(cmbloket1);
         cmbloket1.setBounds(180, 10, 60, 23);
 
@@ -364,27 +406,55 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
     private void BtnAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntri1ActionPerformed
         try {
-            String hrf="";
-            if(cmbloket1.getSelectedItem().equals("A"))
-            {
-                hrf="1";
-            }
-             if(cmbloket1.getSelectedItem().equals("B"))
-            {
-                hrf="2";
-            }
+           
+            switch ((String)cmbloket1.getSelectedItem()) { 
+        case "A": 
+            awal = "1"; 
+            break; 
+        case "B": 
+            awal = "2"; 
+            break; 
+        case "C": 
+            awal = "3"; 
+            break; 
+        case "D": 
+            awal = "4"; 
+            break; 
+        case "E": 
+            awal = "5"; 
+            break; 
+        case "F": 
+            awal = "6"; 
+            break; 
+        case "G": 
+            awal = "7"; 
+            break;
+        case "H": 
+            awal = "8"; 
+            break;
+        case "I": 
+            awal = "9"; 
+            break;
+        case "J": 
+            awal = "10"; 
+            break;
+        default: 
+            awal = "1"; 
+            break; 
+        } 
+           
             
             urut=Integer.parseInt(Antrian.getText())+1;
             Antrian.setText(""+urut);
             pshapus.executeUpdate();
             
-            pscari_tmp.setString(1,prop.getProperty("LOKET"));
+            pscari_tmp.setString(1,awal);
             rs2=pscari_tmp.executeQuery();
             
            
            if(!rs2.next())
            {
-               pssimpan_tmp.setString(1,"1"); 
+            pssimpan_tmp.setString(1,awal); 
             pssimpan_tmp.setString(2,prop.getProperty("LOKET"));
             pssimpan_tmp.setString(3,Integer.toString(urut)); 
             
@@ -393,13 +463,13 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
            else{
              
             psupdate_tmp.setString(1,Integer.toString(urut));
-            psupdate_tmp.setString(2,prop.getProperty("LOKET")); 
+            psupdate_tmp.setString(2,awal); 
              
             psupdate_tmp.executeUpdate();  
            }
             pssimpan.setString(1,prop.getProperty("LOKET"));
             pssimpan.setString(2,Integer.toString(urut));
-            pssimpan.setString(3,hrf);
+            pssimpan.setString(3,awal);
             pssimpan.setString(4,"0");
             pssimpan.executeUpdate();
             
@@ -411,7 +481,28 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     }//GEN-LAST:event_BtnAntri1ActionPerformed
 
     private void BtnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal1ActionPerformed
-        Antrian.setText("1");
+       int dialogButton = JOptionPane.YES_NO_OPTION;
+int dialogResult = JOptionPane.showConfirmDialog(this, "Semua Antrian Akan di Reset ke Awal ", "Warning !!!", dialogButton);
+if(dialogResult == 0) {
+ // System.out.println("Yes option");
+  try
+        {
+        pshapus_tmp=koneksi.prepareStatement("delete from antrianloket_tmp");
+        pshapus_tmp.executeUpdate(); 
+        pshapus.executeUpdate(); 
+        JOptionPane.showMessageDialog(null,"Reset Antrian Berhasil...!!!");
+        Antrian.setText("0");
+        
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        } 
+} else {
+ // System.out.println("No Option");
+} 
+        
+        
+        
     }//GEN-LAST:event_BtnBatal1ActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -437,15 +528,52 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private void BtnPanggilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPanggilActionPerformed
  try {
      pshapus.executeUpdate();
-     
-            pscari_tmp.setString(1,prop.getProperty("LOKET"));
+       switch ((String)cmbloket1.getSelectedItem()) { 
+        case "A": 
+            awal = "1"; 
+            break; 
+        case "B": 
+            awal = "2"; 
+            break; 
+        case "C": 
+            awal = "3"; 
+            break; 
+        case "D": 
+            awal = "4"; 
+            break; 
+        case "E": 
+            awal = "5"; 
+            break; 
+        case "F": 
+            awal = "6"; 
+            break; 
+        case "G": 
+            awal = "7"; 
+            break;
+        case "H": 
+            awal = "8"; 
+            break;
+        case "I": 
+            awal = "9"; 
+            break;
+        case "J": 
+            awal = "10"; 
+            break;
+        default: 
+            awal = "1"; 
+            break; 
+        } 
+            pscari_tmp.setString(1,awal);
             rs2=pscari_tmp.executeQuery();
             while(rs2.next())
             {
-             pssimpan.setString(1,prop.getProperty("LOKET"));
+            pssimpan.setString(1,prop.getProperty("LOKET"));
             pssimpan.setString(2,rs2.getString("antrian"));
-            pssimpan.setString(3,"0");
-            pssimpan.executeUpdate();  
+            pssimpan.setString(3,awal);
+            pssimpan.setString(4,"0");
+            pssimpan.executeUpdate();    
+                
+             
             }
             
         } catch (Exception e) {
@@ -460,6 +588,67 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private void AntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntrianActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AntrianActionPerformed
+
+    private void cmbloket1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbloket1ActionPerformed
+ //System.out.println("Coba  Aplikasi");   
+ try {
+   
+    //        pshapus.executeUpdate();
+    switch ((String)cmbloket1.getSelectedItem()) { 
+        case "A": 
+            awal = "1"; 
+            break; 
+        case "B": 
+            awal = "2"; 
+            break; 
+        case "C": 
+            awal = "3"; 
+            break; 
+        case "D": 
+            awal = "4"; 
+            break; 
+        case "E": 
+            awal = "5"; 
+            break; 
+        case "F": 
+            awal = "6"; 
+            break; 
+        case "G": 
+            awal = "7"; 
+            break;
+        case "H": 
+            awal = "8"; 
+            break;
+        case "I": 
+            awal = "9"; 
+            break;
+        case "J": 
+            awal = "10"; 
+            break;
+        default: 
+            awal = "1"; 
+            break; 
+        } 
+    System.out.println(awal);
+    pscari_tmp2=koneksi.prepareStatement("select loket,antrian,huruf from antrianloket_tmp where huruf=?");
+    pscari_tmp2.setString(1,awal);
+            
+    rs3=pscari_tmp2.executeQuery();
+            if(!rs3.next())
+           {
+            Antrian.setText("0");
+            
+           }else
+            {
+                Antrian.setText(rs3.getString("antrian"));
+             System.out.println(rs3.getString("antrian"));   
+            }
+            
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }  
+    }//GEN-LAST:event_cmbloket1ActionPerformed
 
 
 
@@ -491,7 +680,6 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private widget.Button BtnKeluar;
     private widget.Button BtnPanggil;
     private javax.swing.JDialog DlgDisplay;
-    private widget.ComboBox cmbloket;
     private widget.ComboBox cmbloket1;
     private widget.InternalFrame form1;
     private widget.InternalFrame internalFrame1;
@@ -523,8 +711,8 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             while(rs.next()){
                 labelruntext.setText(rs.getString(1));
                 if(rs.getString(2).equals("Yes")){
-                    Blob blob = rs.getBlob(3);
-                    paneliklan.setBackgroundImage(new javax.swing.ImageIcon(blob.getBytes(1, (int) (blob.length()))));                    
+//                    Blob blob = rs.getBlob(3);
+//                    paneliklan.setBackgroundImage(new javax.swing.ImageIcon(blob.getBytes(1, (int) (blob.length()))));                    
                 }
             }
         }catch(SQLException e){
@@ -914,14 +1102,52 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                        
                         Antrian.setText(antri);                    
                         labelLoket.setText(loket);
-                        labelantri1.setText(antri);
+                          switch (huruf) { 
+        case "1": 
+            awal = "A"; 
+            break; 
+        case "2": 
+            awal = "B"; 
+            break; 
+        case "3": 
+            awal = "C"; 
+            break; 
+        case "4": 
+            awal = "D"; 
+            break; 
+        case "5": 
+            awal = "E"; 
+            break; 
+        case "6": 
+            awal = "F"; 
+            break; 
+        case "7": 
+            awal = "G"; 
+            break;
+        case "8": 
+            awal = "H"; 
+            break;
+        case "9": 
+            awal = "I"; 
+            break;
+        case "10": 
+            awal = "J"; 
+            break;
+        default: 
+            awal = "A"; 
+            break; 
+        } 
+                        labelantri1.setText(awal+antri);
+                        
+                        
                         if(prop.getProperty("ANTRIAN").equals("player")){
                             try {
                                 music=new BackgroundMusic("./suara/Nomor_Antrian.mp3");
                                 music.start();
                                 Thread.sleep(1500);
-                                panggil(Integer.parseInt(antri));
                                 panggilHuruf(Integer.parseInt(huruf));
+                                panggil(Integer.parseInt(antri));
+                                
                                 if(prop.getProperty("STATUSLOKET").equals("poly"))
                                 {
                                  music=new BackgroundMusic("./suara/Dipoly.mp3");   
