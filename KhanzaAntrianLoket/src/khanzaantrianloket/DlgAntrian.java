@@ -37,7 +37,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private final Connection koneksi=koneksiDB.condb();
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
     private static final Properties prop = new Properties();
-    private String antri="0",loket="0",status="0";
+    private String antri="0",loket="0",status="0",huruf="";
     private PreparedStatement pshapus,pssimpan,pscari,psupdate,pssimpan_tmp,pscari_tmp,psupdate_tmp;
     private ResultSet rs,rs2;
     private int urut;
@@ -59,14 +59,14 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         txtLoket.setText(prop.getProperty("LOKET"));
         try {
             pshapus=koneksi.prepareStatement("delete from antriloket");
-            pssimpan=koneksi.prepareStatement("insert into antriloket values(?,?,?)");
+            pssimpan=koneksi.prepareStatement("insert into antriloket values(?,?,?,?)");
             
             psupdate=koneksi.prepareStatement("update antriloket SET status=? where loket=?");
-            pscari=koneksi.prepareStatement("select antrian,loket,status from antriloket");
+            pscari=koneksi.prepareStatement("select antrian,loket,status,huruf from antriloket");
             
-            pssimpan_tmp=koneksi.prepareStatement("insert into antrianloket_tmp values(?,?)");
+            pssimpan_tmp=koneksi.prepareStatement("insert into antrianloket_tmp values(?,?,?)");
             psupdate_tmp=koneksi.prepareStatement("update antrianloket_tmp SET antrian=? where loket=?");
-            pscari_tmp=koneksi.prepareStatement("select loket,antrian from antrianloket_tmp where loket=?");
+            pscari_tmp=koneksi.prepareStatement("select loket,antrian,huruf from antrianloket_tmp where loket=?");
             pscari_tmp.setString(1,prop.getProperty("LOKET"));
             rs2=pscari_tmp.executeQuery();
             if(!rs2.next())
@@ -122,6 +122,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         BtnBatal2 = new widget.Button();
         BtnPanggil = new widget.Button();
         txtLoket = new widget.TextBox();
+        cmbloket1 = new widget.ComboBox();
 
         DlgDisplay.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         DlgDisplay.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
@@ -276,18 +277,23 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         label1.setText("Antrian :");
         label1.setName("label1"); // NOI18N
         panelisi5.add(label1);
-        label1.setBounds(145, 12, 60, 23);
+        label1.setBounds(110, 10, 60, 23);
 
         label2.setText("Loket :");
         label2.setName("label2"); // NOI18N
         panelisi5.add(label2);
-        label2.setBounds(0, 12, 60, 23);
+        label2.setBounds(10, 10, 40, 23);
 
         Antrian.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Antrian.setText("0");
         Antrian.setName("Antrian"); // NOI18N
+        Antrian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AntrianActionPerformed(evt);
+            }
+        });
         panelisi5.add(Antrian);
-        Antrian.setBounds(210, 12, 60, 24);
+        Antrian.setBounds(250, 10, 60, 24);
 
         BtnBatal2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
         BtnBatal2.setMnemonic('8');
@@ -329,7 +335,12 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }
         });
         panelisi5.add(txtLoket);
-        txtLoket.setBounds(60, 12, 60, 24);
+        txtLoket.setBounds(60, 10, 60, 24);
+
+        cmbloket1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" }));
+        cmbloket1.setName("cmbloket1"); // NOI18N
+        panelisi5.add(cmbloket1);
+        cmbloket1.setBounds(180, 10, 60, 23);
 
         internalFrame1.add(panelisi5, java.awt.BorderLayout.CENTER);
 
@@ -353,8 +364,18 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
     private void BtnAntri1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntri1ActionPerformed
         try {
+            String hrf="";
+            if(cmbloket1.getSelectedItem().equals("A"))
+            {
+                hrf="1";
+            }
+             if(cmbloket1.getSelectedItem().equals("B"))
+            {
+                hrf="2";
+            }
+            
             urut=Integer.parseInt(Antrian.getText())+1;
-             Antrian.setText(""+urut);
+            Antrian.setText(""+urut);
             pshapus.executeUpdate();
             
             pscari_tmp.setString(1,prop.getProperty("LOKET"));
@@ -363,18 +384,23 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
            
            if(!rs2.next())
            {
-            pssimpan_tmp.setString(1,prop.getProperty("LOKET"));
-            pssimpan_tmp.setString(2,Integer.toString(urut));          
+               pssimpan_tmp.setString(1,"1"); 
+            pssimpan_tmp.setString(2,prop.getProperty("LOKET"));
+            pssimpan_tmp.setString(3,Integer.toString(urut)); 
+            
             pssimpan_tmp.executeUpdate();
            }
            else{
+             
             psupdate_tmp.setString(1,Integer.toString(urut));
-            psupdate_tmp.setString(2,prop.getProperty("LOKET"));          
+            psupdate_tmp.setString(2,prop.getProperty("LOKET")); 
+             
             psupdate_tmp.executeUpdate();  
            }
             pssimpan.setString(1,prop.getProperty("LOKET"));
             pssimpan.setString(2,Integer.toString(urut));
-            pssimpan.setString(3,"0");
+            pssimpan.setString(3,hrf);
+            pssimpan.setString(4,"0");
             pssimpan.executeUpdate();
             
             
@@ -431,6 +457,10 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLoketActionPerformed
 
+    private void AntrianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AntrianActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AntrianActionPerformed
+
 
 
     /**
@@ -461,6 +491,8 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private widget.Button BtnKeluar;
     private widget.Button BtnPanggil;
     private javax.swing.JDialog DlgDisplay;
+    private widget.ComboBox cmbloket;
+    private widget.ComboBox cmbloket1;
     private widget.InternalFrame form1;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame5;
@@ -825,7 +857,29 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         }
         
     }
-    
+    private void panggilHuruf(int antrian){
+        String[] urut={"","./suara/A.mp3","./suara/B.mp3","./suara/C.mp3","./suara/D.mp3",
+                       "./suara/E.mp3","./suara/F.mp3","./suara/G.mp3","./suara/H.mp3",
+                       "./suara/I.mp3","./suara/J.mp3","./suara/11.mp3","./suara/12.mp3",
+                       "./suara/13.mp3","./suara/14.mp3","./suara/15.mp3","./suara/16.mp3",
+                        "./suara/17.mp3","./suara/18.mp3","./suara/19.mp3","./suara/20.mp3",
+                        "./suara/30.mp3","./suara/40.mp3","./suara/50.mp3","./suara/60.mp3",
+                       "./suara/70.mp3","./suara/80.mp3","./suara/90.mp3","./suara/100.mp3",
+                       "./suara/200.mp3","./suara/300.mp3","./suara/400.mp3","./suara/500.mp3",
+                        "./suara/600.mp3","./suara/700.mp3","./suara/800.mp3","./suara/900.mp3",
+                        "./suara/1000.mp3"};
+        
+        if (antrian <= 20){
+            try {
+                music = new BackgroundMusic(urut[antrian]);
+                music.start();
+                Thread.sleep(1000);                
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }            
+        }
+        
+    }
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_detik;
@@ -846,6 +900,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                         rs=pscari.executeQuery();
                         if(rs.next()){
                             antri=rs.getString("antrian");
+                            huruf=rs.getString("huruf");
                            // loket=rs.getString("loket");
                            loket=prop.getProperty("LOKET");
                            
@@ -856,6 +911,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                     }
                     if(status.equals("0")){
                     if(!antri.equals("")){
+                       
                         Antrian.setText(antri);                    
                         labelLoket.setText(loket);
                         labelantri1.setText(antri);
@@ -865,13 +921,14 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
                                 music.start();
                                 Thread.sleep(1500);
                                 panggil(Integer.parseInt(antri));
+                                panggilHuruf(Integer.parseInt(huruf));
                                 if(prop.getProperty("STATUSLOKET").equals("poly"))
                                 {
                                  music=new BackgroundMusic("./suara/Dipoly.mp3");   
                                 }
                                 if(prop.getProperty("STATUSLOKET").equals("loket"))
                                 {
-                                 music=new BackgroundMusic("./suara/Diloket.mp3");   
+                                music=new BackgroundMusic("./suara/Diloket.mp3");   
                                 }
                                 if(prop.getProperty("STATUSLOKET").equals("counter"))
                                 {
