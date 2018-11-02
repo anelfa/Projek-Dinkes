@@ -987,6 +987,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCarePendaftaran = new widget.ButtonBig();
         btnPCareMapingDokter = new widget.ButtonBig();
         btnRanapPerRuang = new widget.ButtonBig();
+        btnSetDatabase = new widget.ButtonBig();
         tanggal = new widget.Tanggal();
         btnDataPenjualan = new widget.ButtonBig();
         btnInputPenjualan = new widget.ButtonBig();
@@ -6095,6 +6096,19 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         Panelmenu.add(btnRanapPerRuang);
+
+        btnSetDatabase.setForeground(new java.awt.Color(40, 70, 50));
+        btnSetDatabase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1404047007_02.png"))); // NOI18N
+        btnSetDatabase.setText("Seting Database");
+        btnSetDatabase.setIconTextGap(0);
+        btnSetDatabase.setName("btnSetDatabase"); // NOI18N
+        btnSetDatabase.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetDatabase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetDatabaseActionPerformed(evt);
+            }
+        });
+        Panelmenu.add(btnSetDatabase);
 
         scrollPane2.setViewportView(Panelmenu);
 
@@ -12701,6 +12715,30 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         this.setCursor(Cursor.getDefaultCursor());         // TODO add your handling code here:
     }//GEN-LAST:event_btnToolOnlineActionPerformed
 
+    private void btnSetDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetDatabaseActionPerformed
+
+        String[] run = {"java","-jar","updater/SetKoneksiServer.jar"};
+        try {
+            Runtime.getRuntime().exec(run);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.exit(0);
+        /*      try {
+            isTutup();
+            DlgHome.dispose();
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgSetDatabase aplikasi=new DlgSetDatabase(this,false);
+
+            aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+            aplikasi.setLocationRelativeTo(PanelUtama);
+            aplikasi.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor()); // TODO add your handling code here:
+        } catch (Exception ex) {
+            Logger.getLogger(frmUtama.class.getName()).log(Level.SEVERE, null, ex);
+        } */
+    }//GEN-LAST:event_btnSetDatabaseActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -13086,6 +13124,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private widget.ButtonBig btnSensusHarianRalan;
     private widget.ButtonBig btnSetBiayaHarian;
     private widget.ButtonBig btnSetBiayaMasukSekali;
+    private widget.ButtonBig btnSetDatabase;
     private widget.ButtonBig btnSetHargaKamar;
     private widget.ButtonBig btnSetObatRalan;
     private widget.ButtonBig btnSetObatRanap;
@@ -15465,6 +15504,10 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
                 Panelmenu.add(btnUser);
                 jmlmenu++;
             }
+            if(var.getuser()==true){
+                Panelmenu.add(btnSetDatabase);
+                jmlmenu++;
+            }
 
             if(var.gettracer_login()==true){
                 Panelmenu.add(btnTracker);
@@ -17453,6 +17496,10 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
 
         if(var.getuser()==true){
             Panelmenu.add(btnUser);
+            jmlmenu++;
+        }
+        if(var.getuser()==true){
+            Panelmenu.add(btnSetDatabase);
             jmlmenu++;
         }
 
@@ -20212,7 +20259,12 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
                 jmlmenu++;
             }                
         }
-
+        if(var.getuser()==true){
+            if(btnSetDatabase.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSetDatabase);
+                jmlmenu++;
+            }                
+        }
         if(var.gettracer_login()==true){
             if(btnTracker.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnTracker);

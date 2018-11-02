@@ -25,7 +25,7 @@ public final class koneksiDB {
     public static Connection condb(){      
         if(connection == null){
             try{
-                prop.loadFromXML(new FileInputStream("setting/database.xml"));
+                prop.loadFromXML(new FileInputStream("setting/config.xml"));
                 dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull");
                 dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
                 dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
@@ -72,7 +72,7 @@ public final class koneksiDB {
     
     public static String HOST(){
         try{
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            prop.loadFromXML(new FileInputStream("setting/config.xml"));
             var=EnkripsiAES.decrypt(prop.getProperty("HOSTHYBRIDWEB"));
         }catch(Exception e){
             var="localhost"; 
@@ -82,7 +82,7 @@ public final class koneksiDB {
     
     public static String PORT(){
         try{
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            prop.loadFromXML(new FileInputStream("setting/config.xml"));
             var=EnkripsiAES.decrypt(prop.getProperty("PORT"));
         }catch(Exception e){
             var="3306"; 
@@ -92,7 +92,7 @@ public final class koneksiDB {
     
     public static String DATABASE(){
         try{
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            prop.loadFromXML(new FileInputStream("setting/config.xml"));
             var=EnkripsiAES.decrypt(prop.getProperty("DATABASE"));
         }catch(Exception e){
             var="sik"; 

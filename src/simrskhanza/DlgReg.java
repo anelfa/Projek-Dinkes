@@ -6377,7 +6377,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             param.put("emailrs",var.getemailrs());
             param.put("logo",Sequel.cariGambar("select logo from setting"));
             Valid.MyReport("rptBuktiRegister.jrxml","report","::[ Bukti Register ]::",
-                   "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,pasien.no_tlp,"+
+                   "select reg_periksa.no_poli as no_antrian,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,pasien.no_tlp,"+
                    "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.umur as umur,poliklinik.nm_poli,"+
                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab "+
                    "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
@@ -9020,10 +9020,10 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }
     
     private void cetakStruk2(  String title, FileWriter writer){
-        String strukFile = "tracerRm.txt";
+       // String strukFile = "tracerRm.txt";
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader(strukFile));        
+          //  reader = new BufferedReader(new FileReader(strukFile));        
             String tgll= Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+TNoRw.getText()+"'");
             String[] tglref= tgll.split("-");
             boltText(writer);
@@ -9053,7 +9053,9 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             gantiBaris(writer);
             gantiBaris(writer);
             gantiBaris(writer);
-            reader.close();
+            cutPaper();
+            
+          //  reader.close();
         } catch (Exception ex) {
             System.out.println("Notif : "+ex);
         }
@@ -9086,6 +9088,24 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             System.out.println("Notif : "+e);
         }            
     }
+     private void cutPaper() {
+        try {
+           String commandSet = "";
+        final byte[] FeedAndCut = {29, 'V', 66, 0};
+
+        String s = new String(FeedAndCut);
+
+        final byte[] DrawerKick={27,70,0,60,120};   
+        s += new String(DrawerKick);
+
+        commandSet+=s;
+        //return s;
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }            
+    }
+    
+    
     
     private void UpdateUmur(){
         Sequel.mengedit("pasien","no_rkm_medis=?","umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))",1,new String[]{TNoRM.getText()});
