@@ -36,8 +36,8 @@ public class DlgKelurahan extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private PreparedStatement ps;
-    private ResultSet rs;
+    private PreparedStatement ps,ps2;
+    private ResultSet rs,rs2;
 
     /** Creates new form Dlgkelurahan
      * @param parent
@@ -49,7 +49,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
         this.setLocation(10,10);
         setSize(459,539);
 
-        Object[] row={"Nama Kelurahan"};
+        Object[] row={"Kode Kelurahan","Nama Kelurahan","Nama Kecamatan"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -60,10 +60,16 @@ public class DlgKelurahan extends javax.swing.JDialog {
         tbkelurahan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbkelurahan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 3; i++) {
             TableColumn column = tbkelurahan.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(500);
+                column.setPreferredWidth(150);
+            }
+            else if(i==1){
+                column.setPreferredWidth(400);
+            }
+            else if(i==2){
+                column.setPreferredWidth(400);
             }
         }
 
@@ -82,7 +88,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
         } 
         
         try {
-            ps=koneksi.prepareStatement("select nm_kel from kelurahan where nm_kel like ? ");
+            ps=koneksi.prepareStatement("select kd_kel, nm_kel , nm_kec from kelurahan left join kecamatan  on kelurahan.kd_kec=kecamatan.kd_kec where nm_kel like ? ");
         } catch (Exception e) {
         }
     }
@@ -104,6 +110,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
         Nama = new widget.TextBox();
         panelGlass9 = new widget.panelisi();
         jLabel6 = new widget.Label();
+        CMbTCari = new widget.ComboBox();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
         BtnAll = new widget.Button();
@@ -126,7 +133,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Kelurahan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130,100,100))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Kelurahan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -178,6 +185,21 @@ public class DlgKelurahan extends javax.swing.JDialog {
         jLabel6.setName("jLabel6"); // NOI18N
         jLabel6.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass9.add(jLabel6);
+
+        CMbTCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kelurahan","Kecamatan" }));
+        CMbTCari.setName("CMbTCari"); // NOI18N
+        CMbTCari.setOpaque(false);
+        CMbTCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CMbTCariActionPerformed(evt);
+            }
+        });
+        CMbTCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                CMbTCariKeyPressed(evt);
+            }
+        });
+        panelGlass9.add(CMbTCari);
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(250, 23));
@@ -377,7 +399,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil();
+        tampilCari();
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -437,6 +459,18 @@ public class DlgKelurahan extends javax.swing.JDialog {
         onCari();
     }//GEN-LAST:event_formWindowActivated
 
+    private void CMbTCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbTCariKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            TCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            //CmbUmur.requestFocus();
+        }
+    }//GEN-LAST:event_CMbTCariKeyPressed
+
+    private void CMbTCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMbTCariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CMbTCariActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -460,6 +494,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
+    private widget.ComboBox CMbTCari;
     private widget.Label LCount;
     private widget.TextBox Nama;
     private widget.ScrollPane Scroll;
@@ -477,13 +512,55 @@ public class DlgKelurahan extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{            
             ps.setString(1,"%"+TCari.getText().trim()+"%");
+            
             rs=ps.executeQuery();
             while(rs.next()){                
-                tabMode.addRow(new String[]{rs.getString(1)});
+                String[] data={rs.getString(1),
+                                   rs.getString(2),
+                                    rs.getString(3)
+                                   
+                                  };
+                    tabMode.addRow(data);
              }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
+        LCount.setText(""+tabMode.getRowCount());
+    }
+private void tampilCari() {
+    
+        Valid.tabelKosong(tabMode);
+        if(CMbTCari.getSelectedItem()=="Kelurahan"){
+        try{            
+            ps.setString(1,"%"+TCari.getText().trim()+"%");
+            
+            rs=ps.executeQuery();
+            while(rs.next()){                
+                String[] data={rs.getString(1),
+                                   rs.getString(2),
+                                    rs.getString(3)
+                                   
+                                  };
+                    tabMode.addRow(data);
+             }
+        }catch(SQLException e){
+            System.out.println("Notifikasi : "+e);
+        }
+        }else if(CMbTCari.getSelectedItem()=="Kecamatan"){try{      
+            ps2=koneksi.prepareStatement("select kd_kel, nm_kel , nm_kec from kelurahan left join kecamatan  on kelurahan.kd_kec=kecamatan.kd_kec where nm_kec like ? ");
+            ps2.setString(1,"%"+TCari.getText().trim()+"%");         
+            rs2=ps2.executeQuery();
+            while(rs2.next()){                
+                String[] data={rs2.getString(1),
+                                   rs2.getString(2),
+                                    rs2.getString(3)
+                                   
+                                  };
+                    tabMode.addRow(data);
+             }
+        }catch(SQLException e){
+            System.out.println("Notifikasi : "+e);
+        }};
         LCount.setText(""+tabMode.getRowCount());
     }
 
@@ -495,7 +572,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
 
     private void getData() {
         if(tbkelurahan.getSelectedRow()!= -1){
-            Nama.setText(tbkelurahan.getValueAt(tbkelurahan.getSelectedRow(),0).toString());
+            Nama.setText(tbkelurahan.getValueAt(tbkelurahan.getSelectedRow(),1).toString());
         }
     }
     

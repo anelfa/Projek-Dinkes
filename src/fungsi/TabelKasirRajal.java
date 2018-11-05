@@ -14,11 +14,12 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Owner
  */
-public class TabelIGD extends DefaultTableCellRenderer {
+public class TabelKasirRajal extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-         String status = table.getValueAt(row, 18).toString();
+         String status = table.getValueAt(row, 10).toString();
+        // System.out.print(table.getValueAt(row, 10).toString());
         if (row % 2 == 1){
             
             component.setBackground(new Color(247,255,243));

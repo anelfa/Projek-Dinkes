@@ -88,7 +88,7 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
             p_alamatpj=0,p_kelurahanpj=0,p_kecamatanpj=0,p_kabupatenpj=0,
             p_propinsi=0,p_propinsipj=0;
     private double jumlah=0,x=0,i=0;
-    private String klg="SAUDARA",say="",pengurutan="",asalform="",bulan="",tahun="",awalantahun="",awalanbulan="",posisitahun="",
+    private String id_propPj,nm_propPj,id_prop,nm_prop,id_kel,id_kec,nm_kec,id_kab,nm_kab,id_kelPj,id_kecPj,nm_kecPj,id_kabPj,nm_kabPj,klg="SAUDARA",say="",pengurutan="",asalform="",bulan="",tahun="",awalantahun="",awalanbulan="",posisitahun="",
             no_ktp="",tmp_lahir="",nm_ibu="",alamat="",pekerjaan="",no_tlp="",
             umur="",namakeluarga="",no_peserta="",kelurahan="",kecamatan="",
             kabupaten="",pekerjaanpj="",alamatpj="",kelurahanpj="",kecamatanpj="",
@@ -1078,13 +1078,33 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
                 if(var.getform().equals("DlgPasien")){
                     if(kel.getTable().getSelectedRow()!= -1){
                         if(pilih==1){                    
-                            Kelurahan.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
+                           Kelurahan.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),1).toString());
+                            id_kel=kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString();
+                            id_kec=Sequel.cariIsi("select kelurahan.kd_kec from kelurahan where kelurahan.kd_kel=?",id_kel);
+                            nm_kec=Sequel.cariIsi("select kecamatan.nm_kec from kecamatan where kecamatan.kd_kec=?",id_kec);
+                            Kecamatan.setText(nm_kec);
+                            id_kab=Sequel.cariIsi("select kecamatan.kd_kab from kecamatan where kecamatan.kd_kec=?",id_kec);
+                            nm_kab=(Sequel.cariIsi("select kabupaten.nm_kab from kabupaten where kabupaten.kd_kab=?",id_kab));
+                            Kabupaten.setText(nm_kab); 
+                             id_prop=Sequel.cariIsi("select kabupaten.kd_prop from kabupaten where kabupaten.kd_kab=?",id_kab);
+                            nm_prop=(Sequel.cariIsi("select propinsi.nm_prop from propinsi where propinsi.kd_prop=?",id_prop));
+                            Propinsi.setText(nm_prop); 
                             Kelurahan.requestFocus();
                         }else if(pilih==2){                    
                             Kelurahan2.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
                             Kelurahan2.requestFocus();
                         }else if(pilih==3){                    
-                            KelurahanPj.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
+                            KelurahanPj.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),1).toString());
+                            id_kelPj=kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString();
+                            id_kecPj=Sequel.cariIsi("select kelurahan.kd_kec from kelurahan where kelurahan.kd_kel=?",id_kelPj);
+                            nm_kecPj=Sequel.cariIsi("select kecamatan.nm_kec from kecamatan where kecamatan.kd_kec=?",id_kecPj);
+                            KecamatanPj.setText(nm_kecPj);
+                            id_kabPj=Sequel.cariIsi("select kecamatan.kd_kab from kecamatan where kecamatan.kd_kec=?",id_kecPj);
+                            nm_kabPj=(Sequel.cariIsi("select kabupaten.nm_kab from kabupaten where kabupaten.kd_kab=?",id_kabPj));
+                            KabupatenPj.setText(nm_kabPj); 
+                            id_propPj=Sequel.cariIsi("select kabupaten.kd_prop from kabupaten where kabupaten.kd_kab=?",id_kabPj);
+                            nm_propPj=(Sequel.cariIsi("select propinsi.nm_prop from propinsi where propinsi.kd_prop=?",id_propPj));
+                            PropinsiPj.setText(nm_propPj); 
                             KelurahanPj.requestFocus();
                         }
                     }                
@@ -1535,6 +1555,8 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         EMail = new widget.TextBox();
         jLabel40 = new widget.Label();
         NIP = new widget.TextBox();
+        jLabel1 = new javax.swing.JLabel();
+        ChkAlamatSama = new widget.CekBox();
         internalFrame4 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbPasien = new widget.Table();
@@ -2983,7 +3005,7 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(4, 102, 95, 23);
 
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2018" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-11-2018" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -3118,7 +3140,7 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         TKtp.setBounds(712, 132, 130, 23);
 
         DTPDaftar.setEditable(false);
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2018" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-11-2018" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -3318,6 +3340,7 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         BtnKecamatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnKecamatan.setMnemonic('3');
         BtnKecamatan.setToolTipText("ALt+3");
+        BtnKecamatan.setEnabled(false);
         BtnKecamatan.setName("BtnKecamatan"); // NOI18N
         BtnKecamatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3330,6 +3353,7 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         BtnKabupaten.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnKabupaten.setMnemonic('4');
         BtnKabupaten.setToolTipText("ALt+4");
+        BtnKabupaten.setEnabled(false);
         BtnKabupaten.setName("BtnKabupaten"); // NOI18N
         BtnKabupaten.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3442,6 +3466,7 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         BtnKecamatanPj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnKecamatanPj.setMnemonic('3');
         BtnKecamatanPj.setToolTipText("ALt+3");
+        BtnKecamatanPj.setEnabled(false);
         BtnKecamatanPj.setName("BtnKecamatanPj"); // NOI18N
         BtnKecamatanPj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3475,6 +3500,7 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         BtnKabupatenPj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnKabupatenPj.setMnemonic('4');
         BtnKabupatenPj.setToolTipText("ALt+4");
+        BtnKabupatenPj.setEnabled(false);
         BtnKabupatenPj.setName("BtnKabupatenPj"); // NOI18N
         BtnKabupatenPj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3903,6 +3929,7 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         BtnPropinsi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnPropinsi.setMnemonic('4');
         BtnPropinsi.setToolTipText("ALt+4");
+        BtnPropinsi.setEnabled(false);
         BtnPropinsi.setName("BtnPropinsi"); // NOI18N
         BtnPropinsi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3957,6 +3984,7 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         btnPropinsiPj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPropinsiPj.setMnemonic('4');
         btnPropinsiPj.setToolTipText("ALt+4");
+        btnPropinsiPj.setEnabled(false);
         btnPropinsiPj.setName("btnPropinsiPj"); // NOI18N
         btnPropinsiPj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -4022,6 +4050,33 @@ public class DlgPasienPenunjang extends javax.swing.JDialog {
         });
         FormInput.add(NIP);
         NIP.setBounds(753, 342, 120, 23);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Alamat Sama");
+        jLabel1.setName("jLabel1"); // NOI18N
+        FormInput.add(jLabel1);
+        jLabel1.setBounds(910, 254, 90, 14);
+
+        ChkAlamatSama.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(175, 180, 170)));
+        ChkAlamatSama.setForeground(new java.awt.Color(153, 0, 51));
+        ChkAlamatSama.setBorderPainted(true);
+        ChkAlamatSama.setBorderPaintedFlat(true);
+        ChkAlamatSama.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkAlamatSama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkAlamatSama.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkAlamatSama.setName("ChkAlamatSama"); // NOI18N
+        ChkAlamatSama.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkAlamatSamaItemStateChanged(evt);
+            }
+        });
+        ChkAlamatSama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkAlamatSamaActionPerformed(evt);
+            }
+        });
+        FormInput.add(ChkAlamatSama);
+        ChkAlamatSama.setBounds(880, 250, 23, 23);
 
         Scroll1.setViewportView(FormInput);
 
@@ -7352,6 +7407,27 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         }
     }//GEN-LAST:event_MnCekNIK1ActionPerformed
 
+    private void ChkAlamatSamaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkAlamatSamaItemStateChanged
+        if(ChkAlamatSama.isSelected()==true){
+            AlamatPj.setText(Alamat.getText());
+            KelurahanPj.setText(Kelurahan.getText());
+            KecamatanPj.setText(Kecamatan.getText());
+            KabupatenPj.setText(Kabupaten.getText());
+            PropinsiPj.setText(Propinsi.getText());
+        }else if(ChkAlamatSama.isSelected()==false){
+            AlamatPj.setText("");
+            KelurahanPj.setText("KELURAHAN");
+            KecamatanPj.setText("KECAMATAN");
+            KabupatenPj.setText("KABUPATEN");
+            PropinsiPj.setText("PROPINSI");
+            AlamatPj.requestFocus();
+        }
+    }//GEN-LAST:event_ChkAlamatSamaItemStateChanged
+
+    private void ChkAlamatSamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAlamatSamaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChkAlamatSamaActionPerformed
+
     /**
      * @data args the command line arguments
      */
@@ -7441,6 +7517,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     private widget.ComboBox CMbGd;
     private widget.ComboBox CMbPnd;
     private widget.TextBox Carialamat;
+    private widget.CekBox ChkAlamatSama;
     private widget.CekBox ChkDaftar;
     private widget.CekBox ChkRM;
     private widget.ComboBox CmbJk;
@@ -7563,6 +7640,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
     private widget.InternalFrame internalFrame8;
+    private javax.swing.JLabel jLabel1;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
     private widget.Label jLabel12;

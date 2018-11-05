@@ -768,6 +768,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         jLabel23 = new widget.Label();
         btnPenjab1 = new widget.Button();
         ChkTracker = new widget.CekBox();
+        jLabel1 = new javax.swing.JLabel();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -2441,7 +2442,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         TglSakit1.setEditable(false);
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-09-2018" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-11-2018" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -2489,7 +2490,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         TglSakit2.setEditable(false);
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-09-2018" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-11-2018" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -2970,7 +2971,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-09-2018" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-11-2018" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2985,7 +2986,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-09-2018" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-11-2018" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3078,7 +3079,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         DTPReg.setEditable(false);
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-09-2018" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-11-2018" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -3326,7 +3327,13 @@ public final class DlgIGD extends javax.swing.JDialog {
         ChkTracker.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ChkTracker.setName("ChkTracker"); // NOI18N
         FormInput.add(ChkTracker);
-        ChkTracker.setBounds(203, 12, 23, 23);
+        ChkTracker.setBounds(900, 10, 23, 23);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Cetak Tracer");
+        jLabel1.setName("jLabel1"); // NOI18N
+        FormInput.add(jLabel1);
+        jLabel1.setBounds(930, 14, 90, 14);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -3486,6 +3493,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                 if(ChkTracker.isSelected()==true){
                     ctk();
                 }
+                 cetakregister();
                 tampil();
                 emptTeks();                
             }else{
@@ -3502,6 +3510,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                     if(ChkTracker.isSelected()==true){
                         ctk();
                     }
+                     cetakregister();
                     tampil();
                     emptTeks();                
                 }else{
@@ -3518,6 +3527,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                         if(ChkTracker.isSelected()==true){
                             ctk();
                         }
+                         cetakregister();
                         tampil();
                         emptTeks();                
                     }else{
@@ -3534,6 +3544,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                             if(ChkTracker.isSelected()==true){
                                 ctk();
                             }
+                             cetakregister();
                             tampil();
                             emptTeks();                
                         }else{
@@ -3550,6 +3561,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                                 if(ChkTracker.isSelected()==true){
                                     ctk();
                                 }
+                                cetakregister();
                                 tampil();
                                 emptTeks();                
                             }else{
@@ -3563,7 +3575,27 @@ public final class DlgIGD extends javax.swing.JDialog {
             }            
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
-
+public void cetakregister() { 
+        
+             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",var.getnamars());
+            param.put("alamatrs",var.getalamatrs());
+            param.put("kotars",var.getkabupatenrs());
+            param.put("propinsirs",var.getpropinsirs());
+            param.put("kontakrs",var.getkontakrs());
+            param.put("emailrs",var.getemailrs());
+            param.put("logo",Sequel.cariGambar("select logo from setting"));
+             Valid.MyReport("rptBuktiRegister.jrxml","report","::[ Bukti Register ]::",
+                   "select reg_periksa.no_reg as no_antrian,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+                   "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,poliklinik.nm_poli,"+
+                   "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.nm_user "+
+                   "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
+                   "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                   "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
+            this.setCursor(Cursor.getDefaultCursor());
+        
+    }  
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
@@ -5127,12 +5159,30 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         if(TNoRw.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"No.Rawat");
         }else{
-            if(Sequel.cariInteger("select count(no_rawat) from kamar_inap where no_rawat=?",TNoRw.getText())>0){
+            int quetion =   JOptionPane.showConfirmDialog(
+            null,
+            "Apakah Anda Ingin Membatalkan Registrasi Ini ?",
+            "Warning",
+            JOptionPane.YES_NO_OPTION);
+              if(quetion == JOptionPane.YES_OPTION){
+        if(Sequel.cariInteger("select count(no_rawat) from kamar_inap where no_rawat=?",TNoRw.getText())>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
             }else {
                 Valid.editTable(tabMode,"reg_periksa","no_rawat",TNoRw,"stts='Batal'");
                 if(tabMode.getRowCount()!=0){tampil();}
             }
+              }
+        else
+        {
+        }
+            
+            
+            
+            
+            
+            
+            
+            
         }
     }//GEN-LAST:event_MnBatalActionPerformed
 
@@ -5919,6 +5969,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
+    private javax.swing.JLabel jLabel1;
     private widget.Label jLabel10;
     private widget.Label jLabel13;
     private widget.Label jLabel15;
@@ -6066,6 +6117,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 
     private void getData() {
         if(tbPetugas.getSelectedRow()!= -1){
+           String sts = tbPetugas.getValueAt(tbPetugas.getSelectedRow(),18).toString();
             TNoReg.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),1).toString());
             TNoRw.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
             Kd2.setText(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
@@ -6273,6 +6325,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnSKDPBPJS.setEnabled(var.getskdp_bpjs());
         MnPermintaanLab.setEnabled(var.getpermintaan_lab());
         MnPermintaanRadiologi.setEnabled(var.getpermintaan_radiologi());
+        
+        
     }
     
     private void isNumber(){

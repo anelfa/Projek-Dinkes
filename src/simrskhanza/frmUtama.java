@@ -7296,7 +7296,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnToolIGD.setEnabled(var.getigd());   
                     btnToolIGD.setEnabled(var.getigd());
                     btnToolPenunjang.setEnabled(var.getigd());
-                    btnToolOnline.setEnabled(var.getigd());
+                   // btnToolOnline.setEnabled(var.getigd());
                     
                     btnToolBcdRalan.setEnabled(var.getbarcoderalan());
                     btnToolBcdRanap.setEnabled(var.getbarcoderanap()); 
