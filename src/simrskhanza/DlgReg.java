@@ -8815,9 +8815,11 @@ public void cetakregister() {
                         "on pasien.kd_kel=kelurahan.kd_kel and pasien.kd_pj=penjab.kd_pj "+
                         "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "+
                         "where pasien.no_rkm_medis=?");
-            try {            
+            try {  
+                
                 ps3.setString(1,Valid.SetTgl(DTPReg.getSelectedItem()+""));
                 ps3.setString(2,TNoRM.getText());
+                String statusDaftar=Sequel.cariIsi("select if((select count(no_rkm_medis) from reg_periksa where no_rkm_medis='"+TNoRM.getText()+"')>0,'Lama','Baru' )");
                 rs=ps3.executeQuery();
                 while(rs.next()){
                     TPasien.setText(rs.getString("nm_pasien"));
@@ -8826,7 +8828,7 @@ public void cetakregister() {
                     THbngn.setText(rs.getString("keluarga"));
                     kdpnj.setText(rs.getString("kd_pj"));
                     nmpnj.setText(rs.getString("png_jawab"));
-                    TStatus.setText(rs.getString("daftar")); 
+                    TStatus.setText(statusDaftar); 
                     String tanggal = rs.getString("tgl_lahir");
                     Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
                     Date kini = new Date();

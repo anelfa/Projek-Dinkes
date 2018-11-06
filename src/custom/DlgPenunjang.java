@@ -8371,6 +8371,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             try {            
                 ps3.setString(1,Valid.SetTgl(DTPReg.getSelectedItem()+""));
                 ps3.setString(2,TNoRM.getText());
+                String statusDaftar=Sequel.cariIsi("select if((select count(no_rkm_medis) from reg_periksa where no_rkm_medis='"+TNoRM.getText()+"')>0,'Lama','Baru' )");
                 rs=ps3.executeQuery();
                 while(rs.next()){
                     TPasien.setText(rs.getString("nm_pasien"));
@@ -8379,7 +8380,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     THbngn.setText(rs.getString("keluarga"));
                     kdpnj.setText(rs.getString("kd_pj"));
                     nmpnj.setText(rs.getString("png_jawab"));
-                    TStatus.setText(rs.getString("daftar")); 
+                    TStatus.setText(statusDaftar); 
                     String tanggal = rs.getString("tgl_lahir");
                     Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
                     Date kini = new Date();
