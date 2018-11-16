@@ -40,25 +40,33 @@ public static String version;
             }
             else
             {
-//                if(koneksiDB.condb() == null){
-//                String[] run = {"java","-jar","updater/SetKoneksiServer.jar"};
-//                    try {
-//                            Runtime.getRuntime().exec(run);
-//                        } catch (Exception ex) {
-//                            ex.printStackTrace();
-//                        }
-//                    }else{
+                if(koneksiDB.condb() == null){
+                String[] run = {"java","-jar","updater/SetKoneksiServer.jar"};
+                    try {
+                            Runtime.getRuntime().exec(run);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }else{
                             WidgetUtilities.invokeLater(() -> {
                             main utama=new main();
                             utama.setVisible(true);
                             });
-//                         }
+                         }
             }
             } catch (Exception ex) {
                     ex.printStackTrace();
                 }
          
-         } else {
+         }  else  if(koneksiDB.condb() == null){
+             String[] run = {"java","-jar","updater/SetKoneksiServer.jar"};
+        try {
+            Runtime.getRuntime().exec(run);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+         } 
+        else {
              WidgetUtilities.invokeLater(() -> {
                             main utama=new main();
                             utama.setVisible(true);

@@ -2,6 +2,8 @@ package bridging;
 
 import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.security.GeneralSecurityException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -16,12 +18,13 @@ import javax.net.ssl.X509TrustManager;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
 
 public class BPJSApi {        
     private static final Properties prop = new Properties();
-    private String Key,Consid;
+    private String Key,Consid,proxy_ip,proxy_port;
     
     public BPJSApi(){
         try {
@@ -67,7 +70,18 @@ public class BPJSApi {
     }
     
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
-        SSLContext sslContext = SSLContext.getInstance("SSL");
+        if( prop.getProperty("PROXY").equals("YES")){
+             SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+                proxy_ip=prop.getProperty("PROXY_IP");
+                proxy_port=prop.getProperty("PROXY_PORT");
+                int port=Integer.parseInt(proxy_port);
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxy_ip, port));
+            requestFactory.setProxy(proxy);
+            return new RestTemplate(requestFactory);
+        }
+        else
+        {
+           SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {
             new X509TrustManager() {
                 public X509Certificate[] getAcceptedIssuers() {return null;}
@@ -80,7 +94,11 @@ public class BPJSApi {
         Scheme scheme=new Scheme("https",443,sslFactory);
         HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory();
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
-        return new RestTemplate(factory);
+        return new RestTemplate(factory); 
+        }
+        
+        
+        
     }
 
 }
