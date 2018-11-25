@@ -16,6 +16,7 @@ public class KhanzaAntrianLoket {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+         
           DlgAntrian antrian=new DlgAntrian(null,false);
           antrian.setVisible(true);
     }

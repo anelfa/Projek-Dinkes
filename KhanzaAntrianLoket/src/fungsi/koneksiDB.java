@@ -27,7 +27,7 @@ public final class koneksiDB {
     public static Connection condb(){      
         if(connection == null){
             try{
-                prop.loadFromXML(new FileInputStream("setting/database.xml"));
+                prop.loadFromXML(new FileInputStream("setting/databaseAntrian.xml"));
                 dataSource.setURL("jdbc:mysql://"+prop.getProperty("HOST")+":"+prop.getProperty("PORT")+"/"+prop.getProperty("DATABASE")+"?zeroDateTimeBehavior=convertToNull");
                 dataSource.setUser(prop.getProperty("USER"));
                 dataSource.setPassword(prop.getProperty("PAS"));

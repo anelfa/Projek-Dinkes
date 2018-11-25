@@ -1,44 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <comment>KhanzaHMS</comment>
-    <entry key="HOSTWEBSERVICE">localhost</entry>
-    <entry key="PORTWEBSERVICE">80</entry>
-    <entry key="HYBRIDWEB">webapps</entry>
-    
-     <entry key="PROXY">NO</entry> <!--NO:YES-->
-     <entry key="PROXY_IP">10.15.3.20</entry>
-     <entry key="PROXY_PORT">80</entry>
-     
-    <entry key="URLSERVERUPDATE">10.50.150.90/webapps/serverupdate</entry>
-    <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
+    <comment>KhanzaHMS</comment> 
+    <entry key="HOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="DATABASE">ZJVzlJrYN7bfopmSrDuKwpHigoZQzayqOvmzEGlVDHY=</entry>
+    <entry key="PORT">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="USER">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="PAS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="CARICEPAT">nonaktif</entry>
-    <entry key="ANTRIAN">sender</entry>
-    <entry key="MENUTRANSPARAN">no</entry>
-    <entry key="MENUTRANSPARAN">no</entry>
-    <entry key="URLAPIBPJS">http://dvlp.bpjs-kesehatan.go.id:8081/VClaim-rest</entry>
-    <entry key="SECRETKEYAPIBPJS">7lH3C91B3A</entry>
-    <entry key="CONSIDAPIBPJS">17643</entry>
-    <entry key="URLAPIAPLICARE">http://api.bpjs-kesehatan.go.id/aplicaresws</entry>
-    <entry key="SECRETKEYAPIAPLICARE">8cG0606137</entry>
-    <entry key="CONSIDAPIAPLICARE">12151</entry>
+    <entry key="HOSTHYBRIDWEB">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="HYBRIDWEB">webapps</entry>
+    <entry key="PORTWEB">80</entry>
+    <!--    PROXY DISKOMINFO JAKARTA-->
+    <entry key="PROXY">NO</entry> <!--NO:YES-->
+    <entry key="PROXY_IP">10.15.3.20</entry>
+    <entry key="PROXY_PORT">80</entry>
+    <!--    END PROXY DISKOMINFO JAKARTA-->
+    <!--UPDATE-->
+    <entry key="URLSERVERUPDATE">192.168.128.4/webapps/serverupdate</entry> <!--link Update -->
+    <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
+    <!--End UPDATE-->
+    <!-- LIS -->
+    <entry key="IPLISSHARE">10.50.150.20/sharing</entry>
+    <entry key="ANTRIAN">player</entry>
+    <entry key="MENUTRANSPARAN">yes</entry>
+    <entry key="URLAPIBPJS">https://dvlp.bpjs-kesehatan.go.id/vclaim-rest</entry>
+    <entry key="SECRETKEYAPIBPJS">3uX2876258</entry>
+    <entry key="CONSIDAPIBPJS">11030</entry>
+    <entry key="URLAPIAPLICARE">http://dvlp.bpjs-kesehatan.go.id:8888/aplicaresws</entry>
+    <entry key="SECRETKEYAPIAPLICARE">1112</entry>
+    <entry key="CONSIDAPIAPLICARE">1000</entry>
+    <entry key="URLAPIPCARE">https://dvlp.bpjs-kesehatan.go.id:9081/pcare-rest-v3.0</entry>
+    <entry key="SECRETKEYAPIPCARE">7nR046993B</entry>
+    <entry key="CONSIDAPIPCARE">1223</entry>
+    <entry key="PASSPCARE">Iismedika123#</entry>
+    <entry key="USERPCARE">0151B113</entry>
     <entry key="KAMARAKTIFRANAP"></entry>
     <entry key="DOKTERAKTIFKASIRRALAN"></entry>
     <entry key="POLIAKTIFKASIRRALAN"></entry>
-    <entry key="JADWALDOKTERDIREGISTRASI">no</entry>
-    <entry key="IPPRINTERTRACER">192.168.150.16/label2</entry>
-    
-    <entry key="URLDUKCAPILJAKARTA">http://kependudukan.jakarta.go.id/rsudxxx/xml.jsp</entry>
-    <entry key="USERDUKCAPILJAKARTA">WSRSIABK</entry>
-    <entry key="PASSDUKCAPILJAKARTA">R8ud!KSW5</entry>
-    <entry key="VAR1DUKCAPILJAKARTA">RSIABK</entry>
-    <entry key="VAR2DUKCAPILJAKARTA">12</entry>
-    
-    <entry key="DISKOMINFODUKCAPILJAKARTA">YES</entry> <!--NO:YES-->
-    <entry key="DISKOMINFOURLDUKCAPILJAKARTA">http://soadev.jakarta.go.id/rest/gov/dki/dukcapil/ws/</entry>
-    <entry key="DISKOMINFOUSERDUKCAPILJAKARTA">dinkes</entry>
-    <entry key="DISKOMINFOPASSDUKCAPILJAKARTA">dinkes123!!</entry>
-    <entry key="DISKOMINFOVAR1DUKCAPILJAKARTA">DINKES</entry>
-    <entry key="DISKOMINFOVAR2DUKCAPILJAKARTA">SIDINKES</entry>
-    <entry key="DISKOMINFOVAR3DUKCAPILJAKARTA">DINKES</entry>
+    <entry key="BASENOREG">registrasi</entry>
+    <entry key="URUTNOREG">poli</entry>
+    <entry key="JADWALDOKTERDIREGISTRASI">nonaktif</entry>    
+    <entry key="IPPRINTERTRACER">10.50.150.57/label2</entry>
+    <entry key="URLAPIINHEALTH">http://dummy.inhealth.co.id/pelkesws2</entry>
+    <entry key="TOKENINHEALTH">WhTCrcPRDrv5d1JZAFEBrw==</entry>
+    <entry key="PEMBULATANHARGAOBAT">no</entry>
+    <entry key="AKTIFKANBATCHOBAT">yes</entry>
+    <entry key="CETAKRINCIANOBAT">no</entry>
+     <!--WS DUKCAPIL-->
+     <entry key="URLDUKCAPILJAKARTA">http://10.0.0.20/wsrs/xml.jsp</entry>
+    <entry key="USERDUKCAPILJAKARTA">WSRSUDKRAMATJATI</entry>
+    <entry key="PASSDUKCAPILJAKARTA">W5RSUDKRMTJT1</entry>
+    <entry key="VAR1DUKCAPILJAKARTA">RSUDKRAMATJATI</entry>
+    <entry key="VAR2DUKCAPILJAKARTA">30</entry>
+     <!--END WS DUKCAPIL-->
+    <entry key="URLDUKCAPILACEH">http://172.16.160.128:8000/dukcapil/get_json/rsia_aceh</entry>
+    <entry key="USERDUKCAPILACEH">rsia</entry>
+    <entry key="PASSDUKCAPILACEH">123</entry>
+    <entry key="IPUSERDUKCAPILACEH">10.160.57.2</entry>
+    <entry key="URLDUKCAPILBATAM">http://172.16.160.128:8000/dukcapil/get_json/rsembongfat</entry>
+    <entry key="USERDUKCAPILBATAM">rsia</entry>
+    <entry key="PASSDUKCAPILBATAM">123</entry>
+    <entry key="IPUSERDUKCAPILBATAM">10.160.57.2</entry>
 </properties>

@@ -11,6 +11,13 @@
 
 package khanzaantrianloket;
 
+import com.fazecast.jSerialComm.SerialPort;
+import email.com.gmail.ttsai0509.escpos.EscPosBuilder;
+import email.com.gmail.ttsai0509.escpos.EscPosBuilder.Align;
+import email.com.gmail.ttsai0509.escpos.EscPosBuilder.Font;
+import email.com.gmail.ttsai0509.escpos.EscPosBuilder.Cut;
+import email.com.gmail.ttsai0509.serial.SerialFactory;
+import email.com.gmail.ttsai0509.serial.config.SerialConfig;
 import fungsi.BackgroundMusic;
 import fungsi.koneksiDB;
 import java.sql.ResultSet;
@@ -19,7 +26,12 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,11 +49,58 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
     private final Connection koneksi=koneksiDB.condb();
     private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
     private static final Properties prop = new Properties();
-    private String antri="0",loket="0",status="0",huruf="",awal="1";
-    private PreparedStatement pshapus,pssimpan,pscari,psupdate,pssimpan_tmp,pshapus_tmp,pscari_tmp,psupdate_tmp,pscari_tmp2;
-    private ResultSet rs,rs2,rs3;
+    private String a="",IPPRINTERTRACER="",antri="0",loket="0",status="0",huruf="",awal="1";
+    private PreparedStatement pscariantrian,pssimpanantrian,psupdateantrian,pshapusantrian,pshapus,pssimpan,pscari,psupdate,pssimpan_tmp,pshapus_tmp,pscari_tmp,psupdate_tmp,pscari_tmp2;
+    private ResultSet rs,rs2,rs3,rsantrian;
     private int urut;
     private BackgroundMusic music;
+    private char ESC = 27;
+    // ganti kertas
+    private char[] FORM_FEED = {12};
+    // reset setting
+    private char[] RESET = {ESC,'@'};
+    // huruf tebal diaktifkan
+    private char[] BOLD_ON = {ESC,'E'};
+    // huruf tebal dimatikan
+    private char[] BOLD_OFF = {ESC,'F'};
+    // huruf miring diaktifkan
+    private char[] ITALIC_ON = {ESC,'4'};
+    // huruf miring dimatikan
+    private char[] ITALIC_OFF = {ESC,'5'};
+    // mode draft diaktifkan
+    private char[] MODE_DRAFT = {ESC,'x',0};
+    private char[] MODE_NLQ = {ESC,'x',1};
+    // font Roman (halaman 47)
+    private char[] FONT_ROMAN = {ESC,'k',0};
+    // font Sans serif
+    private char[] FONT_SANS_SERIF = {ESC,'k',1};
+    // font size (halaman 49)
+    private char[] SIZE_5_CPI = {ESC,'W','1',ESC,'P'};
+    private char[] SIZE_6_CPI = {ESC,'W','1',ESC,'M'};
+    private char[] SIZE_10_CPI = {ESC,'P'};
+    private char[] SIZE_12_CPI = {ESC,'M'};
+
+    //font height
+    private char[] HEIGHT_NORMAL = {ESC,'w', '0'};
+    private char[] HEIGHT_DOUBLE = {ESC,'w', '1'};
+    // double strike (satu dot dicetak 2 kali)
+    private char[] DOUBLE_STRIKE_ON = {ESC,'G'};
+    private char[] DOUBLE_STRIKE_OFF = {ESC,'H'};
+    // http://www.berklix.com/~jhs/standards/escapes.epson
+    // condensed (huruf kurus)
+    private char[] CONDENSED_ON = {15};
+    private char[] CONDENSED_OFF = {18};
+    // condensed (huruf gemuk)
+    private char[] ENLARGED_ON = {(char) 14};
+    private char[] ENLARGED_OFF = {(char) 20};
+    // line spacing
+    private char[] SPACING_9_72 = {ESC, '0'};
+    private char[] SPACING_7_72 = {ESC, '1'};
+    private char[] SPACING_12_72 = {ESC, '2'};
+    // set unit for margin setting
+    private char[] UNIT_1_360 = {ESC,40, 'U', '1', '0'};
+    // move vertical print position
+    private char[] VERTICAL_PRINT_POSITION = {ESC, 'J', '1'};
     /** Creates new form DlgBiling
      * @param parent
      * @param modal */
@@ -52,11 +111,12 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         
         this.setSize(350,400);
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            prop.loadFromXML(new FileInputStream("setting/databaseAntrian.xml"));
         } catch (IOException ex) {
             System.out.println(ex);
         }
         txtLoket.setText(prop.getProperty("LOKET"));
+         IPPRINTERTRACER=prop.getProperty("IPPRINTERTRACER");
          switch ((String)cmbloket1.getSelectedItem()) { 
         case "A": 
             awal = "1"; 
@@ -95,10 +155,14 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         try {
             pshapus=koneksi.prepareStatement("delete from antriloket");
             pssimpan=koneksi.prepareStatement("insert into antriloket values(?,?,?,?)");
-            
             psupdate=koneksi.prepareStatement("update antriloket SET status=? where loket=?");
             pscari=koneksi.prepareStatement("select antrian,loket,status,huruf from antriloket");
-            
+            //antrian
+            pscariantrian=koneksi.prepareStatement("select loket,antrian,huruf from antrianloket where loket=?");
+            pssimpanantrian=koneksi.prepareStatement("insert into antrianloket values(?,?,?)");
+            psupdateantrian=koneksi.prepareStatement("update antrianloket SET antrian=?,huruf=? where loket=?");
+            pshapusantrian=koneksi.prepareStatement("delete from antrianloket");
+            //temporarry
             pssimpan_tmp=koneksi.prepareStatement("insert into antrianloket_tmp values(?,?,?)");
             psupdate_tmp=koneksi.prepareStatement("update antrianloket_tmp SET antrian=? where huruf=?");
             pscari_tmp=koneksi.prepareStatement("select loket,antrian,huruf from antrianloket_tmp where huruf=?");
@@ -144,10 +208,19 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         form1 = new widget.InternalFrame();
         labelantri1 = new widget.Label();
         labelLoket = new widget.Label();
+        DlgDisplay1 = new javax.swing.JDialog();
+        internalFrame6 = new widget.InternalFrame();
+        paneliklan1 = new usu.widget.glass.PanelGlass();
+        BtnA = new widget.Button();
+        BtnB = new widget.Button();
+        BtnC = new widget.Button();
+        panelruntext1 = new javax.swing.JPanel();
+        labelruntext1 = new widget.Label();
         internalFrame1 = new widget.InternalFrame();
         panelisi1 = new widget.panelisi();
-        BtnDisplay = new widget.Button();
         BtnKeluar = new widget.Button();
+        BtnButton = new widget.Button();
+        BtnDisplay = new widget.Button();
         panelisi5 = new widget.panelisi();
         BtnAntri1 = new widget.Button();
         BtnBatal1 = new widget.Button();
@@ -160,11 +233,11 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         cmbloket1 = new widget.ComboBox();
 
         DlgDisplay.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        DlgDisplay.setAutoRequestFocus(false);
         DlgDisplay.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         DlgDisplay.setName("DlgDisplay"); // NOI18N
-        DlgDisplay.getContentPane().setLayout(new java.awt.BorderLayout());
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), "::[ Informasi ]::", 0, 0, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), "::[ Informasi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setPreferredSize(new java.awt.Dimension(500, 110));
         internalFrame5.setWarnaAtas(new java.awt.Color(255, 255, 255));
@@ -196,14 +269,14 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
         DlgDisplay.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
-        form1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), " Antrian Registrasi", 0, 0, new java.awt.Font("Tahoma", 0, 45), new java.awt.Color(50, 100, 50))); // NOI18N
+        form1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), " Antrian Registrasi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 45), new java.awt.Color(50, 100, 50))); // NOI18N
         form1.setName("form1"); // NOI18N
         form1.setPreferredSize(new java.awt.Dimension(550, 150));
         form1.setWarnaAtas(new java.awt.Color(255, 255, 255));
         form1.setWarnaBawah(new java.awt.Color(230, 255, 230));
         form1.setLayout(new java.awt.GridLayout(2, 0));
 
-        labelantri1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 250, 150)), "No.Antrian :", 0, 0, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
+        labelantri1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 250, 150)), "No.Antrian :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
         labelantri1.setForeground(new java.awt.Color(50, 100, 50));
         labelantri1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelantri1.setText("-");
@@ -212,7 +285,7 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
         labelantri1.setPreferredSize(new java.awt.Dimension(300, 50));
         form1.add(labelantri1);
 
-        labelLoket.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 250, 150)), "Loket :", 0, 0, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
+        labelLoket.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 250, 150)), "Loket :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
         labelLoket.setForeground(new java.awt.Color(50, 100, 50));
         labelLoket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelLoket.setText("-");
@@ -224,42 +297,120 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
         DlgDisplay.getContentPane().add(form1, java.awt.BorderLayout.LINE_END);
 
+        DlgDisplay1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        DlgDisplay1.setAutoRequestFocus(false);
+        DlgDisplay1.setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        DlgDisplay1.setName("DlgDisplay1"); // NOI18N
+
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 200, 100)), "::[ ANTRIAN PASIEN  ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 32), new java.awt.Color(50, 100, 50))); // NOI18N
+        internalFrame6.setName("internalFrame6"); // NOI18N
+        internalFrame6.setPreferredSize(new java.awt.Dimension(500, 110));
+        internalFrame6.setWarnaAtas(new java.awt.Color(255, 255, 255));
+        internalFrame6.setWarnaBawah(new java.awt.Color(230, 255, 230));
+        internalFrame6.setLayout(new java.awt.BorderLayout());
+
+        paneliklan1.setBackgroundImage(new javax.swing.ImageIcon(getClass().getResource("/picture/simpan.gif"))); // NOI18N
+        paneliklan1.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_STRECT);
+        paneliklan1.setPreferredSize(new java.awt.Dimension(200, 140));
+        paneliklan1.setWarna(new java.awt.Color(150, 255, 150));
+        paneliklan1.setLayout(null);
+
+        BtnA.setMnemonic('7');
+        BtnA.setText("A");
+        BtnA.setToolTipText("Alt+7");
+        BtnA.setBorderPainted(true);
+        BtnA.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        BtnA.setIconTextGap(3);
+        BtnA.setName("BtnA"); // NOI18N
+        BtnA.setOpaque(true);
+        BtnA.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnA.setRequestFocusEnabled(false);
+        BtnA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAActionPerformed(evt);
+            }
+        });
+        paneliklan1.add(BtnA);
+        BtnA.setBounds(50, 60, 100, 60);
+
+        BtnB.setMnemonic('7');
+        BtnB.setText("B");
+        BtnB.setToolTipText("Alt+7");
+        BtnB.setBorderPainted(true);
+        BtnB.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        BtnB.setIconTextGap(3);
+        BtnB.setName("BtnB"); // NOI18N
+        BtnB.setOpaque(true);
+        BtnB.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnB.setRequestFocusEnabled(false);
+        BtnB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBActionPerformed(evt);
+            }
+        });
+        paneliklan1.add(BtnB);
+        BtnB.setBounds(270, 60, 100, 60);
+
+        BtnC.setMnemonic('7');
+        BtnC.setText("C");
+        BtnC.setToolTipText("Alt+7");
+        BtnC.setBorderPainted(true);
+        BtnC.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        BtnC.setIconTextGap(3);
+        BtnC.setName("BtnC"); // NOI18N
+        BtnC.setOpaque(true);
+        BtnC.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnC.setRequestFocusEnabled(false);
+        BtnC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCActionPerformed(evt);
+            }
+        });
+        paneliklan1.add(BtnC);
+        BtnC.setBounds(480, 60, 100, 60);
+
+        internalFrame6.add(paneliklan1, java.awt.BorderLayout.CENTER);
+
+        panelruntext1.setBackground(new java.awt.Color(230, 255, 230));
+        panelruntext1.setName("panelruntext1"); // NOI18N
+        panelruntext1.setPreferredSize(new java.awt.Dimension(100, 100));
+        panelruntext1.setLayout(new java.awt.BorderLayout());
+
+        labelruntext1.setBackground(new java.awt.Color(238, 255, 238));
+        labelruntext1.setForeground(new java.awt.Color(50, 100, 50));
+        labelruntext1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelruntext1.setFont(new java.awt.Font("Tahoma", 0, 35)); // NOI18N
+        labelruntext1.setName("labelruntext1"); // NOI18N
+        labelruntext1.setPreferredSize(new java.awt.Dimension(853, 50));
+        panelruntext1.add(labelruntext1, java.awt.BorderLayout.CENTER);
+
+        internalFrame6.add(panelruntext1, java.awt.BorderLayout.PAGE_END);
+
+        DlgDisplay1.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage(null);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Antrian Pasien ]::", 0, 0, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Antrian Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         panelisi1.setName("panelisi1"); // NOI18N
         panelisi1.setPreferredSize(new java.awt.Dimension(55, 55));
-        panelisi1.setLayout(new java.awt.FlowLayout(0, 5, 9));
-
-        BtnDisplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editcopy.png"))); // NOI18N
-        BtnDisplay.setMnemonic('D');
-        BtnDisplay.setText("Display");
-        BtnDisplay.setToolTipText("Alt+D");
-        BtnDisplay.setIconTextGap(3);
-        BtnDisplay.setName("BtnDisplay"); // NOI18N
-        BtnDisplay.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnDisplay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDisplayActionPerformed(evt);
-            }
-        });
-        panelisi1.add(BtnDisplay);
+        panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -274,6 +425,32 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             }
         });
         panelisi1.add(BtnKeluar);
+
+        BtnButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editcopy.png"))); // NOI18N
+        BtnButton.setMnemonic('D');
+        BtnButton.setText("Display");
+        BtnButton.setToolTipText("Alt+D");
+        BtnButton.setIconTextGap(3);
+        BtnButton.setName("BtnButton"); // NOI18N
+        BtnButton.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnButtonActionPerformed(evt);
+            }
+        });
+        panelisi1.add(BtnButton);
+
+        BtnDisplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editcopy.png"))); // NOI18N
+        BtnDisplay.setText("Button");
+        BtnDisplay.setIconTextGap(3);
+        BtnDisplay.setName("BtnDisplay"); // NOI18N
+        BtnDisplay.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnDisplay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDisplayActionPerformed(evt);
+            }
+        });
+        panelisi1.add(BtnDisplay);
 
         internalFrame1.add(panelisi1, java.awt.BorderLayout.PAGE_END);
 
@@ -388,16 +565,18 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
 
+        getAccessibleContext().setAccessibleName("::[ Khanza Hospital Management System 2017 ]::");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDisplayActionPerformed
         Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
         isTampil();
-        DlgDisplay.setSize(screen.width,screen.height);
-        DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        DlgDisplay.setAlwaysOnTop(false);
-        DlgDisplay.setVisible(true);
+        DlgDisplay1.setSize(screen.width,screen.height);
+        DlgDisplay1.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
+        DlgDisplay1.setAlwaysOnTop(false);
+        DlgDisplay1.setVisible(true);         
     }//GEN-LAST:event_BtnDisplayActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -447,9 +626,10 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             urut=Integer.parseInt(Antrian.getText())+1;
             Antrian.setText(""+urut);
             pshapus.executeUpdate();
-            
             pscari_tmp.setString(1,awal);
             rs2=pscari_tmp.executeQuery();
+            pscariantrian.setString(1,prop.getProperty("LOKET"));
+            rsantrian=pscariantrian.executeQuery();
             
            
            if(!rs2.next())
@@ -457,16 +637,30 @@ public class DlgAntrian extends javax.swing.JDialog implements ActionListener{
             pssimpan_tmp.setString(1,awal); 
             pssimpan_tmp.setString(2,prop.getProperty("LOKET"));
             pssimpan_tmp.setString(3,Integer.toString(urut)); 
-            
             pssimpan_tmp.executeUpdate();
            }
            else{
              
             psupdate_tmp.setString(1,Integer.toString(urut));
             psupdate_tmp.setString(2,awal); 
-             
             psupdate_tmp.executeUpdate();  
            }
+           if(!rsantrian.next())
+           {
+            pssimpanantrian.setString(1,awal); 
+            pssimpanantrian.setString(2,prop.getProperty("LOKET"));
+            pssimpanantrian.setString(3,Integer.toString(urut)); 
+            pssimpanantrian.executeUpdate();
+           }
+           else{
+             
+            psupdateantrian.setString(1,Integer.toString(urut));
+            psupdateantrian.setString(2,awal); 
+            psupdateantrian.setString(3,prop.getProperty("LOKET"));
+            
+            psupdateantrian.executeUpdate();  
+           }
+           
             pssimpan.setString(1,prop.getProperty("LOKET"));
             pssimpan.setString(2,Integer.toString(urut));
             pssimpan.setString(3,awal);
@@ -490,6 +684,7 @@ if(dialogResult == 0) {
         pshapus_tmp=koneksi.prepareStatement("delete from antrianloket_tmp");
         pshapus_tmp.executeUpdate(); 
         pshapus.executeUpdate(); 
+        pshapusantrian.executeUpdate(); 
         JOptionPane.showMessageDialog(null,"Reset Antrian Berhasil...!!!");
         Antrian.setText("0");
         
@@ -514,7 +709,16 @@ if(dialogResult == 0) {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        BtnDisplayActionPerformed(null);
+       if(prop.getProperty("ANTRIAN").equals("player")){
+                            try {  
+                                BtnDisplayActionPerformed(null);
+                            }
+                            catch (Exception ex) {
+                            System.out.println(ex);
+        
+                            }
+       }   
+       
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnBatal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal2ActionPerformed
@@ -650,6 +854,33 @@ if(dialogResult == 0) {
         }  
     }//GEN-LAST:event_cmbloket1ActionPerformed
 
+    private void BtnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnButtonActionPerformed
+  Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
+        isTampil();
+        DlgDisplay.setSize(screen.width,screen.height);
+        DlgDisplay.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
+        DlgDisplay.setAlwaysOnTop(false);
+        DlgDisplay.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnButtonActionPerformed
+
+    private void BtnAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAActionPerformed
+        a="A";
+        ctk(a);        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAActionPerformed
+
+    private void BtnBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBActionPerformed
+    a="B";
+        ctk2
+        (a);    // TODO add your handling code here:
+    }//GEN-LAST:event_BtnBActionPerformed
+
+    private void BtnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCActionPerformed
+      a="C";
+        ctk(a); // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_BtnCActionPerformed
+
 
 
     /**
@@ -673,36 +904,54 @@ if(dialogResult == 0) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.TextBox Antrian;
+    private widget.Button BtnA;
     private widget.Button BtnAntri1;
+    private widget.Button BtnB;
     private widget.Button BtnBatal1;
     private widget.Button BtnBatal2;
+    private widget.Button BtnButton;
+    private widget.Button BtnC;
     private widget.Button BtnDisplay;
     private widget.Button BtnKeluar;
     private widget.Button BtnPanggil;
     private javax.swing.JDialog DlgDisplay;
+    private javax.swing.JDialog DlgDisplay1;
     private widget.ComboBox cmbloket1;
     private widget.InternalFrame form1;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame5;
+    private widget.InternalFrame internalFrame6;
     private widget.Label label1;
     private widget.Label label2;
     private widget.Label labelLoket;
     private widget.Label labelantri1;
     private widget.Label labelruntext;
+    private widget.Label labelruntext1;
     private usu.widget.glass.PanelGlass paneliklan;
+    private usu.widget.glass.PanelGlass paneliklan1;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi5;
     private javax.swing.JPanel panelruntext;
+    private javax.swing.JPanel panelruntext1;
     private widget.TextBox txtLoket;
     // End of variables declaration//GEN-END:variables
     
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        paneliklan.repaint();
+        if(prop.getProperty("ANTRIAN").equals("player")){
+                            try {  
+                                paneliklan.repaint();
         String oldText = labelruntext.getText();
         String newText = oldText.substring(1) + oldText.substring(0, 1);
         labelruntext.setText( newText );
+                            }
+                            catch (Exception ex) {
+                            System.out.println(ex);
+        
+                            }
+       }   
+       
     }
     
     private  void isTampil(){
@@ -1089,8 +1338,8 @@ if(dialogResult == 0) {
                         if(rs.next()){
                             antri=rs.getString("antrian");
                             huruf=rs.getString("huruf");
-                           // loket=rs.getString("loket");
-                           loket=prop.getProperty("LOKET");
+                            loket=rs.getString("loket");
+                          // loket=prop.getProperty("LOKET");
                            
                              status=rs.getString("status");
                         }
@@ -1099,8 +1348,15 @@ if(dialogResult == 0) {
                     }
                     if(status.equals("0")){
                     if(!antri.equals("")){
-                       
-                        Antrian.setText(antri);                    
+                        try {
+                        rs2=pscari_tmp.executeQuery();
+                        if(rs2.next()){
+                            Antrian.setText(rs2.getString("antrian"));
+                        }
+                    } catch (Exception ez) {
+                        System.out.println(ez);
+                    }
+                                           
                         labelLoket.setText(loket);
                           switch (huruf) { 
         case "1": 
@@ -1180,6 +1436,15 @@ if(dialogResult == 0) {
 //                                }
 //                                music.start();
                                 panggil(Integer.parseInt(loket));
+                                 try {
+            //pshapus.executeUpdate();
+            psupdate.setString(1,"1");
+            psupdate.setString(2,loket);
+            psupdate.executeUpdate();
+//            System.out.println("Loket : "+cmbloket.getSelectedItem().toString()+" Antrian : "+Antrian.getText());
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
                             } catch (InterruptedException ex) {
                                System.out.println(e);
                             }
@@ -1194,15 +1459,7 @@ if(dialogResult == 0) {
                         } catch (Exception ex) {
                             System.out.println(ex);
                         }*/
-                        try {
-            //pshapus.executeUpdate();
-            psupdate.setString(1,"1");
-            psupdate.setString(2,loket);
-            psupdate.executeUpdate();
-//            System.out.println("Loket : "+cmbloket.getSelectedItem().toString()+" Antrian : "+Antrian.getText());
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+                       
                     }  
                    }
                 }
@@ -1211,5 +1468,181 @@ if(dialogResult == 0) {
         // Timer
         new Timer(1000, taskPerformer).start();
     }
+    public void ctk2(String hur)
+    {
+        try {
+//            String os = System.getProperty("os.name").toLowerCase();
+//            
+//            OutputStreamWriter osw = new OutputStreamWriter(
+//                            new FileOutputStream("//"+IPPRINTERTRACER),
+//                            Charset.forName("UTF-8").newEncoder() );
+//            if(os.contains("win")) {
+//                            
+//
+////                writer = new FileWriter("//"+IPPRINTERTRACER);
+////            }else if (os.contains("mac")) {
+////                writer = new FileWriter("smb://"+IPPRINTERTRACER);
+////            }else if (os.contains("nix") || os.contains("nux")) {
+////                writer = new FileWriter("smb://"+IPPRINTERTRACER);
+////            }
+//            }
+            EscPosBuilder escPos = new EscPosBuilder();
+String fileName="";
 
+byte[] data = escPos.initialize()
+        .font(Font.EMPHASIZED)
+        .align(Align.LEFT)
+        .text("RUMAH SAKIT UMUM DAERAH")
+        .feed(10)
+        .text("KRAMAT JATI")
+        .feed(10)
+        .font(Font.REGULAR)
+        .text("No. Antrian")
+        .feed(10)
+        .font(Font.DWDH_EMPHASIZED)
+        .text("A1")
+        .feed(10)
+      //  .font(Font.EMPHASIZED)
+        .cut(Cut.PART)
+        .getBytes();
+writeToFile(data,fileName);
+            
+        }
+             catch (Exception ex) {
+             System.out.println("Notif Writer 3 : "+ex);
+        }
+    
+
+    }
+    
+
+public void writeToFile(byte[] data, String fileName) throws IOException{
+    
+  FileOutputStream out = new FileOutputStream("//"+IPPRINTERTRACER);
+  out.write(data);
+  out.close();
+}
+
+
+     public void sendCommand2(char[] command, Writer writer) throws IOException {
+        writer.write(command);
+    }
+public  void ctk(String hur){
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+            Runtime rt = Runtime.getRuntime();
+            FileWriter writer = null;
+            if(os.contains("win")) {
+                writer = new FileWriter("//"+IPPRINTERTRACER);
+            }else if (os.contains("mac")) {
+                writer = new FileWriter("smb://"+IPPRINTERTRACER);
+            }else if (os.contains("nix") || os.contains("nux")) {
+                writer = new FileWriter("smb://"+IPPRINTERTRACER);
+            }
+            writer.write(hur);
+            cetakStruk(hur, writer,
+                    FONT_SANS_SERIF,
+                    CONDENSED_ON,
+                    SPACING_12_72);
+            sendCommand(RESET, writer);
+            writer.close();
+        } catch (Exception ex) {
+             System.out.println("Notif Writer 3 : "+ex);
+        }
+    }
+    
+    private  void cetakStruk(String title, FileWriter writer, char[]... mode) throws IOException {
+        sendCommand(RESET, writer);
+        for (int i = 0; i < mode.length; i++) {
+            char[] cmd = mode[i];
+            sendCommand(cmd, writer);
+        }
+
+        cetakStruk2(title,writer);
+	sendCommand(VERTICAL_PRINT_POSITION, writer);
+    }
+    
+    public void sendCommand(char[] command, Writer writer) throws IOException {
+        writer.write(command);
+    }
+    
+    private void cetakStruk2(  String title, FileWriter writer){
+//        String strukFile = "tracerRm.txt";
+//        BufferedReader reader;
+        try {
+//            reader = new BufferedReader(new FileReader(strukFile));        
+//            String tgll= Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+TNoRw.getText()+"'");
+//            String[] tglref= tgll.split("-");
+            boltText(writer);
+            writer.write(".: RUMAH SAKIT UMUM DAERAH :.");
+            
+            gantiBaris(writer);
+            boltText(writer);
+             writer.write("     .: KRAMAT JATI :.");
+            boltTextOff(writer);
+            gantiBaris(writer);
+            writer.write("No. Antrian      : ");
+           gantiBaris(writer);
+            boltTextUp(writer);
+            writer.write(title);
+            boltTextOff(writer);
+            gantiBaris(writer);
+            
+//            writer.write(Sequel.cariIsi("select nm_poli from poliklinik where kd_poli='"+kdpoli.getText()+"'"));
+            boltTextOff(writer);
+
+            gantiBaris(writer);
+            gantiBaris(writer);
+            gantiBaris(writer);
+//            reader.close();
+        } catch (Exception ex) {
+            System.out.println("Notif : "+ex);
+        }
+    }
+    
+    private void boltText(Writer writer){
+        try {
+            writer.write(ESC);
+            writer.write((char)14);
+            writer.write(ESC);
+            writer.write('E');
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }            
+    }
+    private void boltTextUp(Writer writer){
+        try {
+            writer.write(ESC);
+              writer.write('w');
+              writer.write('1');
+              writer.write(ESC);
+              writer.write('P');
+     
+//        
+//        writer.write(0x1B);
+//        writer.write(0x21);
+//        writer.write(0x112);
+//            
+            
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }            
+    }
+    
+    private void boltTextOff(Writer writer) {
+        try {
+            writer.write(ESC);
+            writer.write('F');
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }
+    }
+    
+    private void gantiBaris(Writer writer) {
+        try {
+            writer.write("\n");
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }            
+    }
 }
