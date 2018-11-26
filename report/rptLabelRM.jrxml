@@ -1,43 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"  ?>
-<!-- Created with iReport - A designer for JasperReports -->
-<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-<jasperReport
-		 name="null"
-		 columnCount="1"
-		 printOrder="Vertical"
-		 orientation="Portrait"
-		 pageWidth="210"
-		 pageHeight="123"
-		 columnWidth="93"
-		 columnSpacing="0"
-		 leftMargin="5"
-		 rightMargin="5"
-		 topMargin="5"
-		 bottomMargin="5"
-		 whenNoDataType="NoPages"
-		 isTitleNewPage="false"
-		 isSummaryNewPage="false">
-	<property name="ireport.zoom" value="3.0" />
-	<property name="ireport.x" value="0" />
-	<property name="ireport.y" value="0" />
-	<property name="ireport.scriptlethandling" value="0" />
-	<property name="ireport.encoding" value="UTF-8" />
-	<import value="java.util.*" />
-	<import value="net.sf.jasperreports.engine.*" />
-	<import value="net.sf.jasperreports.engine.data.*" />
-
-	<parameter name="namars" isForPrompting="true" class="java.lang.String"/>
-	<parameter name="alamatrs" isForPrompting="true" class="java.lang.String"/>
-	<parameter name="kotars" isForPrompting="true" class="java.lang.String"/>
-	<parameter name="propinsirs" isForPrompting="true" class="java.lang.String"/>
-	<parameter name="kontakrs" isForPrompting="true" class="java.lang.String"/>
-	<parameter name="logo" isForPrompting="true" class="java.io.InputStream"/>
-	<queryString><![CDATA[select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg, reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.umur,poliklinik.nm_poli,
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="210" pageHeight="123" columnWidth="93" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5">
+	<property name="ireport.zoom" value="2.727272727272727"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<queryString>
+		<![CDATA[select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg, reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.umur,poliklinik.nm_poli,
 reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,
 reg_periksa.stts_daftar,penjab.png_jawab.pasien.tgl_lahir 
 from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab
-on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli]]></queryString>
-
+on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli]]>
+	</queryString>
 	<field name="no_reg" class="java.lang.String"/>
 	<field name="no_rawat" class="java.lang.String"/>
 	<field name="tgl_registrasi" class="java.sql.Date"/>
@@ -56,200 +39,120 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 	<field name="stts_daftar" class="java.lang.String"/>
 	<field name="png_jawab" class="java.lang.String"/>
 	<field name="tgl_lahir" class="java.lang.String"/>
-
-		<background>
-			<band height="0"  isSplitAllowed="true" >
-			</band>
-		</background>
-		<title>
-			<band height="0"  isSplitAllowed="true" >
-			</band>
-		</title>
-		<pageHeader>
-			<band height="0"  isSplitAllowed="true" >
-			</band>
-		</pageHeader>
-		<columnHeader>
-			<band height="0"  isSplitAllowed="true" >
-			</band>
-		</columnHeader>
-		<detail>
-			<band height="93"  isSplitAllowed="true" >
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="43"
-						y="29"
-						width="157"
-						height="11"
-						key="textField"/>
-					<box></box>
-					<textElement lineSpacing="Single">
-						<font fontName="Tahoma" size="9" isBold="true"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{nm_pasien}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="43"
-						y="42"
-						width="157"
-						height="11"
-						key="textField"/>
-					<box></box>
-					<textElement lineSpacing="Single">
-						<font fontName="Tahoma" size="9" isBold="true"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{no_rkm_medis}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement
-						x="3"
-						y="29"
-						width="36"
-						height="11"
-						key="staticText"/>
-					<box></box>
-					<textElement textAlignment="Left" lineSpacing="Single">
-						<font fontName="Tahoma" size="9"/>
-					</textElement>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="93" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="43" y="19" width="157" height="11"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[": "+$F{nm_pasien}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="43" y="32" width="72" height="11"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[": "+$F{no_rkm_medis}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText" mode="Transparent" x="3" y="19" width="36" height="11"/>
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
 				<text><![CDATA[Nama]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="3"
-						y="42"
-						width="37"
-						height="11"
-						key="staticText"/>
-					<box></box>
-					<textElement textAlignment="Left" lineSpacing="Single">
-						<font fontName="Tahoma" size="9"/>
-					</textElement>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Transparent" x="3" y="32" width="37" height="11"/>
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
 				<text><![CDATA[No.RM]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="3"
-						y="55"
-						width="39"
-						height="11"
-						key="staticText"/>
-					<box></box>
-					<textElement textAlignment="Left" lineSpacing="Single">
-						<font fontName="Tahoma" size="9"/>
-					</textElement>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText" mode="Transparent" x="3" y="45" width="39" height="11"/>
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
 				<text><![CDATA[Jenis Kelamin]]></text>
-				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="43"
-						y="55"
-						width="157"
-						height="11"
-						key="textField"/>
-					<box></box>
-					<textElement lineSpacing="Single">
-						<font fontName="Tahoma" size="9" isBold="true"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{jk}.replaceAll("L","Laki-Laki").replaceAll("P","Perempuan")]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement
-						x="3"
-						y="80"
-						width="32"
-						height="11"
-						key="staticText"/>
-					<box></box>
-					<textElement textAlignment="Left" lineSpacing="Single">
-						<font fontName="Tahoma" size="9"/>
-					</textElement>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="43" y="45" width="157" height="11"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[": "+$F{jk}.replaceAll("L","Laki-Laki").replaceAll("P","Perempuan")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText" mode="Transparent" x="3" y="72" width="32" height="11"/>
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
 				<text><![CDATA[Poli Dituju]]></text>
-				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="43"
-						y="80"
-						width="157"
-						height="11"
-						key="textField"/>
-					<box></box>
-					<textElement lineSpacing="Single">
-						<font fontName="Tahoma" size="9" isBold="true"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{nm_poli}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement
-						x="3"
-						y="67"
-						width="39"
-						height="11"
-						key="staticText-2"/>
-					<box></box>
-					<textElement textAlignment="Left" lineSpacing="Single">
-						<font fontName="Tahoma" size="9"/>
-					</textElement>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="43" y="72" width="157" height="11"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[": "+$F{nm_poli}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-2" mode="Transparent" x="3" y="57" width="39" height="11"/>
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
 				<text><![CDATA[Tgl. Lahir]]></text>
-				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="43"
-						y="67"
-						width="157"
-						height="12"
-						key="textField-1"/>
-					<box></box>
-					<textElement lineSpacing="Single">
-						<font fontName="Tahoma" size="9" isBold="true"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[": "+$F{tgl_lahir}.split("-")[2]+"-"+$F{tgl_lahir}.split("-")[1]+"-"+$F{tgl_lahir}.split("-")[0]]]></textFieldExpression>
-				</textField>
-				<line direction="TopDown">
-					<reportElement
-						x="2"
-						y="25"
-						width="197"
-						height="0"
-						key="line-1"/>
-					<graphicElement stretchType="NoStretch"/>
-				</line>
-				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="3"
-						y="0"
-						width="32"
-						height="25"
-						key="image-1"/>
-					<box></box>
-					<graphicElement stretchType="NoStretch" fill="Solid" />
-					<imageExpression class="java.io.InputStream"><![CDATA[$P{logo}]]></imageExpression>
-				</image>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="35"
-						y="0"
-						width="165"
-						height="25"
-						key="textField-2"/>
-					<box></box>
-					<textElement textAlignment="Center" lineSpacing="Single">
-						<font fontName="Tahoma" size="11"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{namars}]]></textFieldExpression>
-				</textField>
-			</band>
-		</detail>
-		<columnFooter>
-			<band height="0"  isSplitAllowed="true" >
-			</band>
-		</columnFooter>
-		<pageFooter>
-			<band height="0"  isSplitAllowed="true" >
-			</band>
-		</pageFooter>
-		<summary>
-			<band height="0"  isSplitAllowed="true" >
-			</band>
-		</summary>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-1" mode="Transparent" x="43" y="57" width="157" height="12"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[": "+$F{tgl_lahir}.split("-")[2]+"-"+$F{tgl_lahir}.split("-")[1]+"-"+$F{tgl_lahir}.split("-")[0]]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-1" mode="Opaque" x="2" y="17" width="197" height="1"/>
+			</line>
+			<image scaleImage="FillFrame">
+				<reportElement key="image-1" mode="Transparent" x="3" y="0" width="20" height="15"/>
+				<graphicElement fill="Solid"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-2" mode="Transparent" x="35" y="0" width="165" height="15"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="Tahoma" size="11"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{namars}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement mode="Opaque" x="105" y="30" width="95" height="18"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="1" barHeight="25">
+					<jr:codeExpression><![CDATA[$F{no_rkm_medis}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
 </jasperReport>
