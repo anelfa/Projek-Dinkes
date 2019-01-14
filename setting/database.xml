@@ -19,7 +19,11 @@
     <!--UPDATE-->
     <entry key="URLSERVERUPDATE">192.168.128.4/webapps/serverupdate</entry> <!--link Update -->
     <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
-    <!--End UPDATE-->
+    <!-- Mesin Antrian-->
+    <entry key="BRIDGEANTRIANP3">no</entry> <!--no:aktif-->
+    <entry key="BRIDGEANTRIANP3AUTO">no</entry> <!--no:yes-->
+    <entry key="BRIDGEANTRIANP3DBASE">//10.50.150.20/foto int/antrian/RSUDKramatJati/data/qeue.mdb</entry> <!--DATABASE SHARE-->
+    <!--End Antrian-->
     <!-- LIS -->
     <entry key="IPLISSHARE">10.50.150.20/sharing</entry>
     <entry key="ANTRIAN">player</entry>

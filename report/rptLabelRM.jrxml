@@ -96,20 +96,6 @@ on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no
 				<textFieldExpression class="java.lang.String"><![CDATA[": "+$F{jk}.replaceAll("L","Laki-Laki").replaceAll("P","Perempuan")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement key="staticText" mode="Transparent" x="3" y="72" width="32" height="11"/>
-				<textElement textAlignment="Left" lineSpacing="Single">
-					<font fontName="Tahoma" size="9"/>
-				</textElement>
-				<text><![CDATA[Poli Dituju]]></text>
-			</staticText>
-			<textField isBlankWhenNull="false">
-				<reportElement key="textField" mode="Transparent" x="43" y="72" width="157" height="11"/>
-				<textElement lineSpacing="Single">
-					<font fontName="Tahoma" size="9" isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[": "+$F{nm_poli}]]></textFieldExpression>
-			</textField>
-			<staticText>
 				<reportElement key="staticText-2" mode="Transparent" x="3" y="57" width="39" height="11"/>
 				<textElement textAlignment="Left" lineSpacing="Single">
 					<font fontName="Tahoma" size="9"/>

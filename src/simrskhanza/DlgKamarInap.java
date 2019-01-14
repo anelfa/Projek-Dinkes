@@ -45,6 +45,10 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -81,10 +85,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
     
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date date = new Date();
-    private String now=dateFormat.format(date),kmr="",key="",tglmasuk,jammasuk,kd_pj,
+    private String umur_pasien,th_umur="0",bl_umur="0",hr_umur="0",username="",now=dateFormat.format(date),kmr="",key="",tglmasuk,jammasuk,kd_pj,
             hariawal="",pilihancetak="",nonota="",aktifkan_hapus_data_salah="";
-    private PreparedStatement ps,pssetjam,pscaripiutang,psdiagnosa,psibu,psanak,pstarif,psdpjp,pscariumur;
-    private ResultSet rs,rs2,rssetjam;
+    private PreparedStatement psumur,ps,pssetjam,pscaripiutang,psdiagnosa,psibu,psanak,pstarif,psdpjp,pscariumur;
+    private ResultSet rsumur,rs,rs2,rssetjam;
     private int i,sudah=0,row=0;
     private double lama=0,persenbayi=0;
     private String gabungkan="",norawatgabung="",kamaryangdigabung="",dokterranap="",bangsal="",diagnosa_akhir="",namakamar="",umur="0",sttsumur="Th";
@@ -718,7 +722,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnGelang2 = new javax.swing.JMenuItem();
         MnGelang3 = new javax.swing.JMenuItem();
         MnGelang4 = new javax.swing.JMenuItem();
-        MnGelangRSUD = new javax.swing.JMenuItem();
+        MnGelangRanap = new javax.swing.JMenuItem();
         MenuBPJS = new javax.swing.JMenu();
         MnCekKepesertaan = new javax.swing.JMenuItem();
         MnCekNIK = new javax.swing.JMenuItem();
@@ -2508,20 +2512,20 @@ public class DlgKamarInap extends javax.swing.JDialog {
         });
         MnGelang.add(MnGelang4);
 
-        MnGelangRSUD.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnGelangRSUD.setForeground(new java.awt.Color(60, 80, 50));
-        MnGelangRSUD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnGelangRSUD.setText("Gelang RSUD");
-        MnGelangRSUD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnGelangRSUD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnGelangRSUD.setName("MnGelangRSUD"); // NOI18N
-        MnGelangRSUD.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnGelangRSUD.addActionListener(new java.awt.event.ActionListener() {
+        MnGelangRanap.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnGelangRanap.setForeground(new java.awt.Color(60, 80, 50));
+        MnGelangRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnGelangRanap.setText("Gelang Rawat Inap");
+        MnGelangRanap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnGelangRanap.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnGelangRanap.setName("MnGelangRanap"); // NOI18N
+        MnGelangRanap.setPreferredSize(new java.awt.Dimension(250, 28));
+        MnGelangRanap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnGelangRSUDActionPerformed(evt);
+                MnGelangRanapActionPerformed(evt);
             }
         });
-        MnGelang.add(MnGelangRSUD);
+        MnGelang.add(MnGelangRanap);
 
         jPopupMenu1.add(MnGelang);
 
@@ -3376,7 +3380,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(R2);
 
         DTPCari1.setEditable(false);
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2018" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2018" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -3400,7 +3404,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(jLabel22);
 
         DTPCari2.setEditable(false);
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2018" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2018" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3428,7 +3432,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(R3);
 
         DTPCari3.setEditable(false);
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2018" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2018" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -3452,7 +3456,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(jLabel25);
 
         DTPCari4.setEditable(false);
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2018" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2018" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -6133,6 +6137,15 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     }//GEN-LAST:event_BtnCloseGabungActionPerformed
 
     private void BtnSimpanGabungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanGabungActionPerformed
+
+        
+        if (var.getkode()=="Admin Utama")
+        {
+        username=var.getkode();
+        }
+        else{
+        username=Sequel.cariIsi("select nama from pegawai where nik=?",var.getkode());
+        }
         if(norawat.getText().trim().equals("")){
             Valid.textKosong(NoRmBayi,"Pasien");
         }else{            
@@ -6146,12 +6159,22 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         pscariumur=koneksi.prepareStatement(
                             "select TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) as tahun, "+
                             "(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12)) as bulan, "+
-                            "TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari "+
+                            "TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari,tgl_lahir "+
                             "from pasien where no_rkm_medis=?");
                         try {
                             pscariumur.setString(1,NoRmBayi.getText());                            
                             rs2=pscariumur.executeQuery();
                             if(rs2.next()){
+                                String tanggal = rs2.getString("tgl_lahir");
+                                Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
+                    Date kini = new Date();
+                    LocalDate today =LocalDate.now();
+                    LocalDate birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    Period p = Period.between(birthday,today);
+                    long p2 =ChronoUnit.DAYS.between(birthday,today);
+                    th_umur=String.valueOf(p.getYears());
+                    bl_umur=String.valueOf(p.getMonths());
+                    hr_umur=String.valueOf(p.getDays());
                                 umur="0";
                                 sttsumur="Th";
                                 if(rs2.getInt("tahun")>0){
@@ -6178,10 +6201,10 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                             }
                         }
                         Valid.autoNomer3("select (ifnull(MAX(CONVERT(RIGHT(no_rawat,6),signed)),0)+1) from reg_periksa where tgl_registrasi='"+rs.getString("tgl_registrasi")+"' ",dateformat.format(rs.getDate("tgl_registrasi"))+"/",6,NoRawatGabung);
-                        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Reg Periksa",19,
+                        if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Reg Periksa",23,
                             new String[]{rs.getString("no_reg"),NoRawatGabung.getText(),rs.getString("tgl_registrasi"),rs.getString("jam_reg"),
                             rs.getString("kd_dokter"),NoRmBayi.getText(),rs.getString("kd_poli"),rs.getString("p_jawab"),
-                            rs.getString("almt_pj"),rs.getString("hubunganpj"),rs.getString("biaya_reg"),"Belum","Baru","Ranap",rs.getString("kd_pj"),umur,sttsumur,"Sudah Bayar","Baru"})==true){
+                            rs.getString("almt_pj"),rs.getString("hubunganpj"),rs.getString("biaya_reg"),"Belum","Baru","Ranap",rs.getString("kd_pj"),hr_umur,bl_umur,th_umur,username,umur,sttsumur,"Sudah Bayar","Baru"})==true){
                             Sequel.menyimpan("ranap_gabung","?,?","Data Ranap Gabung",2,new String[]{
                                 norawat.getText(),NoRawatGabung.getText()
                             });
@@ -8129,10 +8152,26 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
     }//GEN-LAST:event_MnResepDOkterActionPerformed
 
-    private void MnGelangRSUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelangRSUDActionPerformed
+    private void MnGelangRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGelangRanapActionPerformed
+  
         if(TPasien.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
+      try {  
+          String noraw=tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString();
+           psumur=koneksi.prepareStatement(
+                        "select * "+
+                        "from reg_periksa "+
+                        "where no_rawat=?");  
+           psumur.setString(1,noraw);
+           rsumur=psumur.executeQuery();
+           rsumur.next();
+              umur_pasien=rsumur.getString("thn_umur")+"Th "+rsumur.getString("bln_umur")+"Bl "+rsumur.getString("hr_umur")+"Hr";
+               System.out.println(umur_pasien);
+             
+      
+      
+     
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();
             param.put("namars",var.getnamars());
@@ -8140,18 +8179,26 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             param.put("kotars",var.getkabupatenrs());
             param.put("propinsirs",var.getpropinsirs());
             param.put("kontakrs",var.getkontakrs());
+             param.put("umur_pasien",umur_pasien);
+             param.put("umur",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),2).toString());
+              param.put("dpjp",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),18).toString());
             param.put("emailrs",var.getemailrs());
             param.put("logo",Sequel.cariGambar("select logo from setting"));
-            Valid.MyReport("rptGelangRSUD.jrxml","report","::[ Data Registrasi Pasien ]::",
-                "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,poliklinik.nm_poli,"+
-                "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,pasien.tgl_lahir "+
-                "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
-                "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+TNoRw1.getText()+"' ",param);
-            this.setCursor(Cursor.getDefaultCursor());
+            Valid.MyReport("rptGelangRawatInap.jrxml","report","::[ Gelang Pasien ]::","select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
+                   "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
+                   "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,"+
+                   "pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.pekerjaanpj,"+
+                   "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) as alamatpj from pasien "+
+                   "inner join kelurahan inner join kecamatan inner join kabupaten "+
+                   "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
+                   "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab  where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",param);
         }
-    }//GEN-LAST:event_MnGelangRSUDActionPerformed
+      catch (Exception ex) {
+                System.out.println(ex);
+            }
+      }
+       
+    }//GEN-LAST:event_MnGelangRanapActionPerformed
 
     /**
     * @param args the command line arguments
@@ -8229,7 +8276,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JMenuItem MnGelang7;
     private javax.swing.JMenuItem MnGelang8;
     private javax.swing.JMenuItem MnGelang9;
-    private javax.swing.JMenuItem MnGelangRSUD;
+    private javax.swing.JMenuItem MnGelangRanap;
     private javax.swing.JMenu MnHapusData;
     private javax.swing.JMenuItem MnHapusDataSalah;
     private javax.swing.JMenuItem MnHapusObatOperasi;

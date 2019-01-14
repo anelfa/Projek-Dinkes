@@ -54,8 +54,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -109,7 +111,11 @@ public final class DlgReg extends javax.swing.JDialog {
     private ResultSet rs;
     private int pilihan=0,i=0,kuota=0;
     private Date cal=new Date();
-    private String pengurutan="",th_umur="0",bl_umur="0",hr_umur="0",username="",BASENOREG="",URUTNOREG="",status="Baru",order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc",alamatperujuk="-",aktifjadwal="",IPPRINTERTRACER="",umur="0",sttsumur="Th",
+     Connection Conn = null;
+public Statement stat,s;
+public String sql="";
+ private String POLI1,POLI1KODE,POLI2,POLI2KODE,POLI3,POLI3KODE,POLI4,POLI4KODE,POLI5,POLI5KODE,POLI6,POLI6KODE,POLI7,POLI7KODE,POLI8,POLI8KODE,POLI9,POLI9KODE,POLI10,POLI10KODE,POLI11,POLI11KODE,POLI12,POLI12KODE,POLI13,POLI13KODE,POLI14,POLI14KODE,POLI15,POLI15KODE;
+    private String BRIDGEANTRIANP3AUTO="",BRIDGEANTRIANP3="",BRIDGEANTRIANP3DBASE="",awalan,pengurutan="",th_umur="0",bl_umur="0",hr_umur="0",username="",BASENOREG="",URUTNOREG="",status="Baru",order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc",alamatperujuk="-",aktifjadwal="",IPPRINTERTRACER="",umur="0",sttsumur="Th",
             validasiregistrasi=Sequel.cariIsi("select wajib_closing_kasir from set_validasi_registrasi"),
             validasicatatan=Sequel.cariIsi("select tampilkan_catatan from set_validasi_catatan");
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
@@ -167,14 +173,17 @@ public final class DlgReg extends javax.swing.JDialog {
     public DlgReg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        //antrian
+        
         this.setLocation(8,1);
         setSize(885,674);
 
         tabMode=new DefaultTableModel(null,new Object[]{
-            "P","No.Reg","No.Rawat","Tanggal","Jam","Kd.Dokter","Dokter Dituju","Nomer RM",
-            "Pasien","J.K.","Umur","Poliklinik","Jenis Bayar","Penanggung Jawab","Alamat P.J.","Hubungan P.J.",
-            "Biaya Regristrasi","Status","No.Telp","Stts Rawat","Stts Poli"
+            "P","No.Reg","No.Rawat","Tanggal","Jam",
+            "Kd.Dokter","Dokter Dituju","Nomer RM","Pasien",
+            "J.K.","Umur","Poliklinik","Jenis Bayar","Penanggung Jawab",
+            "Alamat P.J.","Hubungan P.J.","Biaya Regristrasi","Status","No.Telp",
+            "Stts Rawat","Stts Poli"
         }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -189,7 +198,7 @@ public final class DlgReg extends javax.swing.JDialog {
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class
+                 java.lang.Object.class,java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -250,8 +259,9 @@ public final class DlgReg extends javax.swing.JDialog {
         tbPetugas.setDefaultRenderer(Object.class, new TabelRegistrasi());
 
         tabMode2=new DefaultTableModel(null,new Object[]{
-            "P","No.Rawat","Tanggal","Jam","Kd.Dokter","Dokter Rujukan","Nomer RM",
-            "Pasien","J.K.","Umur","Poliklinik Rujukan","Jenis Bayar","Penanggung Jawab","Alamat P.J.","Hubungan P.J.",
+            "P","No.Rawat","Tanggal","Jam","Kd.Dokter",
+            "Dokter Rujukan","Nomer RM","Pasien","J.K.","Umur",
+            "Poliklinik Rujukan","Jenis Bayar","Penanggung Jawab","Alamat P.J.","Hubungan P.J.",
             "Status","No.Telp","Stts Rawat","Kode Poli"
         }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -317,8 +327,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }else if(i==17){
                 column.setPreferredWidth(70);
             }else if(i==18){
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                 column.setPreferredWidth(70);
             }
         }
         tbPetugas2.setDefaultRenderer(Object.class, new WarnaTable());
@@ -738,6 +747,18 @@ public final class DlgReg extends javax.swing.JDialog {
             IPPRINTERTRACER=prop.getProperty("IPPRINTERTRACER");
             URUTNOREG=prop.getProperty("URUTNOREG");
             BASENOREG=prop.getProperty("BASENOREG");
+            BRIDGEANTRIANP3=prop.getProperty("BRIDGEANTRIANP3");
+            BRIDGEANTRIANP3AUTO=prop.getProperty("BRIDGEANTRIANP3AUTO");
+            BRIDGEANTRIANP3DBASE=prop.getProperty("BRIDGEANTRIANP3DBASE");
+            if(BRIDGEANTRIANP3AUTO.equals("yes"))
+            {
+              ChkAntrianSend.setSelected(true);  
+            }
+           else
+            {
+              ChkAntrianSend.setSelected(false);  
+            }
+            
             try{    
                 if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
                     com.sun.awt.AWTUtilities.setWindowOpacity(DlgCatatan,0.5f);
@@ -1040,6 +1061,8 @@ public final class DlgReg extends javax.swing.JDialog {
         btnPenjab1 = new widget.Button();
         ChkTracker = new widget.CekBox();
         jLabel1 = new javax.swing.JLabel();
+        ChkAntrianSend = new widget.CekBox();
+        jLabel2 = new javax.swing.JLabel();
         ChkInput = new widget.CekBox();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
@@ -3231,7 +3254,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit1.setEditable(false);
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2018" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -3279,7 +3302,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit2.setEditable(false);
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2018" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -4229,7 +4252,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass7.add(jLabel15);
 
         DTPCari1.setEditable(false);
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2018" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -4243,7 +4266,7 @@ public final class DlgReg extends javax.swing.JDialog {
         panelGlass7.add(jLabel17);
 
         DTPCari2.setEditable(false);
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2018" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4383,7 +4406,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel9.setBounds(180, 72, 36, 23);
 
         DTPReg.setEditable(false);
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2018" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -4670,6 +4693,22 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel1);
         jLabel1.setBounds(930, 14, 90, 14);
 
+        ChkAntrianSend.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
+        ChkAntrianSend.setBorderPainted(true);
+        ChkAntrianSend.setBorderPaintedFlat(true);
+        ChkAntrianSend.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkAntrianSend.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkAntrianSend.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkAntrianSend.setName("ChkAntrianSend"); // NOI18N
+        FormInput.add(ChkAntrianSend);
+        ChkAntrianSend.setBounds(900, 40, 23, 23);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Send Antrian");
+        jLabel2.setName("jLabel2"); // NOI18N
+        FormInput.add(jLabel2);
+        jLabel2.setBounds(930, 45, 90, 14);
+
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -4860,11 +4899,22 @@ public final class DlgReg extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
                     TCari.requestFocus();
                 }else{
+                     if(ChkAntrianSend.isSelected()==true){
+                         if(BRIDGEANTRIANP3.equals("aktif")){
+                sendantrian();
+                         }
+            }
                     isRegistrasi();
-                   
+                       
                 }                    
             }else{
+                 if(ChkAntrianSend.isSelected()==true){
+                 if(BRIDGEANTRIANP3.equals("aktif")){
+                sendantrian();
+                         }
+            }   
                 isRegistrasi();
+               
                
             }            
         }
@@ -8229,7 +8279,7 @@ public void cetakregister() {
 
     private void MnCetaHasilMCUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetaHasilMCUActionPerformed
        Locale locale = new Locale ("id", "ID");
-Locale.setDefault(locale); 
+        Locale.setDefault(locale); 
         if(TPasien.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
@@ -8245,14 +8295,32 @@ Locale.setDefault(locale);
             param.put("logo",Sequel.cariGambar("select logo from setting"));
             Valid.MyReport("rptHasilMcu4.jrxml","report","::[ Hasil MCU ]::",
                     "select reg_periksa.tgl_registrasi,reg_periksa.no_rkm_medis, reg_periksa.no_rawat,dokter.nm_dokter,pasien.tgl_lahir,pasien.jk,"+
-                    " pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.pekerjaan,pasien.alamat "+
+                    " pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.pekerjaan,pasien.alamat,pasien.tmp_lahir,pasien.stts_nikah,pasien.no_tlp "+
                     " from reg_periksa inner join pasien inner join dokter "+
                     " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter  "+
                     "where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_MnCetaHasilMCUActionPerformed
+public void testkoneksi(){
+    
+    try
+        { 
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+              String LokDbase = "\\\\10.50.150.20\\foto int\\qeue.mdb";
+           Connection conn=DriverManager.getConnection("jdbc:ucanaccess://"+LokDbase);
+            Statement s = conn.createStatement();
+            s.executeUpdate("INSERT INTO qeue VALUES (1,'A011',6,10,'7:35:55',1,'','',#12/11/2023#,1,'',1,'','',1)");        // TODO add your handling code here:
+            ResultSet rs = s.executeQuery("SELECT * FROM qeue order BY q_id Desc Limit 1 ");
 
+conn.close();
+        }
+        catch(Exception con)
+        {
+              JOptionPane.showMessageDialog(null,"koneksi gagal"+con);
+        }
+
+    }  
     /**
     * @param args the command line arguments
     */
@@ -8292,6 +8360,7 @@ Locale.setDefault(locale);
     private widget.Button BtnSeek5;
     private widget.Button BtnSimpan;
     private widget.Button BtnUnit;
+    private widget.CekBox ChkAntrianSend;
     private widget.CekBox ChkInput;
     private widget.CekBox ChkJln;
     private widget.CekBox ChkTracker;
@@ -8487,6 +8556,7 @@ Locale.setDefault(locale);
     private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
+    private javax.swing.JLabel jLabel2;
     private widget.Label jLabel20;
     private widget.Label jLabel21;
     private widget.Label jLabel22;
@@ -9257,8 +9327,112 @@ Locale.setDefault(locale);
     private void UpdateUmur(){
         Sequel.mengedit("pasien","no_rkm_medis=?","umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))",1,new String[]{TNoRM.getText()});
     }
+private void sendantrian()
+{
+    
+      try {
+         
+            prop.loadFromXML(new FileInputStream("setting/mappingantrian.xml"));
+            POLI1=prop.getProperty("POLI1");
+            POLI1KODE=prop.getProperty("POLI1KODE");
+            POLI2=prop.getProperty("POLI2");
+            POLI2KODE=prop.getProperty("POLI2KODE");
+            POLI3=prop.getProperty("POLI3");
+            POLI3KODE=prop.getProperty("POLI3KODE");
+            POLI4=prop.getProperty("POLI4");
+            POLI4KODE=prop.getProperty("POLI4KODE");
+            POLI5=prop.getProperty("POLI5");
+            POLI5KODE=prop.getProperty("POLI5KODE");
+            POLI6=prop.getProperty("POLI6");
+            POLI6KODE=prop.getProperty("POLI6KODE");
+            POLI7=prop.getProperty("POLI7");
+            POLI7KODE=prop.getProperty("POLI7KODE");
+            POLI8=prop.getProperty("POLI8");
+            POLI8KODE=prop.getProperty("POLI8KODE");
+            POLI9=prop.getProperty("POLI9");
+            POLI9KODE=prop.getProperty("POLI9KODE");
+            POLI10=prop.getProperty("POLI10");
+            POLI10KODE=prop.getProperty("POLI10KODE");
+            POLI11=prop.getProperty("POLI11");
+            POLI11KODE=prop.getProperty("POLI11KODE");
+            POLI12=prop.getProperty("POLI12");
+            POLI12KODE=prop.getProperty("POLI12KODE");
+            POLI13=prop.getProperty("POLI13");
+            POLI13KODE=prop.getProperty("POLI13KODE");
+            POLI14=prop.getProperty("POLI14");
+            POLI14KODE=prop.getProperty("POLI14KODE");
+            POLI15=prop.getProperty("POLI15");
+            POLI15KODE=prop.getProperty("POLI15KODE");
+      }
+      catch(Exception e){    
+            }
+//    id_service_desc	id_header
+//Poli UMUM	A
+//Poli Penyakit dalam	B
+//Poli PARU	C
+//Poli GIGI	H
+//Poli BEDAH	E
+//Poli ANAK	F
+//Poli Kebidanan dan Kandungan	G
+//Poli GIGI Spesialis	I
+//Kasir	X
+//Laborat	J
+//Apotik	K
+//Pendaftaran	X
+//Poli Spesialis GIZI	D
+//Fisio Terapi	L
+     switch(kdpoli.getText())
+        {
+            case "ANA": awalan="F";
+             break;
+            case "PU": awalan="A";
+             break;
+             case "BED": awalan="E";
+             break;
+             case "FIS": awalan="L";
+             break;
+             case "GIG": awalan="H";
+             break;
+             case "GND": awalan="I";
+             break;
+             case "GZ": awalan="D";
+             break;
+              case "INT": awalan="B";
+             break;
+              case "IRM": awalan="M";
+             break;
+              case "LAB": awalan="J";
+             break;
+              case "OBG": awalan="G";
+             break;
+             case "PAR": awalan="C";
+             break;
+              case "SAR": awalan="P";
+             break;
+             default : awalan="Z";
+             break;
+        }
+     
 
+   try
+        {
+         
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+              String LokDbase = BRIDGEANTRIANP3DBASE;
+           Connection conn=DriverManager.getConnection("jdbc:ucanaccess://"+LokDbase);
+            Statement s = conn.createStatement();
+            s.executeUpdate("INSERT INTO qeue VALUES (Null,'"+awalan+""+TNoReg.getText()+"',6,10,'"+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+"',Null,'','',#"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"#,Null,'',Null,'','',1)");        // TODO add your handling code here:
+           
+conn.close();
+        }
+        catch(Exception con)
+        {
+              JOptionPane.showMessageDialog(null,"koneksi gagal"+con);
+        } 
+}
     private void isRegistrasi() {
+      
+       
          if (var.getkode()=="Admin Utama")
         {
         username=var.getkode();
@@ -9279,6 +9453,7 @@ Locale.setDefault(locale);
             if(ChkTracker.isSelected()==true){
                 ctk();
             }
+            
             cetakregister();
             tampil();
             emptTeks();                
@@ -9295,6 +9470,7 @@ Locale.setDefault(locale);
                 if(ChkTracker.isSelected()==true){
                     ctk();
                 }
+               
                  cetakregister();
                 tampil();
                 emptTeks();                
@@ -9311,6 +9487,7 @@ Locale.setDefault(locale);
                     if(ChkTracker.isSelected()==true){
                         ctk();
                     }
+                   
                      cetakregister();
                     tampil();
                     emptTeks();                
@@ -9327,6 +9504,7 @@ Locale.setDefault(locale);
                         if(ChkTracker.isSelected()==true){
                             ctk();
                         }
+                      
                          cetakregister();
                         tampil();
                         emptTeks();                
@@ -9343,6 +9521,7 @@ Locale.setDefault(locale);
                             if(ChkTracker.isSelected()==true){
                                 ctk();
                             }
+                           
                              cetakregister();
                             tampil();
                             emptTeks();                
