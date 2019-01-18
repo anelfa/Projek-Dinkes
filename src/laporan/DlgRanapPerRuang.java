@@ -208,13 +208,13 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Laporan Rawat Inap Per Ruang ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(130, 100, 100))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Laporan Rawat Inap Per Ruang ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70,70,70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 253));
-        TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(241, 246, 236)));
-        TabRawat.setForeground(new java.awt.Color(130, 100, 100));
+        TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239,244,234)));
+        TabRawat.setForeground(new java.awt.Color(70,70,70));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -466,7 +466,42 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==1){
-            
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            if(tabMode2.getRowCount()==0){
+                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                //TCari.requestFocus();
+            }else if(tabMode2.getRowCount()!=0){
+                Sequel.AutoComitFalse();
+                Map<String, Object> param = new HashMap<>();         
+                param.put("namars",var.getnamars());
+                param.put("alamatrs",var.getalamatrs());
+                param.put("kotars",var.getkabupatenrs());
+                param.put("propinsirs",var.getpropinsirs());
+                param.put("kontakrs",var.getkontakrs());
+                param.put("emailrs",var.getemailrs());
+                if(nmpenjab.getText().equals("")){
+                    param.put("ruang","SEMUA CARA BAYAR"); 
+                }else{
+                    param.put("ruang",nmpenjab.getText().toUpperCase()); 
+                }                       
+                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());  
+                param.put("tanggal",Tgl2.getDate());  
+                param.put("logo",Sequel.cariGambar("select logo from setting"));  
+                Sequel.queryu("delete from temporary");
+                for(int r=0;r<tabMode2.getRowCount();r++){ 
+                    if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                        Sequel.menyimpan("temporary","'0','"+
+                                        tabMode2.getValueAt(r,0).toString()+"','"+
+                                        tabMode2.getValueAt(r,1).toString()+"','"+
+                                        tabMode2.getValueAt(r,2).toString()+"','"+
+                                        tabMode2.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Rekap Nota Pembayaran");
+                    }                    
+                }
+                Sequel.AutoComitTrue();   
+                Valid.MyReport("rptRanapPerRuang.jrxml","report","::[ Laporan Rawat Inap Per Ruang ]::",
+                    "select * from temporary order by no asc",param);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
 }//GEN-LAST:event_BtnPrintActionPerformed
 

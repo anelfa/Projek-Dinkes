@@ -109,14 +109,14 @@ public class DlgPenggajian extends javax.swing.JDialog {
                         if(engine.getLocation().contains("/webapps/penggajian/index.php?act=HomeAdmin")){
                             try{            
                                 if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
-                                    com.sun.awt.AWTUtilities.setWindowOpacity(DlgPenggajian.this,0.6f);
+//                                    com.sun.awt.AWTUtilities.setWindowOpacity(DlgPenggajian.this,0.6f);
                                 }               
                             }catch(Exception e){
                             }
                         }else{
                             try{     
                                 if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
-                                    com.sun.awt.AWTUtilities.setWindowOpacity(DlgPenggajian.this,1f);
+//                                    com.sun.awt.AWTUtilities.setWindowOpacity(DlgPenggajian.this,1f);
                                 }                                                                      
                             }catch(Exception e){
                             }

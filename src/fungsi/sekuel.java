@@ -1069,7 +1069,35 @@ public final class sekuel {
         
         return dicari;
     }
-    
+    public double cariIsiAngka2(String sql,String data,String data2) {
+        angka2=0;
+        try {
+            ps=connect.prepareStatement(sql);
+            try{            
+                ps.setString(1,data);
+                ps.setString(2,data2);
+                rs=ps.executeQuery();
+                if(rs.next()){
+                    angka2=rs.getDouble(1);
+                }else{
+                    angka2=0;
+                }
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }                
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+            
+        return angka2;
+    }
     public ByteArrayInputStream cariGambar(String sql){
         ByteArrayInputStream inputStream=null;
         try {
@@ -1241,7 +1269,70 @@ public final class sekuel {
             
         return angka;
     }
+     public Integer cariInteger(String sql,String data,String data2){
+        angka=0;
+        try {
+            ps=connect.prepareStatement(sql);
+            try{
+                ps.setString(1,data);
+                ps.setString(2,data2);
+                rs=ps.executeQuery();            
+                if(rs.next()){
+                    angka=rs.getInt(1);
+                }else{
+                    angka=0;
+                }  
+            }catch(Exception e){
+                angka=0;
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+            
+        return angka;
+    }
     
+    public Integer cariInteger(String sql,String data,String data2,String data3){
+        angka=0;
+        try {
+            ps=connect.prepareStatement(sql);
+            try{
+                ps.setString(1,data);
+                ps.setString(2,data2);
+                ps.setString(3,data3);
+                rs=ps.executeQuery();            
+                if(rs.next()){
+                    angka=rs.getInt(1);
+                }else{
+                    angka=0;
+                }  
+            }catch(Exception e){
+                angka=0;
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+            
+        return angka;
+    }
     public Integer cariInteger2(String sql){
         angka=0;
         try {

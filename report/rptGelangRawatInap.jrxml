@@ -76,7 +76,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="false">
-				<reportElement key="textField-1" mode="Transparent" x="0" y="21" width="70" height="10"/>
+				<reportElement key="textField-1" mode="Transparent" x="0" y="21" width="57" height="10"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Tahoma" size="8" isBold="true"/>
 				</textElement>
@@ -100,11 +100,18 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<textFieldExpression class="java.lang.String"><![CDATA["dpjp : "+$P{dpjp}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="false">
-				<reportElement key="textField" mode="Transparent" x="70" y="21" width="74" height="10"/>
+				<reportElement key="textField" mode="Transparent" x="80" y="21" width="64" height="10"/>
 				<textElement textAlignment="Right" lineSpacing="Single">
 					<font fontName="Tahoma" size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{umur_pasien}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="57" y="21" width="23" height="10"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["("+$F{jk}+")"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

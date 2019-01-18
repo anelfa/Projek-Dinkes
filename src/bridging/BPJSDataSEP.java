@@ -2792,6 +2792,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             param.put("kotars",var.getkabupatenrs());
             param.put("propinsirs",var.getpropinsirs());
             param.put("kontakrs",var.getkontakrs());
+            param.put("prb",Sequel.cariIsi("select prb from bpjs_prb where no_sep=?",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()));
             param.put("logo",Sequel.cariGambar("select bpjs from gambar")); 
             if(JenisPelayanan.getSelectedIndex()==0){
                 Valid.MyReport("rptBridgingSEP.jrxml","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+

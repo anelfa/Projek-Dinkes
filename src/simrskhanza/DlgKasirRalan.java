@@ -6,6 +6,7 @@ import inventory.DlgPemberianObat;
 import laporan.DlgDiagnosaPenyakit;
 import keuangan.DlgBilingRalan;
 import fungsi.WarnaTable;
+import fungsi.TabelKasirRajal;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -156,7 +157,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 column.setMaxWidth(0);
             }
         }
-        tbKasirRalan.setDefaultRenderer(Object.class, new WarnaTable());
+        tbKasirRalan.setDefaultRenderer(Object.class, new TabelKasirRajal());
         
         tabModekasir2=new DefaultTableModel(null,new String[]{
             "Kd.Dokter","Dokter Rujukan","Nomer RM","Pasien",
@@ -360,7 +361,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             aktifkanparsial=prop.getProperty("AKTIFKANBILLINGPARSIAL");
             try{    
                 if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
-                    com.sun.awt.AWTUtilities.setWindowOpacity(DlgCatatan,0.5f);
+//                    com.sun.awt.AWTUtilities.setWindowOpacity(DlgCatatan,0.5f);
                 }     
             }catch(Exception e){    
             }
@@ -3828,7 +3829,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass8.add(jLabel15);
 
         DTPCari1.setEditable(false);
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-11-2018" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-01-2019" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -3842,7 +3843,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass8.add(jLabel17);
 
         DTPCari2.setEditable(false);
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-11-2018" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-01-2019" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3878,7 +3879,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         TabRawat.setBackground(new java.awt.Color(255, 255, 253));
         TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(241, 246, 236)));
         TabRawat.setForeground(new java.awt.Color(100, 80, 80));
-        TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -3891,6 +3891,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbKasirRalan.setAutoCreateRowSorter(true);
         tbKasirRalan.setToolTipText("Klik 2X Kd.Dokter= Jendela Tindakan, Dokter Dituju=Jendela Obat, Nomer RM=Jendela Billing, Pasien=Jendela Total Obat, Poliklinik=Set Sudah Periksa, Penanggung Jawab=Masukan tindakan otomatis");
         tbKasirRalan.setComponentPopupMenu(jPopupMenu1);
         tbKasirRalan.setName("tbKasirRalan"); // NOI18N
@@ -3913,6 +3914,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
+        tbKasirRalan2.setAutoCreateRowSorter(true);
         tbKasirRalan2.setToolTipText("Klik 2X Kd.Dokter= Jendela Tindakan, Dokter Dituju=Jendela Obat, Nomer RM=Jendela Billing, Pasien=Jendela Total Obat, Poliklinik=Set Sudah Periksa, Penanggung Jawab=Masukan tindakan otomatis");
         tbKasirRalan2.setComponentPopupMenu(jPopupMenu2);
         tbKasirRalan2.setName("tbKasirRalan2"); // NOI18N
@@ -4713,7 +4715,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 resep.setLocationRelativeTo(internalFrame1);
                 resep.isCek();
                 resep.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"Ralan");
-                resep.tampil();
+                resep.panelDiagnosa1.tampil();
                 resep.setVisible(true);
             }
         }
@@ -5972,7 +5974,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),10).toString(),
                         DTPCari1.getDate(),DTPCari2.getDate(),"Ralan"
                     );
-                    resep.tampil();
+                    resep.panelDiagnosa1.tampil();
                     resep.setVisible(true);
                 }                    
             }

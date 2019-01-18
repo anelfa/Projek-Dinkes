@@ -761,7 +761,7 @@ public String sql="";
             
             try{    
                 if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
-                    com.sun.awt.AWTUtilities.setWindowOpacity(DlgCatatan,0.5f);
+//                    com.sun.awt.AWTUtilities.setWindowOpacity(DlgCatatan,0.5f);
                 }     
             }catch(Exception e){    
             }
@@ -3254,7 +3254,7 @@ public String sql="";
 
         TglSakit1.setEditable(false);
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-01-2019" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -3302,7 +3302,7 @@ public String sql="";
 
         TglSakit2.setEditable(false);
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-01-2019" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -4252,7 +4252,7 @@ public String sql="";
         panelGlass7.add(jLabel15);
 
         DTPCari1.setEditable(false);
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-01-2019" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -4266,7 +4266,7 @@ public String sql="";
         panelGlass7.add(jLabel17);
 
         DTPCari2.setEditable(false);
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-01-2019" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4406,7 +4406,7 @@ public String sql="";
         jLabel9.setBounds(180, 72, 36, 23);
 
         DTPReg.setEditable(false);
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-01-2019" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-01-2019" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -4749,6 +4749,7 @@ public String sql="";
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbPetugas.setAutoCreateRowSorter(true);
         tbPetugas.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         tbPetugas.setComponentPopupMenu(jPopupMenu1);
         tbPetugas.setName("tbPetugas"); // NOI18N
@@ -4771,6 +4772,7 @@ public String sql="";
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        tbPetugas2.setAutoCreateRowSorter(true);
         tbPetugas2.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         tbPetugas2.setComponentPopupMenu(jPopupMenu2);
         tbPetugas2.setName("tbPetugas2"); // NOI18N
@@ -6111,7 +6113,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 resep.setLocationRelativeTo(internalFrame1);
                 resep.isCek();
                 resep.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"Ralan");
-                resep.tampil();
+                resep.panelDiagnosa1.tampil();
                 resep.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }                
@@ -7698,7 +7700,7 @@ public void cetakregister() {
                     resep.setNoRm(tbPetugas2.getValueAt(tbPetugas2.getSelectedRow(),1).toString(),
                         DTPCari1.getDate(),DTPCari2.getDate(),"Ralan"
                     );
-                    resep.tampil();
+                    resep.panelDiagnosa1.tampil();
                     resep.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }

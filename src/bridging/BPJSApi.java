@@ -81,7 +81,7 @@ public class BPJSApi {
         }
         else
         {
-           SSLContext sslContext = SSLContext.getInstance("SSL");
+          SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {
             new X509TrustManager() {
                 public X509Certificate[] getAcceptedIssuers() {return null;}
@@ -94,7 +94,7 @@ public class BPJSApi {
         Scheme scheme=new Scheme("https",443,sslFactory);
         HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory();
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
-        return new RestTemplate(factory); 
+        return new RestTemplate(factory);
         }
         
         

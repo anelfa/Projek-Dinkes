@@ -210,23 +210,6 @@ public class DlgBarang extends javax.swing.JDialog {
         kdkategori.setDocument(new batasInput((byte) 4).getKata(kdkategori));
         KdIF.setDocument(new batasInput((byte) 5).getKata(KdIF));
 
-        beli.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                isHitung();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                isHitung();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                isHitung();
-            }
-        });
-
         ChkInput.setSelected(false);
         isForm();
 
@@ -562,7 +545,7 @@ public class DlgBarang extends javax.swing.JDialog {
 
         ppBarcode.setBackground(new java.awt.Color(255, 255, 255));
         ppBarcode.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppBarcode.setForeground(new java.awt.Color(100, 80, 80));
+        ppBarcode.setForeground(new java.awt.Color(70,70,70));
         ppBarcode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         ppBarcode.setText("Barcode");
         ppBarcode.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -579,7 +562,7 @@ public class DlgBarang extends javax.swing.JDialog {
 
         ppBarcodeItem.setBackground(new java.awt.Color(255, 255, 255));
         ppBarcodeItem.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppBarcodeItem.setForeground(new java.awt.Color(100, 80, 80));
+        ppBarcodeItem.setForeground(new java.awt.Color(70,70,70));
         ppBarcodeItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         ppBarcodeItem.setText("Barcode Perbarang");
         ppBarcodeItem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -596,7 +579,7 @@ public class DlgBarang extends javax.swing.JDialog {
 
         ppStok.setBackground(new java.awt.Color(255, 255, 255));
         ppStok.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppStok.setForeground(new java.awt.Color(100, 80, 80));
+        ppStok.setForeground(new java.awt.Color(70,70,70));
         ppStok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         ppStok.setText("Tampilkan Semua Stok");
         ppStok.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -613,7 +596,7 @@ public class DlgBarang extends javax.swing.JDialog {
 
         ppStok2.setBackground(new java.awt.Color(255, 255, 255));
         ppStok2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppStok2.setForeground(new java.awt.Color(100, 80, 80));
+        ppStok2.setForeground(new java.awt.Color(70,70,70));
         ppStok2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         ppStok2.setText("Tampilkan Stok Per Lokasi");
         ppStok2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -630,7 +613,7 @@ public class DlgBarang extends javax.swing.JDialog {
 
         MnRestore.setBackground(new java.awt.Color(255, 255, 255));
         MnRestore.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnRestore.setForeground(new java.awt.Color(100, 80, 80));
+        MnRestore.setForeground(new java.awt.Color(70,70,70));
         MnRestore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnRestore.setText("Data Sampah");
         MnRestore.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -654,7 +637,7 @@ public class DlgBarang extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Obat, Alkes & BHP Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(100, 80, 80))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Obat, Alkes & BHP Medis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70,70,70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1338,7 +1321,7 @@ public class DlgBarang extends javax.swing.JDialog {
         karyawan.setBounds(660, 192, 110, 23);
 
         DTPExpired.setForeground(new java.awt.Color(50, 70, 50));
-        DTPExpired.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-09-2018" }));
+        DTPExpired.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-11-2018" }));
         DTPExpired.setDisplayFormat("dd-MM-yyyy");
         DTPExpired.setName("DTPExpired"); // NOI18N
         DTPExpired.setOpaque(false);
@@ -1617,10 +1600,10 @@ public class DlgBarang extends javax.swing.JDialog {
             }
             Valid.editTable(tabMode, "databarang", "kode_brng", "?", "nama_brng=?,kode_brng=?,kapasitas=?,kode_sat=?,letak_barang=?,"
                     + "h_beli=?,ralan=?,kelas1=?,kelas2=?,stokminimal=?,kdjns=?,kelas3=?,utama=?,vip=?,vvip=?,beliluar=?,jualbebas=?,karyawan=?,expire=?,kode_industri=?,kode_kategori=?,kode_golongan=?", 23, new String[]{
-                        Nm.getText(), Kd.getText(), Kapasitas.getText(), kdsat.getText(), Letak.getText(), beli.getText(), ralan.getText().replaceAll(",", ""),
-                        kelas1.getText().replaceAll(",", ""), kelas2.getText().replaceAll(",", ""), stok_minimal.getText(), kdjns.getText(), 
-                        kelas3.getText().replaceAll(",", ""), utama.getText().replaceAll(",", ""), kelasvip.getText().replaceAll(",", ""), kelasvvip.getText().replaceAll(",", ""),
-                        beliluar.getText().replaceAll(",", ""), jualbebas.getText().replaceAll(",", ""), karyawan.getText().replaceAll(",", ""), 
+                        Nm.getText(), Kd.getText(), Kapasitas.getText(), kdsat.getText(), Letak.getText(), beli.getText(), ralan.getText(),
+                        kelas1.getText(), kelas2.getText(), stok_minimal.getText(), kdjns.getText(), 
+                        kelas3.getText(), utama.getText(), kelasvip.getText(), kelasvvip.getText(),
+                        beliluar.getText(), jualbebas.getText(), karyawan.getText(), 
                         tanggal,KdIF.getText(),kdkategori.getText(),kdgolongan.getText(),
                         tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(),
                     });
@@ -1768,10 +1751,10 @@ public class DlgBarang extends javax.swing.JDialog {
                 tanggal = "0000-00-00";
             }
             Sequel.menyimpan("databarang", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "Kode Barang", 23, new String[]{
-                Kd.getText(), Nm.getText(), kdsat.getText(), Letak.getText(), beli.getText(), ralan.getText().replaceAll(",", ""),
-                kelas1.getText().replaceAll(",", ""), kelas2.getText().replaceAll(",", ""), kelas3.getText().replaceAll(",", ""),
-                utama.getText().replaceAll(",", ""), kelasvip.getText().replaceAll(",", ""), kelasvvip.getText().replaceAll(",", ""),
-                beliluar.getText().replaceAll(",", ""), jualbebas.getText().replaceAll(",", ""), karyawan.getText().replaceAll(",", ""),
+                Kd.getText(), Nm.getText(), kdsat.getText(), Letak.getText(), beli.getText(), ralan.getText(),
+                kelas1.getText(), kelas2.getText(), kelas3.getText(),
+                utama.getText(), kelasvip.getText(), kelasvvip.getText(),
+                beliluar.getText(), jualbebas.getText(), karyawan.getText(),
                 stok_minimal.getText(), kdjns.getText(), Kapasitas.getText(), tanggal,"1",KdIF.getText(),kdkategori.getText(),kdgolongan.getText()
             });
             tampil();
@@ -1934,7 +1917,12 @@ private void stok_minimalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:ev
     }//GEN-LAST:event_beliMouseMoved
 
     private void beliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_beliKeyPressed
-        Valid.pindah(evt, kdjns, ralan);
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            isHitung();        
+            ralan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            kdjns.requestFocus();
+        }
     }//GEN-LAST:event_beliKeyPressed
 
     private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBarcodeBtnPrintActionPerformed
@@ -2911,7 +2899,7 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             nmkategori.setText(tbDokter.getValueAt(row, 25).toString());
             kdgolongan.setText(tbDokter.getValueAt(row, 26).toString());
             nmgolongan.setText(tbDokter.getValueAt(row, 27).toString());
-            Kapasitas.setText(Valid.SetAngka2(Double.parseDouble(tbDokter.getValueAt(row, 20).toString())));
+            Kapasitas.setText(tbDokter.getValueAt(row, 20).toString());
             ChkKadaluarsa.setSelected(false);
             DTPExpired.setDate(new Date());
             if(tbDokter.getValueAt(row, 21).toString().equals("")||(tbDokter.getValueAt(row, 21).toString().length()==0)){
@@ -2928,93 +2916,105 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         return tbDokter;
     }
 
-    private void isHitung() {            
-        try {
-            if (!beli.getText().equals("")) {
-                switch (pengaturanharga) {
-                    case "Per Jenis":
-                        try{
-                            rs=koneksi.prepareStatement("select * from setpenjualan where kdjns='"+kdjns.getText()+"'").executeQuery();
-                            if(rs.next()){
-                                ralan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("ralan") / 100)),100)));
-                                kelas1.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas1") / 100)),100)));
-                                kelas2.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas2") / 100)),100)));
-                                kelas3.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas3") / 100)),100)));
-                                utama.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("utama") / 100)),100)));
-                                kelasvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vip") / 100)),100)));
-                                kelasvvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vvip") / 100)),100)));
-                                beliluar.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("beliluar") / 100)),100)));
-                                jualbebas.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("jualbebas") / 100)),100)));
-                                karyawan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("karyawan") / 100)),100)));
+    private void isHitung() {   
+        if(this.isVisible()==true){
+            try {
+                if (!beli.getText().equals("")) {
+                    switch (pengaturanharga) {
+                        case "Per Jenis":
+                            if(kdjns.getText().equals("")){
+                                Valid.textKosong(kdjns,"Kode Jenis");
                             }else{
-                                JOptionPane.showMessageDialog(null,"Pengaturan untuk jenis obat/alkes/bhp ini tidak ditemukan..!!");
-                                TCari.requestFocus();
+                                try{
+                                    rs=koneksi.prepareStatement("select * from setpenjualan where kdjns='"+kdjns.getText()+"'").executeQuery();
+                                    if(rs.next()){
+                                        ralan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("ralan") / 100)),100)));
+                                        kelas1.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas1") / 100)),100)));
+                                        kelas2.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas2") / 100)),100)));
+                                        kelas3.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas3") / 100)),100)));
+                                        utama.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("utama") / 100)),100)));
+                                        kelasvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vip") / 100)),100)));
+                                        kelasvvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vvip") / 100)),100)));
+                                        beliluar.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("beliluar") / 100)),100)));
+                                        jualbebas.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("jualbebas") / 100)),100)));
+                                        karyawan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("karyawan") / 100)),100)));
+                                    }else{
+                                        JOptionPane.showMessageDialog(null,"Pengaturan untuk jenis obat/alkes/bhp ini tidak ditemukan..!!");
+                                        TCari.requestFocus();
+                                    }
+                                }catch(Exception e){
+                                    System.out.println("Notifikasi : "+e);
+                                }finally{
+                                    if(rs!=null){
+                                        rs.close();
+                                    }
+                                }
                             }
-                        }catch(Exception e){
-                            System.out.println("Notifikasi : "+e);
-                        }finally{
-                            if(rs!=null){
-                                rs.close();
-                            }
-                        }   break;
-                    case "Umum":
-                        try{
-                            rs=koneksi.prepareStatement("select * from setpenjualanumum").executeQuery();
-                            if(rs.next()){
-                                ralan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("ralan") / 100)),100)));
-                                kelas1.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas1") / 100)),100)));
-                                kelas2.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas2") / 100)),100)));
-                                kelas3.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas3") / 100)),100)));
-                                utama.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("utama") / 100)),100)));
-                                kelasvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vip") / 100)),100)));
-                                kelasvvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vvip") / 100)),100)));
-                                beliluar.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("beliluar") / 100)),100)));
-                                jualbebas.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("jualbebas") / 100)),100)));
-                                karyawan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("karyawan") / 100)),100)));
+                            break;
+                        case "Umum":
+                            try{
+                                rs=koneksi.prepareStatement("select * from setpenjualanumum").executeQuery();
+                                if(rs.next()){
+                                    ralan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("ralan") / 100)),100)));
+                                    kelas1.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas1") / 100)),100)));
+                                    kelas2.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas2") / 100)),100)));
+                                    kelas3.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas3") / 100)),100)));
+                                    utama.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("utama") / 100)),100)));
+                                    kelasvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vip") / 100)),100)));
+                                    kelasvvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vvip") / 100)),100)));
+                                    beliluar.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("beliluar") / 100)),100)));
+                                    jualbebas.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("jualbebas") / 100)),100)));
+                                    karyawan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("karyawan") / 100)),100)));
+                                }else{
+                                    JOptionPane.showMessageDialog(null,"Pengaturan harga umum masih kosong..!!");
+                                    TCari.requestFocus();
+                                }
+                            }catch(Exception e){
+                                System.out.println("Notifikasi : "+e);
+                            }finally{
+                                if(rs!=null){
+                                    rs.close();
+                                }
+                            }   break;
+                        case "Per Barang":
+                            if(Kd.getText().equals("")){
+                                Valid.textKosong(Kd,"Kode Barang");
                             }else{
-                                JOptionPane.showMessageDialog(null,"Pengaturan harga umum masih kosong..!!");
-                                TCari.requestFocus();
+                                try{
+                                    rs=koneksi.prepareStatement("select * from setpenjualanperbarang where kode_brng='"+Kd.getText()+"'").executeQuery();
+                                    if(rs.next()){
+                                        ralan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("ralan") / 100)),100)));
+                                        kelas1.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas1") / 100)),100)));
+                                        kelas2.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas2") / 100)),100)));
+                                        kelas3.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas3") / 100)),100)));
+                                        utama.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("utama") / 100)),100)));
+                                        kelasvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vip") / 100)),100)));
+                                        kelasvvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vvip") / 100)),100)));
+                                        beliluar.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("beliluar") / 100)),100)));
+                                        jualbebas.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("jualbebas") / 100)),100)));
+                                        karyawan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("karyawan") / 100)),100)));
+                                    }else{
+                                        JOptionPane.showMessageDialog(null,"Pengaturan untuk obat/alkes/bhp ini tidak ditemukan..!!");
+                                        TCari.requestFocus();
+                                    }
+                                }catch(Exception e){
+                                    System.out.println("Notifikasi : "+e);
+                                }finally{
+                                    if(rs!=null){
+                                        rs.close();
+                                    }
+                                }
                             }
-                        }catch(Exception e){
-                            System.out.println("Notifikasi : "+e);
-                        }finally{
-                            if(rs!=null){
-                                rs.close();
-                            }
-                        }   break;
-                    case "Per Barang":
-                        try{
-                            rs=koneksi.prepareStatement("select * from setpenjualanperbarang where kode_brng='"+Kd.getText()+"'").executeQuery();
-                            if(rs.next()){
-                                ralan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("ralan") / 100)),100)));
-                                kelas1.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas1") / 100)),100)));
-                                kelas2.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas2") / 100)),100)));
-                                kelas3.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("kelas3") / 100)),100)));
-                                utama.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("utama") / 100)),100)));
-                                kelasvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vip") / 100)),100)));
-                                kelasvvip.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("vvip") / 100)),100)));
-                                beliluar.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("beliluar") / 100)),100)));
-                                jualbebas.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("jualbebas") / 100)),100)));
-                                karyawan.setText(Double.toString(Valid.roundUp(Double.parseDouble(beli.getText()) + (Double.parseDouble(beli.getText()) * (rs.getDouble("karyawan") / 100)),100)));
-                            }else{
-                                JOptionPane.showMessageDialog(null,"Pengaturan untuk obat/alkes/bhp ini tidak ditemukan..!!");
-                                TCari.requestFocus();
-                            }
-                        }catch(Exception e){
-                            System.out.println("Notifikasi : "+e);
-                        }finally{
-                            if(rs!=null){
-                                rs.close();
-                            }
-                        }   break;
-                    default:
-                        JOptionPane.showMessageDialog(null,"Pengaturan untuk obat/alkes/bhp belum disetting..!!");
-                        break;                    
-                }                    
-            }                
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
-        }
+                            break;
+                        default:
+                            JOptionPane.showMessageDialog(null,"Pengaturan untuk obat/alkes/bhp belum disetting..!!");
+                            break;                    
+                    }                    
+                }                               
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+            }
+        }            
     }
 
     private void isForm() {

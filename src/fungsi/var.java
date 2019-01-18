@@ -87,7 +87,8 @@ public final class var {
             pcare_cek_obat=false,pcare_cek_tindakan=false,pcare_cek_faskessubspesialis=false,pcare_cek_faskesalihrawat=false,
             pcare_cek_faskesthalasemia=false,pcare_mapping_obat=false,pcare_mapping_tindakan=false,pcare_club_prolanis=false,
             pcare_mapping_poli=false,pcare_kegiatan_kelompok=false,pcare_mapping_tindakan_ranap=false,pcare_peserta_kegiatan_kelompok=false,
-            sirkulasi_obat3=false,bridging_pcare_daftar=false,pcare_mapping_dokter=false,ranap_per_ruang=false;
+            sirkulasi_obat3=false,bridging_pcare_daftar=false,pcare_mapping_dokter=false,ranap_per_ruang=false,saldo_akun_perbulan=false,hais_perbangsal=false,
+            stok_opname_logistik=false,catatan_perawatan=false,jumlah_porsi_diet=false,jumlah_macam_diet=false;
     
     public static void setData(String user, String pass) {
        try {                
@@ -509,6 +510,12 @@ public final class var {
                         var.bridging_pcare_daftar=true;
                         var.pcare_mapping_dokter=true;
                         var.ranap_per_ruang=true;
+                         var.saldo_akun_perbulan=true;
+                         var.hais_perbangsal=true;
+                          var.stok_opname_logistik=true;
+                           var.catatan_perawatan=true;
+                           var.jumlah_porsi_diet=true;
+                        var.jumlah_macam_diet=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -639,6 +646,7 @@ public final class var {
                         var.surveilans_ralan=rs2.getBoolean("surveilans_ralan");
                         var.diagnosa_pasien=rs2.getBoolean("diagnosa_pasien");
                         var.surveilans_ranap=rs2.getBoolean("surveilans_ranap");
+                        var.saldo_akun_perbulan=rs2.getBoolean("saldo_akun_perbulan");
                         var.admin=false;
                         var.user=false;
                         var.vakum=false;
@@ -914,6 +922,11 @@ public final class var {
                         var.bridging_pcare_daftar=rs2.getBoolean("bridging_pcare_daftar");
                         var.pcare_mapping_dokter=rs2.getBoolean("pcare_mapping_dokter");
                         var.ranap_per_ruang=rs2.getBoolean("ranap_per_ruang");
+                        var.hais_perbangsal=rs2.getBoolean("hais_perbangsal");
+                        var.stok_opname_logistik=rs2.getBoolean("stok_opname_logistik");
+                        var.catatan_perawatan=rs2.getBoolean("catatan_perawatan");
+                          var.jumlah_porsi_diet=rs2.getBoolean("jumlah_porsi_diet");
+                        var.jumlah_macam_diet=rs2.getBoolean("jumlah_macam_diet");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         var.kode="";                  
                         var.penyakit= false;
@@ -1317,6 +1330,12 @@ public final class var {
                         var.bridging_pcare_daftar=false;
                         var.pcare_mapping_dokter=false;
                         var.ranap_per_ruang=false;
+                        var.saldo_akun_perbulan=false;
+                        var.hais_perbangsal=false;
+                        var.stok_opname_logistik=false;
+                        var.catatan_perawatan=false;
+                        var.jumlah_porsi_diet=false;
+                        var.jumlah_macam_diet=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -1772,4 +1791,10 @@ public final class var {
     public static boolean getbridging_pcare_daftar(){return var.bridging_pcare_daftar;}
     public static boolean getpcare_mapping_dokter(){return var.pcare_mapping_dokter;}
     public static boolean getranap_per_ruang(){return var.ranap_per_ruang;}
+     public static boolean getsaldo_akun_perbulan(){return var.saldo_akun_perbulan;}
+       public static boolean gethais_perbangsal(){return var.hais_perbangsal;}
+        public static boolean getstok_opname_logistik(){return var.stok_opname_logistik;}
+        public static boolean getcatatan_perawatan(){return var.catatan_perawatan;}
+        public static boolean getjumlah_porsi_diet(){return var.jumlah_porsi_diet;}
+    public static boolean getjumlah_macam_diet(){return var.jumlah_macam_diet;}
 }   

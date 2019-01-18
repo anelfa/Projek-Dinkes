@@ -845,7 +845,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.setWarnaBawah(new java.awt.Color(245, 250, 240));
         internalFrame2.setLayout(null);
 
-        norawat.setHighlighter(null);
         norawat.setName("norawat"); // NOI18N
         norawat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -856,12 +855,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
         norawat.setBounds(75, 25, 150, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         internalFrame2.add(TPasien);
         TPasien.setBounds(359, 25, 269, 23);
 
-        kdkamar.setHighlighter(null);
         kdkamar.setName("kdkamar"); // NOI18N
         kdkamar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -878,7 +875,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         ttlbiaya.setEditable(false);
         ttlbiaya.setText("0");
-        ttlbiaya.setHighlighter(null);
         ttlbiaya.setName("ttlbiaya"); // NOI18N
         ttlbiaya.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -916,7 +912,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         btnReg.setBounds(630, 25, 28, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         internalFrame2.add(TNoRM);
         TNoRM.setBounds(227, 25, 130, 23);
@@ -994,7 +989,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         cmbJam.setBounds(75, 115, 48, 23);
 
         TBangsal.setEditable(false);
-        TBangsal.setHighlighter(null);
         TBangsal.setName("TBangsal"); // NOI18N
         TBangsal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1011,7 +1005,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel11.setBounds(173, 145, 15, 23);
 
         TJmlHari.setText("0");
-        TJmlHari.setHighlighter(null);
         TJmlHari.setName("TJmlHari"); // NOI18N
         internalFrame2.add(TJmlHari);
         TJmlHari.setBounds(75, 145, 96, 23);
@@ -1096,7 +1089,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel16.setBounds(0, 145, 72, 23);
 
         TTarif.setText("0");
-        TTarif.setHighlighter(null);
         TTarif.setName("TTarif"); // NOI18N
         internalFrame2.add(TTarif);
         TTarif.setBounds(188, 145, 160, 23);
@@ -1112,7 +1104,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.add(jLabel18);
         jLabel18.setBounds(275, 85, 140, 23);
 
-        diagnosaawal.setHighlighter(null);
         diagnosaawal.setName("diagnosaawal"); // NOI18N
         diagnosaawal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1122,7 +1113,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame2.add(diagnosaawal);
         diagnosaawal.setBounds(418, 85, 240, 23);
 
-        diagnosaakhir.setHighlighter(null);
         diagnosaakhir.setName("diagnosaakhir"); // NOI18N
         diagnosaakhir.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2728,18 +2718,15 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame3.setLayout(null);
 
         norawatpindah.setEditable(false);
-        norawatpindah.setHighlighter(null);
         norawatpindah.setName("norawatpindah"); // NOI18N
         internalFrame3.add(norawatpindah);
         norawatpindah.setBounds(75, 25, 150, 23);
 
         TPasienpindah.setEditable(false);
-        TPasienpindah.setHighlighter(null);
         TPasienpindah.setName("TPasienpindah"); // NOI18N
         internalFrame3.add(TPasienpindah);
         TPasienpindah.setBounds(359, 25, 299, 23);
 
-        kdkamarpindah.setHighlighter(null);
         kdkamarpindah.setName("kdkamarpindah"); // NOI18N
         kdkamarpindah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2751,7 +2738,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         ttlbiayapindah.setEditable(false);
         ttlbiayapindah.setText("0");
-        ttlbiayapindah.setHighlighter(null);
         ttlbiayapindah.setName("ttlbiayapindah"); // NOI18N
         internalFrame3.add(ttlbiayapindah);
         ttlbiayapindah.setBounds(368, 115, 290, 23);
@@ -2767,7 +2753,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel20.setBounds(0, 55, 72, 23);
 
         TNoRMpindah.setEditable(false);
-        TNoRMpindah.setHighlighter(null);
         TNoRMpindah.setName("TNoRMpindah"); // NOI18N
         internalFrame3.add(TNoRMpindah);
         TNoRMpindah.setBounds(227, 25, 130, 23);
@@ -2810,7 +2795,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         cmbJampindah.setBounds(350, 85, 55, 23);
 
         TBangsalpindah.setEditable(false);
-        TBangsalpindah.setHighlighter(null);
         TBangsalpindah.setName("TBangsalpindah"); // NOI18N
         TBangsalpindah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2827,7 +2811,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel28.setBounds(173, 115, 15, 23);
 
         TJmlHaripindah.setText("1");
-        TJmlHaripindah.setHighlighter(null);
         TJmlHaripindah.setName("TJmlHaripindah"); // NOI18N
         internalFrame3.add(TJmlHaripindah);
         TJmlHaripindah.setBounds(75, 115, 96, 23);
@@ -2895,7 +2878,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         TTarifpindah.setEditable(false);
         TTarifpindah.setText("0");
-        TTarifpindah.setHighlighter(null);
         TTarifpindah.setName("TTarifpindah"); // NOI18N
         internalFrame3.add(TTarifpindah);
         TTarifpindah.setBounds(188, 115, 160, 23);
@@ -2992,7 +2974,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame5.add(jLabel17);
         jLabel17.setBounds(0, 32, 77, 23);
 
-        kdpenjab.setHighlighter(null);
         kdpenjab.setName("kdpenjab"); // NOI18N
         kdpenjab.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3062,7 +3043,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame6.add(jLabel34);
         jLabel34.setBounds(2, 30, 87, 23);
 
-        NoRmBayi.setHighlighter(null);
         NoRmBayi.setName("NoRmBayi"); // NOI18N
         NoRmBayi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3103,7 +3083,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         internalFrame6.add(BtnHapusGabung);
         BtnHapusGabung.setBounds(123, 70, 100, 30);
 
-        NoRawatGabung.setHighlighter(null);
         NoRawatGabung.setName("NoRawatGabung"); // NOI18N
         internalFrame6.add(NoRawatGabung);
         NoRawatGabung.setBounds(230, 220, 190, 23);
@@ -3380,7 +3359,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(R2);
 
         DTPCari1.setEditable(false);
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2018" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2019" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -3404,7 +3383,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(jLabel22);
 
         DTPCari2.setEditable(false);
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2018" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2019" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3432,7 +3411,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(R3);
 
         DTPCari3.setEditable(false);
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2018" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2019" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -3456,7 +3435,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(jLabel25);
 
         DTPCari4.setEditable(false);
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2018" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2019" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -3482,6 +3461,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbKamIn.setAutoCreateRowSorter(true);
         tbKamIn.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         tbKamIn.setComponentPopupMenu(jPopupMenu1);
         tbKamIn.setName("tbKamIn"); // NOI18N
@@ -3509,7 +3489,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelGlass9.add(jLabel5);
 
         TNoRw1.setEditable(false);
-        TNoRw1.setHighlighter(null);
         TNoRw1.setName("TNoRw1"); // NOI18N
         TNoRw1.setPreferredSize(new java.awt.Dimension(140, 23));
         panelGlass9.add(TNoRw1);
@@ -3520,7 +3499,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelGlass9.add(jLabel9);
 
         TNoRM1.setEditable(false);
-        TNoRM1.setHighlighter(null);
         TNoRM1.setName("TNoRM1"); // NOI18N
         TNoRM1.setPreferredSize(new java.awt.Dimension(90, 23));
         panelGlass9.add(TNoRM1);
@@ -3531,7 +3509,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelGlass9.add(jLabel36);
 
         TPasien1.setEditable(false);
-        TPasien1.setHighlighter(null);
         TPasien1.setName("TPasien1"); // NOI18N
         TPasien1.setPreferredSize(new java.awt.Dimension(250, 23));
         panelGlass9.add(TPasien1);
@@ -6120,7 +6097,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 diagnosa.setLocationRelativeTo(internalFrame1);
                 diagnosa.isCek();
                 diagnosa.setNoRm(norawat.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"Ranap");
-                diagnosa.tampil();
+                diagnosa.panelDiagnosa1.tampil();
                 diagnosa.setVisible(true);
         }
     }//GEN-LAST:event_btnDiagnosaActionPerformed
@@ -6312,7 +6289,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                             date=DTPCari2.getDate();
                         }
                         diagnosa.setNoRm(rs2.getString("no_rawat2"),date,DTPCari2.getDate(),"Ranap");
-                        diagnosa.tampil();
+                        diagnosa.panelDiagnosa1.tampil();
                         diagnosa.setVisible(true);  
                     }else{
                         JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
@@ -6342,7 +6319,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 date=DTPCari2.getDate();
             }
             diagnosa.setNoRm(norawat.getText(),date,DTPCari2.getDate(),"Ranap");
-            diagnosa.tampil();
+            diagnosa.panelDiagnosa1.tampil();
             diagnosa.setVisible(true);  
         }        
     }//GEN-LAST:event_MnDiagnosaActionPerformed
