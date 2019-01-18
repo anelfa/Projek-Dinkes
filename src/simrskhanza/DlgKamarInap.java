@@ -700,6 +700,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenggunaanKamar = new javax.swing.JMenuItem();
         MnPengantarPulang = new javax.swing.JMenuItem();
         MnFormulirPenerimaan = new javax.swing.JMenuItem();
+        MnCetakRegister = new javax.swing.JMenuItem();
         MnUpdateHari = new javax.swing.JMenuItem();
         MnDPJP = new javax.swing.JMenuItem();
         MnDPJPRanap = new javax.swing.JMenuItem();
@@ -2131,6 +2132,24 @@ public class DlgKamarInap extends javax.swing.JDialog {
         });
         MnLaporan.add(MnFormulirPenerimaan);
 
+        MnCetakRegister.setBackground(new java.awt.Color(255, 255, 255));
+        MnCetakRegister.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakRegister.setForeground(new java.awt.Color(130, 100, 100));
+        MnCetakRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakRegister.setText("Bukti Register");
+        MnCetakRegister.setAutoscrolls(true);
+        MnCetakRegister.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakRegister.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakRegister.setIconTextGap(5);
+        MnCetakRegister.setName("MnCetakRegister"); // NOI18N
+        MnCetakRegister.setPreferredSize(new java.awt.Dimension(320, 26));
+        MnCetakRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakRegisterActionPerformed(evt);
+            }
+        });
+        MnLaporan.add(MnCetakRegister);
+
         jPopupMenu1.add(MnLaporan);
 
         MnUpdateHari.setBackground(new java.awt.Color(255, 255, 255));
@@ -3359,7 +3378,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(R2);
 
         DTPCari1.setEditable(false);
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2019" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-01-2019" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -3383,7 +3402,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(jLabel22);
 
         DTPCari2.setEditable(false);
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2019" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-01-2019" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3411,7 +3430,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(R3);
 
         DTPCari3.setEditable(false);
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2019" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-01-2019" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -3435,7 +3454,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         panelCari.add(jLabel25);
 
         DTPCari4.setEditable(false);
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2019" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-01-2019" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -3670,6 +3689,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnOutKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+       int quetion =   JOptionPane.showConfirmDialog(
+            null,
+            "Apakah Anda Ingin Menghapus Data Ini ?",
+            "Warning",
+            JOptionPane.YES_NO_OPTION);
+              if(quetion == JOptionPane.YES_OPTION){
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             norawat.requestFocus();
@@ -3692,6 +3717,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
         }
 
         emptTeks();
+              }
+              
+              else
+              {}
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -8177,6 +8206,34 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
        
     }//GEN-LAST:event_MnGelangRanapActionPerformed
 
+    private void MnCetakRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakRegisterActionPerformed
+        if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",var.getnamars());
+            param.put("alamatrs",var.getalamatrs());
+            param.put("kotars",var.getkabupatenrs());
+            param.put("propinsirs",var.getpropinsirs());
+            param.put("kontakrs",var.getkontakrs());
+            param.put("emailrs",var.getemailrs());
+            param.put("ruang",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),7).toString());
+            param.put("dpjp",tbKamIn.getValueAt(tbKamIn.getSelectedRow(),18).toString());
+            param.put("logo",Sequel.cariGambar("select logo from setting"));
+
+            Valid.MyReport("rptBuktiRegisterRanap.jrxml","report","::[ Bukti Register ]::",
+                "select reg_periksa.no_reg as no_antrian,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+                "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,concat(reg_periksa.thn_umur,' Th ',reg_periksa.bln_umur,' Bl ',reg_periksa.hr_umur,' Hr')as umur,poliklinik.nm_poli,"+
+                "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.nm_user "+
+                "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
+                "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='"+TNoRw1.getText()+"' ",param);
+            this.setCursor(Cursor.getDefaultCursor());
+
+        }
+    }//GEN-LAST:event_MnCetakRegisterActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -8234,6 +8291,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JMenuItem MnBilling;
     private javax.swing.JMenuItem MnCekKepesertaan;
     private javax.swing.JMenuItem MnCekNIK;
+    private javax.swing.JMenuItem MnCetakRegister;
     private javax.swing.JMenuItem MnDPJP;
     private javax.swing.JMenuItem MnDPJPRanap;
     private javax.swing.JMenuItem MnDeposit;
@@ -8768,6 +8826,12 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     }
     
     public void isCek(){
+        if(var.getkode().equals("Admin Utama")){
+             BtnHapus.setVisible(true);
+               
+            }else{
+                BtnHapus.setVisible(false);
+         }
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             namakamar=prop.getProperty("KAMARAKTIFRANAP");
@@ -8792,7 +8856,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         
         BtnSimpan.setEnabled(var.getkamar_inap());
         BtnSimpanpindah.setEnabled(var.getkamar_inap());
-        BtnHapus.setEnabled(var.getkamar_inap());
+//        BtnHapus.setEnabled(var.getkamar_inap());
         BtnPrint.setEnabled(var.getkamar_inap());
         MnRawatInap.setEnabled(var.gettindakan_ranap());
         MnRawatJalan.setEnabled(var.gettindakan_ralan());

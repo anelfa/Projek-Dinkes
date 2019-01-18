@@ -88,7 +88,8 @@ public final class var {
             pcare_cek_faskesthalasemia=false,pcare_mapping_obat=false,pcare_mapping_tindakan=false,pcare_club_prolanis=false,
             pcare_mapping_poli=false,pcare_kegiatan_kelompok=false,pcare_mapping_tindakan_ranap=false,pcare_peserta_kegiatan_kelompok=false,
             sirkulasi_obat3=false,bridging_pcare_daftar=false,pcare_mapping_dokter=false,ranap_per_ruang=false,saldo_akun_perbulan=false,hais_perbangsal=false,
-            stok_opname_logistik=false,catatan_perawatan=false,jumlah_porsi_diet=false,jumlah_macam_diet=false;
+            stok_opname_logistik=false,catatan_perawatan=false,jumlah_porsi_diet=false,jumlah_macam_diet=false,sisrute_referensi_faskes=false,
+            sisrute_referensi_alasanrujuk=false,sisrute_referensi_diagnosa=false;
     
     public static void setData(String user, String pass) {
        try {                
@@ -516,6 +517,9 @@ public final class var {
                            var.catatan_perawatan=true;
                            var.jumlah_porsi_diet=true;
                         var.jumlah_macam_diet=true;
+                        var.sisrute_referensi_faskes=true;
+                        var.sisrute_referensi_alasanrujuk=true;
+                        var.sisrute_referensi_diagnosa=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -927,6 +931,9 @@ public final class var {
                         var.catatan_perawatan=rs2.getBoolean("catatan_perawatan");
                           var.jumlah_porsi_diet=rs2.getBoolean("jumlah_porsi_diet");
                         var.jumlah_macam_diet=rs2.getBoolean("jumlah_macam_diet");
+                        var.sisrute_referensi_faskes=rs2.getBoolean("sisrute_referensi_faskes");
+                        var.sisrute_referensi_alasanrujuk=rs2.getBoolean("sisrute_referensi_alasanrujuk");
+                        var.sisrute_referensi_diagnosa=rs2.getBoolean("sisrute_referensi_diagnosa");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         var.kode="";                  
                         var.penyakit= false;
@@ -1336,6 +1343,9 @@ public final class var {
                         var.catatan_perawatan=false;
                         var.jumlah_porsi_diet=false;
                         var.jumlah_macam_diet=false;
+                         var.sisrute_referensi_faskes=false;
+                        var.sisrute_referensi_alasanrujuk=false;
+                        var.sisrute_referensi_diagnosa=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -1797,4 +1807,7 @@ public final class var {
         public static boolean getcatatan_perawatan(){return var.catatan_perawatan;}
         public static boolean getjumlah_porsi_diet(){return var.jumlah_porsi_diet;}
     public static boolean getjumlah_macam_diet(){return var.jumlah_macam_diet;}
+     public static boolean getsisrute_referensi_faskes(){return var.sisrute_referensi_faskes;}
+    public static boolean getsisrute_referensi_alasanrujuk(){return var.sisrute_referensi_alasanrujuk;}
+    public static boolean getsisrute_referensi_diagnosa(){return var.sisrute_referensi_diagnosa;}
 }   

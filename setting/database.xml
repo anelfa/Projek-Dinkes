@@ -25,13 +25,18 @@
     <entry key="BRIDGEANTRIANP3DBASE">//10.50.150.20/foto int/antrian/RSUDKramatJati/data/qeue.mdb</entry> <!--DATABASE SHARE-->
     <!--End Antrian-->
     <!-- ALARM-->
-     <entry key="ALARMAPOTEK">yes</entry>
+    <entry key="ALARMAPOTEK">yes</entry>
     <entry key="FORMALARMAPOTEK">ralan + ranap</entry>
     <entry key="ALARMLAB">yes</entry>
     <entry key="FORMALARMLAB">ralan + ranap</entry>
     <entry key="ALARMRADIOLOGI">yes</entry>
     <entry key="FORMALARMRADIOLOGI">ralan + ranap</entry>
      <!--End ALARM-->
+     <!-- SISRUTE-->
+    <entry key="URLAPISISRUTE">https://api.sisrute.kemkes.go.id</entry>
+    <entry key="IDSISRUTE">7303010</entry>
+    <entry key="PASSSISRUTE">12345</entry>
+    <!--End SISRUTE-->
     <!-- LIS -->
     <entry key="IPLISSHARE">10.50.150.20/sharing</entry>
     <entry key="ANTRIAN">player</entry>

@@ -15740,6 +15740,20 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
                 Panelmenu.add(btnCekPCareRujukan);
                 jmlmenu++;
             }
+            if(var.getsisrute_referensi_faskes()==true){
+                Panelmenu.add(btnCekSisruteFaskes);
+                jmlmenu++;
+            }
+            
+            if(var.getsisrute_referensi_alasanrujuk()==true){
+                Panelmenu.add(btnCekSisruteAlasanRujuk);
+                jmlmenu++;
+            }
+            
+            if(var.getsisrute_referensi_diagnosa()==true){
+                Panelmenu.add(btnCekSisruteDiagnosa);
+                jmlmenu++;
+            }
         }else if(cmbMenu.getSelectedIndex()==11){ 
             jmlmenu=0;
             if(var.getperusahaan_pasien()==true){
@@ -17742,7 +17756,20 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
             Panelmenu.add(btnCekPCareRujukan);
             jmlmenu++;
         }
+        if(var.getsisrute_referensi_faskes()==true){
+            Panelmenu.add(btnCekSisruteFaskes);
+            jmlmenu++;
+        }
+        
+        if(var.getsisrute_referensi_alasanrujuk()==true){
+            Panelmenu.add(btnCekSisruteAlasanRujuk);
+            jmlmenu++;
+        }
 
+        if(var.getsisrute_referensi_diagnosa()==true){
+            Panelmenu.add(btnCekSisruteDiagnosa);
+            jmlmenu++;
+        }
         if(var.getperusahaan_pasien()==true){
             Panelmenu.add(btnPerusahaan);
             jmlmenu++;
@@ -20336,7 +20363,26 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
                 jmlmenu++;
             }                
         }
-
+        if(var.getsisrute_referensi_faskes()==true){
+            if(btnCekSisruteFaskes.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnCekSisruteFaskes);
+                jmlmenu++;
+            }                
+        }
+        
+        if(var.getsisrute_referensi_alasanrujuk()==true){
+            if(btnCekSisruteAlasanRujuk.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnCekSisruteAlasanRujuk);
+                jmlmenu++;
+            }                
+        }
+        
+        if(var.getsisrute_referensi_diagnosa()==true){
+            if(btnCekSisruteDiagnosa.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnCekSisruteDiagnosa);
+                jmlmenu++;
+            }                
+        }
         if(var.getperusahaan_pasien()==true){
             if(btnPerusahaan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPerusahaan);
