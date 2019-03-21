@@ -13,7 +13,7 @@
     <entry key="PORTWEB">80</entry>
     <!--    PROXY DISKOMINFO JAKARTA-->
     <entry key="PROXY">NO</entry> <!--NO:YES-->
-    <entry key="PROXY_IP">10.15.3.20</entry>
+    <entry key="PROXY_IP">10.15.3.21</entry>
     <entry key="PROXY_PORT">80</entry>
     <!--    END PROXY DISKOMINFO JAKARTA-->
     <!--UPDATE-->
@@ -41,9 +41,10 @@
     <entry key="IPLISSHARE">10.50.150.20/sharing</entry>
     <entry key="ANTRIAN">player</entry>
     <entry key="MENUTRANSPARAN">yes</entry>
+    <!-- End Antrian-->
     <entry key="URLAPIBPJS">https://dvlp.bpjs-kesehatan.go.id/vclaim-rest</entry>
-    <entry key="SECRETKEYAPIBPJS">3jYC24C6A0</entry>
-    <entry key="CONSIDAPIBPJS">2724</entry>
+    <entry key="SECRETKEYAPIBPJS">7lH3C91B3A</entry>
+    <entry key="CONSIDAPIBPJS">17643</entry>
     <entry key="URLAPIAPLICARE">http://api.bpjs-kesehatan.go.id/aplicaresws</entry>
     <entry key="SECRETKEYAPIAPLICARE">9yU9F682BF</entry>
     <entry key="CONSIDAPIAPLICARE">3024</entry>
