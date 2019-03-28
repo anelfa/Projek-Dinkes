@@ -115,8 +115,8 @@ public final class DlgReg extends javax.swing.JDialog {
      Connection Conn = null;
 public Statement stat,s;
 public String sql="";
- private String POLI1,POLI1KODE,POLI2,POLI2KODE,POLI3,POLI3KODE,POLI4,POLI4KODE,POLI5,POLI5KODE,POLI6,POLI6KODE,POLI7,POLI7KODE,POLI8,POLI8KODE,POLI9,POLI9KODE,POLI10,POLI10KODE,POLI11,POLI11KODE,POLI12,POLI12KODE,POLI13,POLI13KODE,POLI14,POLI14KODE,POLI15,POLI15KODE;
-    private String BRIDGEANTRIANP3AUTO="",BRIDGEANTRIANP3="",BRIDGEANTRIANP3DBASE="",awalan,pengurutan="",th_umur="0",bl_umur="0",hr_umur="0",username="",BASENOREG="",URUTNOREG="",status="Baru",order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc",alamatperujuk="-",aktifjadwal="",IPPRINTERTRACER="",umur="0",sttsumur="Th",
+ private String  POLI1,POLI1KODE,POLI2,POLI2KODE,POLI3,POLI3KODE,POLI4,POLI4KODE,POLI5,POLI5KODE,POLI6,POLI6KODE,POLI7,POLI7KODE,POLI8,POLI8KODE,POLI9,POLI9KODE,POLI10,POLI10KODE,POLI11,POLI11KODE,POLI12,POLI12KODE,POLI13,POLI13KODE,POLI14,POLI14KODE,POLI15,POLI15KODE;
+    private String nosisrute="", BRIDGEANTRIANP3AUTO="",BRIDGEANTRIANP3="",BRIDGEANTRIANP3DBASE="",awalan,pengurutan="",th_umur="0",bl_umur="0",hr_umur="0",username="",BASENOREG="",URUTNOREG="",status="Baru",order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc",alamatperujuk="-",aktifjadwal="",IPPRINTERTRACER="",umur="0",sttsumur="Th",
             validasiregistrasi=Sequel.cariIsi("select wajib_closing_kasir from set_validasi_registrasi"),
             validasicatatan=Sequel.cariIsi("select tampilkan_catatan from set_validasi_catatan");
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
@@ -9615,5 +9615,29 @@ conn.close();
             }                
         } 
         Sequel.AutoComitTrue();
+    }
+    
+     public void SetPasien(String norm,String nosisrute,String FaskesAsal){
+        ChkInput.setSelected(true);
+        isForm(); 
+        TNoRM.setText(norm);
+        this.nosisrute=nosisrute;
+        AsalRujukan.setText(FaskesAsal);
+        isPas();
+    }
+    
+    public void setPasien(String NamaPasien,String Kontak,String Alamat,String TempatLahir,String TglLahir,
+            String JK,String NoKartuJKN,String NIK,String nosisrute,String FaskesAsal){
+        var.setform("DlgReg");
+        ChkInput.setSelected(true);
+        isForm(); 
+        pasien.emptTeks();
+        pasien.isCek();
+        this.nosisrute=nosisrute;
+        AsalRujukan.setText(FaskesAsal);
+        pasien.setPasien(NamaPasien, Kontak, Alamat, TempatLahir, TglLahir, JK, NoKartuJKN, NIK);
+        pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        pasien.setLocationRelativeTo(internalFrame1);
+        pasien.setVisible(true);
     }
 }

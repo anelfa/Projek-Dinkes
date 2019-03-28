@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="288" columnWidth="533" leftMargin="42" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="473"/>
+	<property name="ireport.y" value="30"/>
 	<parameter name="parameter" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -471,14 +471,14 @@ bridging_sep.asal_rujukan,bridging_sep.eksekutif,bridging_sep.cob,bridging_sep.p
 				<textElement lineSpacing="Single">
 					<font fontName="Tahoma" size="9"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{cob}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cob}.replaceAll("0. Tidak","-").replaceAll("1.Ya","YA")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement mode="Transparent" x="400" y="93" width="132" height="11"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Tahoma" size="9"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{penjamin}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{penjamin}.replaceAll("","").replaceAll("0","").replaceAll("1","Jasa Raharja PT").replaceAll("2","BPJS Ketenagakerjaan").replaceAll("3","TASPEN PT").replaceAll("4","ASABRI PT")]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="392" y="93" width="7" height="11"/>

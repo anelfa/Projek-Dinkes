@@ -46,8 +46,8 @@
     <entry key="SECRETKEYAPIBPJS">7lH3C91B3A</entry>
     <entry key="CONSIDAPIBPJS">17643</entry>
     <entry key="URLAPIAPLICARE">http://api.bpjs-kesehatan.go.id/aplicaresws</entry>
-    <entry key="SECRETKEYAPIAPLICARE">9yU9F682BF</entry>
-    <entry key="CONSIDAPIAPLICARE">3024</entry>
+    <entry key="SECRETKEYAPIAPLICARE">8cG0606137</entry>
+    <entry key="CONSIDAPIAPLICARE">12151</entry>
     <entry key="URLAPIPCARE">https://dvlp.bpjs-kesehatan.go.id:9081/pcare-rest-v3.0</entry>
     <entry key="SECRETKEYAPIPCARE">7nR046993B</entry>
     <entry key="CONSIDAPIPCARE">1223</entry>
@@ -63,8 +63,8 @@
     <entry key="URLAPIINHEALTH">http://dummy.inhealth.co.id/pelkesws2</entry>
     <entry key="TOKENINHEALTH">WhTCrcPRDrv5d1JZAFEBrw==</entry>
     <entry key="PEMBULATANHARGAOBAT">no</entry>
-    <entry key="AKTIFKANBATCHOBAT">yes</entry>
-    <entry key="CETAKRINCIANOBAT">yes</entry>
+    <entry key="AKTIFKANBATCHOBAT">no</entry>
+    <entry key="CETAKRINCIANOBAT">no</entry>
     <entry key="AKTIFKANBILLINGPARSIAL">no</entry>
      <!--WS DUKCAPIL-->
      <entry key="URLDUKCAPILJAKARTA">http://10.0.0.20/wsrs/xml.jsp</entry>

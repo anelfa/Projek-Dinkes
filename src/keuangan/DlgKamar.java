@@ -47,7 +47,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
-    private String asalform="";
+    private String asalform="",ubah_status_kamar=Sequel.cariIsi("select ubah_status_kamar from set_jam_minimal");
 
     /** Creates new form DlgKamar
      * @param parent
@@ -111,11 +111,23 @@ public final class DlgKamar extends javax.swing.JDialog {
         if(koneksiDB.cariCepat().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
-                public void insertUpdate(DocumentEvent e) {tampil();}
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil();
+                    }
+                }
                 @Override
-                public void removeUpdate(DocumentEvent e) {tampil();}
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil();
+                    }
+                }
                 @Override
-                public void changedUpdate(DocumentEvent e) {tampil();}
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil();
+                    }
+                }
             });
         }  
         panelCari.setVisible(false);
@@ -213,9 +225,9 @@ public final class DlgKamar extends javax.swing.JDialog {
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
-        MnRestore.setBackground(new java.awt.Color(255, 255, 255));
+        MnRestore.setBackground(new java.awt.Color(255, 255, 254));
         MnRestore.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnRestore.setForeground(new java.awt.Color(100, 80, 80));
+        MnRestore.setForeground(new java.awt.Color(70, 70, 70));
         MnRestore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnRestore.setText("Data Sampah");
         MnRestore.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -240,7 +252,7 @@ public final class DlgKamar extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Nomor Kamar ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(100, 80, 80))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Nomor Kamar ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70, 70, 70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -269,6 +281,7 @@ public final class DlgKamar extends javax.swing.JDialog {
 
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
+        PanelCariUtama.setBackground(new java.awt.Color(255, 255, 255));
         PanelCariUtama.setName("PanelCariUtama"); // NOI18N
         PanelCariUtama.setOpaque(false);
         PanelCariUtama.setPreferredSize(new java.awt.Dimension(100, 162));
@@ -482,7 +495,7 @@ public final class DlgKamar extends javax.swing.JDialog {
 
         BangsalCari.setEditable(false);
         BangsalCari.setName("BangsalCari"); // NOI18N
-        BangsalCari.setPreferredSize(new java.awt.Dimension(200, 23));
+        BangsalCari.setPreferredSize(new java.awt.Dimension(190, 23));
         panelCari.add(BangsalCari);
 
         btnKamarCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
@@ -507,10 +520,9 @@ public final class DlgKamar extends javax.swing.JDialog {
         jLabel11.setPreferredSize(new java.awt.Dimension(85, 23));
         panelCari.add(jLabel11);
 
-        CmbCrIsi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "ISI", "KOSONG" }));
+        CmbCrIsi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "ISI", "KOSONG", "DIBERSIHKAN", "DIBOOKING" }));
         CmbCrIsi.setName("CmbCrIsi"); // NOI18N
-        CmbCrIsi.setOpaque(false);
-        CmbCrIsi.setPreferredSize(new java.awt.Dimension(95, 23));
+        CmbCrIsi.setPreferredSize(new java.awt.Dimension(125, 23));
         CmbCrIsi.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 CmbCrIsiItemStateChanged(evt);
@@ -582,7 +594,7 @@ public final class DlgKamar extends javax.swing.JDialog {
             }
         });
         panelGlass4.add(TBangsal);
-        TBangsal.setBounds(158, 42, 250, 23);
+        TBangsal.setBounds(158, 42, 230, 23);
 
         jLabel8.setText("Tarif/Hari : Rp.");
         jLabel8.setName("jLabel8"); // NOI18N
@@ -597,23 +609,22 @@ public final class DlgKamar extends javax.swing.JDialog {
             }
         });
         panelGlass4.add(TTarif);
-        TTarif.setBounds(299, 12, 140, 23);
+        TTarif.setBounds(299, 12, 120, 23);
 
         jLabel9.setText("Stts.Kamar :");
         jLabel9.setName("jLabel9"); // NOI18N
         panelGlass4.add(jLabel9);
-        jLabel9.setBounds(440, 12, 90, 23);
+        jLabel9.setBounds(420, 12, 70, 23);
 
-        CmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISI", "KOSONG" }));
+        CmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISI", "KOSONG", "DIBERSIHKAN", "DIBOOKING" }));
         CmbStatus.setName("CmbStatus"); // NOI18N
-        CmbStatus.setOpaque(false);
         CmbStatus.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CmbStatusKeyPressed(evt);
             }
         });
         panelGlass4.add(CmbStatus);
-        CmbStatus.setBounds(534, 12, 85, 23);
+        CmbStatus.setBounds(494, 12, 125, 23);
 
         btnKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnKamar.setMnemonic('1');
@@ -630,7 +641,7 @@ public final class DlgKamar extends javax.swing.JDialog {
             }
         });
         panelGlass4.add(btnKamar);
-        btnKamar.setBounds(411, 42, 28, 23);
+        btnKamar.setBounds(391, 42, 28, 23);
 
         kd_bangsal.setHighlighter(null);
         kd_bangsal.setName("kd_bangsal"); // NOI18N
@@ -645,18 +656,17 @@ public final class DlgKamar extends javax.swing.JDialog {
         jLabel5.setText("Kelas :");
         jLabel5.setName("jLabel5"); // NOI18N
         panelGlass4.add(jLabel5);
-        jLabel5.setBounds(440, 42, 90, 23);
+        jLabel5.setBounds(420, 42, 70, 23);
 
         Kelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kelas 1", "Kelas 2", "Kelas 3", "Kelas Utama", "Kelas VIP", "Kelas VVIP" }));
         Kelas.setName("Kelas"); // NOI18N
-        Kelas.setOpaque(false);
         Kelas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 KelasKeyPressed(evt);
             }
         });
         panelGlass4.add(Kelas);
-        Kelas.setBounds(534, 42, 85, 23);
+        Kelas.setBounds(494, 42, 125, 23);
 
         internalFrame1.add(panelGlass4, java.awt.BorderLayout.PAGE_START);
 
@@ -1171,11 +1181,15 @@ private void CmbCrIsiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST
         TKd.setEditable(var.getkamar());
         TTarif.setEditable(var.getkamar());
         kd_bangsal.setEditable(var.getkamar());
-        Kelas.setEnabled(var.getkamar());
+        Kelas.setEnabled(var.getkamar());        
         asalform=var.getform();
         if(var.getkode().equals("Admin Utama")){
             MnRestore.setEnabled(true);
+            BtnEdit.setEnabled(true);
         }else{
+            if(ubah_status_kamar.equals("No")){
+                BtnEdit.setEnabled(false);
+            }
             MnRestore.setEnabled(false);
         }
      }

@@ -34,10 +34,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -82,7 +78,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             p_alamatpj=0,p_kelurahanpj=0,p_kecamatanpj=0,p_kabupatenpj=0,jmlhari=0,
             p_propinsi=0,p_propinsipj=0;
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
-    private String th_umur="0",bl_umur="0",hr_umur="0",username="", kdkel="",kdkec="",kdkab="",kdprop="",nosisrute="",BASENOREG="",URUTNOREG="",klg="SAUDARA",statuspasien="",pengurutan="",tahun="",bulan="",posisitahun="",awalantahun="",awalanbulan="",
+    private String th_umur="0",bl_umur="0",hr_umur="0",username="",kdkel="",kdkec="",kdkab="",kdprop="",nosisrute="",BASENOREG="",URUTNOREG="",klg="SAUDARA",statuspasien="",pengurutan="",tahun="",bulan="",posisitahun="",awalantahun="",awalanbulan="",
             no_ktp="",tmp_lahir="",nm_ibu="",alamat="",pekerjaan="",no_tlp="",tglkkl="0000-00-00",
             umur="",namakeluarga="",no_peserta="",kelurahan="",kecamatan="",sttsumur="",
             kabupaten="",pekerjaanpj="",alamatpj="",kelurahanpj="",kecamatanpj="",prb="",
@@ -1721,6 +1717,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
+        MnDocument.setBackground(new java.awt.Color(255, 255, 254));
         MnDocument.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnDocument.setForeground(new java.awt.Color(70, 70, 70));
         MnDocument.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
@@ -1737,6 +1734,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnDocument);
 
+        ppPengajuan.setBackground(new java.awt.Color(255, 255, 254));
         ppPengajuan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppPengajuan.setForeground(new java.awt.Color(70, 70, 70));
         ppPengajuan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
@@ -1753,6 +1751,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         });
         jPopupMenu1.add(ppPengajuan);
 
+        ppPengajuan1.setBackground(new java.awt.Color(255, 255, 254));
         ppPengajuan1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppPengajuan1.setForeground(new java.awt.Color(70, 70, 70));
         ppPengajuan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
@@ -2841,7 +2840,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel23);
         jLabel23.setBounds(495, 55, 90, 23);
 
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2019 18:03:36" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2019 23:14:39" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -3680,7 +3679,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         propinsikll.dispose();
         kabupatenkll.dispose();
         kecamatankll.dispose();
-//        var.setAktif(false);
+        var.setAktif(false);
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
@@ -5997,7 +5996,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                      KdKecamatan.getText(),NmKecamatan.getText(),NoSKDP.getText(),KdDPJP.getText(),NmDPJP.getText()
                  })==true){
                     if(JenisPelayanan.getSelectedIndex()==1){
-                        try {
+                        /*try {
                             headers2= new HttpHeaders();
                             headers2.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
                             headers2.add("X-Cons-ID",prop.getProperty("CONSIDAPIBPJS"));
@@ -6021,17 +6020,17 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                             System.out.println("code : "+nameNode.path("code").asText());
                             System.out.println("message : "+nameNode.path("message").asText());
                             response = root.path("response");
-                            if(nameNode.path("code").asText().equals("200")){
+                            if(nameNode.path("code").asText().equals("200")){*/
                                 Sequel.mengedit("bridging_sep","no_sep=?","tglpulang=?",2,new String[]{                             
                                      Valid.SetTgl(TanggalSEP.getSelectedItem()+"")+" "+TanggalSEP.getSelectedItem().toString().substring(11,19),
                                      response.asText()
                                 }); 
-                            }else{
+                            /*}else{
                                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
                             }
                         }catch (Exception ex) {
                             System.out.println("Notifikasi Bridging : "+ex);
-                        }
+                        }*/
                     }    
                     JOptionPane.showMessageDialog(null,"Proses Selesai...!");
                     if(!nosep.equals("")){
@@ -6089,7 +6088,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
     }
     
     private void inputRegistrasi(){
-         if (var.getkode()=="Admin Utama")
+        if (var.getkode()=="Admin Utama")
         {
         username=var.getkode();
         }
@@ -6100,22 +6099,12 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             pscariumur=koneksi.prepareStatement(
                 "select TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) as tahun, "+
                 "(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12)) as bulan, "+
-                "TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari, tgl_lahir "+
+                "TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari "+
                 "from pasien where no_rkm_medis=?");
             try {
                 pscariumur.setString(1,TNo.getText());                            
                 rs=pscariumur.executeQuery();
                 if(rs.next()){
-                      String tanggal = rs.getString("tgl_lahir");
-                    Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
-                    Date kini = new Date();
-                    LocalDate today =LocalDate.now();
-                    LocalDate birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    Period p = Period.between(birthday,today);
-                    long p2 =ChronoUnit.DAYS.between(birthday,today);
-                    th_umur=String.valueOf(p.getYears());
-                    bl_umur=String.valueOf(p.getMonths());
-                    hr_umur=String.valueOf(p.getDays());
                     umur="0";
                     sttsumur="Th";
                     if(rs.getInt("tahun")>0){
