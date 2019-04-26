@@ -5909,12 +5909,22 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
             pscariumur=koneksi.prepareStatement(
                 "select TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) as tahun, "+
                 "(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12)) as bulan, "+
-                "TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari "+
+                "TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()) as hari,tgl_lahir "+
                 "from pasien where no_rkm_medis=?");
             try {
                 pscariumur.setString(1,TNo.getText());                            
                 rs=pscariumur.executeQuery();
                 if(rs.next()){
+                    String tanggal = rs.getString("tgl_lahir");
+                    Date lahir = new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
+                    Date kini = new Date();
+                    LocalDate today =LocalDate.now();
+                    LocalDate birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    Period p = Period.between(birthday,today);
+                    long p2 =ChronoUnit.DAYS.between(birthday,today);
+                    th_umur=String.valueOf(p.getYears());
+                    bl_umur=String.valueOf(p.getMonths());
+                    hr_umur=String.valueOf(p.getDays());
                     umur="0";
                     sttsumur="Th";
                     if(rs.getInt("tahun")>0){

@@ -18,7 +18,7 @@ public class TabelRegistrasi extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-         String status = table.getValueAt(row, 19).toString();
+         String status = table.getValueAt(row, 12).toString();
         if (row % 2 == 1){
             component.setBackground(new Color(247,255,243));
         }else{

@@ -13,7 +13,7 @@
     <entry key="PORTWEB">80</entry>
     <!--    PROXY DISKOMINFO JAKARTA-->
     <entry key="PROXY">NO</entry> <!--NO:YES-->
-    <entry key="PROXY_IP">10.15.3.20</entry>
+    <entry key="PROXY_IP">10.15.3.21</entry>
     <entry key="PROXY_PORT">80</entry>
     <!--    END PROXY DISKOMINFO JAKARTA-->
     <!--UPDATE-->
@@ -25,23 +25,29 @@
     <entry key="BRIDGEANTRIANP3DBASE">//10.50.150.20/foto int/antrian/RSUDKramatJati/data/qeue.mdb</entry> <!--DATABASE SHARE-->
     <!--End Antrian-->
     <!-- ALARM-->
-     <entry key="ALARMAPOTEK">yes</entry>
+    <entry key="ALARMAPOTEK">yes</entry>
     <entry key="FORMALARMAPOTEK">ralan + ranap</entry>
     <entry key="ALARMLAB">yes</entry>
     <entry key="FORMALARMLAB">ralan + ranap</entry>
     <entry key="ALARMRADIOLOGI">yes</entry>
     <entry key="FORMALARMRADIOLOGI">ralan + ranap</entry>
      <!--End ALARM-->
+     <!-- SISRUTE-->
+    <entry key="URLAPISISRUTE">https://api.sisrute.kemkes.go.id</entry>
+    <entry key="IDSISRUTE">7303010</entry>
+    <entry key="PASSSISRUTE">12345</entry>
+    <!--End SISRUTE-->
     <!-- LIS -->
     <entry key="IPLISSHARE">10.50.150.20/sharing</entry>
     <entry key="ANTRIAN">player</entry>
     <entry key="MENUTRANSPARAN">yes</entry>
+    <!-- End Antrian-->
     <entry key="URLAPIBPJS">https://dvlp.bpjs-kesehatan.go.id/vclaim-rest</entry>
-    <entry key="SECRETKEYAPIBPJS">3jYC24C6A0</entry>
-    <entry key="CONSIDAPIBPJS">2724</entry>
+    <entry key="SECRETKEYAPIBPJS">7lH3C91B3A</entry>
+    <entry key="CONSIDAPIBPJS">17643</entry>
     <entry key="URLAPIAPLICARE">http://api.bpjs-kesehatan.go.id/aplicaresws</entry>
-    <entry key="SECRETKEYAPIAPLICARE">9yU9F682BF</entry>
-    <entry key="CONSIDAPIAPLICARE">3024</entry>
+    <entry key="SECRETKEYAPIAPLICARE">8cG0606137</entry>
+    <entry key="CONSIDAPIAPLICARE">12151</entry>
     <entry key="URLAPIPCARE">https://dvlp.bpjs-kesehatan.go.id:9081/pcare-rest-v3.0</entry>
     <entry key="SECRETKEYAPIPCARE">7nR046993B</entry>
     <entry key="CONSIDAPIPCARE">1223</entry>
@@ -57,8 +63,8 @@
     <entry key="URLAPIINHEALTH">http://dummy.inhealth.co.id/pelkesws2</entry>
     <entry key="TOKENINHEALTH">WhTCrcPRDrv5d1JZAFEBrw==</entry>
     <entry key="PEMBULATANHARGAOBAT">no</entry>
-    <entry key="AKTIFKANBATCHOBAT">yes</entry>
-    <entry key="CETAKRINCIANOBAT">yes</entry>
+    <entry key="AKTIFKANBATCHOBAT">no</entry>
+    <entry key="CETAKRINCIANOBAT">no</entry>
     <entry key="AKTIFKANBILLINGPARSIAL">no</entry>
      <!--WS DUKCAPIL-->
      <entry key="URLDUKCAPILJAKARTA">http://10.0.0.20/wsrs/xml.jsp</entry>

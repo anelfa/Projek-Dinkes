@@ -238,7 +238,9 @@ import bridging.ReklasifikasiRanap;
 import bridging.SiranapKetersediaanKamar;
 import bridging.SisruteRujukanKeluar;
 import bridging.SisruteRujukanMasukan;
+import custom.DlgDetailRemunDokter;
 import custom.DlgOnline;
+import custom.DlgOnline1;
 import custom.DlgPenunjang;
 import grafikanalisa.GrafikDemografiRegistrasi;
 import grafikanalisa.GrafikKejadianIKPPerBulan;
@@ -1046,6 +1048,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnRujukanMasukSisrute = new widget.ButtonBig();
         btnRujukanKeluarSisrute = new widget.ButtonBig();
         btnSiranapKetersediaanKamar = new widget.ButtonBig();
+        btnRemunDokter = new widget.ButtonBig();
         tanggal = new widget.Tanggal();
         btnDataPenjualan = new widget.ButtonBig();
         btnInputPenjualan = new widget.ButtonBig();
@@ -6551,6 +6554,18 @@ public class frmUtama extends javax.swing.JFrame {
         });
         Panelmenu.add(btnSiranapKetersediaanKamar);
 
+        btnRemunDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/coins.png"))); // NOI18N
+        btnRemunDokter.setText("Remun Dokter");
+        btnRemunDokter.setIconTextGap(0);
+        btnRemunDokter.setName("btnRemunDokter"); // NOI18N
+        btnRemunDokter.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRemunDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemunDokterActionPerformed(evt);
+            }
+        });
+        Panelmenu.add(btnRemunDokter);
+
         scrollPane2.setViewportView(Panelmenu);
 
         panelMenu.add(scrollPane2, java.awt.BorderLayout.CENTER);
@@ -6559,7 +6574,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28/03/2019" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26/04/2019" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -13556,6 +13571,19 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnSiranapKetersediaanKamarActionPerformed
 
+    private void btnRemunDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemunDokterActionPerformed
+        
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgDetailRemunDokter remun=new DlgDetailRemunDokter(this,false);
+        remun.isCek();
+        remun.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        remun.setLocationRelativeTo(PanelUtama);
+        remun.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());            // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemunDokterActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -13921,6 +13949,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private widget.ButtonBig btnRekeningTahun;
     private widget.ButtonBig btnReklasifikasiRalan;
     private widget.ButtonBig btnReklasifikasiRanap;
+    private widget.ButtonBig btnRemunDokter;
     private widget.ButtonBig btnResepObat;
     private widget.ButtonBig btnResepObatDepan;
     private widget.ButtonBig btnResepPulang;
@@ -14356,7 +14385,28 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         }else if(jmlmenu<=400){
             Panelmenu.setLayout(new GridLayout(0,5));
             Panelmenu.setPreferredSize(new Dimension(scrollPane2.getWidth()-10,scrollPane2.getHeight()+((scrollPane2.getHeight()/4)*80)));
-        }                                                
+        }    else if(jmlmenu<=405){
+            Panelmenu.setLayout(new GridLayout(0,5));
+            Panelmenu.setPreferredSize(new Dimension(scrollPane2.getWidth()-10,scrollPane2.getHeight()+((scrollPane2.getHeight()/4)*77)));
+        }else if(jmlmenu<=410){
+            Panelmenu.setLayout(new GridLayout(0,5));
+            Panelmenu.setPreferredSize(new Dimension(scrollPane2.getWidth()-10,scrollPane2.getHeight()+((scrollPane2.getHeight()/4)*78)));
+        }else if(jmlmenu<=415){
+            Panelmenu.setLayout(new GridLayout(0,5));
+            Panelmenu.setPreferredSize(new Dimension(scrollPane2.getWidth()-10,scrollPane2.getHeight()+((scrollPane2.getHeight()/4)*79)));
+        }else if(jmlmenu<=420){
+            Panelmenu.setLayout(new GridLayout(0,5));
+            Panelmenu.setPreferredSize(new Dimension(scrollPane2.getWidth()-10,scrollPane2.getHeight()+((scrollPane2.getHeight()/4)*80)));
+        }else if(jmlmenu<=425){
+            Panelmenu.setLayout(new GridLayout(0,5));
+            Panelmenu.setPreferredSize(new Dimension(scrollPane2.getWidth()-10,scrollPane2.getHeight()+((scrollPane2.getHeight()/4)*81)));
+        }else if(jmlmenu<=430){
+            Panelmenu.setLayout(new GridLayout(0,5));
+            Panelmenu.setPreferredSize(new Dimension(scrollPane2.getWidth()-10,scrollPane2.getHeight()+((scrollPane2.getHeight()/4)*82)));
+        }else if(jmlmenu<=435){
+            Panelmenu.setLayout(new GridLayout(0,5));
+            Panelmenu.setPreferredSize(new Dimension(scrollPane2.getWidth()-10,scrollPane2.getHeight()+((scrollPane2.getHeight()/4)*83)));
+        }                                              
         Panelmenu.repaint(); 
         DlgHome.setVisible(true);               
     }
@@ -14421,7 +14471,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     }
 
     private void isCombo() {
-        if(cmbMenu.getSelectedIndex()==0){
+        if(cmbMenu.getSelectedIndex()==0){ 
             jmlmenu=0;     
             if(var.getinformasi_kamar()==true){
                 Panelmenu.add(btnAnalisaKamar);
@@ -15575,7 +15625,11 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
             if(var.getkeuangan()==true){
                 Panelmenu.add(btnLabaRugi);
                 jmlmenu++;
-            }                               
+            }   
+            if(var.getkeuangan()==true){
+                Panelmenu.add(btnRemunDokter);
+                jmlmenu++;
+            }  
 
         }else if(cmbMenu.getSelectedIndex()==10){ 
             jmlmenu=0;
@@ -17625,13 +17679,15 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
             Panelmenu.add(btnCashFlow);
             jmlmenu++;
         }
-
+                              
         if(var.getkeuangan()==true){
             Panelmenu.add(btnLabaRugi);
             jmlmenu++;
-        }                               
-
-
+        } 
+        if(var.getkeuangan()==true){
+            Panelmenu.add(btnRemunDokter);
+            jmlmenu++;
+        } 
         if(var.getbpjs_cek_kartu()==true){
             Panelmenu.add(btnCekBPJSKartu);
             jmlmenu++;
@@ -20142,7 +20198,14 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
                 jmlmenu++;
             }                
         }                               
-
+        
+         if(var.getkeuangan()==true){
+            if(btnRemunDokter.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnRemunDokter);
+                jmlmenu++;
+            }                
+        }  
+         
         if(var.getbpjs_cek_kartu()==true){
             if(btnCekBPJSKartu.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnCekBPJSKartu);
